@@ -1,0 +1,36 @@
+<?php
+
+require_once 'Zend/Controller/Front.php';
+require_once 'Zend/Controller/Router/Rewrite.php';
+require_once 'Zend/Controller/Router/Route.php';
+require_once 'Zend/Layout.php';
+require_once 'Zend/Registry.php';
+require_once 'Zend/Config/Ini.php';
+require_once 'Zend/Session.php';
+
+// セッションをスタートする
+Zend_Session::start();
+
+// 設定情報をロードする
+$config = new Zend_Config_Ini('../application/modules/lib/config.ini', null);
+
+// 設定情報をレジストリに登録する
+Zend_Registry::set('config', $config);
+
+// データベース関連の設定をレジストリに登録する
+Zend_Registry::set('database', $config->datasource->database->toArray());
+
+// デフォルトタイムゾーンの設定
+date_default_timezone_set('Asia/Tokyo');
+
+// フロントコントローラのインスタンスを取得する
+$front = Zend_Controller_Front::getInstance();
+
+// メインシステムのディレクトリを設定する
+$front->setControllerDirectory('../application/modules/controllers');
+
+// ディスパッチする
+$front->dispatch();
+
+
+//Zend_Controller_Front::run('../application/modules/controllers');
