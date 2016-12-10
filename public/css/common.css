@@ -1,0 +1,96 @@
+@charset "Shift_JIS";
+
+/*============================================
+全般的なスタイル
+============================================*/
+* {
+	margin:0; padding:0; 	/*全要素のマージン・パディングをリセット*/
+	line-height:1.5;	/*全要素の行の高さを1.5倍にする*/
+	color:#333333;		/*文字色*/
+
+}
+body {
+	background-color:#ffe4e1;	/*ページ全体の背景色 mistyrose(??＞?＜?)。??*/
+	text-align:center;		/*IE6以下でセンタリングするための対策*/
+}
+div#pagebody {
+	width:796px; margin:0 auto;	/*内容全体をセンタリング*/
+	text-align:left;	/*テキストの配置を左揃えにする*/
+	background-image:url("images/bg_pagebody.gif");	/*内容全体の背景*/
+	background-repeat:repeat-y;		/*背景画像を縦方向に繰り返す*/
+	background-color:#ffffff;		/*内容全体の背景色*/
+}
+
+/*============================================
+ヘッダ
+============================================*/
+div#header {
+	height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
+	background-image:url("images/bg_header.jpg");	/*ヘッダ部分の背景画像*/
+	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
+	background-color:#cccccc;		/*ヘッダ部分の背景色*/
+}
+h1 {
+	padding:20px 0px 0px 30px;		/*見出し内容の位置調整*/
+	font-family:Arial, Helvetica, sans-serif;	/*フォントの種類*/
+}
+h1 a {text-decoration:none;} 			/*リンクの下線を無くす*/
+
+
+/*============================================
+コンテンツ（中央と右の2カラム全体）
+============================================*/
+div#content {
+	width:560px; margin:10px 20px 10px 0px;	/*幅の指定と位置調整*/
+	float:right;				/*2カラム全体を右寄せにする*/
+}
+
+
+
+
+a {
+	border-radius: 6px 6px 0 0;
+	display: inline-block;
+	line-height: 32px;
+	font: sans-serif;
+	text-align: center;
+	background-color: #efefef;
+	color: black;
+	margin-left: 4px;
+	text-decoration: none;
+	padding: 0 32px;
+}
+
+a:nth-child(1) { border-top: 6px solid tomato; }
+a:nth-child(3) { border-top: 6px solid steelblue; }
+a:nth-child(2) { border-top: 6px solid gold; }
+a:nth-child(4) { border-top: 6px solid teal; }
+
+.content {
+	border: 1px solid lightgray;
+	height: 320px;
+	display: none;
+	padding: 32px;
+}
+
+.content:target {
+	display: block;
+}
+
+
+
+/*============================================
+フッタ
+============================================*/
+div#footer {
+	height:42px; text-align:center;
+	clear:both;					/*回り込みを解除する*/
+	background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
+	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
+	background-color:#cccccc;			/*フッタ部分の背景色*/
+}
+address {
+	font-style:normal;			 /*フォントスタイルを標準にする*/
+	font-size:small;			 /*フォントサイズを小さくする*/
+	padding:5px 0px 5px 0px;		 /*要素内容の位置調整*/
+}
