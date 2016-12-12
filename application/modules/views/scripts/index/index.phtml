@@ -1,109 +1,108 @@
 <head>
     <meta charset="utf-8">
     <link type="text/css" href="/css/common.css" rel="stylesheet"/>
-    <link href="/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="/css/common.css" rel="stylesheet"/>
     <title>五月祭企画展示 経路探索 by工學博覧会</title>
 </head>
-
 <body>
-<div class="cl-mcont aside message">
-    <div class="pagebody">
-        <div class="header">
-            <h3>五月祭企画展示 経路探索 by工學博覧会</h3>
+<div>
+    <div id="header">
+        <h3>五月祭企画展示 経路探索 by工學博覧会</h3>
+    </div>
+    <form action="" method="get">
+            日にちと滞在時刻を入力して下さい
+        <div class="container">
+            <div class="row" >
+                <div class="col-md-12">
+                    <input type="checkbox" name="1date">1日目
+                    <input type="checkbox" name="2date">2日目
+                </div>
+                <div>
+                    <select name="start" class="input-sm">
+                        <option value=""> -- </option>
+                        <?php for($i = 9; $i <= 16; $i ++): ?>
+                            <?php for($j = 0; $j <= 5; $j ++) : ?>
+                                <option value="<?php echo $i; ?>:<?php echo $j; ?>0"><?php echo $i; ?>:<?php echo $j; ?>0</option>
+                            <?php endfor; ?>
+                        <?php endfor; ?>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    ～
+                    <select name="end" class="input-sm">
+                        <option value=""> -- </option>
+                        <?php for($i = 10; $i <= 17; $i ++): ?>
+                            <?php for($j = 0; $j <= 5; $j ++) : ?>
+                                <option value="<?php echo $i; ?>:<?php echo $j; ?>0"><?php echo $i; ?>:<?php echo $j; ?>0</option>
+                            <?php endfor; ?>
+                        <?php endfor; ?>
+                        <option value="18:00">18:00</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <form action="" method="get">
-            <div class="container-fluid">
-                日にちと滞在時刻を入力して下さい
-                <div class="row" >
-                    <div class="col-md-12">
-                        <input type="checkbox" name="1date">1日目
-                        <input type="checkbox" name="2date">2日目
-                        <select name="start" class="input-sm">
-                            <option value=""> -- </option>
-                            <?php for($i = 9; $i <= 16; $i ++): ?>
-                                <?php for($j = 0; $j <= 5; $j ++) : ?>
-                                    <option value="<?php echo $i; ?>:<?php echo $j; ?>0"><?php echo $i; ?>:<?php echo $j; ?>0</option>
-                                <?php endfor; ?>
-                            <?php endfor; ?>
-                            <option value="17:00">17:00</option>
-                        </select>
-                        ～
-                        <select name="end" class="input-sm">
-                            <option value=""> -- </option>
-                            <?php for($i = 10; $i <= 17; $i ++): ?>
-                                <?php for($j = 0; $j <= 5; $j ++) : ?>
-                                    <option value="<?php echo $i; ?>:<?php echo $j; ?>0"><?php echo $i; ?>:<?php echo $j; ?>0</option>
-                                <?php endfor; ?>
-                            <?php endfor; ?>
-                            <option value="18:00">18:00</option>
-                        </select>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tabu_menu">
+                        <nav id="tab">
+                            <a href="#key_word_search">キーワード検索</a>
+                            <a href="#genre_search">ジャンル検索</a>
+                            <a href="#area_search">エリア検索</a>
+                            <a href="#recommended_or_pickup>">おすすめ・ピックアップ企画</a>
+                        </nav>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="tabu_menu">
-                            <nav id="tab">
-                                <a href="#key_word_search">キーワード検索</a>
-                                <a href="#genre_search">ジャンル検索</a>
-                                <a href="#area_search">エリア検索</a>
-                                <a href="#recommended_or_pickup>">おすすめ・ピックアップ企画</a>
-                            </nav>
-                        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="key_word_search" class="content">
+                        <input type="text" name="free_word" class="form-control ">
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="key_word_search" class="content">
-                                <input type="text" name="free_word" class="form-control ">
-                            </div>
-                            <div id="genre_search" class="content">
-                                <?php foreach($this->contents['list']['genre'] as $key => $item) : ?>
-                                    <select name="<?php echo $key; ?>">
-                                        <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                        <?php if($this->contents['list'][$key]): ?>
-                                            <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
-                                                <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </select>
-                                <?php endforeach; ?>
-                            </div>
-                            <div id="area_search" class="content">
-                                <?php foreach($this->contents['list']['area'] as $key => $item) : ?>
-                                    <select name="<?php echo $key; ?>">
-                                        <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                        <?php if($this->contents['list'][$key]): ?>
-                                            <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
-                                                <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </select>
-                                <?php endforeach; ?>
-                            </div>
-                            <div id="recommended_or_pickup" class="content">
-                                <?php foreach($this->contents['list']['recommended_or_pickup'] as $key => $item) : ?>
-                                <select name="<?php echo $key; ?>">
-                                    <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                        <?php //$this->dataのrecommended_flgが1のものをforeachで列挙。pickupも同様 ?>
-                                </select>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <select name="<?php echo $this->data; ?>">
-                                <?php foreach($this->data as $key => $item): ?>
-                                    <option value="<?php echo $key; ?>"><?php echo $item; ?></option>
-                                <?php endforeach; ?>
+                    <div id="genre_search" class="content">
+                        <?php foreach($this->contents['list']['genre'] as $key => $item) : ?>
+                            <select name="<?php echo $key; ?>">
+                                <option value="<?php echo $key; ?>"><?php echo $item; ?>
+                                <?php if($this->contents['list'][$key]): ?>
+                                    <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
+                                        <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
-                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div id="area_search" class="content">
+                        <?php foreach($this->contents['list']['area'] as $key => $item) : ?>
+                            <select name="<?php echo $key; ?>">
+                                <option value="<?php echo $key; ?>"><?php echo $item; ?>
+                                <?php if($this->contents['list'][$key]): ?>
+                                    <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
+                                        <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        <?php endforeach; ?>
+                    </div>
+                    <div id="recommended_or_pickup" class="content">
+                        <?php foreach($this->contents['list']['recommended_or_pickup'] as $key => $item) : ?>
+                        <select name="<?php echo $key; ?>">
+                            <option value="<?php echo $key; ?>"><?php echo $item; ?>
+                                <?php //$this->dataのrecommended_flgが1のものをforeachで列挙。pickupも同様 ?>
+                        </select>
+                        <?php endforeach; ?>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <select name="<?php echo $this->data; ?>">
+                        <?php foreach($this->data as $key => $item): ?>
+                            <option value="<?php echo $key; ?>"><?php echo $item; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
-        </form>
-        <div class="footer">
-            <h5>工学部応用物理系 工學博覧会</h5>
         </div>
+    </form>
+    <div id="footer" >
+        <h5>工学部応用物理系 工學博覧会</h5>
     </div>
 </div>
 </body>
