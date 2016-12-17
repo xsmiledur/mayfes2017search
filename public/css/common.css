@@ -10,25 +10,30 @@
 
 }
 body {
-	background-color:#ffe4e1;	/*ページ全体の背景色 mistyrose(??＞?＜?)。??*/
+	background-color:#ffffff;	/*ページ全体の背景色*/
 	text-align:center;		/*IE6以下でセンタリングするための対策*/
 }
 div#pagebody {
 	width:796px; margin:0 auto;	/*内容全体をセンタリング*/
 	text-align:left;	/*テキストの配置を左揃えにする*/
-	background-image:url("images/bg_pagebody.gif");	/*内容全体の背景*/
+	/*background-image:url("images/bg_pagebody.gif");	/*内容全体の背景*/
 	background-repeat:repeat-y;		/*背景画像を縦方向に繰り返す*/
-	background-color:#ffffff;		/*内容全体の背景色*/
+	background-color:transparent;		/*内容全体の背景色*/
 }
 
 /*============================================
 ヘッダ
 ============================================*/
-div#header {
-	height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
-	background-image:url("images/bg_header.jpg");	/*ヘッダ部分の背景画像*/
+
+#header {
+	height:100px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
+	text-align:center;
+	font-size:xx-large;
+	margin-top:140px;
+	margin-bottom:30px;
+	/*background-image:url("images/bg_header.jpg");	/*ヘッダ部分の背景画像*/
 	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
-	background-color:#cccccc;		/*ヘッダ部分の背景色*/
+	background-color:#ffffff
 }
 h1 {
 	padding:20px 0px 0px 30px;		/*見出し内容の位置調整*/
@@ -45,36 +50,97 @@ div#content {
 	float:right;				/*2カラム全体を右寄せにする*/
 }
 
+div#tab-menu {
+	width: 760px;
+	height: 58px;
+	position: relative;
+}
 
-
-
-a {
+a#tab {
 	border-radius: 6px 6px 0 0;
+	transition: background-color 0.2s linear, padding-top 0.2s ease-in;
 	display: inline-block;
 	line-height: 32px;
 	font: sans-serif;
 	text-align: center;
-	background-color: #efefef;
+	position: absolute;
+	background-color: #f6f7f8;
 	color: black;
+	margin-top:18px;
 	margin-left: 4px;
 	text-decoration: none;
-	padding: 0 32px;
+	padding: 4px 35px;
+	font-weight: bold;
 }
 
-a:nth-child(1) { border-top: 6px solid tomato; }
-a:nth-child(3) { border-top: 6px solid steelblue; }
-a:nth-child(2) { border-top: 6px solid gold; }
-a:nth-child(4) { border-top: 6px solid teal; }
+a#tab:hover {
+	background-color: #e2edd7;
+	padding-top: 14px;
+}
+a#tab:hover:after {
+	border-color: #53b300;
+}
 
-.content {
+a#tab:nth-child(1) {
+	background-color: rgba(255,99,71,0.55);
+	left:18px;
+	bottom: 0px;
+	border-top: solid 2px #eeeeee;
+	border-right: solid 2px #eeeeee;
+	border-left: solid 2px #eeeeee;
+}
+a#tab:nth-child(2) {
+	background-color: rgba(70,130,180,0.55);
+	left:195px;
+	bottom: 0px;
+	border-top: solid 2px #eeeeee;
+	border-right: solid 2px #eeeeee;
+	border-left: solid 2px #eeeeee;
+}
+a#tab:nth-child(3) {
+	background-color: rgba(255,215,0,0.55);
+	left:355px;
+	bottom: 0px;
+	border-top: solid 2px #eeeeee;
+	border-right: solid 2px #eeeeee;
+	border-left: solid 2px #eeeeee;
+}
+a#tab:nth-child(4) {
+	background-color: rgba(0,128,128,0.55);
+	right:18px;
+	bottom: 0px;
+	border-top: solid 2px #eeeeee;
+	border-right: solid 2px #eeeeee;
+	border-left: solid 2px #eeeeee;
+}
+
+div#tab-contents {
+	border: solid 2px #eeeeee;
+	width: 719px;
+	margin-left: 22px;
+}
+
+.tab-content {
 	border: 1px solid lightgray;
 	height: 320px;
+	list-style-type:none;
 	display: none;
 	padding: 32px;
 }
 
-.content:target {
+.hover {
+	display:block !important;
+}
+.active {
 	display: block;
+}
+
+
+
+.title {
+	height: 30px;
+	text-align: center;
+	font-size: xx-large;
 }
 
 
@@ -82,15 +148,112 @@ a:nth-child(4) { border-top: 6px solid teal; }
 /*============================================
 フッタ
 ============================================*/
-div#footer {
+#footer {
 	height:42px; text-align:center;
 	clear:both;					/*回り込みを解除する*/
-	background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
+	/*background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
 	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
-	background-color:#cccccc;			/*フッタ部分の背景色*/
+	background-color:#ffffff
 }
 address {
 	font-style:normal;			 /*フォントスタイルを標準にする*/
 	font-size:small;			 /*フォントサイズを小さくする*/
 	padding:5px 0px 5px 0px;		 /*要素内容の位置調整*/
 }
+
+.checkbox {
+	display: none;
+}
+.checkbox + .checkbox-icon {
+	position: relative;
+	vertical-align: middle;
+}
+.checkbox + .checkbox-icon:before {
+	content: "\f372";
+	font-family: "Ionicons";
+	color: #ccc;
+	font-size: 22px;
+}
+.checkbox:checked + .checkbox-icon:before {
+	content: "\f374";
+	color: #17bcdf;
+}
+input[type=radio], input[type=checkbox] {
+	display: none;
+}
+
+.radio, .checkbox {
+	box-sizing: border-box;
+	-webkit-transition: background-color 0.2s linear;
+	transition: background-color 0.2s linear;
+	position: relative;
+	display: inline-block;
+	margin: 0 20px 8px 0;
+	padding: 12px 12px 12px 42px;
+	border-radius: 8px;
+	background-color: #f6f7f8;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.radio:hover, .checkbox:hover {
+	background-color: #e2edd7;
+}
+.radio:hover:after, .checkbox:hover:after {
+	border-color: #53b300;
+}
+.radio:after, .checkbox:after {
+	-webkit-transition: border-color 0.2s linear;
+	transition: border-color 0.2s linear;
+	position: absolute;
+	top: 55%;
+	left: 17px;
+	display: block;
+	margin-top: -10px;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #bbb;
+	border-radius: 6px;
+	content: '';
+}
+
+.radio:before {
+	-webkit-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;
+	position: absolute;
+	top: 50%;
+	left: 20px;
+	display: block;
+	margin-top: -5px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #53b300;
+	content: '';
+	opacity: 0;
+}
+input[type=radio]:checked + .radio:before {
+	opacity: 1;
+}
+
+.checkbox:before {
+	-webkit-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;
+	position: absolute;
+	top: 50%;
+	left: 21px;
+	display: block;
+	margin-top: -7px;
+	width: 5px;
+	height: 9px;
+	border-right: 3px solid #53b300;
+	border-bottom: 3px solid #53b300;
+	content: '';
+	opacity: 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+input[type=checkbox]:checked + .checkbox:before {
+	opacity: 1;
+}
+
