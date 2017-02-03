@@ -6,7 +6,7 @@ require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Session.php';
 
-require_once '../application/modules/models/MainModel.php';
+require_once '../application/modules/default/models/MainModel.php';
 
 class IndexController extends Zend_Controller_Action
 {
@@ -15,10 +15,9 @@ class IndexController extends Zend_Controller_Action
     private $_lang;                           // 言語設定
     private $_contents;                       // 言語データ
     private $_main;                           // モデルのインスタンス
+
     public function init()
     {
-
-
         /**
          * ドメイン設定とスペースの確認
          */
@@ -27,7 +26,7 @@ class IndexController extends Zend_Controller_Action
         $this->_session = new Zend_Session_Namespace('data');
 
         // 設定情報をロードする
-        $this->_config = new Zend_Config_Ini('../application/modules/lib/config.ini', null);
+        $this->_config = new Zend_Config_Ini('../application/modules/default/lib/config.ini', null);
 
         /**
          * DBの接続

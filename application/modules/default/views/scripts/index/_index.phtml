@@ -79,10 +79,10 @@
                                     <?php foreach($this->contents['list']['genre'] as $key => $item) : ?>
                                         <select name="<?php echo $key; ?>">
                                             <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                            <?php if($this->contents['list'][$key]): ?>
+                                                <?php if($this->contents['list'][$key]): ?>
                                                 <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
-                                                    <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
-                                                <?php endforeach; ?>
+                                            <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
+                                            <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
                                     <?php endforeach; ?>
@@ -91,20 +91,20 @@
                                     <?php foreach($this->contents['list']['area'] as $key => $item) : ?>
                                         <select name="<?php echo $key; ?>">
                                             <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                            <?php if($this->contents['list'][$key]): ?>
+                                                <?php if($this->contents['list'][$key]): ?>
                                                 <?php foreach($this->contents['list'][$key] as $key2 => $item2) : ?>
-                                                    <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
-                                                <?php endforeach; ?>
+                                            <option value="<?php echo $key2; ?>"><?php echo $item2; ?></option>
+                                            <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
                                     <?php endforeach; ?>
                                 </div>
                                 <div id="recommended_or_pickup" class="tab-content">
                                     <?php foreach($this->contents['list']['recommended_or_pickup'] as $key => $item) : ?>
-                                    <select name="<?php echo $key; ?>">
-                                        <option value="<?php echo $key; ?>"><?php echo $item; ?>
-                                            <?php //$this->dataのrecommended_flgが1のものをforeachで列挙。pickupも同様 ?>
-                                    </select>
+                                        <select name="<?php echo $key; ?>">
+                                            <option value="<?php echo $key; ?>"><?php echo $item; ?>
+                                                <?php //$this->dataのrecommended_flgが1のものをforeachで列挙。pickupも同様 ?>
+                                        </select>
                                     <?php endforeach; ?>
                                 </div>
                             </div>

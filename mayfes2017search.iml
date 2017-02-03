@@ -19,10 +19,23 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/public/static_web/Laravel5_Seed_Project/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/../ZendFramework-1.12.20/library/Zend/Service/WindowsAzure/CommandLine/Scaffolders/DefaultScaffolder.phar/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="phar://$MODULE_DIR$/public/static_web/Laravel5_Seed_Project/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/../ZendFramework-1.12.20/library/Zend/Service/WindowsAzure/CommandLine/Scaffolders/DefaultScaffolder.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
         </SOURCES>
       </library>
     </orderEntry>
