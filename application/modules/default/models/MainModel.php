@@ -152,78 +152,31 @@ class MainModel
     }
 
     /**
-     * 企画データ
+     * 企画データを取得
      *
-     * @param
+     * @param $data
      */
+
     public function getProjectData()
     {
         // トランザクション開始
         $this->_read->beginTransaction();
         $this->_read->query('begin');
         try {
-            $result = array();
-
             $select = $this->_read->select();
             $select->from('project_data');
-            $select->where('active_flg = ?', 1)
-                ->order('sc_order ASC')
-                ->where($this->_read->quoteInto('sc_lang = ?', $lang))
-                ->where($this->_read->quoteInto('sc_path = ?', 'form') . ' OR ' .
-                    $this->_read->quoteInto('sc_path = ?', 'list') . ' OR ' .
-                    $this->_read->quoteInto('sc_path = ?', 'page'));
+            $select->where('active_flg = ?', 1);
+                //->order('sc_order ASC')
 
             $stmt = $select->query();
             $data = $stmt->fetchAll();
 
-            if ($data) {
-
-                foreach ($data as $val) {
-
-                    if ($val['sc_path'] != 'form') {
-                        $item = $val['sc_text'];
-                    } else {
-                        $item = array(
-                            'lang' => $val['sc_lang'],
-                            'kind' => $val['sc_kind'],
-                            'key' => $val['sc_key'],
-                            'name' => $val['sc_text'],
-                            'type' => $val['sc_type'],
-                        );
-                    }
-
-                    if ($val['sc_path'] == 'form') {
-                        $result[$val['sc_path']][$val['sc_kind']][] = $item;
-                    } elseif ($val['sc_path'] == 'list') {
-                        $result[$val['sc_path']][$val['sc_kind']][$val['sc_key']] = $item;
-                    } else {
-                        $result[$val['sc_path']][$val['sc_key']] = $item;
-                    }
-                }
-
-                if ($path) {
-
-                    $select = $this->_read->select();
-                    $select->from('site_contents');
-                    $select->where('sc_active_flg = ?', 1)
-                        ->order('sc_order ASC')
-                        ->where($this->_read->quoteInto('sc_lang = ?', $lang))
-                        ->where($this->_read->quoteInto('sc_path = ?', $path));
-                    $stmt = $select->query();
-                    $data_path = $stmt->fetchAll();
-
-                    if ($data_path) {
-                        foreach ($data_path as $val) {
-                            $result[$val['sc_path']][$val['sc_key']] = $val['sc_text'];
-                        }
-                    }
-                }
-            }
+            //var_dump($data);exit();
 
             // 成功した場合はコミットする
             $this->_read->commit();
             $this->_read->query('commit');
-            return $result;
+            return $data;
         } catch (Exception $e) {
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
