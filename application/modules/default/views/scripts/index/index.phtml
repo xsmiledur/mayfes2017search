@@ -17,14 +17,16 @@
     <link href="static_web/Static_Full_Version/css/animate.css" rel="stylesheet">
     <link href="static_web/Static_Full_Version/css/style.css" rel="stylesheet">
 
+    <!-- chosen -->
+    <link href="static_web/Static_Full_Version/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
     <!-- checkbox -->
     <link href="static_web/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
     <!-- switchery -->
-    <link href="static_web/Static_Full_Version/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <!--<link href="static_web/Static_Full_Version/css/plugins/switchery/switchery.css" rel="stylesheet">-->
 
-
+    <!-- checkboxその２-->
     <link href="static_web/Static_Full_Version/css/plugins/iCheck/custom.css" rel="stylesheet">
 
 
@@ -57,7 +59,47 @@
                 <div style="text-align: center;">
                     <div class="checkbox-inline i-checks"><label> <input type="radio" checked="" value="option2" name="a"> <i></i> １日目 </label></div>
                     <div class="checkbox-inline i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> ２日目 </label></div>
-                    <div class="checkbox-inline i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> 両日 </label></div>
+                    <!--<div class="checkbox-inline i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> 両日 </label></div>-->
+                </div>
+                <div class="form-group" style="text-align:center;">
+                    <label class="font-normal">滞在時間  </label>
+                    <div style="display:inline">
+                        <div style="display:inline">
+                            <select data-placeholder="Choose a Country..." class="chosen-select"  tabindex="2">
+                            <option value="">Select</option>
+                                <?php for ($i=9;$i<16;$i++): ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>:
+                        <div style="display:inline">
+                            <select data-placeholder="Choose a Country..." class="chosen-select"  tabindex="2">
+                                <option value="">Select</option>
+                                <?php for ($i=0;$i<6;$i++): ?>
+                                    <option value="United States"><?php echo $i; ?>0</option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <label class="font-normal">〜</label>
+                    <div style="display:inline;">
+                        <div style="display:inline">
+                            <select data-placeholder="Choose a Country..." class="chosen-select"  tabindex="2">
+                                <option value="">Select</option>
+                                <?php for ($i=10;$i<17;$i++): ?>
+                                    <option value="United States"><?php echo $i; ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>:
+                        <div style="display:inline">
+                            <select data-placeholder="Choose a Country..." class="chosen-select"  tabindex="2">
+                                <option value="">Select</option>
+                                <?php for ($i=0;$i<6;$i++): ?>
+                                    <option value="United States"><?php echo $i; ?>0</option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div style="text-align:center;"><a href="" type="button" class="btn btn-outline btn-default btn-lg">GO</a></div>
             </div>
@@ -624,9 +666,15 @@
 <script src="static_web/Static_Full_Version/js/inspinia.js"></script>
 <script src="static_web/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
 
+<!-- Chosen -->
+<script src="static_web/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
+
 <!-- iCheck -->
 <script src="static_web/Static_Full_Version/js/plugins/iCheck/icheck.min.js"></script>
 <script>
+
+    $('.chosen-select').chosen({width: "10%"});
+
     $(document).ready(function () {
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
