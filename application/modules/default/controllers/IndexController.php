@@ -79,15 +79,39 @@ class IndexController extends Zend_Controller_Action
 
     }
 
-    public function indexAction() {
-
+    public function indexAction()
+    {
         $this->view->data = $this->_main->getProjectData();
 
+        $request = $this->getRequest();
+        $search = $request->getParam('search');
+
+        //var_dump($search);
+        //exit();
+
+
+        $result = $this->_main->searchFree();
+        //var_dump($result);
+        //exit();
+        $this->view->result = $result;
+
     }
 
-/*
-    public function resultAction() {
+
+    /*
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $search = $request->getParam('search');
+
+
+        //$sql = "SELECT * FROM テーブル WHERE title_name LIKE '%$user_search%'";
+
+        $result = $this->_main->searchFree($search);
+
+        $this->view->result = $result;
 
     }
-*/
+    */
+
 }

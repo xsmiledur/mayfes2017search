@@ -29,14 +29,30 @@ date_default_timezone_set('Asia/Tokyo');
 $front = Zend_Controller_Front::getInstance();
 
 // メインシステムのディレクトリを設定する
-$front->setControllerDirectory('../application/modules/default/controllers');
+$front->setControllerDirectory(array(
+    'default'	=> '../application/modules/default/controllers'
+));
 
-//$front->setParam('noViewRenderer',true);
+//$front->setParam('prefixDefaultModule',true);
+
+// ルーターインスタンスの作成
+//$router = $front->getRouter();
 
 
 
 // ディスパッチする
-$front->dispatch();
+//$front->dispatch();
+
+$front->throwExceptions(true);
+try {
+    $front->dispatch();
+} catch (Exception $e) {
+    // ここで、自分自身で例外を処理します
+    echo $e->getMessage();
+    exit();
+    return false;
+}
+
 
 
 //Zend_Controller_Front::run('../application/modules/controllers');

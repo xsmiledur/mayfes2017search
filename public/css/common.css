@@ -1,8 +1,9 @@
-@charset "Shift_JIS";
+/*@charset "Shift_JIS";*/
 
 /*============================================
 全般的なスタイル
 ============================================*/
+
 * {
 	margin:0; padding:0; 	/*全要素のマージン・パディングをリセット*/
 	line-height:1.5;	/*全要素の行の高さを1.5倍にする*/
@@ -256,4 +257,3 @@ input[type=radio]:checked + .radio:before {
 input[type=checkbox]:checked + .checkbox:before {
 	opacity: 1;
 }
-

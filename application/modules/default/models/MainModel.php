@@ -154,15 +154,17 @@ class MainModel
     /**
      * 企画データを取得
      *
-     * @param $data
+     * @return array
      */
 
     public function getProjectData()
     {
         // トランザクション開始
+        /*
         $this->_read->beginTransaction();
         $this->_read->query('begin');
         try {
+        */
             $select = $this->_read->select();
             $select->from('project_data');
             $select->where('active_flg = ?', 1);
@@ -171,12 +173,17 @@ class MainModel
             $stmt = $select->query();
             $data = $stmt->fetchAll();
 
+            return $data;
+
             //var_dump($data);exit();
 
             // 成功した場合はコミットする
+            /*
             $this->_read->commit();
             $this->_read->query('commit');
-            return $data;
+            */
+            //return $data;
+            /*
         } catch (Exception $e) {
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
@@ -184,7 +191,34 @@ class MainModel
 //            var_dump($e->getMessage());exit();
             return false;
         }
+            */
 
+    }
+
+    /**
+     * フリーワード検索
+     *
+     * @param $search
+     * @return array
+     */
+    public function searchFree()
+    {
+        //$contents = $this->getContentsData('ja',null);
+
+        $select = $this->_read->select();
+        $select->from('free_words_data')
+            ->where('fw_active_flg = ? ', 1);
+        //$data = $this->_read->quoteInto('fw_name LIKE ?', '%'.$search.'%');
+        /*$select->where('fw_name LIKE ?', '%'.$search.'%')
+            ->orwhere('fw_area LIKE ?', '%'.$search.'%')
+            ->orwhere('fw_place_index LIKE ?', '%'.$search.'%');*/
+
+        //var_dump($data);exit();
+
+        $stmt = $select->query();
+        $data = $stmt->fetchAll();
+
+        return $data;
     }
 
 }
