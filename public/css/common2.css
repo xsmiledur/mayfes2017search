@@ -1,0 +1,103 @@
+li {
+    list-style:none;
+}
+
+.dropmenu{
+    *zoom: 1;
+    list-style-type: none;
+    width: 100%;
+    height:30px;
+    margin: 0px auto 0px;
+    padding: 0;
+}
+.dropmenu:before, .dropmenu:after{
+    content: "";
+    display: table;
+}
+.dropmenu:after{
+    clear: both;
+}
+.dropmenu li{
+    position: relative;
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.dropmenu li a{
+    display: block;
+    margin: 0;
+    padding: 7px 0 7px;
+    background: #fff;
+    color: #676a6c;
+    opacity:0.8;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration: none;
+}
+.dropmenu li ul{
+    list-style: none;
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+.dropmenu li ul li{
+    width: 100%;
+}
+.dropmenu li ul li a{
+    padding: 7px 7px;
+    /*border-top: 1px solid #ffffff;*/
+    background: #fff;
+    opacity:1;
+    text-align: left;
+}
+.dropmenu li:hover > a{
+    background: #ffffe0;
+    cursor: pointer;
+}
+.dropmenu li a:hover{
+    background: #ffffe0;
+}
+
+#dropmenu li ul li{
+    overflow: hidden;
+    height: 0;
+    transition: .2s;
+}
+#dropmenu li:hover ul li{
+    overflow: visible;
+    height: 38px;
+}
+#dropmenu li:active ul li{
+
+}
+
+.contact-box {
+    height: 200px;
+    color: #ffffe0;
+    font-weight: normal;
+}
+.contact-box:hover {
+    filter:brightness(1.1);
+}
+
+#jQueryPush2 {
+    z-index:3;
+}
+#jQueryBox2 {
+    z-index:1;
+}
+
+.highlight {
+    color:#ffa500 !important;
+}
+fieldset .ibox .ibox-content {
+    height:600px;
+}
+.panel-body {
+    height:528px;
+}

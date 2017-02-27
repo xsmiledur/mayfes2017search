@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
+
 <module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
 </module>
-=======
+
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
->>>>>>> refs/remotes/origin/develop
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="PHP">
+      <library name="PHP Runtime" type="php">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
+          <root url="jar://$APPLICATION_PLUGINS_DIR$/php/lib/php.jar!/stubs/standard" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
+          <root url="jar://$APPLICATION_PLUGINS_DIR$/php/lib/php.jar!/stubs/standard" />
         </SOURCES>
       </library>
     </orderEntry>
-<<<<<<< HEAD
-=======
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
@@ -34,6 +31,16 @@
         </SOURCES>
       </library>
     </orderEntry>
->>>>>>> refs/remotes/origin/develop
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../ZendFramework-1.12.20/library" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
