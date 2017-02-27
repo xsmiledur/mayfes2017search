@@ -34,6 +34,10 @@
     <!-- steps-->
     <link href="/Static_Full_Version/css/plugins/steps/jquery.steps.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -598,7 +602,7 @@
                                                             <td><?php echo $item['body']; ?></td>
                                                             <td><?php echo $this->contents['list']['area'][$item['area']]; ?></td>
                                                             <td><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></td>
-                                                            <td><input type="hidden" name="input<?php echo $item['pid']; ?>" value=""></td>
+                                                            <td><input type="hidden" id="hidden-input" name="input<?php echo $item['pid']; ?>" value=""></td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                         </tbody>
@@ -661,6 +665,9 @@
 <!-- Chosen -->
 <script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
 
+<!-- Sweet alert -->
+<script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+
 <script>
     $('.chosen-select').chosen({width: "15%"});
 
@@ -719,12 +726,38 @@
             {
                 var form = $(this);
 
+                var j = 0;
+
+                for(i=1;i<10;i++) {
+                    name = "input" + i;
+                    hidden = $('[name=' + name + ']').val();
+                    if (hidden) {
+                        j = 1;
+                        break;
+                    }
+                    console.log(name);
+                    console.log(hidden);
+                }
+
                 // Disable validation on fields that are disabled.
                 // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
                 form.validate().settings.ignore = ":disabled";
 
                 // Start validation; Prevent form submission if false
-                return form.valid();
+
+                if (j == 1) {
+                    return form.valid();
+                } else {
+                    swal({
+                        title: "企画が選択されてません",
+                        text: "検索するには、企画を１つ以上選択してください",
+                        type: "warning",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    });
+
+                }
             },
             onFinished: function (event, currentIndex)
             {
@@ -861,43 +894,53 @@
     $(function() {
 
 
+        //キーワード検索
         $("#search_pid").on("select2:select", function () {
-            val = $(this).val();
-            //console.log(val);
-            val1 = "#form_pid";
-            //console.log(val1);
-            val1 += val;
-            //console.log(val1);
-            $(val1).show();
+            pid = $(this).val();
 
+            $.each(pid,
+                function(index, elem) {
+                    console.log(elem);
+
+                    val = "#form_pid" + elem;
+
+                    console.log(val);
+                    $(val).show();
+
+                    val1 = "input" + elem;
+                    a = $('[name=' + val1 + ']').val(elem);
+                    console.log(a);
+                }
+            );
         });
 
+        //キーワード検索　消す
         $("#search_pid").on("select2:unselect", function (e) {
-            val = e.params.data.id;
+            val = "#form_pid" + e.params.data.id;
             //console.log(val);
-            val1 = "#form_pid";
-            //console.log(val1);
-            val1 += val;
-            //console.log(val1);
+            console.log(val);
             //console.log(e);
 
 
-            $(val1).hide();
+            $(val).hide();
+            $('[name=val]').val();
+
 
         });
 
-        <?php for ($i = 1;$i < 100;$i++) : ?>
+        for (i = 1;i < 100;i++) {
+            //ジャンル、エリア
+            name1 = "#pid" + i + " a";
+            name2 = "#form_pid" + i;
+            $(name1).click(function () {
+                $(name2).toggle();
+                $(name1).toggleClass("highlight");
 
-        //ジャンル、エリア
-        $("#pid<?php echo $i; ?> a").click(function () {
-            $("#form_pid<?php echo $i; ?>").toggle();
-            $("#pid<?php echo $i; ?> a").toggleClass("highlight");
-
-            val = "input" + <?php echo $i; ?>;
-            console.log(val);
-            $('[name=val]').val(<?php echo $i; ?>);
-        });
-        <?php endfor; ?>
+                val = "name=[input" + i + "]";
+                console.log(val);
+                $(val).val(i;
+            });
+        }
 
         $("#dropmenu").click(function (e) {
             e.stopPropagation(); // 追加
