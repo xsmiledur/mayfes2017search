@@ -17,7 +17,7 @@
     <link href="static_web/Static_Full_Version/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
     <link href="static_web/Static_Full_Version/css/animate.css" rel="stylesheet">
-    <link href="static_web/Static_Full_Version/css/style.css" rel="stylesheet">
+    <link href="public/css/style2.css" rel="stylesheet">
 
     <!-- chosen -->
     <link href="static_web/Static_Full_Version/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
@@ -36,6 +36,8 @@
 
     <!-- multi-select-->
     <link href="css/multi-select.css" type="text/css" rel="stylesheet">
+
+    <link href="/css/rangeslider.css" rel="stylesheet">
 
 
 </head>
@@ -777,12 +779,66 @@
 
         </div>
 
+            <!--ここで本田が検索結果表示のコードを書く-->
+            <div id="routes">
+
+                <div id="route1">
+                    <h3>ルート1</h3>
+                    <div class="visit">
+                        10:00-10:30　東大音感　赤門総合研究棟
+                    </div>
+                    <div class="time">
+                        <div class="u-cf">
+                            <div class="right">
+                                <input type="range" min="0" max="120" value="15" step="5" data-rangeslider data-orientation="vertical">
+                            </div>
+                            <div class="left">
+                                <output></output>分
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visit">
+                        10:45-12:00　工学博覧会　工学部6号館
+                    </div>
+                    <div class="time">
+                        <div class="u-cf">
+                            <div class="right">
+                                <input type="range" min="0" max="120" step="5" value="30" data-rangeslider data-orientation="vertical">
+                            </div>
+                            <div class="left">
+                                <output></output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visit">
+                        12:05-12:30　東大娘　工学部前広場
+                    </div>
+
+                </div>
+
+
+                <div id="route2">
+                    <h3>ルート2</h3>
+                    <div class="visit">
+                        10:00-10:25　東大娘　工学部前広場
+                    </div>
+                    <div class="time">
+                        <br>↓5分<br><br>
+                    </div>
+                    <div class="visit">
+                        10:30-11:45　工学博覧会　工学部6号館
+                    </div>
+                    <div class="time">
+                        <br>↓15分<br><br>
+                    </div>
+                    <div class="visit">
+                        12:00-12:30　東大音感　赤門総合研究棟
+                    </div>
+                </div>
 
 
 
-
-
-        <!--しょーんくん-->
+                <!--ここまで本田-->
 
 
         <div class="footer">
@@ -832,7 +888,91 @@
 <script src="static_web/Static_Full_Version/js/plugins/topojson/topojson.js"></script>
 <script src="static_web/Static_Full_Version/js/plugins/datamaps/datamaps.all.min.js"></script>
 
-<!-- 検索項目の表示非表示-->
+<!-- スライドバー -->
+<script src="/js/rangeslider.min.js"></script>
+
+        <!-- スライドバー(インデントを消したい…) -->
+        <script>
+            $(function() {
+                var $document = $(document);
+                var selector = '[data-rangeslider]';
+                var $element = $(selector);
+                // For ie8 support
+                var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
+                // Example functionality to demonstrate a value feedback
+                function valueOutput(element) {
+                    var value = element.value;
+                    var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
+                    output[textContent] = value;
+                }
+                $document.on('input', 'input[type="range"], ' + selector, function(e) {
+                    valueOutput(e.target);
+                });
+                // Example functionality to demonstrate disabled functionality
+                $document .on('click', '#js-example-disabled button[data-behaviour="toggle"]', function(e) {
+                    var $inputRange = $(selector, e.target.parentNode);
+                    if ($inputRange[0].disabled) {
+                        $inputRange.prop("disabled", false);
+                    }
+                    else {
+                        $inputRange.prop("disabled", true);
+                    }
+                    $inputRange.rangeslider('update');
+                });
+                // Example functionality to demonstrate programmatic value changes
+                $document.on('click', '#js-example-change-value button', function(e) {
+                    var $inputRange = $(selector, e.target.parentNode);
+                    var value = $('input[type="number"]', e.target.parentNode)[0].value;
+                    $inputRange.val(value).change();
+                });
+                // Example functionality to demonstrate programmatic attribute changes
+                $document.on('click', '#js-example-change-attributes button', function(e) {
+                    var $inputRange = $(selector, e.target.parentNode);
+                    var attributes = {
+                        min: $('input[name="min"]', e.target.parentNode)[0].value,
+                        max: $('input[name="max"]', e.target.parentNode)[0].value,
+                        step: $('input[name="step"]', e.target.parentNode)[0].value
+                    };
+                    $inputRange.attr(attributes);
+                    $inputRange.rangeslider('update', true);
+                });
+                // Example functionality to demonstrate destroy functionality
+                $document
+                    .on('click', '#js-example-destroy button[data-behaviour="destroy"]', function(e) {
+                        $(selector, e.target.parentNode).rangeslider('destroy');
+                    })
+                    .on('click', '#js-example-destroy button[data-behaviour="initialize"]', function(e) {
+                        $(selector, e.target.parentNode).rangeslider({ polyfill: false });
+                    });
+                // Example functionality to test initialisation on hidden elements
+                $document
+                    .on('click', '#js-example-hidden button[data-behaviour="toggle"]', function(e) {
+                        var $container = $(e.target.previousElementSibling);
+                        $container.toggle();
+                    });
+                // Basic rangeslider initialization
+                $element.rangeslider({
+                    // Deactivate the feature detection
+                    polyfill: false,
+                    // Callback function
+                    onInit: function() {
+                        valueOutput(this.$element[0]);
+                    },
+                    // Callback function
+                    onSlide: function(position, value) {
+                        console.log('onSlide');
+                        console.log('position: ' + position, 'value: ' + value);
+                    },
+                    // Callback function
+                    onSlideEnd: function(position, value) {
+                        console.log('onSlideEnd');
+                        console.log('position: ' + position, 'value: ' + value);
+                    }
+                });
+            });
+        </script>
+
+        <!-- 検索項目の表示非表示-->
 <script type="text/javascript">
     $(function() {
         <?php foreach($this->data as $item): ?>
