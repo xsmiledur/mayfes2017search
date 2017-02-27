@@ -96,8 +96,31 @@ li {
     color:#ffa500 !important;
 }
 fieldset .ibox .ibox-content {
-    height:600px;
+    height:460px;
+    overflow: scroll;
 }
-.panel-body {
-    height:528px;
+#tab-1 .panel-body {
+    min-height:380px;
+}
+
+#tab-2 .panel-body {
+    min-height:380px;
+}
+#tab-3 .panel-body {
+    height:460px;
+    overflow: scroll;
+}
+#tab-4 .panel-body {
+    min-height:380px;
+}
+
+#page-wrapper {
+    min-height: 700px;
+}
+.wizard-big.wizard > .content {
+    min-height: 550px !important;
+}
+
+.outside {
+    margin-left: 30px;
 }
