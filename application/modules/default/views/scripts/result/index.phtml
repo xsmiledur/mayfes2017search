@@ -1,1 +1,95 @@
-hello
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="ほんっとにはじめてのHTML5">
+    <meta name="keywords" content="ほんっとにはじめてのHTML5,CSS3,html5">
+    <title>キャンパスマップ</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+</head>
+
+
+<body>
+<p>
+    <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:1025px; height:700px;" usemap="#shape1" id="shape1">
+</p>
+
+<!--3100*2100-->
+
+<map name="shape1">
+    <!--工学部-->
+    <area shape="rect" coords="1100,1010,1370,1215" href="#shikoku" alt="工学部２号館" region="ko_2">
+    <area shape="rect" coords="1130,1260,1370,1440" href="#shikoku" alt="工学部６号館" region="ko_6">
+    <area shape="rect" coords="880,1255,1055,1450" href="#shikoku" alt="工学部８号館" region="ko_8">
+    <area shape="rect" coords="765,1265,840,1475" href="#shikoku" alt="工学部７号館" region="ko_7">
+    <area shape="rect" coords="950,1520,1205,1790" href="#shikoku" alt="工学部１号館" region="ko_1">
+    <area shape="rect" coords="830,1520,930,1820" href="#shikoku" alt="工学部５号館" region="ko_5">
+    <area shape="rect" coords="830,1840,930,1920" href="#shikoku" alt="工学部５号館" region="ko_5">
+    <area shape="rect" coords="940,1840,1200,1930" href="#shikoku" alt="工学部１４号館" region="ko_14">
+    <area shape="rect" coords="1190,1850,1380,1930" href="#shikoku" alt="工学部１１号館" region="ko_11">
+
+    <!--農学部-->
+    <area shape="rect" coords="130,1190,480,1410" href="#shikoku" alt="農学部３号館" region="no_3">
+
+    <!---!!!!安田講堂エリア!!!!---->
+    <!--理学部-->
+    <area shape="rect" coords="1415,650,1640,750" href="#shikoku" alt="理学部１号館" region="sc_1">
+    <area shape="rect" coords="1420,770,1500,870" href="#shikoku" alt="理学部１号館" region="sc_1">
+    <area shape="rect" coords="1560,770,1630,870" href="#shikoku" alt="理学部１号館" region="sc_1">
+
+    <!--医学部近辺-->
+    <area shape="poly" coords="2070,610,2470,720,2410,975,1995,920" href="#shikoku" alt="御殿下グラウンド" region="gotenshita">
+
+    <!--法文-->
+    <area shape="poly" coords="1435,1305,1498,1255,1562,1305,1567,1465,1430,1465" href="#shikoku" alt="法文１号館（東）" region="hobun_1east">
+    <area shape="rect" coords="1430,1290,1567,1465" href="#shikoku" alt="法文１号館（西）" region="hobun_1west">
+    <area shape="poly" coords="1600,1305,1623,1255,1727,1305,1732,1465,1600,1465" href="#shikoku" alt="法文２号館" region="hobun_2">
+
+
+
+    <!--!!!!赤門エリア!!!!-->
+    <area shape="poly" coords="2470,860,2570,870,2560,965,2460,955" href="#shikoku" alt="七徳堂" region="shichitokudo">
+    <area shape="poly" coords="2585,1515, 2660,1515, 2660,1739, 2750,1739, 2750,1794, 2585,1795" href="#shikoku" alt="赤門総合研究棟" region="akamon_sogokenkyuto">
+    <area shape="rect" coords="2660,1420,2800,1500" href="#shikoku" alt="合格通り広場" region="gokakudoriarea">
+    <area shape="rect" coords="2450,1840,2650,1950" href="#shikoku" alt="赤門" region="akamon">
+
+
+    <!--<area shape="rect" coords="0,0,3100,2100" href="#shikoku" alt="工学部３号館" region="ko_3">-->
+    <!--<area shape="default" href="#shikoku" alt="工学部６号館" region="ko_6">-->
+    <area shape="poly" coords="302,83,349,83,349,141,343,141,343,169,279,169,279,149,291,150,291,141,302,141" href="#tohoku" alt="東北" region="tohoku">
+    <area shape="poly" coords="286,168,342,169,342,177,347,177,348,236,332,235,332,213,319,213,320,227,295,228,297,202,291,202,291,191,285,191" href="#kanto" alt="関東" region="kanto">
+    <area shape="poly" coords="278,150,279,169,287,169,287,191,291,190,291,202,296,202,296,249,239,248,238,195,208,195,208,180,243,180,242,135,254,135,254,150" href="#tyubu" alt="中部" region="tyubu">
+    <area shape="poly" coords="207,180,207,195,238,194,238,252,182,252,181,228,171,229,171,219,159,219,159,180" href="#kinki" alt="近畿" region="kinki">
+    <area shape="rect" coords="101,179,159,220" href="#tyugoku" alt="中国" region="tyugoku">
+    <area shape="rect" coords="109,226,169,259" href="#shikoku" alt="四国" region="shikoku">
+    <area shape="poly" coords="33,195,87,195,87,217,99,218,98,293,84,293,77,290,65,290,31,280,14,281,14,262,33,226" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
+    <!--AREA for text-->
+    <area shape="rect" coords="132,30,209,48" href="#hokkaido" alt="北海道" region="hokkaido">
+    <area shape="rect" coords="132,58,209,76" href="#tohoku" alt="東北" region="tohoku">
+    <area shape="rect" coords="132,86,209,104" href="#kanto" alt="関東" region="kanto">
+    <area shape="rect" coords="132,114,209,132" href="#tyubu" alt="中部" region="tyubu">
+    <area shape="rect" coords="31,30,105,48" href="#kinki" alt="近畿" region="kinki">
+    <area shape="rect" coords="31,58,105,76" href="#tyugoku" alt="中国" region="tyugoku">
+    <area shape="rect" coords="31,86,105,104" href="#shikoku" alt="四国" region="shikoku">
+    <area shape="rect" coords="31,114,105,132" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
+
+    <script>
+        $(document).ready(function ()
+        {
+            $('#shape1').mapster({
+                singleSelect : true,
+                //clickNavigate : true,
+               // render_highlight : { fillColor: '2aff00' },
+               render_highlight : { altImage : '/img/map2.jpg' },
+                mapKey: 'region',
+                fillOpacity : 0.5
+            });
+        });
+    </script>
+
+    <!--altImage :   -->
+</body>
+
+<script src="/js/jquery.imagemapster.js"></script>
