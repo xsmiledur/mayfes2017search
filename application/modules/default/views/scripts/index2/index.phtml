@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Wizards</title>
+    <title>第90回五月祭 企画展示経路探索</title>
 
     <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -44,74 +44,70 @@
 <div id="wrapper">
 
     <div id="page-wrapper" class="gray-bg" style="margin-left:0px;">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>May Festival 2017 Search Form</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        App Views
+                    </li>
+                    <li class="active">
+                        <strong>Contacts</strong>
+                    </li>
+                </ol>
+            </div>
+        </div>
         <div class="wrapper wrapper-content animated fadeInRight">
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Wizard with Validation</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
+
                         <div class="ibox-content">
-                            <h2>
-                                Validation Wizard Form
-                            </h2>
-                            <p>
-                                This example show how to use Steps with jQuery Validation plugin.
-                            </p>
 
                             <form id="form" action="#" class="wizard-big">
                                 <h1>Date & Time</h1>
                                 <fieldset>
                                     <h2>滞在時間</h2>
                                     <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
-                                                <div class="col-sm-10">
-                                                    <label class="radio-inline i-checks" id="i-check1"><input type="radio" id="1day" checked="checked" value="1day" name="date"> <i></i> １日目 </label>
-                                                    <label class="radio-inline i-checks" id="i-check2"><input type="radio" id="2day" value="2day" name="date"> <i></i> ２日目 </label>
-                                                </div>
-                                            </div>
+                                        <div class="ibox">
+                                            <div class="ibox-content outside b-r-md">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
+                                                        <div class="col-sm-10">
+                                                            <label class="radio-inline i-checks" id="i-check1"><input type="radio" id="1day" checked="checked" value="1day" name="date"> <i></i> １日目 </label>
+                                                            <label class="radio-inline i-checks" id="i-check2"><input type="radio" id="2day" value="2day" name="date"> <i></i> ２日目 </label>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="form-group"><label class="col-sm-2 control-label">滞在予定時間</label>
-                                                <div class="col-sm-4">
+                                                    <div class="form-group"><label class="col-sm-2 control-label">滞在予定時間</label>
+                                                        <div class="col-sm-4">
 
-                                                    <div class="input-group clockpicker" id="clock1">
-                                                        <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
-                                                        <span class="input-group-addon">
+                                                            <div class="input-group clockpicker" id="clock1">
+                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
+                                                                <span class="input-group-addon">
                                                             <span class="fa fa-clock-o"></span>
                                                         </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-1" style="padding-top:10px;">〜</div>
-                                                <div class="col-sm-4">
-                                                    <div class="input-group clockpicker" id="clock2">
-                                                        <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
-                                                        <span class="input-group-addon">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-1" style="padding-top:10px;">〜</div>
+                                                        <div class="col-sm-4">
+                                                            <div class="input-group clockpicker" id="clock2">
+                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
+                                                                <span class="input-group-addon">
                                                             <span class="fa fa-clock-o"></span>
                                                         </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
-
                                         </div>
+
 
                                     </div>
 
@@ -125,17 +121,22 @@
                                                         あああ
                                                     </p>
                                                     -->
-                                    <select class="select2_demo_1 form-control" style="width:100%;">
-                                        <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
-                                        <?php foreach ($this->result as $item): ?>
-                                            <option value=""><?php echo $item['fw_name']; ?>　（<small style="text-align:right;"><?php echo $item['fw_area']; ?>　<?php echo $item['fw_place_index']; ?></small>）</option>
-                                        <?php endforeach; ?>
-                                        <?php foreach ($this->data as $item) : ?>
-                                            <option value=""><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:100%; height:100%;" usemap="#shape1" id="shape1">
+                                    <div class="ibox">
+                                        <div class="ibox-content outside b-r-md">
+                                            <select class="select2_demo_1 form-control" style="width:100%;">
+                                                <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
+                                                <?php foreach ($this->result as $item): ?>
+                                                    <option value=""><?php echo $item['fw_name']; ?>　（<small style="text-align:right;"><?php echo $item['fw_area']; ?>　<?php echo $item['fw_place_index']; ?></small>）</option>
+                                                <?php endforeach; ?>
+                                                <?php foreach ($this->data as $item) : ?>
+                                                    <option value=""><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:100%; height:100%;" usemap="#shape1" id="shape1">
 
+
+                                        </div>
+                                    </div>
 
                                 </fieldset>
 
@@ -143,7 +144,7 @@
                                 <fieldset>
                                     <h2>Please select projects you want to watch!</h2>
                                     <div class="ibox">
-                                        <div class="ibox-content">
+                                        <div class="ibox-content outside b-r-md">
 
                                             <div class="tabs-container">
                                                 <ul class="nav nav-tabs">
@@ -163,10 +164,10 @@
                                                                     <table class="table table-striped table-hover">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <select class="select2_demo_1 form-control">
+                                                                            <select class="select2_demo_1 form-control" id="search_pid" style="width:100%;" multiple="multiple">
                                                                                 <option value="">行きたい企画の名称,団体名,場所などの文字列を入力してください</option>
                                                                                 <?php foreach ($this->data as $item) : ?>
-                                                                                    <option value=""><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
+                                                                                    <option value="<?php echo $item['pid']; ?>"><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
                                                                                 <?php endforeach; ?>
                                                                             </select>
                                                                         </tr>
@@ -429,7 +430,7 @@
 
 
                                                     <div id="tab-3" class="tab-pane">
-                                                        <div class="panel-body" style="height:540px;overflow: scroll;">
+                                                        <div class="panel-body">
                                                             <div class="full-height-scroll">
                                                                 <div class="table-responsive">
                                                                     <div class="row">
@@ -541,13 +542,12 @@
                                                         <div class="panel-body" style="height:540px;overflow: scroll;">
                                                             <div class="full-height-scroll">
                                                                 <div class="table-responsive">
-                                                                    <table class="table table-striped table-hover">
+                                                                    <table class="table table-hover">
                                                                         <tbody>
                                                                         <?php foreach ($this->data as $item) : ?>
                                                                             <?php if ($item['recommend_flg'] == 1) : ?>
-                                                                                <tr>
-                                                                                    <td class="client-avatar"><img alt="image" src="img/a2.jpg"> </td>
-                                                                                    <td><a id=<?php echo $item['pid']; ?> class="client-link"><?php echo $item['name']; ?></a></td>
+                                                                                <tr id="pid<?php echo $item['pid']; ?>">
+                                                                                    <td><a id="<?php echo $item['pid']; ?>" class="client-link"><?php echo $item['name']; ?></a></td>
                                                                                     <td><?php echo $item['body']; ?></td>
                                                                                     <!--<td><small class="text-muted"><?php echo $this->contents['list']['area'][$item['area']]; ?></small></td>-->
                                                                                     <td><small class="text-muted"><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></small></td>
@@ -573,7 +573,7 @@
                                 <fieldset>
                                     <h2>Check your search terms!</h2>
                                     <div class="ibox">
-                                        <div class="ibox-content">
+                                        <div class="ibox-content outside b-r-md">
                                             <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
                                                 <div class="col-sm-10">
                                                     <div id="jQuery1"><label style="font-weight:normal;">１日目</label></div>
@@ -588,10 +588,21 @@
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">選択した企画</label>
                                                 <div class="col-sm-10">
-                                                    <?php foreach($this->data as $item) : ?>
-                                                        <label id="form_pid<?php echo $item['pid']; ?>" style="display:none; font-weight:normal;"><?php echo $item['name']; ?></label>
-                                                        <input type="hidden" name="input<?php echo $item['pid']; ?>" value="">
-                                                    <?php endforeach; ?>
+                                                    <table class="table table-hover">
+
+                                                        <tbody>
+
+                                                        <?php foreach($this->data as $item) : ?>
+                                                            <tr id="form_pid<?php echo $item['pid']; ?>" style="display:none; ">
+                                                            <td><?php echo $item['name']; ?></td>
+                                                            <td><?php echo $item['body']; ?></td>
+                                                            <td><?php echo $this->contents['list']['area'][$item['area']]; ?></td>
+                                                            <td><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></td>
+                                                            <td><input type="hidden" name="input<?php echo $item['pid']; ?>" value=""></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
 
@@ -849,27 +860,42 @@
     //企画の項目を選んで表示
     $(function() {
 
+
+        $("#search_pid").on("select2:select", function () {
+            val = $(this).val();
+            //console.log(val);
+            val1 = "#form_pid";
+            //console.log(val1);
+            val1 += val;
+            //console.log(val1);
+            $(val1).show();
+
+        });
+
+        $("#search_pid").on("select2:unselect", function (e) {
+            val = e.params.data.id;
+            //console.log(val);
+            val1 = "#form_pid";
+            //console.log(val1);
+            val1 += val;
+            //console.log(val1);
+            //console.log(e);
+
+
+            $(val1).hide();
+
+        });
+
         <?php for ($i = 1;$i < 100;$i++) : ?>
 
-        /*
-         $("#pid<?php echo $i; ?> a").click(function () {
-         $("#form_pid<?php echo $i; ?>").toggle(
-         function () {
-         $("#pid<?php echo $i; ?> a").css("background-color", "#ff1111");
-         },
-         function () {
-         $("#pid<?php echo $i; ?> a").css("background-color","#ffe222");
-         }
-         );
-         });
-         */
-
-
+        //ジャンル、エリア
         $("#pid<?php echo $i; ?> a").click(function () {
             $("#form_pid<?php echo $i; ?>").toggle();
             $("#pid<?php echo $i; ?> a").toggleClass("highlight");
-            var newText = 'トラ';
-            $('[name="input".$i]').val(<?php echo $i; ?>);
+
+            val = "input" + <?php echo $i; ?>;
+            console.log(val);
+            $('[name=val]').val(<?php echo $i; ?>);
         });
         <?php endfor; ?>
 
@@ -884,8 +910,47 @@
     });
 
 
+
+    /*
+     $("#pid<?php echo $i; ?> a").click(function () {
+     $("#form_pid<?php echo $i; ?>").toggle(
+     function () {
+     $("#pid<?php echo $i; ?> a").css("background-color", "#ff1111");
+     },
+     function () {
+     $("#pid<?php echo $i; ?> a").css("background-color","#ffe222");
+     }
+     );
+     });
+     */
+
+    //var $eventSelect = $("#search_pid");
+
+    //$eventSelect.on("change", function (e) { log("change"); });
+
+    //キーワード検索用
+
+    /*
+     $('#search_pid').on('select2:select',function(e){
+     val = ($(this).val());
+     console.log(val);
+     });
+     */
+
+
+
+
+    /*$("#form_pid".val).toggle();
+     e.stopPropagation(); // 追加
+     */
+    //$("#pid".val." a").toggleClass("highlight");
+    //$('[name="input".val]').val(<?php echo $i; ?>);
+
+
+
 </script>
 
 </body>
 
 </html>
+
