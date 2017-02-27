@@ -164,7 +164,7 @@
                                                                     <table class="table table-striped table-hover">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <select class="select2_demo_1 form-control" id="search_pid" style="width:100%;">
+                                                                            <select class="select2_demo_1 form-control" id="search_pid" style="width:100%;" multiple="multiple">
                                                                                 <option value="">行きたい企画の名称,団体名,場所などの文字列を入力してください</option>
                                                                                 <?php foreach ($this->data as $item) : ?>
                                                                                     <option value="<?php echo $item['pid']; ?>"><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
@@ -542,12 +542,12 @@
                                                         <div class="panel-body" style="height:540px;overflow: scroll;">
                                                             <div class="full-height-scroll">
                                                                 <div class="table-responsive">
-                                                                    <table class="table table-striped table-hover">
+                                                                    <table class="table table-hover">
                                                                         <tbody>
                                                                         <?php foreach ($this->data as $item) : ?>
                                                                             <?php if ($item['recommend_flg'] == 1) : ?>
-                                                                                <tr>
-                                                                                    <td><a id=<?php echo $item['pid']; ?> class="client-link"><?php echo $item['name']; ?></a></td>
+                                                                                <tr id="pid<?php echo $item['pid']; ?>">
+                                                                                    <td><a id="<?php echo $item['pid']; ?>" class="client-link"><?php echo $item['name']; ?></a></td>
                                                                                     <td><?php echo $item['body']; ?></td>
                                                                                     <!--<td><small class="text-muted"><?php echo $this->contents['list']['area'][$item['area']]; ?></small></td>-->
                                                                                     <td><small class="text-muted"><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></small></td>
@@ -860,43 +860,42 @@
     //企画の項目を選んで表示
     $(function() {
 
-        <?php for ($i = 1;$i < 100;$i++) : ?>
 
-        /*
-         $("#pid<?php echo $i; ?> a").click(function () {
-         $("#form_pid<?php echo $i; ?>").toggle(
-         function () {
-         $("#pid<?php echo $i; ?> a").css("background-color", "#ff1111");
-         },
-         function () {
-         $("#pid<?php echo $i; ?> a").css("background-color","#ffe222");
-         }
-         );
-         });
-         */
+        $("#search_pid").on("select2:select", function () {
+            val = $(this).val();
+            //console.log(val);
+            val1 = "#form_pid";
+            //console.log(val1);
+            val1 += val;
+            //console.log(val1);
+            $(val1).show();
 
-        //var $eventSelect = $("#search_pid");
-
-        //$eventSelect.on("change", function (e) { log("change"); });
-
-        //キーワード検索用
-
-
-        $('#search_pid').select2().on('select2:select',function(e){
-            val = ($(this).val());
-            console.log(val);
-            /*$("#form_pid".val).toggle();
-            e.stopPropagation(); // 追加
-*/
-            //$("#pid".val." a").toggleClass("highlight");
-            //$('[name="input".val]').val(<?php echo $i; ?>);
         });
 
-        //ジャンル、エリア、おすすめ用
+        $("#search_pid").on("select2:unselect", function (e) {
+            val = e.params.data.id;
+            //console.log(val);
+            val1 = "#form_pid";
+            //console.log(val1);
+            val1 += val;
+            //console.log(val1);
+            //console.log(e);
+
+
+            $(val1).hide();
+
+        });
+
+        <?php for ($i = 1;$i < 100;$i++) : ?>
+
+        //ジャンル、エリア
         $("#pid<?php echo $i; ?> a").click(function () {
             $("#form_pid<?php echo $i; ?>").toggle();
             $("#pid<?php echo $i; ?> a").toggleClass("highlight");
-            $('[name="input".$i]').val(<?php echo $i; ?>);
+
+            val = "input" + <?php echo $i; ?>;
+            console.log(val);
+            $('[name=val]').val(<?php echo $i; ?>);
         });
         <?php endfor; ?>
 
@@ -912,8 +911,46 @@
 
 
 
+    /*
+     $("#pid<?php echo $i; ?> a").click(function () {
+     $("#form_pid<?php echo $i; ?>").toggle(
+     function () {
+     $("#pid<?php echo $i; ?> a").css("background-color", "#ff1111");
+     },
+     function () {
+     $("#pid<?php echo $i; ?> a").css("background-color","#ffe222");
+     }
+     );
+     });
+     */
+
+    //var $eventSelect = $("#search_pid");
+
+    //$eventSelect.on("change", function (e) { log("change"); });
+
+    //キーワード検索用
+
+    /*
+     $('#search_pid').on('select2:select',function(e){
+     val = ($(this).val());
+     console.log(val);
+     });
+     */
+
+
+
+
+    /*$("#form_pid".val).toggle();
+     e.stopPropagation(); // 追加
+     */
+    //$("#pid".val." a").toggleClass("highlight");
+    //$('[name="input".val]').val(<?php echo $i; ?>);
+
+
+
 </script>
 
 </body>
 
 </html>
+
