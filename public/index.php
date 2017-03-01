@@ -48,7 +48,7 @@ try {
     $front->dispatch();
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
-    echo $e->getMessage();
+    //echo $e->getMessage();
     exit();
     return false;
 }

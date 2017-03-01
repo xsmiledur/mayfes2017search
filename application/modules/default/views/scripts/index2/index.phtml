@@ -48,34 +48,27 @@
 <div id="wrapper">
 
     <div id="page-wrapper" class="gray-bg" style="margin-left:0px;">
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row wrapper border-bottom white-bg page-heading" style="height: 120px;background-image: url('/img/may-chan.png');">
             <div class="col-lg-9">
-                <h2>May Festival 2017 Search Form</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        App Views
-                    </li>
-                    <li class="active">
-                        <strong>Contacts</strong>
-                    </li>
-                </ol>
+                <a href="#id"><div style="background-color:rgba(255,255,255,0.8);"><h1 class="p-xs" style="color: #ff69b4; font-weight: bold;">May Festival 2017 Search Form</h1></div></a>
+                <div class="pull-right tooltip-demo" style="background-color:rgba(255,255,255,0.8);"><button type="button" id="ap" class="btn btn-link">工学部応用物理系 五月祭企画展示経路探索サイト</button></div>
             </div>
+
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox">
+                    <div class="ibox" id="id">
 
-                        <div class="ibox-content">
+                        <div class="ibox-content" style="height: 690px;">
 
                             <form id="form" action="#" class="wizard-big">
                                 <h1>Date & Time</h1>
                                 <fieldset>
-                                    <h2>滞在時間</h2>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="fa fa-clock-o"> 滞在時間</i></h2>
+                                    </div>
                                     <div class="row">
                                         <div class="ibox">
                                             <div class="ibox-content outside b-r-md">
@@ -118,7 +111,9 @@
                                 </fieldset>
                                 <h1>You are here</h1>
                                 <fieldset>
-                                    <h2>現在地</h2>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="fa fa-map-marker"> 現在地</i></h2>
+                                    </div>
 
                                                     <!--
                                                     <p>
@@ -136,7 +131,8 @@
                                                     <option value=""><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
                                                 <?php endforeach; ?>
                                             </select>
-                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:100%; height:100%;" usemap="#shape1" id="shape1">
+                                            <br>
+                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:900px; height:600px;" usemap="#shape1" id="shape1">
 
 
                                         </div>
@@ -146,7 +142,10 @@
 
                                 <h1>Select Projects</h1>
                                 <fieldset>
-                                    <h2>Please select projects you want to watch!</h2>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="fa fa-eye"> 企画の選択</i></h2>
+                                        <p class="text-muted">選択できる企画は５個までです。</p>
+                                    </div>
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md">
 
@@ -575,7 +574,9 @@
 
                                 <h1>Finish</h1>
                                 <fieldset>
-                                    <h2>Check your search terms!</h2>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="fa fa-rocket"> 確認</i></h2>
+                                    </div>
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md">
                                             <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
@@ -622,11 +623,11 @@
             </div>
         </div>
         <div class="footer">
-            <div class="pull-right">
+        <!--<div class="pull-right">
                 10GB of <strong>250GB</strong> Free.
-            </div>
+            </div>-->
             <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
+                <strong>Applied Physics ,University of Tokyo</strong> 東京大学工学部応用物理系 &copy; 2017
             </div>
         </div>
 
@@ -803,6 +804,7 @@
         });
 
         $('#input-clock1').change(function() {
+            if ($('#input-clock1').val) 
             $("#clockText1").text($('#input-clock1').val());
         });
         $('#input-clock2').change(function() {
@@ -928,19 +930,7 @@
 
         });
 
-        for (i = 1;i < 100;i++) {
-            //ジャンル、エリア
-            name1 = "#pid" + i + " a";
-            name2 = "#form_pid" + i;
-            $(name1).click(function () {
-                $(name2).toggle();
-                $(name1).toggleClass("highlight");
 
-                val = "name=[input" + i + "]";
-                console.log(val);
-                $(val).val(i;
-            });
-        }
 
         $("#dropmenu").click(function (e) {
             e.stopPropagation(); // 追加
@@ -951,6 +941,186 @@
 
 
     });
+
+    $(function() {
+        $("#pid1 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid1").toggle();
+            $("#pid1 a").toggleClass("highlight");
+            $("[name=input1]").val("1");
+        });
+        $("#pid2 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid2").toggle();
+            $("#pid2 a").toggleClass("highlight");
+            $("[name=input2]").val(2);
+        });
+        $("#pid3 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid3").toggle();
+            $("#pid3 a").toggleClass("highlight");
+            $("[name=input3]").val(3);
+        });
+        $("#pid4 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid4").toggle();
+            $("#pid4 a").toggleClass("highlight");
+            $("[name=input4]").val(4);
+        });
+        $("#pid5 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid5").toggle();
+            $("#pid5 a").toggleClass("highlight");
+            $("[name=input5]").val(5);
+        });
+        $("#pid6 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid6").toggle();
+            $("#pid6 a").toggleClass("highlight");
+            $("n[ame=input6]").val(6);
+        });
+        $("#pid7 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid7").toggle();
+            $("#pid7 a").toggleClass("highlight");
+            $("[name=input7]").val(7);
+        });
+        $("#pid8 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid8").toggle();
+            $("#pid8 a").toggleClass("highlight");
+            $("[name=input8]").val(8);
+        });
+        $("#pid9 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid9").toggle();
+            $("#pid9 a").toggleClass("highlight");
+            $("[name=input9]").val(9);
+        });
+        $("#pid10 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid10").toggle();
+            $("#pid10 a").toggleClass("highlight");
+            $("[name=input10]").val(10);
+        });
+        $("#pid11 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid11").toggle();
+            $("#pid11 a").toggleClass("highlight");
+            $("[name=input11]").val(11);
+        });
+        $("#pid12 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid12").toggle();
+            $("#pid12 a").toggleClass("highlight");
+            $("[name=input12]").val(12);
+        });
+        $("#pid13 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid13").toggle();
+            $("#pid13 a").toggleClass("highlight");
+            $("[name=input13]").val(13);
+        });
+        $("#pid14 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid14").toggle();
+            $("#pid14 a").toggleClass("highlight");
+            $("[name=input14]").val(14);
+        });
+        $("#pid15 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid15").toggle();
+            $("#pid15 a").toggleClass("highlight");
+            $("[name=input15]").val(15);
+        });
+        $("#pid16 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid16").toggle();
+            $("#pid16 a").toggleClass("highlight");
+            $("[name=input16]").val(16);
+        });
+        $("#pid1 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid17").toggle();
+            $("#pid17 a").toggleClass("highlight");
+            $("[name=input17]").val(17);
+        });
+        $("#pid18 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid18").toggle();
+            $("#pid18 a").toggleClass("highlight");
+            $("[name=input18]").val(18);
+        });
+        $("#pid19 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid19").toggle();
+            $("#pid19 a").toggleClass("highlight");
+            $("[name=input19]").val(19);
+        });
+        $("#pid20 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid20").toggle();
+            $("#pid20 a").toggleClass("highlight");
+            $("[name=input20]").val(20);
+        });
+        $("#pid21 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid21").toggle();
+            $("#pid21 a").toggleClass("highlight");
+            $("[name=input21]").val(21);
+        });
+        $("#pid22 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid22").toggle();
+            $("#pid22 a").toggleClass("highlight");
+            $("[name=input22]").val(22);
+        });
+        $("#pid23 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid23").toggle();
+            $("#pid23 a").toggleClass("highlight");
+            $("[name=input23]").val(23);
+        });
+        $("#pid24 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid24").toggle();
+            $("#pid24 a").toggleClass("highlight");
+            $("[name=input24]").val(24);
+        });
+    });
+
+    $(document).ready(function () {
+
+        $('#ap').click(function (e) {
+            e.stopPropagation();
+            swal({
+                title: "工学部応用物理系ってなあに？",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "詳細が知りたい！",
+                closeOnConfirm: false,
+                allowOutsideClick: true,
+            }, function () {
+                window.location.href = "";
+            });
+        });
+    });
+
+    //ページ内ゆっくり遷移
+
+    $(function(){
+        $('a[href="#id"]').click(function(){
+            var speed = 500;
+            var href= $(this).attr("href");
+            var target = $('#id');
+            var position = target.offset().top;
+            $("html, body").animate({scrollTop:position}, speed, "swing");
+            return false;
+        });
+    });
+
 
 
 
