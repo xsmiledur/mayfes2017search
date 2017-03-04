@@ -94,20 +94,11 @@ class Index2Controller extends Zend_Controller_Action
 
 
 
-    /*
-    public function searchAction()
+
+    public function algorithmAction()
     {
-        $request = $this->getRequest();
-        $search = $request->getParam('search');
-
-
-        //$sql = "SELECT * FROM テーブル WHERE title_name LIKE '%$user_search%'";
-
-        $result = $this->_main->searchFree($search);
-
-        $this->view->result = $result;
 
     }
-    */
+
 
 }

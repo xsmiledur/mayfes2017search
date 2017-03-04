@@ -208,3 +208,64 @@ button#ap::after {
 button#ap:hover::after {
     width: 100%;
 }
+a#jump div {
+    background-color:rgba(255,255,255,0.8);
+    transition: all .3s;
+}
+a#jump div:hover,
+a#jump div:active {
+    background-color:rgba(255,255,255,0.9);
+}
+
+div#may-chan {
+    background-image : url('/img/may-chan2-2.png');
+    width:360px;
+    height:300px;
+    position: absolute;
+    left: -10px;
+    bottom: 0px;
+    transition: all .3s;
+}
+div#may-chan:hover {
+    left: 10px;
+    bottom: 20px;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-name: flash;
+    animation-duration: 1.5s;
+    animation-name: flash;
+}
+@-webkit-keyframes flash {
+    0% {
+        opacity: .4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes flash {
+    0% {
+        opacity: .4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+div#may-chan:active {
+    left: 10px;
+    bottom: 20px;
+}
+
+div#comment {
+    background-image : url('/img/comment-3.png');
+    display: none;
+    width:253px;
+    height:200px;
+    position: absolute;
+    left: 370px;
+    bottom: 150px;
+}
+
+a#footer:hover,
+a#footer:active {
+
+}
