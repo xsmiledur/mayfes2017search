@@ -26,21 +26,21 @@
     <splitter split-orientation="horizontal" split-proportion="0.4753328">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="249">
-                  <caret line="977" column="43" lean-forward="true" selection-start-line="977" selection-start-column="43" selection-end-line="977" selection-end-column="43" />
+                  <caret line="977" column="43" lean-forward="false" selection-start-line="977" selection-start-column="43" selection-end-line="977" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="algorithm.phtml" pinned="false" current-in-tab="false">
+          <file leaf-file-name="algorithm.phtml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1590">
-                  <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+                <state relative-caret-position="135">
+                  <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -70,10 +70,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="8580">
+                <state relative-caret-position="688">
                   <caret line="572" column="48" lean-forward="false" selection-start-line="572" selection-start-column="48" selection-end-line="572" selection-end-column="48" />
                   <folding />
                 </state>
@@ -83,7 +83,7 @@
           <file leaf-file-name="article.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/article.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6825">
+                <state relative-caret-position="688">
                   <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
                   <folding />
                 </state>
@@ -100,11 +100,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="common2.css" pinned="false" current-in-tab="true">
+          <file leaf-file-name="common2.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/css/common2.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="463">
-                  <caret line="236" column="18" lean-forward="false" selection-start-line="236" selection-start-column="18" selection-end-line="236" selection-end-column="18" />
+                <state relative-caret-position="43">
+                  <caret line="208" column="16" lean-forward="true" selection-start-line="208" selection-start-column="16" selection-end-line="208" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
@@ -260,9 +260,9 @@
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index2/search.phtml" />
         <option value="$PROJECT_DIR$/application/modules/default/controllers/Index2Controller.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml" />
         <option value="$PROJECT_DIR$/public/css/common2.css" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml" />
+        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml" />
       </list>
     </option>
   </component>
@@ -287,8 +287,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="42" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="817" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -807,14 +808,15 @@
       <workItem from="1488370081785" duration="7354000" />
       <workItem from="1488448850526" duration="3548000" />
       <workItem from="1488490093879" duration="48000" />
+      <workItem from="1488607235518" duration="444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208376000" />
+    <option name="totallyTimeSpent" value="208820000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="42" width="1440" height="817" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1036,26 +1038,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/article.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6825">
-          <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1590">
-          <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/common2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="236" column="18" lean-forward="false" selection-start-line="236" selection-start-column="18" selection-end-line="236" selection-end-column="18" />
+        <state relative-caret-position="43">
+          <caret line="208" column="16" lean-forward="true" selection-start-line="208" selection-start-column="16" selection-end-line="208" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1076,10 +1062,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/article.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
-          <caret line="977" column="43" lean-forward="true" selection-start-line="977" selection-start-column="43" selection-end-line="977" selection-end-column="43" />
+          <caret line="977" column="43" lean-forward="false" selection-start-line="977" selection-start-column="43" selection-end-line="977" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
