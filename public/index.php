@@ -49,7 +49,7 @@ try {
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
     //echo $e->getMessage();
-    exit();
+    //exit();
     return false;
 }
 
