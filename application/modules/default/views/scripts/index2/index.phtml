@@ -81,25 +81,29 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group"><label class="col-sm-2 control-label">滞在予定時間</label>
-                                                        <div class="col-sm-4">
-
-                                                            <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
-                                                                <span class="input-group-addon">
-                                                            <span class="fa fa-clock-o"></span>
-                                                        </span>
+                                                    <div class="form-group" id="clock-check"><label class="col-sm-2 control-label">滞在予定時間</label>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="input-group clockpicker" id="clock1">
+                                                                    <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
+                                                                    <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                            </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1" style="padding-top:10px;">〜</div>
+                                                            <div class="col-sm-4">
+                                                                <div class="input-group clockpicker" id="clock2">
+                                                                    <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
+                                                                    <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                            </span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-1" style="padding-top:10px;">〜</div>
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group clockpicker" id="clock2">
-                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
-                                                                <span class="input-group-addon">
-                                                            <span class="fa fa-clock-o"></span>
-                                                        </span>
-                                                            </div>
-                                                        </div>
+                                                        <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none;">滞在終了時刻が開始時刻より早くなっています。</span>
+                                                        <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
+                                                        <span id="clock-check-help3" class="help-block m-b-none text-danger" style="display: none;">五月祭の開始時刻より滞在終了時刻が早くなっています。</span>
                                                     </div>
 
                                                 </div>
@@ -187,244 +191,138 @@
 
 
                                                     <div id="tab-2" class="tab-pane">
-                                                        <div class="panel-body" style="height:540px;overflow: scroll;">
+                                                        <div class="panel-body" style="height:480px;overflow: scroll;">
                                                             <div class="full-height-scroll">
                                                                 <div class="table-responsive">
 
                                                                     <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                        <div class="col-sm-4">
+                                                                            <div id="jQueryPush5" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
                                                                                 <h3><strong>展示実演</strong></h3>
                                                                             </div>
-                                                                            <div class="contact-box">
+
+                                                                            <div id="jQueryBox5" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
                                                                                 <?php foreach ($this->contents['list']['exhibition'] as $key => $place) : ?>
+                                                                                    <ul id="dropmenu" class="dropmenu">
+                                                                                        <li><a href="#"><?php echo $place; ?></a>
+                                                                                            <ul>
+                                                                                                <?php foreach($this->data as $item) : ?>
+                                                                                                    <?php if ($item['genre'] == 'exhibition' && $item['genre_detail'] == $key) : ?>
 
-                                                                                <ul id="dropmenu" class="dropmenu">
-                                                                                    <li><a href="#"><?php echo $place; ?></a>
-                                                                                        <?php foreach($this->data as $item) : ?>
-                                                                                            <?php if ($item['area'] == 'exhibition' && $item['place_index'] == $key) : ?>
-                                                                                                <ul>
-                                                                                                    <li><a href="#"><?php echo $item['name']; ?></a></li>
+                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endforeach;?>
 
-                                                                                                </ul>
-                                                                                            <?php endif; ?>
-                                                                                        <?php endforeach; ?>
-                                                                                    </li>
-                                                                                </ul>
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    </ul>
                                                                                 <?php endforeach; ?>
-
-                                                                                <!--
-                                                                                <select class="select2_demo_1 form-control" style="width:100%;">
-                                                                                    <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
-                                                                                    <?php foreach ($this->contents['list']['exhibition'] as $key => $place) : ?>
-                                                                                        <option value=""><?php echo $item['fw_name']; ?>　（<small style="text-align:right;"><?php echo $item['fw_area']; ?>　<?php echo $item['fw_place_index']; ?></small>）</option>
-                                                                                    <?php endforeach; ?>
-                                                                                </select>
-
-
-                                                                                <?php foreach ($this->contents['list']['exhibition'] as $key => $place) : ?>
-                                                                                    <div class="ibox-title">
-                                                                                        <h5><?php echo $place; ?></h5>
-                                                                                        <div class="ibox-tools">
-                                                                                            <a data-toggle="collapse" href="#<?php echo $key; ?>">
-                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ibox-content collapse" id="<?php echo $key; ?>">
-                                                                                        <ul class="list-group">
-                                                                                            <?php foreach($this->data as $item) : ?>
-                                                                                                <?php if ($item['area'] == 'exhibition' && $item['place_index'] == $key) : ?>
-                                                                                                    <li class="list-group-item">
-                                                                                                        <?php echo $item['name']; ?></li>
-                                                                                                <?php endif; ?>
-                                                                                            <?php endforeach; ?>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                <?php endforeach; ?>
-                                                                                -->
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="col-sm-6">
-                                                                            <div class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                        <div class="col-sm-4">
+
+                                                                            <div id="jQueryPush6" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
                                                                                 <h3><strong>参加型</strong></h3>
-                                                                                <br><br><br><br><br>
-                                                                                <div class="clearfix"></div>
-                                                                                <div class="ibox float-e-margins border-bottom">
-                                                                                    <div class="ibox-title">
-                                                                                        <h5>Select</h5>
-                                                                                        <div class="ibox-tools">
-                                                                                            <a class="collapse-link">
-                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ibox-content" style="display: none;">
-                                                                                        <ul class="list-group">
-                                                                                            <div class="ibox float-e-margins border-bottom">
-                                                                                                <?php foreach ($this->contents['list']['join'] as $key => $place) : ?>
-                                                                                                    <div class="ibox-title">
-                                                                                                        <h5><?php echo $place; ?></h5>
-                                                                                                        <div class="ibox-tools">
-                                                                                                            <a data-toggle="collapse" href="#<?php echo $key; ?>">
-                                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="ibox-content collapse" id="<?php echo $key; ?>">
-                                                                                                        <ul class="list-group">
-                                                                                                            <?php foreach($this->data as $item) : ?>
-                                                                                                                <?php if ($item['genre'] == 'join' && $item['genre_detail'] == $key) : ?>
-                                                                                                                    <li class="list-group-item">
-                                                                                                                        <?php echo $item['name']; ?></li>
-                                                                                                                <?php endif; ?>
-                                                                                                            <?php endforeach; ?>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                <?php endforeach; ?>
-                                                                                            </div>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="jQueryBox6" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                                <?php foreach ($this->contents['list']['join'] as $key => $place) : ?>
+                                                                                    <ul id="dropmenu" class="dropmenu">
+                                                                                        <li><a href="#"><?php echo $place; ?></a>
+                                                                                            <ul>
+                                                                                                <?php foreach($this->data as $item) : ?>
+                                                                                                    <?php if ($item['genre'] == 'join' && $item['genre_detail'] == $key) : ?>
+
+                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endforeach;?>
+
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                <?php endforeach; ?>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+
+                                                                            <div id="jQueryPush7" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
+                                                                                <h3><strong>講演会・討論会</strong></h3>
+                                                                            </div>
+
+                                                                            <div id="jQueryBox7" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                                <?php foreach ($this->contents['list']['lec_or_critic'] as $key => $place) : ?>
+                                                                                    <ul id="dropmenu" class="dropmenu">
+                                                                                        <li><a href="#"><?php echo $place; ?></a>
+                                                                                            <ul>
+                                                                                                <?php foreach($this->data as $item) : ?>
+                                                                                                    <?php if ($item['genre'] == 'lec_or_critic' && $item['genre_detail'] == $key) : ?>
+
+                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endforeach;?>
+
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                <?php endforeach; ?>
                                                                             </div>
                                                                         </div>
 
                                                                     </div>
 
                                                                     <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
-                                                                                <h3><strong>講演会・評論会</strong></h3>
-                                                                                <br><br><br><br><br>
-                                                                                <div class="clearfix"></div>
-                                                                                <div class="ibox float-e-margins border-bottom">
-                                                                                    <div class="ibox-title">
-                                                                                        <h5>Select</h5>
-                                                                                        <div class="ibox-tools">
-                                                                                            <a class="collapse-link">
-                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ibox-content" style="display: none;">
-                                                                                        <ul class="list-group">
-                                                                                            <div class="ibox float-e-margins border-bottom">
-                                                                                                <?php foreach ($this->contents['list']['lec_or_critic'] as $key => $place) : ?>
-                                                                                                    <div class="ibox-title">
-                                                                                                        <h5><?php echo $place; ?></h5>
-                                                                                                        <div class="ibox-tools">
-                                                                                                            <a data-toggle="collapse" href="#<?php echo $key; ?>">
-                                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="ibox-content collapse" id="<?php echo $key; ?>">
-                                                                                                        <ul class="list-group">
-                                                                                                            <?php foreach($this->data as $item) : ?>
-                                                                                                                <?php if ($item['genre'] == 'lec_or_critic' && $item['genre_detail'] == $key) : ?>
-                                                                                                                    <li class="list-group-item">
-                                                                                                                        <?php echo $item['name']; ?></li>
-                                                                                                                <?php endif; ?>
-                                                                                                            <?php endforeach; ?>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                <?php endforeach; ?>
-                                                                                            </div>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-sm-6">
-                                                                            <div class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                        <div class="col-sm-4">
+                                                                            <div id="jQueryPush8" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
                                                                                 <h3><strong>パフォーマンス</strong></h3>
-                                                                                <br><br><br><br><br>
-                                                                                <div class="clearfix"></div>
-                                                                                <div class="ibox float-e-margins border-bottom">
-                                                                                    <div class="ibox-title">
-                                                                                        <h5>Select</h5>
-                                                                                        <div class="ibox-tools">
-                                                                                            <a class="collapse-link">
-                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ibox-content" style="display: none;">
-                                                                                        <ul class="list-group">
-                                                                                            <div class="ibox float-e-margins border-bottom">
-                                                                                                <?php foreach ($this->contents['list']['performance'] as $key => $place) : ?>
-                                                                                                    <div class="ibox-title">
-                                                                                                        <h5><?php echo $place; ?></h5>
-                                                                                                        <div class="ibox-tools">
-                                                                                                            <a data-toggle="collapse" href="#<?php echo $key; ?>">
-                                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="ibox-content collapse" id="<?php echo $key; ?>">
-                                                                                                        <ul class="list-group">
-                                                                                                            <?php foreach($this->data as $item) : ?>
-                                                                                                                <?php if ($item['genre'] == 'performance' && $item['genre_detail'] == $key) : ?>
-                                                                                                                    <li class="list-group-item">
-                                                                                                                        <?php echo $item['name']; ?></li>
-                                                                                                                <?php endif; ?>
-                                                                                                            <?php endforeach; ?>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                <?php endforeach; ?>
-                                                                                            </div>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="jQueryBox8" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                                <?php foreach ($this->contents['list']['performance'] as $key => $place) : ?>
+                                                                                    <ul id="dropmenu" class="dropmenu">
+                                                                                        <li><a href="#"><?php echo $place; ?></a>
+                                                                                            <ul>
+                                                                                                <?php foreach($this->data as $item) : ?>
+                                                                                                    <?php if ($item['genre'] == 'performance' && $item['genre_detail'] == $key) : ?>
+
+                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endforeach;?>
+
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                <?php endforeach; ?>
                                                                             </div>
                                                                         </div>
 
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                        <div class="col-sm-4">
+                                                                            <div id="jQueryPush9" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
                                                                                 <h3><strong>音楽</strong></h3>
-                                                                                <br><br><br><br><br>
-                                                                                <div class="clearfix"></div>
-                                                                                <div class="ibox float-e-margins border-bottom">
-                                                                                    <div class="ibox-title">
-                                                                                        <h5>Select</h5>
-                                                                                        <div class="ibox-tools">
-                                                                                            <a class="collapse-link">
-                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ibox-content" style="display: none;">
-                                                                                        <ul class="list-group">
-                                                                                            <div class="ibox float-e-margins border-bottom">
-                                                                                                <?php foreach ($this->contents['list']['music'] as $key => $place) : ?>
-                                                                                                    <div class="ibox-title">
-                                                                                                        <h5><?php echo $place; ?></h5>
-                                                                                                        <div class="ibox-tools">
-                                                                                                            <a data-toggle="collapse" href="#<?php echo $key; ?>">
-                                                                                                                <i class="fa fa-chevron-up"></i>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="ibox-content collapse" id="<?php echo $key; ?>">
-                                                                                                        <ul class="list-group">
-                                                                                                            <?php foreach($this->data as $item) : ?>
-                                                                                                                <?php if ($item['genre'] == 'music' && $item['genre_detail'] == $key) : ?>
-                                                                                                                    <li class="list-group-item">
-                                                                                                                        <?php echo $item['name']; ?></li>
-                                                                                                                <?php endif; ?>
-                                                                                                            <?php endforeach; ?>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                <?php endforeach; ?>
-                                                                                            </div>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="jQueryBox9" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                                                                                <?php foreach ($this->contents['list']['music'] as $key => $place) : ?>
+                                                                                    <ul id="dropmenu" class="dropmenu">
+                                                                                        <li><a href="#"><?php echo $place; ?></a>
+                                                                                            <ul>
+                                                                                                <?php foreach($this->data as $item) : ?>
+                                                                                                    <?php if ($item['genre'] == 'music' && $item['genre_detail'] == $key) : ?>
+
+                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <?php endif; ?>
+                                                                                                <?php endforeach;?>
+
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                <?php endforeach; ?>
                                                                             </div>
                                                                         </div>
 
@@ -518,7 +416,7 @@
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <div id="jQueryPush4" class="contact-box" style="background-image: url(/img/akamon.jpg);background-size: cover; cursor: pointer;">
-                                                                                <h3><strong>赤門エリア</strong></h3>
+                                                                                <h3 style="color: #696969;"><strong>赤門エリア</strong></h3>
                                                                             </div>
 
                                                                             <div id="jQueryBox4" class="contact-box" style="background-image: url(/img/akamon.jpg);background-size: cover;">
@@ -584,38 +482,53 @@
                                         <p class="text-muted">選択できる企画は５個までです。</p>
                                     </div>
                                     <div class="ibox">
-                                        <div class="ibox-content outside b-r-md">
-                                            <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
-                                                <div class="col-sm-10">
-                                                    <div id="jQuery1"><label style="font-weight:normal;">１日目</label></div>
-                                                    <div id="jQuery2" style="display: none;"><label style="font-weight:normal;">２日目</label></div>
+                                        <div class="ibox-content outside b-r-md" style="overflow:hidden;">
+                                            <div class="row" style="padding: 15px;">
+                                                <div class="col-md-3">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading" style="font-size: medium;"><label><i class="fa fa-calendar-o" style="font-size: x-large;"></i> 日にち</label></div>
+                                                        <div class="panel-body">
+                                                            <div id="jQuery1"><label style="font-weight:normal;">１日目</label></div>
+                                                            <div id="jQuery2" style="display: none;"><label style="font-weight:normal;">２日目</label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-heading" style="font-size: medium;"><label><i class="fa fa-clock-o" style="font-size: x-large;"></i> 滞在予定時刻</label></div>
+                                                        <div class="panel-body">
+                                                            <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
+                                                            <label id="clockText2" style="font-weight:normal;">16:00</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading" style="font-size: medium;"><label><i class="fa fa-map-marker" style="font-size: x-large;"></i> 現在地</label></div>
+                                                        <div class="panel-body">
+                                                            <label id="here" style="weight:normal;">現在時刻</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="panel panel-danger">
+                                                        <div class="panel-heading" style="font-size: medium;"><label><i class="fa fa-pencil" style="font-size: x-large;"></i> 選択した企画</label></div>
+                                                        <div class="panel-body" style="height:320px;">
+                                                        <table class="table table-hover">
+                                                            <tbody>
+                                                            <?php foreach($this->data as $item) : ?>
+                                                                <tr id="form_pid<?php echo $item['pid']; ?>" style="display:none; ">
+                                                                    <td><?php echo $item['name']; ?></td>
+                                                                    <td><?php echo $item['body']; ?></td>
+                                                                    <td><?php echo $this->contents['list']['area'][$item['area']]; ?></td>
+                                                                    <td><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></td>
+                                                                    <td><input type="hidden" id="hidden-input" name="input<?php echo $item['pid']; ?>" value=""></td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                            </tbody>
+                                                        </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">滞在予定時刻</label>
-                                                <div class="col-sm-10">
-                                                    <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
-                                                    <label id="clockText2" style="font-weight:normal;">16:00</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">選択した企画</label>
-                                                <div class="col-sm-10">
-                                                    <table class="table table-hover">
 
-                                                        <tbody>
 
-                                                        <?php foreach($this->data as $item) : ?>
-                                                            <tr id="form_pid<?php echo $item['pid']; ?>" style="display:none; ">
-                                                            <td><?php echo $item['name']; ?></td>
-                                                            <td><?php echo $item['body']; ?></td>
-                                                            <td><?php echo $this->contents['list']['area'][$item['area']]; ?></td>
-                                                            <td><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></td>
-                                                            <td><input type="hidden" id="hidden-input" name="input<?php echo $item['pid']; ?>" value=""></td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -823,11 +736,59 @@
         });
 
         $('#input-clock1').change(function() {
-            if ($('#input-clock1').val) 
-            $("#clockText1").text($('#input-clock1').val());
+            if ($('#input-clock1').val()) {
+                $("#clockText1").text($('#input-clock1').val());
+            }
+            a = $('#input-clock1').val();
+            b = $('#input-clock2').val();
+            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
+            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
+
+            console.log(parseInt(c) >= 1020);
+            if (parseInt(c) >= parseInt(d)) {
+                $('#clock-check').addClass('has-error');
+                $('#clock-check-help1').show();
+            } else {
+                $('#clock-check-help1').hide();
+            }
+            if (parseInt(c) >= 1020) {
+                $('#clock-check').addClass('has-error');
+                $('#clock-check-help2').show();
+            } else {
+                $('#clock-check-help2').hide();
+            }
+            if (parseInt(c) < parseInt(d) && parseInt(c) < 1020 && parseInt(d) > 540) {
+                $('#clock-check').removeClass('has-error');
+            }
         });
         $('#input-clock2').change(function() {
             $("#clockText2").text($('#input-clock2').val());
+            if ($('#input-clock1').val() > $('#input-clock2').val()) {
+                $('#clock-check').addClass('has-error');
+            }
+            a = $('#input-clock1').val();
+            b = $('#input-clock2').val();
+            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
+            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
+            console.log(c);
+            console.log(d);
+
+            if (parseInt(c) >= parseInt(d)) {
+                $('#clock-check').addClass('has-error');
+                $('#clock-check-help1').show();
+            } else {
+                $('#clock-check-help1').hide();
+            }
+            if (parseInt(d) <= 540) {
+                $('#clock-check').addClass('has-error');
+                $('#clock-check-help3').show();
+            } else {
+                $('#clock-check-help3').hide();
+            }
+            if (parseInt(c) < parseInt(d) && parseInt(d) > 540 && parseInt(c) < 1020) {
+                $('#clock-check').removeClass('has-error');
+            }
+
         });
 
         //select2
@@ -911,6 +872,95 @@
         });
     });
 
+    $(function(){
+        // 「id="jQueryBox"」を非表示
+        $("#jQueryBox5").css("display", "none");
+
+        // 「id="jQueryPush"」がクリックされた場合
+        $("#jQueryPush5").click(function(){
+            $("#jQueryPush5").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox5").toggle();
+        });
+
+        $("#jQueryBox5").click(function(){
+            $("#jQueryPush5").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox5").toggle();
+        });
+    });
+
+    $(function(){
+        // 「id="jQueryBox"」を非表示
+        $("#jQueryBox6").css("display", "none");
+
+        // 「id="jQueryPush"」がクリックされた場合
+        $("#jQueryPush6").click(function(){
+            $("#jQueryPush6").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox6").toggle();
+        });
+
+        $("#jQueryBox6").click(function(){
+            $("#jQueryPush6").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox6").toggle();
+        });
+    });
+
+    $(function(){
+        // 「id="jQueryBox"」を非表示
+        $("#jQueryBox7").css("display", "none");
+
+        // 「id="jQueryPush"」がクリックされた場合
+        $("#jQueryPush7").click(function(){
+            $("#jQueryPush7").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox7").toggle();
+        });
+
+        $("#jQueryBox7").click(function(){
+            $("#jQueryPush7").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox7").toggle();
+        });
+    });
+
+    $(function(){
+        // 「id="jQueryBox"」を非表示
+        $("#jQueryBox8").css("display", "none");
+
+        // 「id="jQueryPush"」がクリックされた場合
+        $("#jQueryPush8").click(function(){
+            $("#jQueryPush8").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox8").toggle();
+        });
+
+        $("#jQueryBox8").click(function(){
+            $("#jQueryPush8").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox8").toggle();
+        });
+    });
+
+    $(function(){
+        // 「id="jQueryBox"」を非表示
+        $("#jQueryBox9").css("display", "none");
+
+        // 「id="jQueryPush"」がクリックされた場合
+        $("#jQueryPush9").click(function(){
+            $("#jQueryPush9").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox9").toggle();
+        });
+
+        $("#jQueryBox9").click(function(){
+            $("#jQueryPush9").toggle();
+            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $("#jQueryBox9").toggle();
+        });
+    });
     //企画の項目を選んで表示
     $(function() {
 
@@ -965,146 +1015,170 @@
         $("#pid1 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid1").toggle();
-            $("#pid1 a").toggleClass("highlight");
+            $("#pid1 a").toggleClass("highlight",1000);
             $("[name=input1]").val("1");
         });
         $("#pid2 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid2").toggle();
-            $("#pid2 a").toggleClass("highlight");
+            $("#pid2 a").toggleClass("highlight",1000);
             $("[name=input2]").val(2);
         });
         $("#pid3 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid3").toggle();
-            $("#pid3 a").toggleClass("highlight");
+            $("#pid3 a").toggleClass("highlight",1000);
             $("[name=input3]").val(3);
         });
         $("#pid4 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid4").toggle();
-            $("#pid4 a").toggleClass("highlight");
+            $("#pid4 a").toggleClass("highlight",1000);
             $("[name=input4]").val(4);
         });
         $("#pid5 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid5").toggle();
-            $("#pid5 a").toggleClass("highlight");
+            $("#pid5 a").toggleClass("highlight",1000);
             $("[name=input5]").val(5);
         });
         $("#pid6 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid6").toggle();
-            $("#pid6 a").toggleClass("highlight");
+            $("#pid6 a").toggleClass("highlight",1000);
             $("n[ame=input6]").val(6);
         });
         $("#pid7 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid7").toggle();
-            $("#pid7 a").toggleClass("highlight");
+            $("#pid7 a").toggleClass("highlight",1000);
             $("[name=input7]").val(7);
         });
         $("#pid8 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid8").toggle();
-            $("#pid8 a").toggleClass("highlight");
+            $("#pid8 a").toggleClass("highlight",1000);
             $("[name=input8]").val(8);
         });
         $("#pid9 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid9").toggle();
-            $("#pid9 a").toggleClass("highlight");
+            $("#pid9 a").toggleClass("highlight",1000);
             $("[name=input9]").val(9);
         });
         $("#pid10 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid10").toggle();
-            $("#pid10 a").toggleClass("highlight");
+            $("#pid10 a").toggleClass("highlight",1000);
             $("[name=input10]").val(10);
         });
         $("#pid11 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid11").toggle();
-            $("#pid11 a").toggleClass("highlight");
+            $("#pid11 a").toggleClass("highlight",1000);
             $("[name=input11]").val(11);
         });
         $("#pid12 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid12").toggle();
-            $("#pid12 a").toggleClass("highlight");
+            $("#pid12 a").toggleClass("highlight",1000);
             $("[name=input12]").val(12);
         });
         $("#pid13 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid13").toggle();
-            $("#pid13 a").toggleClass("highlight");
+            $("#pid13 a").toggleClass("highlight",1000);
             $("[name=input13]").val(13);
         });
         $("#pid14 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid14").toggle();
-            $("#pid14 a").toggleClass("highlight");
+            $("#pid14 a").toggleClass("highlight",1000);
             $("[name=input14]").val(14);
         });
         $("#pid15 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid15").toggle();
-            $("#pid15 a").toggleClass("highlight");
+            $("#pid15 a").toggleClass("highlight",1000);
             $("[name=input15]").val(15);
         });
         $("#pid16 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid16").toggle();
-            $("#pid16 a").toggleClass("highlight");
+            $("#pid16 a").toggleClass("highlight",1000);
             $("[name=input16]").val(16);
         });
-        $("#pid1 a").click(function () {
+        $("#pid17 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid17").toggle();
-            $("#pid17 a").toggleClass("highlight");
+            $("#pid17 a").toggleClass("highlight",1000);
             $("[name=input17]").val(17);
         });
         $("#pid18 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid18").toggle();
-            $("#pid18 a").toggleClass("highlight");
+            $("#pid18 a").toggleClass("highlight",1000);
             $("[name=input18]").val(18);
         });
         $("#pid19 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid19").toggle();
-            $("#pid19 a").toggleClass("highlight");
+            $("#pid19 a").toggleClass("highlight",1000);
             $("[name=input19]").val(19);
         });
         $("#pid20 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid20").toggle();
-            $("#pid20 a").toggleClass("highlight");
+            $("#pid20 a").toggleClass("highlight",1000);
             $("[name=input20]").val(20);
         });
         $("#pid21 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid21").toggle();
-            $("#pid21 a").toggleClass("highlight");
+            $("#pid21 a").toggleClass("highlight",1000);
             $("[name=input21]").val(21);
         });
         $("#pid22 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid22").toggle();
-            $("#pid22 a").toggleClass("highlight");
+            $("#pid22 a").toggleClass("highlight",1000);
             $("[name=input22]").val(22);
         });
         $("#pid23 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid23").toggle();
-            $("#pid23 a").toggleClass("highlight");
+            $("#pid23 a").toggleClass("highlight",1000);
             $("[name=input23]").val(23);
         });
         $("#pid24 a").click(function () {
             console.log(<?php echo $i; ?>);
             $("#form_pid24").toggle();
-            $("#pid24 a").toggleClass("highlight");
+            $("#pid24 a").toggleClass("highlight",1000);
             $("[name=input24]").val(24);
+        });
+        $("#pid25 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid25").toggle();
+            $("#pid25 a").toggleClass("highlight",1000);
+            $("[name=input25]").val(25);
+        });
+        $("#pid26 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid26").toggle();
+            $("#pid26 a").toggleClass("highlight",1000);
+            $("[name=input26]").val(26);
+        });
+        $("#pid27 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid27").toggle();
+            $("#pid27 a").toggleClass("highlight",1000);
+            $("[name=input27]").val(27);
+        });
+        $("#pid28 a").click(function () {
+            console.log(<?php echo $i; ?>);
+            $("#form_pid28").toggle();
+            $("#pid28 a").toggleClass("highlight",1000);
+            $("[name=input28]").val(28);
         });
     });
 
@@ -1151,45 +1225,6 @@
             }
         );
     });
-
-
-
-
-    /*
-     $("#pid<?php echo $i; ?> a").click(function () {
-     $("#form_pid<?php echo $i; ?>").toggle(
-     function () {
-     $("#pid<?php echo $i; ?> a").css("background-color", "#ff1111");
-     },
-     function () {
-     $("#pid<?php echo $i; ?> a").css("background-color","#ffe222");
-     }
-     );
-     });
-     */
-
-    //var $eventSelect = $("#search_pid");
-
-    //$eventSelect.on("change", function (e) { log("change"); });
-
-    //キーワード検索用
-
-    /*
-     $('#search_pid').on('select2:select',function(e){
-     val = ($(this).val());
-     console.log(val);
-     });
-     */
-
-
-
-
-    /*$("#form_pid".val).toggle();
-     e.stopPropagation(); // 追加
-     */
-    //$("#pid".val." a").toggleClass("highlight");
-    //$('[name="input".val]').val(<?php echo $i; ?>);
-
 
 
 </script>

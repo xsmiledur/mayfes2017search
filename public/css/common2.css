@@ -72,7 +72,7 @@ li {
 }
 #dropmenu li:hover ul li{
     overflow: visible;
-    height: 38px;
+    height: 28px;
 }
 #dropmenu li:active ul li{
 
@@ -82,6 +82,7 @@ li {
     height: 200px;
     color: #ffffe0;
     font-weight: normal;
+    transition: .2s;
 }
 .contact-box:hover {
     filter:brightness(1.1);
@@ -95,6 +96,7 @@ li {
 }
 
 .highlight {
+    background: #ffffe0 !important;
     color:#ffa500 !important;
 }
 fieldset .ibox .ibox-content {
