@@ -32,7 +32,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox" id="id">
-                        <div class="ibox-content" style="height: 690px;">
+
+                        <!--ここで高さ変更できる-->
+                        <div class="ibox-content">
 
                             <div class="pull-left">
                                 <a href="/index2" class="btn btn-white btn-xs" type="button"><i class="fa fa-mail-reply"></i> Back</a>
@@ -46,28 +48,152 @@
                             <div class="text-center article-title">
                                 <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Oct 2015</span>
                                 <h1>
-                                    Behind the word mountains
+                                    このアプリで使われているアルゴリズムの説明
                                 </h1>
                             </div>
+                            <h2>
+                                ざっくりいうと
+                            </h2>
+                            <br>
                             <p>
-                                Many desktop publishing packages and web page editors now use <strong>Lorem Ipsum as their default model text</strong>, and a search for 'lorem ipsum' will uncover many web
+                                アルゴリズム班が製作したこのアプリは簡単に言うと、みなさんが回りたいいくつかの展示を最短でいい感じに回る経路を求めるというものです。
+                                <br>この最短経路検索には大きく分けて二つのアルゴリズムが使われています。
                             </p>
+
                             <p>
-                                One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops
+                                一つ目はすべての二つの展示の組み合わせに対して、最短距離と経路を求めるアルゴリズムです。
+                                <br>今回のアプリではグラフ上での二点間を求めるためによく使われるダイクストラ法を使いました。
+                                <br>ダイクストラ法によってあらかじめ全展示間の最短での移動時間を計算して保存しておきます。ダイクストラ法については後で書くので詳しく知りたい方は下の方を読んでみてください。
                             </p>
+
                             <p>
-                                <i>
-                                    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                                </i>
+                                二つ目はみなさんが回りたい展示の列と現在地を受け取り、展示を回る順番を全通り列挙して必要な合計時間が一番小さくなるような回り方をぽん！っと出しちゃうアルゴリズムです。合計時間は一つ目のダイクストラ法で求めておいた二点間の距離を用いて求めます。
+                                <br>その際、展示時間が固定されているような展示(演劇や演奏など上映時間が決められているもの)があったりしたら、その展示に間に合うような経路だけ返すようにしてあります。
                             </p>
+
                             <p>
-                                The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek,
+                                まとめると
+                                <br>
+                                <div style="border:5px double #F9F;padding:10px;border-radius:10px;">
+                                <strong>二つの展示の間の最短移動時間をすべての組み合わせに対してあらかじめ計算しておいて、みなさんが行きたい展示を並べ替えて求めておいた時間を合計して一番早いやつをぽん！っとだす！！</strong>
+                            </div>
+                            <br>
+                            ということです。
                             </p>
+                            <br>
+                            <h2 class="alg">
+                                2点間の最短の経路と移動時間を求めよう
+                            </h2>
+                            <br>
                             <p>
-                                Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Trebek's fun TV quiz game. Woven silk pyjamas exchanged for blue quartz. Brawny gods just
+                                ダイクストラ法の説明をする前にグラフについて簡単に説明しておきます。
+                                <br>
+グラフと聞いて多くの人が最初に思い浮かべるのは棒グラフや折れ線グラフ、中高生であれば関数のグラフなどではないでしょうか。
+今回のアルゴリズムでいうグラフとはこれらとは異なるもので、大まかに言うと頂点が辺で繋がれているような地図のようなものです。
+<br>
+単純なグラフには各辺には数字が振られていないのですが、以下のように辺に数字が割り当てられているグラフもあり、これを重み付きグラフといいます。今回のアルゴリズムではこの重み付きグラフを使います。ちなみに重み付きグラフはネットワークといい、割り当てられた数字を重みと言います。
+今回のアプリケーションでは本郷キャンパスの各展示や交差点を頂点に、道を辺として重み付きグラフを作成しました。重み付きグラフなので先ほども述べた通り各辺には数字が割り当てられますが、ここではその道を移動するのにかかる時間を割り当てました。
+
                             </p>
+
                             <p>
-                                Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex.
+                                ここまできたらやることがなんとなくわかってきたと思います。二つの頂点をつなぐ道の中で辺に振られている重みの合計が最小になるような道順を見つければいいということですね。
+                                <br>では試しに下のグラフについて、頂点1から頂点5までの最短経路を探してみましょう。
+                            </p>
+                            <br>
+                            <div align="center">
+                                <img src="/img/graph.png" width="500" height="300">
+                            </div>
+
+                            <p>
+                                <br>
+                                見つけられたでしょうか？？最短経路は頂点1,2,3,5の順にたどっていくというものですが、大事なのは答えではなくその求め方にあります。
+おそらく多くの方はしらみつぶしに片っ端から1から5に行ける道を辿って行って最短経路を求めたと思います。
+<br>
+このグラフでは規模が小さいので全部しらみつぶしに探して行ってもそこまで負担ではないのですが、想像してみてください。本郷キャンパスにはもっとたくさんの展示と道があります。そのグラフ上で先ほどと同じことをあなたはしたいでしょうか？また人間がやらないとしても、一つ一つ試していくのはコンピュータでも結構な時間がかかってしまいます。
+                            </p>
+
+                            <p>
+                                というように、グラフが大きくなってしまう今回のアプリでは残念ながら最短経路を一つ一つ試していって求めるという方法は使うことができません。ここで、ようやくダイクストラ法の出番です。
+                            </p>
+                            <br>
+                            <h2 class="alg">
+                                よくあるたとえ話
+                            </h2>
+                            <br>
+                            <p>
+                                ここからいよいよダイクストラ法の中身について説明していきます。
+                                <br>
+いきなりダイクストラ法の細かい説明をするよりもまずイメージをつかんでほしいので、次のようなことを想像してみてください。
+先ほど述べたグラフの頂点をビー玉に、辺をひもにしてみます。辺の距離と比例するように紐の長さも調整してあります。
+<br>
+このビー玉のうち、出発したい点を手に持って持ち上げていきます。どんどん他のビー玉も持ち上がっていき、終点にしたいビー玉が持ち上がる寸前に止めます。その時の手に持ってるビー玉の高さが始点と終点を結ぶ最短距離となります。ざっくりいうとこれがダイクストラ法の正体です。
+                            </p>
+
+                            <p>
+                                これでダイクストラ法の全てがわかる人はすごいと思うのでふわっとイメージが湧いてくれたら嬉しいです。
+このイメージを実際にプログラムではどうやってるんだという人のために以下にアルゴリズムの細かい部分を説明していきます。
+                            </p>
+                            <br>
+                            <h2 class="alg">
+                                具体的な手順
+                            </h2>
+                            <br>
+                            <p>
+                                先ほどのイメージになぞらえて話していくと、地面に接していない（持ち上がっている）ビー玉は「最短経路が決まったグループ」、地面にまだ接しているビー玉は「最短経路が決まっていないグループ」ということができます。ダイクストラ法ではこの最短距離が決まっていないグループから決まったグループに一つずつ移していき、終点が決まったグループに移ったら終了です。
+                            </p>
+
+                            <p>
+                                最初、すべての頂点を「最短経路が決まってないグループ」に入れておきます。各頂点の始点からの暫定での最短所要時間をすべて無限大に大きくしておき、始点の始点からの到達所要時間は0としておきます。
+    それから以下のルールに従って点をグループからグループへ移動させていきます。
+                            </p>
+
+                            <div style="border:5px double #F9F;padding:10px;border-radius:10px;">~ルール~<br>
+「最短経路が決まっていないグループ」のうち最短経路の所要時間が一番短いものを「最短経路が決まったグループ」に入れる。<br>
+移した点と繋がっている点に対して、その点の暫定の最短所要時間よりも移した点を経由して行った場合の所要時間のほうが短かったら暫定の最短所要時間を更新します。（おわり）
+</div>
+                            <p>
+                                <br>
+                                とはいえ文章だけでは分かりづらいので、実際に先ほど考えたグラフについてダイクストラ法を適用してみてグループ間の移動ルールを理解してみましょう。頂点はさきほどと同じく1から5の最短経路を求めるという設定でやってみます。
+
+                            </p>
+                            <br>
+                            <h2 class="alg">
+                                実際にやってみよう
+                            </h2>
+                            <br>
+                            <p>まず暫定の最短の所要時間は頂点1だけ0で、それ以外は無限大なので一番小さい頂点1が「最短経路が決まったグループ」に移されます。
+                            </p>
+
+                            <p>次に1から移動できる点2と3について、現在の暫定での最短所要時間（どちらも無限大）よりも頂点1から2や3に行った方が所要時間は小さくなるので暫定の最短所要時間を更新します。頂点2は頂点1からいくと50分、頂点3は頂点1からいくと80分であり、頂点1までの所要時間は0なので頂点2,3の暫定の最短所要時間はそれぞれ50分,80分になります。（これで１ステップ終了）
+
+                            </p>
+                            <p>同様に「最短経路が決まっていないグループ」（頂点は2,3,4,5が残ってる）のうち一番暫定最短距離が短いもの（すなわち頂点２）を「最短経路が決まったグループ」に移します。
+頂点2からいける点（頂点3,頂点4）に対して同様に最短での所要時間を更新します。頂点4については無限なので更新するのは当たり前ですが（更新すると50+15で65分になる）、3は1からもいけているのでそれよりも短い時間でいけるかを考えなければいけません。今回1から3に直接行くのにかかる80分（暫定での最短）よりも1から2に行って3に行くルート（2への最短所要時間である50分と、そこからかかる20分を足して70分）を比べて70分の方が短いので3の暫定の最短所要時間を80分から70分に更新することになります。（2ステップ終了）
+                            </p>
+                            <p>同様に「最短経路が決まっていないグループ」（頂点は3,4,5が残ってる）のうち一番暫定最短距離が短いもの（すなわち頂点4）を最短距離が決まったグループに移します。
+また4からいける点に対して最短所要時間を更新して.......と続けていき、5が「最短経路決定済みグループ」に移動したら終了です。各ステップにつき一つずつ頂点の最短経路が決定していく感じです。
+
+                            </p>
+                            <br>
+                            <h2 class="alg">
+                                なんでダイクストラ法がいいの？
+                            </h2>
+                            <br>
+                            <p>この方法で最短経路を求めると、最短経路が決まっているかどうかをで分割するグループの実装の仕方にもよりますが、辺の数の二乗ぐらいの計算時間がかかります。
+                                <br>言い換えると、辺の数を10倍にすると計算時間は100倍に、100倍すると10000倍になるということです。
+                                <br>詳しくは計算時間のオーダーという問題に関わってくるのでここでは詳しくは説明できませんが、最初にみなさんがやろうとした(であろう)、経路の候補を一つ一つすべて試していく愚直な方法では辺の数の階乗ぐらいの計算時間がかかります。
+                                <br>少し試してみるとわかるように階乗の方が圧倒的に早く大きくなっていくことがわかります。下に二つの方法の枝の数に対する計算時間の増え方をまとめました。
+                            </p>
+                            <br>
+                            <div align="center">
+                                <img src="/img/order.png"width="900">
+                            </div>
+
+                            <p>
+                                <br>
+                            <p>
+                                このように、枝の数が大きくなればなるほどダイクストラ法の方が早く計算が終わることがわかり、優れたやり方であると言えます。ダイクストラ法ってすばらしい！(おわり)
                             </p>
                             <hr>
                             <div class="row">
@@ -115,7 +241,7 @@
 <script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="/Static_Full_Version/js/inspinia.js"></script>
+<script src="/assets-admin/js/inspinia.js"></script>
 <script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
 
 <!-- Steps -->
@@ -636,4 +762,3 @@
 </body>
 
 </html>
-
