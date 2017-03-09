@@ -68,18 +68,71 @@
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-clock-o"> 滞在時間</i></h2>
-                                        <p class="text-muted">選択できる企画は５個までです。</p>
+                                        <p class="text-muted" style="padding-left: 20px;">      滞在日と時間を入力してください。</p>
                                     </div>
                                     <div class="row">
                                         <div class="ibox">
                                             <div class="ibox-content outside b-r-md">
-                                                <div class="col-lg-8">
+                                                <div class="col-lg-3"></div>
+                                                <div class="col-lg-3">
+                                                    <div class="contact-box center-version no-borders" style="color: #676a6c;">
+
+                                                        <a >
+
+                                                            <i class="fa fa-calendar fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+
+
+                                                            <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
+
+                                                            <address class="m-t-md">
+                                                                <label class="i-checks" id="i-check1"><input type="radio" id="1day" checked="checked" value="1day" name="date"> <i></i> １日目 </label>
+                                                                <label class="i-checks" id="i-check2"><input type="radio" id="2day" value="2day" name="date"> <i></i> ２日目 </label>
+                                                            </address>
+
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="contact-box center-version no-borders" style="color: #676a6c;">
+
+                                                        <a >
+
+                                                            <i class="fa fa-clock-o fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+
+
+                                                            <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在時間</strong></h3>
+                                                            <div class="input-group clockpicker" id="clock1">
+                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
+                                                                <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="input-group clockpicker" id="clock2">
+                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
+                                                                <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                            </span>
+                                                            </div>
+
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3"></div>
+
+
+                                                <!--
+                                                <div class="col-lg-4">
                                                     <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
                                                         <div class="col-sm-10">
                                                             <label class="radio-inline i-checks" id="i-check1"><input type="radio" id="1day" checked="checked" value="1day" name="date"> <i></i> １日目 </label>
                                                             <label class="radio-inline i-checks" id="i-check2"><input type="radio" id="2day" value="2day" name="date"> <i></i> ２日目 </label>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-lg-8">
+
 
                                                     <div class="form-group" id="clock-check"><label class="col-sm-2 control-label">滞在予定時間</label>
                                                         <div class="row">
@@ -107,6 +160,7 @@
                                                     </div>
 
                                                 </div>
+                                                -->
                                             </div>
                                         </div>
 
@@ -118,7 +172,7 @@
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-map-marker"> 現在地</i></h2>
-                                        <p class="text-muted">選択できる企画は５個までです。</p>
+                                        <p class="text-muted" style="padding-left: 20px;">現在地を選択してください。</p>
                                     </div>
 
                                                     <!--
@@ -150,7 +204,7 @@
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-eye"> 企画の選択</i></h2>
-                                        <p class="text-muted">選択できる企画は５個までです。</p>
+                                        <p class="text-muted" style="padding-left: 20px;">選択できる企画は５個までです。</p>
                                     </div>
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md">
@@ -479,7 +533,7 @@
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-rocket"> 確認</i></h2>
-                                        <p class="text-muted">選択できる企画は５個までです。</p>
+                                        <p class="text-muted" style="padding-left: 20px;">      検索前のチェックを行ってください。</p>
                                     </div>
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md" style="overflow:hidden;">
@@ -971,30 +1025,36 @@
 
             $.each(pid,
                 function(index, elem) {
-                    console.log(elem);
-
                     val = "#form_pid" + elem;
-
-                    console.log(val);
                     $(val).show();
 
                     val1 = "input" + elem;
-                    a = $('[name=' + val1 + ']').val(elem);
-                    console.log(a);
+                    $('[name=' + val1 + ']').val(elem);
+
+                    val2 = '#pid'+elem+' a';
+                    console.log(val2);
+                    $(val2).addClass("highlight",1000);
+                    //$("#pid28 a").toggleClass("highlight",1000);
+
                 }
             );
         });
 
         //キーワード検索　消す
         $("#search_pid").on("select2:unselect", function (e) {
+
             val = "#form_pid" + e.params.data.id;
-            //console.log(val);
-            console.log(val);
-            //console.log(e);
-
-
             $(val).hide();
+
+            val1 = "input" + e.params.data.id;
+            console.log(val1);
+            $('[name=' + val1 + ']').val("");
+
             $('[name=val]').val();
+
+            val2 = '#pid'+e.params.data.id+' a';
+            console.log(val2);
+            $(val2).removeClass("highlight",1000);
 
 
         });
@@ -1013,169 +1073,141 @@
 
     $(function() {
         $("#pid1 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid1").toggle();
             $("#pid1 a").toggleClass("highlight",1000);
             $("[name=input1]").val("1");
         });
         $("#pid2 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid2").toggle();
             $("#pid2 a").toggleClass("highlight",1000);
             $("[name=input2]").val(2);
         });
         $("#pid3 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid3").toggle();
             $("#pid3 a").toggleClass("highlight",1000);
             $("[name=input3]").val(3);
         });
         $("#pid4 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid4").toggle();
             $("#pid4 a").toggleClass("highlight",1000);
             $("[name=input4]").val(4);
         });
         $("#pid5 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid5").toggle();
             $("#pid5 a").toggleClass("highlight",1000);
             $("[name=input5]").val(5);
         });
         $("#pid6 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid6").toggle();
             $("#pid6 a").toggleClass("highlight",1000);
             $("n[ame=input6]").val(6);
         });
         $("#pid7 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid7").toggle();
             $("#pid7 a").toggleClass("highlight",1000);
             $("[name=input7]").val(7);
         });
         $("#pid8 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid8").toggle();
             $("#pid8 a").toggleClass("highlight",1000);
             $("[name=input8]").val(8);
         });
         $("#pid9 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid9").toggle();
             $("#pid9 a").toggleClass("highlight",1000);
             $("[name=input9]").val(9);
         });
         $("#pid10 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid10").toggle();
             $("#pid10 a").toggleClass("highlight",1000);
             $("[name=input10]").val(10);
         });
         $("#pid11 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid11").toggle();
             $("#pid11 a").toggleClass("highlight",1000);
             $("[name=input11]").val(11);
         });
         $("#pid12 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid12").toggle();
             $("#pid12 a").toggleClass("highlight",1000);
             $("[name=input12]").val(12);
         });
         $("#pid13 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid13").toggle();
             $("#pid13 a").toggleClass("highlight",1000);
             $("[name=input13]").val(13);
         });
         $("#pid14 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid14").toggle();
             $("#pid14 a").toggleClass("highlight",1000);
             $("[name=input14]").val(14);
         });
         $("#pid15 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid15").toggle();
             $("#pid15 a").toggleClass("highlight",1000);
             $("[name=input15]").val(15);
         });
         $("#pid16 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid16").toggle();
             $("#pid16 a").toggleClass("highlight",1000);
             $("[name=input16]").val(16);
         });
         $("#pid17 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid17").toggle();
             $("#pid17 a").toggleClass("highlight",1000);
             $("[name=input17]").val(17);
         });
         $("#pid18 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid18").toggle();
             $("#pid18 a").toggleClass("highlight",1000);
             $("[name=input18]").val(18);
         });
         $("#pid19 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid19").toggle();
             $("#pid19 a").toggleClass("highlight",1000);
             $("[name=input19]").val(19);
         });
         $("#pid20 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid20").toggle();
             $("#pid20 a").toggleClass("highlight",1000);
             $("[name=input20]").val(20);
         });
         $("#pid21 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid21").toggle();
             $("#pid21 a").toggleClass("highlight",1000);
             $("[name=input21]").val(21);
         });
         $("#pid22 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid22").toggle();
             $("#pid22 a").toggleClass("highlight",1000);
             $("[name=input22]").val(22);
         });
         $("#pid23 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid23").toggle();
             $("#pid23 a").toggleClass("highlight",1000);
             $("[name=input23]").val(23);
         });
         $("#pid24 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid24").toggle();
             $("#pid24 a").toggleClass("highlight",1000);
             $("[name=input24]").val(24);
         });
         $("#pid25 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid25").toggle();
             $("#pid25 a").toggleClass("highlight",1000);
             $("[name=input25]").val(25);
         });
         $("#pid26 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid26").toggle();
             $("#pid26 a").toggleClass("highlight",1000);
             $("[name=input26]").val(26);
         });
         $("#pid27 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid27").toggle();
             $("#pid27 a").toggleClass("highlight",1000);
             $("[name=input27]").val(27);
         });
         $("#pid28 a").click(function () {
-            console.log(<?php echo $i; ?>);
             $("#form_pid28").toggle();
             $("#pid28 a").toggleClass("highlight",1000);
             $("[name=input28]").val(28);
