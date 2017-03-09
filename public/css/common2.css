@@ -271,3 +271,7 @@ a#footer:hover,
 a#footer:active {
 
 }
+
+.contact-box.center-version > a {
+    background-color: #ffffe0;
+}
