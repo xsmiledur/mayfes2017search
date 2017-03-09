@@ -16,6 +16,10 @@
     <!-- common2 -->
     <link href="/css/common2.css" rel="stylesheet">
 
+    <style type="text/css">
+    p,div{font-size: 18px;
+    }
+    </style>
 
 
 </head>
@@ -48,9 +52,9 @@
                             <div class="text-center article-title">
                                 <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Oct 2015</span>
                                 <br><br>
-                                    <div style="color: #fff; width:700px; margin-left:auto;margin-right:auto; background: #f08080; padding: 20px; border: 1px dashed rgba(255,255,255,0.8); box-shadow: 0 0 0 5px #f08080; -moz-box-shadow: 0 0 0 5px #f08080; -webkit-box-shadow: 0 0 0 5px #f08080;; font-size: 90%;">
+                                    <div style="color: #fff; width:700px; margin-left:auto;margin-right:auto; background: #FF9900; padding: 20px; border: 1px dashed rgba(255,255,255,0.8); box-shadow: 0 0 0 5px #f08080; -moz-box-shadow: 0 0 0 5px #f08080; -webkit-box-shadow: 0 0 0 5px #f08080;; font-size: 90%;">
                                         <h1>
-                                        <font size="5">このアプリに使われているアルゴリズムについて</font>
+                                        <font size="5">〜このアプリに使われているアルゴリズムについて〜</font>
                                         </h1>
                                     </div>
                             </div>
@@ -75,8 +79,10 @@
                                 二つ目はみなさんが回りたい展示の列と現在地を受け取り、展示を回る順番を全通り列挙して必要な合計時間が一番小さくなるような展示のまわり方を表示するアルゴリズムです。合計時間は一つ目のダイクストラ法で求めておいた二点間の距離を用いて求めます。
                                 <br>その際、展示時間が固定されているような展示(演劇や演奏など上映時間が決められているもの)がある場合、その展示に間に合うような経路だけ返すようにしてあります。
                                 どんなに短い時間でまわれる経路でも現実的に不可能なルートだったら意味がないからですね。
+                                <br>
+                                <br>
+                                まとめると次のようになります。
                             </p>
-                            まとめると次のようになります。
                                 <td><div class="p-sm b-r-xl m-xl">
                                     <div style="border:1px dashed #F90;padding:10px;border-radius:10px;background:#FFDBA6;"><strong>~このアプリの仕組み~
                                         <br>
@@ -206,8 +212,58 @@
                                 <br>少し試してみるとわかるように階乗の方が圧倒的に早く大きくなっていくことがわかります。下に二つの方法の枝の数に対する計算時間の増え方をまとめました。
                             </p>
                             <br>
-                            <div align="center">
-                                <img src="/img/order.png"width="900">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>アルゴリズム \ 辺の数</th>
+                                        <th>
+                                            1本
+                                        </th>
+                                        <th>
+                                            2本
+                                        </th>
+                                        <th>
+                                            3本
+                                        </th>
+                                        <th>
+                                            5本
+                                        </th>
+                                        <th>
+                                            7本
+                                        </th>
+                                        <th>
+                                            10本
+                                        </th>
+                                        <th>
+                                            15本
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th>ダイクストラ法</th>
+                                        <td>1 × 1 = 1</td>
+                                        <td>2 × 2 = 4</td>
+                                        <td>3 × 3 = 9</td>
+                                        <td>5 × 5 = 25</td>
+                                        <td>7 x 7 = 49</td>
+                                        <td>10 × 10 = 100</td>
+                                        <td>15 × 15 = 225</td>
+                                    </tr>
+                                    <tr>
+                                        <th>一つずつ試す方法</th>
+                                        <td>1 ! = 1</td>
+                                        <td>2 ! = 2</td>
+                                        <td>3 ! = 6</td>
+                                        <td>5 ! = 120</td>
+                                        <td>7 ! = 5040</td>
+                                        <td>10 ! = 3628800</td>
+                                        <td>15 ! = 1307674368000</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
                             <p>
@@ -218,8 +274,6 @@
                                 <br>
                                 一見とっつきにくそうな印象を持たれがちなアルゴリズムですが、このような応用例を通して少しでも身近に感じていただけたら嬉しいです。
                             </p>
-
-
 
                             <hr>
                             <div class="row">
