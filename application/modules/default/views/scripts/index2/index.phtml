@@ -720,9 +720,7 @@
 
                 // Start validation; Prevent form submission if false
 
-                if (j == 1) {
-                    return form.valid();
-                } else {
+                if (j  == 0) {
                     swal({
                         title: "企画が選択されてません",
                         text: "検索するには、企画を１つ以上選択してください",
@@ -731,11 +729,7 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
-                }
-
-                if (j > 10) {
-                    return form.valid();
-                } else {
+                } else if (j > 10) {
                     swal({
                         title: "選択された企画が多すぎます",
                         text: "選択する企画は１０個以下にしてください",
@@ -744,10 +738,15 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
+                } else {
+                    window.location.href = '/result';
+                    //return form.valid();
                 }
+
             },
             onFinished: function (event, currentIndex)
             {
+                window.location.href = '/result';
                 var form = $(this);
 
                 // Submit form input
