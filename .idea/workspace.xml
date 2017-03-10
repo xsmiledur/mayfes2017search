@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<!--<<<<<<< Shion2
     <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="" />
-=======-->
-    <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-<!-->>>>>>> master-->
     <ignored path="mayfes2017search.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -36,99 +30,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-<!--<<<<<<< Shion2
       <file leaf-file-name="ResultController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/ResultController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="44">
               <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-=======-->
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-<!-->>>>>>> master-->
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<!--<<<<<<< Shion2
       <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="663">
               <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-=======-->
-      <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="535" column="89" lean-forward="false" selection-start-line="535" selection-start-column="89" selection-end-line="535" selection-end-column="89" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h3#0;n#a#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1489103478000" expanded="false" signature="8363:8380" ph="..." />
-                <marker date="1489103478000" expanded="false" signature="9345:9359" ph="..." />
-                <marker date="1489103478000" expanded="false" signature="9523:9537" ph="..." />
-                <marker date="1489103478000" expanded="false" signature="9705:9719" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/models/MainModel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-<!-->>>>>>> master-->
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-<!--<<<<<<< Shion2
       <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
-=======-->
-      <file leaf-file-name="common2.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/common2.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="277" column="37" lean-forward="false" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/functions/functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contacts.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/contacts.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5715">
-              <caret line="381" column="27" lean-forward="false" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
-<!-->>>>>>> master-->
               <folding />
             </state>
           </provider>
@@ -240,11 +166,8 @@
         <option value="$PROJECT_DIR$/public/static_web/Static_Full_Version/clients.html" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index/_index.phtml" />
         <option value="$PROJECT_DIR$/public/static_web/Static_Full_Version/form_basic.html" />
-<!--<<<<<<< Shion2
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-=======-->
-<!-->>>>>>> master-->
         <option value="$PROJECT_DIR$/public/static_web/Static_Full_Version/datamaps.html" />
         <option value="$PROJECT_DIR$/public/static_web/ASPNET_Core_1_0_Full_Project/ASPNET_Core_1_0/wwwroot/lib/morrisjs/examples/months-no-smooth.html" />
         <option value="$PROJECT_DIR$/public/static_web/Static_Full_Version/form_advanced.html" />
@@ -306,13 +229,8 @@
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
-<!--<<<<<<< Shion2
       <flattenPackages />
       <showMembers ProjectPane="true" />
-=======-->
-      <flattenPackages ProjectPane="false" />
-      <showMembers />
-<!-->>>>>>> master-->
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
@@ -324,12 +242,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<!--<<<<<<< Shion2
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
-=======-->
-<!-->>>>>>> master-->
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -358,12 +273,6 @@
           </PATH>
         </subPane>
       </pane>
-<!--<<<<<<< Shion2
-=======-->
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-<!-->>>>>>> master-->
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -863,37 +772,14 @@
       <workItem from="1488034048426" duration="8828000" />
       <workItem from="1488069402561" duration="28785000" />
       <workItem from="1488170858584" duration="2630000" />
-<!--<<<<<<< Shion2
       <workItem from="1488173875059" duration="6565000" />
       <workItem from="1488185605130" duration="1672000" />
       <workItem from="1489023570620" duration="1902000" />
-=======-->
-      <workItem from="1488173875059" duration="11388000" />
-      <workItem from="1488187201316" duration="4000" />
-      <workItem from="1488284055593" duration="7430000" />
-      <workItem from="1488370081785" duration="7354000" />
-      <workItem from="1488448850526" duration="3548000" />
-      <workItem from="1488490093879" duration="48000" />
-      <workItem from="1488607235518" duration="444000" />
-      <workItem from="1488609866604" duration="946000" />
-      <workItem from="1488628064579" duration="3183000" />
-      <workItem from="1488806323679" duration="6150000" />
-      <workItem from="1488927572668" duration="423000" />
-      <workItem from="1488929202529" duration="967000" />
-      <workItem from="1488942238797" duration="13000" />
-      <workItem from="1488982961917" duration="1095000" />
-      <workItem from="1489030468492" duration="369000" />
-      <workItem from="1489103065701" duration="411000" />
-<!-->>>>>>> master-->
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<!--<<<<<<< Shion2
     <option name="totallyTimeSpent" value="188771000" />
-=======-->
-    <option name="totallyTimeSpent" value="222377000" />
-<!-->>>>>>> master-->
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="735" extended-state="1" />
@@ -913,25 +799,14 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-<!--<<<<<<< Shion2
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18502203" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32966226" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24889868" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-=======-->
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18263888" sideWeight="0.49589685" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-<!-->>>>>>> master-->
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-<!--<<<<<<< Shion2
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-=======-->
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39976552" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16041666" sideWeight="0.5041032" order="5" side_tool="true" content_ui="tabs" />
-<!-->>>>>>> master-->
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -939,7 +814,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-<!--<<<<<<< Shion2
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -970,8 +844,6 @@
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
-=======-->
-<!-->>>>>>> master-->
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -998,10 +870,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-<!--<<<<<<< Shion2
-=======-->
-    <entry file="file://$PROJECT_DIR$/public/static_web/Static_Full_Version/css/style.css" />
-<!-->>>>>>> master-->
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1035,28 +903,12 @@
     <entry file="file://$PROJECT_DIR$/public/static_web/Static_Full_Version/form_wizard.html" />
     <entry file="file://$PROJECT_DIR$/public/css/common.css" />
     <entry file="file://$PROJECT_DIR$/public/js/main.js" />
-<!--<<<<<<< Shion2
     <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/tabs.html" />
     <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/css/plugins/steps/jquery.steps.css" />
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/Index2Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1005">
           <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
-=======-->
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="94" column="50" lean-forward="true" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/tabs.html" />
-    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/css/plugins/steps/jquery.steps.css" />
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="523" column="86" lean-forward="false" selection-start-line="523" selection-start-column="86" selection-end-line="523" selection-end-column="86" />
-<!-->>>>>>> master-->
         </state>
       </provider>
     </entry>
@@ -1075,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
           <caret line="474" column="85" lean-forward="true" selection-start-line="474" selection-start-column="85" selection-end-line="474" selection-end-column="85" />
-<!--<<<<<<< Shion2
         </state>
       </provider>
     </entry>
@@ -1083,8 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="41" lean-forward="false" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-=======-->
-<!-->>>>>>> master-->
         </state>
       </provider>
     </entry>
@@ -1113,67 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="7533" column="8" lean-forward="true" selection-start-line="7533" selection-start-column="8" selection-end-line="7533" selection-end-column="8" />
-<!--<<<<<<< Shion2
-=======-->
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/ResultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/example.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="41" lean-forward="false" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/notifications.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="27" lean-forward="false" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/Static_Full_Version/article.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6825">
-          <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/models/MainModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/functions/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-          <folding />
-<!-->>>>>>> master-->
         </state>
       </provider>
     </entry>
@@ -1215,20 +1003,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/common2.css">
       <provider selected="true" editor-type-id="text-editor">
-<!--<<<<<<< Shion2
         <state relative-caret-position="402">
           <caret line="101" column="20" lean-forward="false" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
-=======-->
-        <state relative-caret-position="726">
-          <caret line="277" column="37" lean-forward="false" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
-          <folding />
-<!-->>>>>>> master-->
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml">
       <provider selected="true" editor-type-id="text-editor">
-<!--<<<<<<< Shion2
         <state relative-caret-position="438">
           <caret line="596" column="80" lean-forward="false" selection-start-line="596" selection-start-column="80" selection-end-line="596" selection-end-column="80" />
         </state>
@@ -1331,25 +1112,6 @@
         <state relative-caret-position="119">
           <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
           <folding />
-=======-->
-        <state relative-caret-position="258">
-          <caret line="535" column="89" lean-forward="false" selection-start-line="535" selection-start-column="89" selection-end-line="535" selection-end-column="89" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#a#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h3#0;n#a#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1489103478000" expanded="false" signature="8363:8380" ph="..." />
-            <marker date="1489103478000" expanded="false" signature="9345:9359" ph="..." />
-            <marker date="1489103478000" expanded="false" signature="9523:9537" ph="..." />
-            <marker date="1489103478000" expanded="false" signature="9705:9719" ph="..." />
-          </folding>
-<!-->>>>>>> master-->
         </state>
       </provider>
     </entry>
