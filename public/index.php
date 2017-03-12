@@ -53,7 +53,7 @@ try {
     //exit();
     //return false;
 =======*/
-    //echo $e->getMessage();
+    echo $e->getMessage();
     //exit();
     return false;
 //>>>>>>> master

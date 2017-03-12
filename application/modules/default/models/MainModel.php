@@ -205,6 +205,7 @@ class MainModel
     {
         //$contents = $this->getContentsData('ja',null);
 
+        /*
         $select = $this->_read->select();
         $select->from('free_words_data')
             ->where('fw_active_flg = ? ', 1);
@@ -214,9 +215,10 @@ class MainModel
             ->orwhere('fw_place_index LIKE ?', '%'.$search.'%');*/
 
         //var_dump($data);exit();
-
+/*
         $stmt = $select->query();
         $data = $stmt->fetchAll();
+        */
 
         return $data;
     }
