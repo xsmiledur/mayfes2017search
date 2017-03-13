@@ -124,3 +124,26 @@ fieldset .ibox .ibox-content {
 .outside {
     margin-left: 30px;
 }
+.vertical-timeline-time {
+    color: #676a6c;
+    font-size: 13px;
+}
+.vertical-timeline-time p {
+    margin: 0;
+}
+
+.vertical-timeline-icon:hover {
+    cursor: pointer;
+}
+.draggable-back {
+    position: absolute;
+    top: 124px;
+    margin-top: -24px;
+    height: 218px;
+    width: 100%;
+}
+.draggable-front {
+    position: relative;
+    top: 24px;
+
+}
