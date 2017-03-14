@@ -132,18 +132,56 @@ fieldset .ibox .ibox-content {
     margin: 0;
 }
 
-.vertical-timeline-icon:hover {
-    cursor: pointer;
+.vertical-timeline-icon {
+    z-index: 100;
 }
+/*.vertical-timeline-icon:hover {
+    cursor: pointer;
+}*/
 .draggable-back {
     position: absolute;
-    top: 124px;
-    margin-top: -24px;
+    top: 100px;
     height: 218px;
     width: 100%;
 }
 .draggable-front {
     position: relative;
-    top: 24px;
+}
 
+.vertical-timeline-first-time {
+    z-index: 100;
+    position: relative;
+}
+
+
+/*div#backr1d1 {
+    position: absolute;
+    width: 100%;
+    height: 265px;
+    top: 79px;
+    z-index: 0;
+}
+div#backr1d2 {
+    position: absolute;
+    width: 100%;
+    height: 219px;
+    top: 79px;
+    z-index: 0;
+}*/
+
+.vertical-timeline-time-block {
+    position: absolute;
+    margin-left: -35px;
+    top: 10px;
+}
+.vertical-container {
+    margin-left: 30px;
+}
+.fa-timeline {
+    position: relative;
+    left: 50px;
+}
+.fa-timeline-icon {
+    font-size: large;
+    margin-right: 10px;
 }

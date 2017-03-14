@@ -18,6 +18,9 @@
 
     <link href="/css/common2.css" rel="stylesheet">
 
+    <link href="/css/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="/css/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
 </head>
 
 
@@ -42,90 +45,141 @@
 
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4" id="block1">
                                 <div class="ibox-content" id="ibox-content">
 
                                     <div style="margin-bottom: 80px;">
                                         <h2 style="text-align: center;">Route 1</h2>
-                                        <a href="#" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</a>
+                                        <button type="button" id="btn1" class="btn btn-sm btn-primary btn-outline pull-right"> More info</button>
                                     </div>
 
+
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
-                                        <div id="route1-draggable0" style="overflow: auto;">
 
-                                            <div class="vertical-timeline-block">
-
-
-                                                <div class="vertical-timeline-icon navy-bg">
-                                                    <i class="fa fa-briefcase"></i>
-
-                                                </div>
-
-                                                <div class="vertical-timeline-content">
-                                                    <h2>東大音感
-                                                        <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
-                                                    </h2>
-                                                    <div class="vertical-timeline-time">
-                                                        <p id="r1d0name">滞在時間：10分</p>
-                                                    </div>
-                                                    赤門総合研究棟
-                                                </div>
-
-
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                9:00
                                             </div>
-                                            <div class="draggable-back">
-                                                <div id="route1-draggable1" class="draggable-front">
-                                                    <div class="vertical-timeline-block">
 
-
-                                                        <div class="vertical-timeline-icon blue-bg">
-
-                                                            <i class="fa fa-file-text"></i>
-                                                        </div>
-
-                                                        <div class="vertical-timeline-content">
-                                                            <h2>工学博覧会
-                                                                <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
-                                                            </h2>
-                                                            <div class="vertical-timeline-time">
-                                                                <p id="r1d1name">滞在時間：10分</p>
-                                                            </div>
-                                                            工学部６号館
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="draggable-back">
-
-                                                        <div id="route1-draggable2" class="draggable-front">
-                                                            <div class="vertical-timeline-block">
-
-                                                                <div class="vertical-timeline-icon lazur-bg">
-                                                                    <i class="fa fa-coffee"></i>
-                                                                </div>
-
-                                                                <div class="vertical-timeline-content">
-                                                                    <h2>東大娘
-                                                                        <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
-                                                                    </h2>
-                                                                    工学部前広場
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="vertical-timeline-icon red-bg">
+                                                <i class="fa fa-briefcase"></i>
                                             </div>
+
+                                            <div class="vertical-timeline-content">
+                                                <h2>現在地
+                                                </h2>
+                                                工学部２号館
+                                            </div>
+
                                         </div>
+                                        <div class="fa-timeline">
+                                            <i class="fa fa-male fa-timeline-icon"></i> 移動：15分
+                                        </div>
+
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                9:15
+                                            </div>
+
+                                            <div class="vertical-timeline-icon navy-bg">
+                                                <i class="fa fa-briefcase"></i>
+
+                                            </div>
+
+                                            <div class="vertical-timeline-content">
+                                                <h2>東大音感
+                                                    <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
+                                                </h2>
+                                                赤門総合研究棟
+                                                <div class="vertical-timeline-time">
+                                                    <p id="r1d0name">標準滞在時間：10分</p>
+                                                    <input type="text" id="ionrange_11">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="fa-timeline">
+                                            <i class="fa fa-male fa-timeline-icon"></i>
+                                            移動：15分
+                                        </div>
+
+                                        <div class="vertical-timeline-block draggable-front">
+
+                                            <div class="vertical-timeline-time-block">
+                                                9:40
+                                            </div>
+
+                                            <div class="vertical-timeline-icon blue-bg">
+
+                                                <i class="fa fa-file-text"></i>
+                                            </div>
+
+                                            <div class="vertical-timeline-content">
+                                                <h2>工学博覧会
+                                                    <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
+                                                </h2>
+                                                工学部６号館
+                                                <div class="vertical-timeline-time">
+                                                    <p id="r1d1name">標準滞在時間：10分</p>
+                                                    <input type="text" id="ionrange_12">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="fa-timeline">
+                                            <i class="fa fa-male fa-timeline-icon"></i>
+                                            移動：10分
+                                        </div>
+
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                10:00
+                                            </div>
+                                            <div class="vertical-timeline-icon lazur-bg">
+                                                <i class="fa fa-coffee"></i>
+                                            </div>
+
+                                            <div class="vertical-timeline-content">
+                                                <h2>東大娘
+                                                    <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
+                                                </h2>
+                                                工学部前広場
+                                                <div class="vertical-timeline-time">
+                                                    <p id="r1d1name">標準滞在時間：30分</p>
+                                                    <input type="text" id="ionrange_13">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                10:30
+                                            </div>
+                                            <div class="vertical-timeline-icon yellow-bg">
+                                                <i class="fa fa-briefcase"></i>
+
+                                            </div>
+
+                                            <div class="vertical-timeline-content">
+                                                終了
+
+                                            </div>
+
+                                        </div>
+
+
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" id="block2">
                                 <div class="ibox-content" id="ibox-content">
 
                                     <div style="margin-bottom: 80px;">
                                         <h2 style="text-align: center;">Route 2</h2>
-                                        <a href="#" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</a>
+                                        <button type="button" id="btn2" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
                                     </div>
 
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
@@ -187,12 +241,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" id="block3">
                                 <div class="ibox-content" id="ibox-content">
 
                                     <div style="margin-bottom: 80px;">
                                         <h2 style="text-align: center;">Route 3</h2>
-                                        <a href="#" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</a>
+                                        <button type="button" id="btn3" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
                                     </div>
 
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
@@ -530,39 +584,35 @@
 <!-- jquery UI -->
 <script src="/Static_Full_Version/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
+<!-- IonRangeSlider -->
+<script src="/js/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+
 <script>
     $(function() {
 
-        $( "#route1-draggable1" ).draggable({
-            axis: "y",
-            cursor: "pointer",
-            containment: "parent",
-            handle: "div.blue-bg",
-            drag: function() {
-
-                var r1d0 = $('#route1-draggable0').offset().top;
-                var r1d1 = parseInt($('#route1-draggable1').offset().top)-100;
-                var _r1d10 = parseInt(r1d1) - parseInt(r1d0);
-                var r1d10 = "滞在時間：" + _r1d10 + "分";
-                $('p#r1d0name').html(r1d10);
-            }
+        $("#ionrange_11").ionRangeSlider({
+            min: 0,
+            max: 120,
+            from: 10,
+            postfix: "分",
+            grid: true
         });
-        $( "div, div.blue-bg").disableSelection();
-        $( "#route1-draggable2" ).draggable({
-            axis: "y",
-            handle: "div.lazur-bg",
-            cursor: "pointer",
-            containment: "parent",
-            drag: function() {
-
-                var r1d1 = $('#route1-draggable1').offset().top;
-                var r1d2 = parseInt($('#route1-draggable2').offset().top)-100;
-                var _r1d21 = parseInt(r1d2) - parseInt(r1d1);
-                var r1d21 = "滞在時間：" + _r1d21 + "分";
-                $('p#r1d1name').html(r1d21);
-            }
+        $("#ionrange_12").ionRangeSlider({
+            min: 0,
+            max: 120,
+            from: 10,
+            postfix: "分",
+            grid: true
         });
-        $( "div, div.blue-bg").disableSelection();
+        $("#ionrange_13").ionRangeSlider({
+            min: 0,
+            max: 120,
+            from: 30,
+            postfix: "分",
+            grid: true
+        });
+
 
     });
 </script>
