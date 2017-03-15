@@ -20,6 +20,8 @@
 
     <link href="/css/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="/css/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <!--animateTransition-->
+    <script src="/css/animateTransition/transitions.css"></script>
 
 </head>
 
@@ -50,9 +52,8 @@
 
                                     <div style="margin-bottom: 80px;">
                                         <h2 style="text-align: center;">Route 1</h2>
-                                        <button type="button" id="btn1" class="btn btn-sm btn-primary btn-outline pull-right"> More info</button>
+                                        <button type="button" id="btn1" class="btn btn-sm btn-primary btn-outline pull-right animate-slide"> More info</button>
                                     </div>
-
 
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
 
@@ -174,139 +175,151 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4" id="block2">
-                                <div class="ibox-content" id="ibox-content">
+                            <div class="col-md-8">
+                                <div class="animation-container rotateW">
+                                    <div class="section__content animation-container__block first" data-block="out">
+                                        <div class="col-md-6" id="block2">
+                                            <div class="ibox-content" id="ibox-content">
 
-                                    <div style="margin-bottom: 80px;">
-                                        <h2 style="text-align: center;">Route 2</h2>
-                                        <button type="button" id="btn2" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
+                                                <div style="margin-bottom: 80px;">
+                                                    <h2 style="text-align: center;">Route 2</h2>
+                                                    <button type="button" id="btn2" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
+                                                </div>
+
+                                                <div id="vertical-timeline" class="vertical-container dark-timeline">
+
+                                                    <div class="vertical-timeline-block">
+                                                        <!--6:00 am
+                                                        <br/>
+                                                        <small class="text-navy">2 hour ago</small>-->
+
+                                                        <div class="vertical-timeline-icon navy-bg">
+                                                            <i class="fa fa-briefcase"></i>
+
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>東大音感
+                                                                <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>赤門総合研究棟</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="vertical-timeline-block">
+                                                        <div class="vertical-timeline-icon blue-bg btn-drag">
+                                                            <i class="fa fa-file-text"></i>
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>工学博覧会
+                                                                <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>工学部６号館</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="vertical-timeline-block">
+                                                        <div class="vertical-timeline-icon lazur-bg">
+                                                            <i class="fa fa-coffee"></i>
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>東大娘
+                                                                <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>工学部前広場</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id="block3">
+                                            <div class="ibox-content" id="ibox-content">
+
+                                                <div style="margin-bottom: 80px;">
+                                                    <h2 style="text-align: center;">Route 3</h2>
+                                                    <button type="button" id="btn3" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
+                                                </div>
+
+                                                <div id="vertical-timeline" class="vertical-container dark-timeline">
+
+                                                    <div class="vertical-timeline-block">
+                                                        <!--6:00 am
+                                                        <br/>
+                                                        <small class="text-navy">2 hour ago</small>-->
+
+                                                        <div class="vertical-timeline-icon navy-bg">
+                                                            <i class="fa fa-briefcase"></i>
+
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>東大音感
+                                                                <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>赤門総合研究棟</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="vertical-timeline-block">
+                                                        <div class="vertical-timeline-icon blue-bg">
+                                                            <i class="fa fa-file-text"></i>
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>工学博覧会
+                                                                <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>工学部６号館</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="vertical-timeline-block">
+                                                        <div class="vertical-timeline-icon lazur-bg">
+                                                            <i class="fa fa-coffee"></i>
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>東大娘
+                                                                <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
+                                                            </h2>
+                                                            <p>工学部前広場</p>
+                                                        </div>
+                                                        <div style="margin-left: 5px;">
+                                                            10分
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
-
-                                        <div class="vertical-timeline-block">
-                                            <!--6:00 am
-                                            <br/>
-                                            <small class="text-navy">2 hour ago</small>-->
-
-                                            <div class="vertical-timeline-icon navy-bg">
-                                                <i class="fa fa-briefcase"></i>
-
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>東大音感
-                                                    <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
-                                                </h2>
-                                                <p>赤門総合研究棟</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
+                                    <div class="section__content animation-container__block second" data-block="in">
+                                        <div class="col-md-8">
+                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:1025px; height:700px;" usemap="#shape1" id="shape1">
                                         </div>
-
-
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon blue-bg btn-drag">
-                                                <i class="fa fa-file-text"></i>
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>工学博覧会
-                                                    <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
-                                                </h2>
-                                                <p>工学部６号館</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
-                                        </div>
-
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon lazur-bg">
-                                                <i class="fa fa-coffee"></i>
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>東大娘
-                                                    <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
-                                                </h2>
-                                                <p>工学部前広場</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4" id="block3">
-                                <div class="ibox-content" id="ibox-content">
 
-                                    <div style="margin-bottom: 80px;">
-                                        <h2 style="text-align: center;">Route 3</h2>
-                                        <button type="button" id="btn3" class="btn btn-sm btn-primary btn-outline pull-right" style=""> More info</button>
-                                    </div>
-
-                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
-
-                                        <div class="vertical-timeline-block">
-                                            <!--6:00 am
-                                            <br/>
-                                            <small class="text-navy">2 hour ago</small>-->
-
-                                            <div class="vertical-timeline-icon navy-bg">
-                                                <i class="fa fa-briefcase"></i>
-
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>東大音感
-                                                    <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
-                                                </h2>
-                                                <p>赤門総合研究棟</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
-
-                                        </div>
-
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon blue-bg">
-                                                <i class="fa fa-file-text"></i>
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>工学博覧会
-                                                    <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
-                                                </h2>
-                                                <p>工学部６号館</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
-                                        </div>
-
-                                        <div class="vertical-timeline-block">
-                                            <div class="vertical-timeline-icon lazur-bg">
-                                                <i class="fa fa-coffee"></i>
-                                            </div>
-
-                                            <div class="vertical-timeline-content">
-                                                <h2>東大娘
-                                                    <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
-                                                </h2>
-                                                <p>工学部前広場</p>
-                                            </div>
-                                            <div style="margin-left: 5px;">
-                                                10分
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -323,7 +336,7 @@
 
 <!--3100*2100-->
 
-<map name="shape1">
+<map name="shape11">
     <!--工学部-->
     <area shape="rect" coords="1100,1010,1370,1215" href="#shikoku" alt="工学部２号館" region="ko_2">
     <area shape="rect" coords="1130,1260,1370,1440" href="#shikoku" alt="工学部６号館" region="ko_6">
@@ -587,9 +600,111 @@
 <!-- IonRangeSlider -->
 <script src="/js/ionRangeSlider/ion.rangeSlider.min.js"></script>
 
+<!--animateTransition-->
+<script src="/js/animateTransition/animateTransition.min.js"></script>
+
 
 <script>
+
+    /*
+    document.addEventListener('DOMContentLoaded', function (event) {
+
+        var button = document.querySelector('.animate-slide');
+
+        var container = '.animation-container',
+            blockIn = '[data-block="in"]',
+            blockOut = '[data-block="out"]';
+
+        function animateBlocks(event) {
+            console.log("sss");
+
+            AnimateTransition({
+                container: container,
+                blockIn: blockIn,
+                blockOut: blockOut,
+                animation: 'slide-in',
+                onTransitionStart: function (blockIn, blockOut, container, event) {
+                    console.log("aaa");
+                    button.setAttribute('disabled', 'disabled');
+                },
+                onTransitionEnd: function (blockIn, blockOut, container, event) {
+                    console.log("nnn");
+
+                    button.removeAttribute('disabled');
+                    if (blockOut) {
+                        blockIn.setAttribute('data-block', 'out');
+                        blockOut.setAttribute('data-block', 'in');
+                        container.appendChild(blockOut);
+                    }
+                }
+            });
+        }
+
+        button.addEventListener('click', animateBlocks);
+    });
+    */
+
     $(function() {
+
+        $(function() {
+            var rotationSpeed = 300;
+
+
+            // 横回転の初期設定
+            $('.rotateW .second').each(function() {
+                $(this).css({
+                    width: 0,
+                    marginLeft: $(this).width() / 2
+                });
+            });
+
+            // 横回転の処理
+            $(".rotateW").hover(function() {
+                // 表面の非表示
+                $('.first', this).animate({
+                    width: 0,
+                    marginLeft: $(this).width() / 2
+                }, rotationSpeed);
+                // 裏面の表示
+                $('.second', this).delay(rotationSpeed).animate({
+                    width: $(this).width(),
+                    marginLeft: '0'
+                }, rotationSpeed);
+            }, function() {
+                // 裏面の非表示
+                $('.second', this).animate({
+                    width: 0,
+                    marginLeft: $(this).width() / 2
+                }, rotationSpeed);
+                // 表面の表示
+                $('.first', this).delay(rotationSpeed).animate({
+                    width: $(this).width(),
+                    marginLeft: '0'
+                }, rotationSpeed);
+            });
+        });
+    /*
+
+     $('.animate-slide').click(function () {
+            AnimateTransition({
+                container: '.animation-container',
+                blockIn: '[data-block="in"]',
+                blockOut: '[data-block="out"]',
+                animation: 'revolution-in',
+                onTransitionStart: function () {
+                    $('.animate-slide').attr('disabled', 'disabled');
+                },
+                onTransitionEnd: function () {
+                    $('.animate-slide').removeAttr('disabled');
+                    if ($('[data-block="out"]')) {
+                        $('[data-block="in"]').attr('data-block', 'out');
+                        $('[data-block="out"]').attr('data-block', 'in');
+                        $('.animation-container').append('[data-block="out"]');
+                    }
+                }
+            });
+        });*/
+
 
         $("#ionrange_11").ionRangeSlider({
             min: 0,
