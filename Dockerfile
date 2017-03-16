@@ -30,19 +30,18 @@ RUN mkdir -p /var/public/uploads
 COPY public /var/www/public
 COPY application /var/www/application
 
-CMD ["chmod","775","/var/www/public/uploads"]
+RUN chmod 775 /var/public/uploads
 
-CMD ["cd","/usr/share/php"]
-CMD ["wget","https://packages.zendframework.com/releases/ZendFramework-1.12.20/ZendFramework-1.12.20.zip"]
-CMD ["unzip","ZendFramework-1.12.20.zip"]
-CMD ["rm","-rf","ZendFramework-1.12.20.zip"]
-CMD ["mv","ZendFramework-1.12.20/library/Zend","Zend"]
-CMD ["rm ","-rf","/usr/share/php/ZendFramework-1.12.20"]
+RUN cd /usr/share/php/ &&\
+    wget https://packages.zendframework.com/releases/ZendFramework-1.12.20/ZendFramework-1.12.20.zip &&\
+    unzip ZendFramework-1.12.20.zip &&\
+    rm -rf ZendFramework-1.12.20.zip &&\
+    mv ZendFramework-1.12.20/library/Zend Zend &&\
+    rm -rf /usr/share/php/ZendFramework-1.12.20
 
 # Do some web maping
 VOLUME ["/var/www"]
 
 EXPOSE 80
 
-CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
-
+CMD /usr/sbin/httpd -D FOREGROUND
