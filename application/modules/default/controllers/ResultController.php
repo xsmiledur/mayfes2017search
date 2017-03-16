@@ -83,6 +83,15 @@ class ResultController extends Zend_Controller_Action
 
     }
 
+    public function result2Action()
+    {
+
+        $request = $this->getRequest();
+        $this->view->data1 = $request->getPost('data1');
+        $this->view->data2 = $request->getPost('data2');
+        $this->view->data3 = $request->getPost('data3');
+    }
+
     public function exampleAction() {
 
     }
