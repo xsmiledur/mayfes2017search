@@ -47,9 +47,11 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
+
             <state relative-caret-position="246">
               <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <!-->>>>>>> master-->
+
               <folding />
             </state>
           </provider>
@@ -144,6 +146,7 @@
             <state relative-caret-position="5715">
               <caret line="381" column="27" lean-forward="false" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
               <!-->>>>>>> master-->
+
               <folding />
             </state>
           </provider>
@@ -407,6 +410,9 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState />
+  </component>
+  <component name="PhpServers">
+    <servers />
   </component>
   <component name="PhpTemplates">
     <option name="NEW_PHP_FILE_LAST_EXTENSION" value="phtml" />
@@ -995,6 +1001,7 @@
       <workItem from="1488034048426" duration="8828000" />
       <workItem from="1488069402561" duration="28785000" />
       <workItem from="1488170858584" duration="2630000" />
+
       <!--<<<<<<< Shion2
             <workItem from="1488173875059" duration="6565000" />
             <workItem from="1488185605130" duration="1672000" />
@@ -1030,6 +1037,7 @@
       >>>>>>> Stashed changes
       >>>>>>> Stashed changes
       >>>>>>> master
+
     </task>
     <servers />
   </component>
@@ -1051,10 +1059,11 @@
     >>>>>>> Stashed changes
     >>>>>>> Stashed changes
     >>>>>>> master
+
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="735" extended-state="1" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1352,21 +1361,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
+
         <state relative-caret-position="330">
         <caret line="22" column="11" lean-forward="true" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
         =======
         <state relative-caret-position="6825">
           <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
           <folding />
+
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/algorithm.phtml">
       <provider selected="true" editor-type-id="text-editor">
+
         <state relative-caret-position="765">
           <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
           <folding />
           >>>>>>> Stashed changes
+
         </state>
       </provider>
     </entry>
@@ -1375,6 +1388,7 @@
         <<<<<<< Updated upstream
         <state relative-caret-position="1185">
           <caret line="145" column="29" lean-forward="true" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
+
         </state>
       </provider>
     </entry>
@@ -1386,6 +1400,7 @@
         <state relative-caret-position="208">
           <caret line="540" column="37" lean-forward="false" selection-start-line="540" selection-start-column="37" selection-end-line="540" selection-end-column="37" />
           >>>>>>> Stashed changes
+
           <folding />
         </state>
       </provider>
@@ -1400,6 +1415,7 @@
           <caret line="277" column="37" lean-forward="false" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
           <folding />
           <!-->>>>>>> master-->
+
         </state>
       </provider>
     </entry>
@@ -1539,6 +1555,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+
           <folding />
         </state>
       </provider>
