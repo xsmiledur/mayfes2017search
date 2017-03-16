@@ -190,16 +190,15 @@ div#backr1d2 {
 }
 [data-block="in"] {
     z-index: 2;
+    display: none;
+
 }
-.animation-container__block {
+.feed-block {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    //background-color: #fff;
-    //text-align: left;
-    //font-weight: bold;
     padding: 0;
     border: none;
 
