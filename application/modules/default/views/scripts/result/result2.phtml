@@ -7,6 +7,7 @@
     <title>キャンパスマップ</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- スライダー用CSS -->
     <link href="/css/rangeslider.css" rel="stylesheet">
 
@@ -25,6 +26,16 @@
 
 
 <body>
+
+<!-- 変数の宣言 -->
+<?php
+$route1 = Array("工学部2号館","赤門総合研究棟",15);
+$visit1 = Array("東大音感",30);
+$route2 = Array("赤門総合研究棟", "工学部6号館",15);
+$visit2 = Array("工学博覧会", 45);
+$route3 = Array("工学部6号館", "工学部前広場", 5);
+$visit3 = Array("東大娘", 30);
+?>
 
 <div id="wrapper">
 
@@ -67,12 +78,12 @@
                                             <div class="vertical-timeline-content">
                                                 <h2>現在地
                                                 </h2>
-                                                工学部２号館
+                                                <?php echo $route1[0]; ?>
                                             </div>
 
                                         </div>
                                         <div class="fa-timeline">
-                                            <i class="fa fa-male fa-timeline-icon"></i> 移動：15分
+                                            <i class="fa fa-male fa-timeline-icon"></i> 移動：<?php echo $route1[2]; ?>分
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
@@ -86,12 +97,12 @@
                                             </div>
 
                                             <div class="vertical-timeline-content">
-                                                <h2>東大音感
+                                                <h2><?php echo $visit1[0]; ?>
                                                     <a href="#" class="btn btn-xs btn-primary pull-right"> Detail</a>
                                                 </h2>
-                                                赤門総合研究棟
+                                                <?php echo $route2[0]; ?>
                                                 <div class="vertical-timeline-time">
-                                                    <p id="r1d0name">標準滞在時間：10分</p>
+                                                    <p id="r1d0name">標準滞在時間：<?php echo $visit1[1]; ?>分</p>
                                                     <input type="text" id="ionrange_11">
                                                 </div>
                                             </div>
@@ -99,7 +110,7 @@
                                         </div>
                                         <div class="fa-timeline">
                                             <i class="fa fa-male fa-timeline-icon"></i>
-                                            移動：15分
+                                            移動：<?php echo $route2[2]; ?>分
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
@@ -114,12 +125,12 @@
                                             </div>
 
                                             <div class="vertical-timeline-content">
-                                                <h2>工学博覧会
+                                                <h2><?php echo $visit2[0]; ?>
                                                     <a href="#" class="btn btn-xs btn-success pull-right"> Detail</a>
                                                 </h2>
-                                                工学部６号館
+                                                <?php echo $route3[0]; ?>
                                                 <div class="vertical-timeline-time">
-                                                    <p id="r1d1name">標準滞在時間：10分</p>
+                                                    <p id="r1d1name">標準滞在時間：<?php echo $visit2[1]; ?>分</p>
                                                     <input type="text" id="ionrange_12">
                                                 </div>
                                             </div>
@@ -128,7 +139,7 @@
                                         </div>
                                         <div class="fa-timeline">
                                             <i class="fa fa-male fa-timeline-icon"></i>
-                                            移動：10分
+                                            移動：<?php echo $route3[2]; ?>分
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
@@ -140,12 +151,12 @@
                                             </div>
 
                                             <div class="vertical-timeline-content">
-                                                <h2>東大娘
+                                                <h2><?php echo $visit3[0]; ?>
                                                     <a href="#" class="btn btn-xs btn-info pull-right"> Detail</a>
                                                 </h2>
-                                                工学部前広場
+                                                <?php echo $route3[1]; ?>
                                                 <div class="vertical-timeline-time">
-                                                    <p id="r1d1name">標準滞在時間：30分</p>
+                                                    <p id="r1d1name">標準滞在時間：<?php echo $visit3[1]; ?>分</p>
                                                     <input type="text" id="ionrange_13">
                                                 </div>
                                             </div>
@@ -437,7 +448,7 @@
                                         <div class="ibox">
                                             <div class="ibox-content">
                                         <h2> Route1 Map</h2>
-                                        <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
+                                            <div id="map"><img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -471,7 +482,7 @@
 
 <!--3100*2100-->
 
-<map name="shape11">
+<map name="shape1">
     <!--工学部-->
     <area shape="rect" coords="1100,1010,1370,1215" href="#shikoku" alt="工学部２号館" region="ko_2">
     <area shape="rect" coords="1130,1260,1370,1440" href="#shikoku" alt="工学部６号館" region="ko_6">
@@ -530,86 +541,6 @@
 </map>
 
 
-
-<!--ここで本田が検索結果表示のコードを書く-->
-
-<!--
-    <div id="routes">
-
-        <div id="route1">
-            <h3>ルート1</h3>
-            <div class="visit">
-                10:00-10:30　東大音感　赤門総合研究棟
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" value="15" step="5" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                10:45-12:00　工学博覧会　工学部6号館
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" step="5" value="30" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                12:05-12:30　東大娘　工学部前広場
-            </div>
-
-        </div>
-
-
-        <div id="route2">
-            <h3>ルート2</h3>
-            <div class="visit">
-                10:00-10:25　東大娘　工学部前広場
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" value="30" step="5" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                10:30-11:45　工学博覧会　工学部6号館
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" value="25" step="5" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                12:00-12:30　東大音感　赤門総合研究棟
-            </div>
-        </div>
-
-
-
-
-
-        <!--ここまで本田-->
-
         <script>
             $(document).ready(function ()
             {
@@ -620,9 +551,18 @@
                     render_highlight : { altImage : '/img/map2.jpg' },
                     mapKey: 'region',
                     fillOpacity : 0.5
+
                 });
             });
+            $(document).setInterval(function(){
+                $('#shape1').fadeOut(1200, function(){$(this).fadeIn(200)});
+            }, 1400);
         </script>
+<script type="text/javascript">
+    $(function(){
+        $('#shape1').fadeOut(1000,function(){$(this).fadeIn(1000)});
+    });
+</script>
 
         <!-- スライドバー -->
         <script src="/js/rangeslider.min.js"></script>
@@ -707,6 +647,17 @@
                 });
             });
         </script>
+<!-- 地図のルートを点滅画像で表示 -->
+<script type="text/javascript">
+    $(function(){
+        console.log("はろー");
+        setInterval(function(){
+            $('#shape1').fadeOut(1200, function(){$(this).fadeIn(200)});
+        }, 1400);
+    });
+
+</script>
+
 
         <!--altImage :   -->
 </body>

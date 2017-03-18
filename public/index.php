@@ -49,8 +49,8 @@ try {
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
 //<<<<<<< HEAD
-    //echo $e->getMessage();
-    //exit();
+    echo $e->getMessage();
+    exit();
     //return false;
 //=======
 /*<<<<<<< hikaru
