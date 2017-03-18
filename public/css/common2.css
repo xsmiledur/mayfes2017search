@@ -78,6 +78,13 @@ li {
 
 }
 
+/* 地図 */
+#map_img {
+    position:relative;
+    padding: 0px;
+}
+#map_img img { position:absolute; left:0; top:0; }
+
 .contact-box {
     height: 200px;
     color: #ffffe0;
