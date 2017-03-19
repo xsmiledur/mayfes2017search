@@ -35,6 +35,7 @@ $route2 = Array("赤門総合研究棟", "工学部6号館",15);
 $visit2 = Array("工学博覧会", 45);
 $route3 = Array("工学部6号館", "工学部前広場", 5);
 $visit3 = Array("東大娘", 30);
+
 ?>
 
 <div id="wrapper">
@@ -67,8 +68,7 @@ $visit3 = Array("東大娘", 30);
                                     <div id="vertical-timeline" class="vertical-container dark-timeline">
 
                                         <div class="vertical-timeline-block draggable-front">
-                                            <div class="vertical-timeline-time-block">
-                                                9:00
+                                            <div class="vertical-timeline-time-block" id="time0">
                                             </div>
 
                                             <div class="vertical-timeline-icon red-bg">
@@ -87,14 +87,12 @@ $visit3 = Array("東大娘", 30);
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
-                                            <div class="vertical-timeline-time-block">
-                                                9:15
+                                            <div class="vertical-timeline-time-block" id="time1">
                                             </div>
 
-                                            <div class="vertical-timeline-icon navy-bg">
-                                                <i class="fa fa-briefcase"></i>
-
-                                            </div>
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
 
                                             <div class="vertical-timeline-content">
                                                 <h2><?php echo $visit1[0]; ?>
@@ -115,8 +113,8 @@ $visit3 = Array("東大娘", 30);
 
                                         <div class="vertical-timeline-block draggable-front">
 
-                                            <div class="vertical-timeline-time-block">
-                                                9:40
+                                            <div class="vertical-timeline-time-block" id="time2">
+
                                             </div>
 
                                             <div class="vertical-timeline-icon blue-bg">
@@ -143,8 +141,7 @@ $visit3 = Array("東大娘", 30);
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
-                                            <div class="vertical-timeline-time-block">
-                                                10:00
+                                            <div class="vertical-timeline-time-block" id="time3">
                                             </div>
                                             <div class="vertical-timeline-icon lazur-bg">
                                                 <i class="fa fa-coffee"></i>
@@ -164,8 +161,7 @@ $visit3 = Array("東大娘", 30);
                                         </div>
 
                                         <div class="vertical-timeline-block draggable-front">
-                                            <div class="vertical-timeline-time-block">
-                                                10:30
+                                            <div class="vertical-timeline-time-block" id="time4">
                                             </div>
                                             <div class="vertical-timeline-icon yellow-bg">
                                                 <i class="fa fa-briefcase"></i>
@@ -767,27 +763,90 @@ $visit3 = Array("東大娘", 30);
             });
         });*/
 
+        var time0 = new Date(2017,4,15,9,0);
+        $("#time0").html(timeToString(time0));
+        var time1 = new Date(time0*1+<?php echo $route1[2]; ?>*60*1000);
+        $("#time1").html(timeToString(time1));
+
+        var from1 = 0,
+            from2 = 0,
+            from3 = 0;
+
+        var saveResult1 = function (data) {
+            from1 = data.from;
+        };
+        var saveResult2 = function (data) {
+            from2 = data.from;
+        };
+        var saveResult3 = function (data) {
+            from3 = data.from;
+        };
+
+        var writeResult = function () {
+            var time2 = new Date(time1*1+ (from1+<?php echo $route2[2]; ?>)*60*1000);
+            var time3 = new Date(time2*1+ (from2+<?php echo $route3[2]; ?>)*60*1000);
+            var time4 = new Date(time3*1+ from3*60*1000);
+            $("#time2").html(timeToString(time2));
+            $("#time3").html(timeToString(time3));
+            $("#time4").html(timeToString(time4));
+        };
+
+        function timeToString(time){
+            var hr = time.getHours();
+            var min = time.getMinutes();
+            if (min < 10) {
+                min = "0" + min;
+            }
+            return hr + ":" + min;
+        };
 
         $("#ionrange_11").ionRangeSlider({
             min: 0,
             max: 120,
-            from: 10,
+            from: <?php echo $visit1[1]; ?>,
             postfix: "分",
-            grid: true
+            grid: true,
+            onStart: function (data) {
+                saveResult1(data);
+                writeResult();
+            },
+            onChange: saveResult1,
+            onFinish: function (data) {
+                saveResult1(data);
+                writeResult();
+            }
         });
         $("#ionrange_12").ionRangeSlider({
             min: 0,
             max: 120,
-            from: 10,
+            from: <?php echo $visit2[1]; ?>,
             postfix: "分",
-            grid: true
+            grid: true,
+            onStart: function (data) {
+                saveResult2(data);
+                writeResult();
+            },
+            onChange: saveResult2,
+            onFinish: function (data) {
+                saveResult2(data);
+                writeResult();
+            }
         });
         $("#ionrange_13").ionRangeSlider({
             min: 0,
             max: 120,
-            from: 30,
+            from: <?php echo $visit3[1]; ?>,
             postfix: "分",
-            grid: true
+            grid: true,
+            onStart: function (data) {
+                saveResult3(data);
+                writeResult();
+            },
+            onChange: saveResult3,
+            onFinish: function (data) {
+                saveResult3(data);
+                writeResult();
+            }
         });
 
 
