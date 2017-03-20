@@ -63,7 +63,7 @@
 
                         <div class="ibox-content" style="height: 690px;">
 
-                            <form id="form" action="#" class="wizard-big">
+                            <form id="form" action="/index2/result" class="wizard-big">
                                 <h1>Date & Time</h1>
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
@@ -127,46 +127,6 @@
                                                 </div>
                                                 <div class="col-lg-3"></div>
 
-
-                                                <!--
-                                                <div class="col-lg-4">
-                                                    <div class="form-group"><label class="col-sm-2 control-label">日にち</label>
-                                                        <div class="col-sm-10">
-                                                            <label class="radio-inline i-checks" id="i-check1"><input type="radio" id="1day" checked="checked" value="1day" name="date"> <i></i> １日目 </label>
-                                                            <label class="radio-inline i-checks" id="i-check2"><input type="radio" id="2day" value="2day" name="date"> <i></i> ２日目 </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8">
-
-
-                                                    <div class="form-group" id="clock-check"><label class="col-sm-2 control-label">滞在予定時間</label>
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <div class="input-group clockpicker" id="clock1">
-                                                                    <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
-                                                                    <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
-                                                            </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-1" style="padding-top:10px;">〜</div>
-                                                            <div class="col-sm-4">
-                                                                <div class="input-group clockpicker" id="clock2">
-                                                                    <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
-                                                                    <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
-                                                            </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none;">滞在終了時刻が開始時刻より早くなっています。</span>
-                                                        <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
-                                                        <span id="clock-check-help3" class="help-block m-b-none text-danger" style="display: none;">五月祭の開始時刻より滞在終了時刻が早くなっています。</span>
-                                                    </div>
-
-                                                </div>
-                                                -->
                                             </div>
                                         </div>
 
@@ -238,7 +198,7 @@
                                                                             <select class="select2_demo_1 form-control" id="search_pid" style="width:100%;" multiple="multiple">
                                                                                 <option value=""></option>
                                                                                 <?php foreach ($this->data as $item) : ?>
-                                                                                    <option value="<?php echo $item['pid']; ?>"><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
+                                                                                    <option value="<?php echo $item['pd_pid']; ?>"><?php echo $item['pd_name']."　（".$item['pd_body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
                                                                                 <?php endforeach; ?>
                                                                             </select>
                                                                         </tr>
@@ -409,113 +369,59 @@
                                                             <div class="full-height-scroll">
                                                                 <div class="table-responsive">
                                                                     <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div id="jQueryPush1" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
-                                                                                <h3><strong>農学部エリア</strong></h3>
-                                                                            </div>
+                                                                        <?php foreach ($this->arr_area as $key => $name) : ?>
 
-                                                                            <div id="jQueryBox1" class="contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
-                                                                                <?php foreach ($this->contents['list']['no_dept'] as $key => $place) : ?>
-                                                                                    <ul id="dropmenu" class="dropmenu">
-                                                                                        <li><a href="#"><?php echo $place; ?></a>
-                                                                                            <ul>
-                                                                                                <?php foreach($this->data as $item) : ?>
-                                                                                                    <?php if ($item['area'] == 'no_dept' && $item['place_index'] == $key) : ?>
-                                                                                                        <div>
-                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
-                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
-                                                                                                        </div>
-                                                                                                    <?php endif; ?>
-                                                                                                <?php endforeach;?>
+                                                                            <div class="col-sm-6">
+                                                                                <div id="jQueryPush<?php echo $key; ?>" class="contact-box area-push" style="background-image: url(/img/<?php echo $name['name']; ?>.jpg);background-size: cover; cursor: pointer;">
+                                                                                    <input type="hidden" name="name" value="<?php echo $key; ?>">
+                                                                                    <h3><strong><?php echo $name['label']; ?></strong></h3>
+                                                                                </div>
 
-                                                                                            </ul>
-
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                <?php endforeach; ?>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-
-                                                                            <div id="jQueryPush2" class="contact-box" style="background-image: url(/img/kougaku.jpg);background-size: cover; cursor: pointer;">
-                                                                                <h3><strong>工学部エリア</strong></h3>
-                                                                            </div>
-
-                                                                            <div id="jQueryBox2" class="contact-box jQueryBox" style="background-image: url(/img/kougaku.jpg);background-size: cover;">
-                                                                                <?php foreach ($this->contents['list']['ko_dept'] as $key => $place) : ?>
-                                                                                    <ul id="dropmenu" class="dropmenu">
-                                                                                        <li><a href="#"><?php echo $place; ?></a>
-                                                                                            <ul>
-                                                                                                <?php foreach($this->data as $item) : ?>
-                                                                                                    <?php if ($item['area'] == 'ko_dept' && $item['place_index'] == $key) : ?>
-                                                                                                        <div>
-                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
-                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
-                                                                                                        </div>
-                                                                                                    <?php endif; ?>
-                                                                                                <?php endforeach;?>
-
-                                                                                            </ul>
-
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                <?php endforeach; ?>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div id="jQueryPush3" class="contact-box" style="background-image: url(/img/yasuko.jpg);background-size: cover; cursor: pointer;">
-                                                                                <h3><strong>安田講堂エリア</strong></h3>
-                                                                            </div>
-
-                                                                            <div id="jQueryBox3" class="contact-box jQueryBox" style="background-image: url(/img/yasuko.jpg);background-size: cover;">
-                                                                                <?php foreach ($this->contents['list']['yasuko'] as $key => $place) : ?>
-                                                                                    <ul id="dropmenu" class="dropmenu">
-                                                                                        <li><a href="#"><?php echo $place; ?></a>
-                                                                                            <ul>
-                                                                                                <?php foreach($this->data as $item) : ?>
-                                                                                                    <?php if ($item['area'] == 'yasuko' && $item['place_index'] == $key) : ?>
+                                                                                <div id="jQueryBox<?php echo $key; ?>" class="contact-box area-box" style="background-image: url(/img/<?php echo $name['name']; ?>.jpg);background-size: cover;">
+                                                                                    <input type="hidden" name="name" value="<?php echo $key; ?>">
+                                                                                    <?php foreach ($this->area[$name['name']] as $item) : ?>
+                                                                                        <ul id="dropmenu" class="dropmenu">
+                                                                                            <li><a href="#"><?php echo $item['bd_label']; ?></a>
+                                                                                                <ul>
+                                                                                                <?php foreach($this->data_area[$name['name']][$item['bd_name']] as $item2) : ?>
                                                                                                     <div>
-                                                                                                        <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
-                                                                                                        <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        <input type="hidden" name="pid-val" value="<?php echo $item2['ps_pid']; ?>">
+                                                                                                        <li>
+                                                                                                            <!--<button type="button" data-toggle="modal" data-target="#select<?php echo $item2['pd_pid']; ?>"><?php echo $item2['pd_name']; ?></button>
+                                                                                                            <div class="modal inmodal fade" id="select<?php echo $item2['pd_pid']; ?>" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                                                                                <div class="modal-dialog modal-sm">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                                                                            <h4 class="modal-title">Modal title</h4>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <p><strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                                                                                                                printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                                                                                                                                remaining essentially unchanged.</p>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                                                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>-->
+
+                                                                                                            <a class="pid-btn" id="pid<?php echo $item2['ps_pid']; ?>"><?php echo $item2['pd_name']; ?></a>
+                                                                                                        </li>
                                                                                                     </div>
-                                                                                                    <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
-                                                                                            </ul>
+                                                                                                </ul>
 
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                <?php endforeach; ?>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    <?php endforeach; ?>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div id="jQueryPush4" class="contact-box" style="background-image: url(/img/akamon.jpg);background-size: cover; cursor: pointer;">
-                                                                                <h3 style="color: #696969;"><strong>赤門エリア</strong></h3>
-                                                                            </div>
+                                                                        <?php endforeach; ?>
 
-                                                                            <div id="jQueryBox4" class="contact-box jQueryBox" style="background-image: url(/img/akamon.jpg);background-size: cover;">
-                                                                                <?php foreach ($this->contents['list']['akamon'] as $key => $place) : ?>
-                                                                                    <ul id="dropmenu" class="dropmenu">
-                                                                                        <li><a href="#"><?php echo $place; ?></a>
-                                                                                            <ul>
-                                                                                                <?php foreach($this->data as $item) : ?>
-                                                                                                    <?php if ($item['area'] == 'akamon' && $item['place_index'] == $key) : ?>
-                                                                                                        <div>
-                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
-                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
-                                                                                                        </div>
-                                                                                                    <?php endif; ?>
-                                                                                                <?php endforeach;?>
-
-                                                                                            </ul>
-
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                <?php endforeach; ?>
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -527,11 +433,11 @@
                                                                 <div class="table-responsive">
                                                                     <table class="table table-hover">
                                                                         <tbody>
-                                                                        <?php foreach ($this->data as $item) : ?>
+                                                                        <?php foreach ($this->data_area as $item) : ?>
                                                                             <?php if ($item['recommend_flg'] == 1) : ?>
-                                                                                <tr id="pid<?php echo $item['pid']; ?>">
-                                                                                    <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
-                                                                                    <td><a id="pickup<?php echo $item['pid']; ?>" class="client-link pid-btn"><?php echo $item['name']; ?></a></td>
+                                                                                <tr id="pid<?php echo $item['ps_pid']; ?>">
+                                                                                    <input type="hidden" name="pid-val" value="<?php echo $item['ps_pid']; ?>">
+                                                                                    <td><a id="pickup<?php echo $item['ps_pid']; ?>" class="client-link pid-btn"><?php echo $item['name']; ?></a></td>
                                                                                     <td><?php echo $item['body']; ?></td>
                                                                                     <!--<td><small class="text-muted"><?php echo $this->contents['list']['area'][$item['area']]; ?></small></td>-->
                                                                                     <td><small class="text-muted"><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></small></td>
@@ -590,13 +496,13 @@
                                                         <div class="panel-body" style="height:320px;">
                                                         <table class="table table-hover">
                                                             <tbody>
-                                                            <?php foreach($this->data as $item) : ?>
-                                                                <tr id="form_pid<?php echo $item['pid']; ?>" style="display:none; ">
-                                                                    <td><?php echo $item['name']; ?></td>
-                                                                    <td><?php echo $item['body']; ?></td>
+                                                            <?php foreach($this->data_all as $item) : ?>
+                                                                <tr id="form_pid<?php echo $item['ps_pid']; ?>" style="display:none; ">
+                                                                    <td><?php echo $item['pd_name']; ?></td>
+                                                                    <td><?php echo $item['pd_body']; ?></td>
                                                                     <td><?php echo $this->contents['list']['area'][$item['area']]; ?></td>
                                                                     <td><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></td>
-                                                                    <td><input type="hidden" id="hidden-input" name="input<?php echo $item['pid']; ?>" value=""></td>
+                                                                    <input type="hidden" id="hidden-input" name="input<?php echo $item['ps_pid']; ?>" value="">
                                                                 </tr>
                                                             <?php endforeach; ?>
                                                             </tbody>
@@ -728,10 +634,12 @@
 
                 var j = 0;
 
-                for(i=1;i<10;i++) {
+                var search = new Array();
+                for(i=1;i<600;i++) {
                     name = "input" + i;
                     hidden = $('[name=' + name + ']').val();
                     if (hidden) {
+                        search[j] = hidden;
                         j++;
                     }
                     console.log(name);
@@ -763,8 +671,22 @@
                         closeOnConfirm: false
                     });
                 } else {
-                    window.location.href = '/result';
-                    //return form.valid();
+                    $.ajax({
+                        url: "/index2/search",
+                        type: "POST",
+                        data: {
+                            search : search
+                        },
+                        success: function(arr) {
+                            console.log("aaa");
+                            console.log(arr);
+                            window.location.href = "/index2/result";
+
+                        },
+                        error:function() {
+                            alert('問題がありました。');
+                        }
+                    });
                 }
 
             },
@@ -879,75 +801,24 @@
 
     $(function(){
         // 「id="jQueryBox"」を非表示
-        $("#jQueryBox1").css("display", "none");
+        $(".area-box").css("display", "none");
 
         // 「id="jQueryPush"」がクリックされた場合
-        $("#jQueryPush1").click(function(){
-            $("#jQueryPush1").toggle();
+        $(".area-push").click(function(){
+            var key = $(this).find('input[name="name"]').val();
+            $("#jQueryPush" + key).toggle();
             // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox1").toggle();
+            $("#jQueryBox" + key).toggle();
         });
 
-        $("#jQueryBox1").click(function(){
-            $("#jQueryPush1").toggle();
+        $(".area-box").click(function(){
+            var key = $(this).find('input[name="name"]').val();
+            $("#jQueryPush" + key).toggle();
             // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox1").toggle();
+            $("#jQueryBox" + key).toggle();
         });
     });
 
-    $(function(){
-        // 「id="jQueryBox"」を非表示
-        $("#jQueryBox2").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $("#jQueryPush2").click(function(){
-            $("#jQueryPush2").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox2").toggle();
-        });
-
-        $("#jQueryBox2").click(function(){
-            $("#jQueryPush2").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox2").toggle();
-        });
-    });
-
-    $(function(){
-        // 「id="jQueryBox"」を非表示
-        $("#jQueryBox3").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $("#jQueryPush3").click(function(){
-            $("#jQueryPush3").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox3").toggle();
-        });
-
-        $("#jQueryBox3").click(function(){
-            $("#jQueryPush3").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox3").toggle();
-        });
-    });
-
-    $(function(){
-        // 「id="jQueryBox"」を非表示
-        $("#jQueryBox4").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $("#jQueryPush4").click(function(){
-            $("#jQueryPush4").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox4").toggle();
-        });
-
-        $("#jQueryBox4").click(function(){
-            $("#jQueryPush4").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#jQueryBox4").toggle();
-        });
-    });
 
     $(function(){
         // 「id="jQueryBox"」を非表示
@@ -1107,7 +978,7 @@
             var name1 = '#form_pid' + id;
             $(name1).toggle();
             $(this).toggleClass("highlight", 1000);
-            var name2 = '[name=input' + id + ']';
+            var name2 = '[name="input' + id + '"]';
             var now_val = $(name2).val();
             console.log(now_val);
             if (now_val) {

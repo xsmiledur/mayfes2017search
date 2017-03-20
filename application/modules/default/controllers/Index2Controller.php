@@ -82,13 +82,36 @@ class Index2Controller extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->data = $this->_main->getProjectData();
+        $this->view->data_area = $this->_main->getProjectDataArea();
+
+        $this->view->area = $this->_main->getAreaInfo();
+        $this->view->arr_area = array(
+            1 => array(
+                'label' => '農学部エリア',
+                'name' => 'no_dept',
+            ),
+            2 => array(
+                'label' => '工学部エリア',
+                'name' => 'ko_dept',
+            ),
+            3 => array(
+                'label' => '安田講堂エリア',
+                'name' => 'yasuko',
+            ),
+            4 => array(
+                'label' => '赤門エリア',
+                'name' => 'akamon',
+            ),
+        );
+        $this->view->data_all = $this->_main->getProjectDataAll();
+        //$this->view->data_area = $this->_main->getProjectDataGenre();
 
         $request = $this->getRequest();
         $search = $request->getParam('search');
 
-        $result = $this->_main->searchFree();
+        //$result = $this->_main->searchFree();
 
-        $this->view->result = $result;
+        //$this->view->result = $result;
 
     }
 
@@ -100,5 +123,99 @@ class Index2Controller extends Zend_Controller_Action
 
     }
 
+    public function testAction()
+    {
+        //$data = $this->_main->getProjectData();
+        $this->_main->______timeFix();
+    }
+
+    public function resultAction()
+    {
+        $request = $this->getRequest();
+        //$search = $this->_session->search;//来てる❤️
+    }
+
+    public function getDist($a, $b){
+        //get the length of the shortest from $a to $b
+        return $a+$b;//just a dummy
+    }
+    public function getStartTime($id)
+    {
+        //get the start time of the event $id
+        return 0;
+    }
+
+    public function getEndTime($id)
+    {
+        //get the start time of the event $id
+        return 0;
+    }
+
+    public function searchAction()
+    {
+        $req = $this->getRequest();
+        $params = $req->getParms();
+
+        $search = $this->getRequest()->getPost('search');
+        $this->_session->search = $search;
+
+        var_dump($search);
+
+        $beginTime = $params["clock1"];
+        $endTime = $params["clock2"];
+        $param_keys = array_keys($parms);
+        $checkpoints = array();
+        foreach ($keys as $key){
+            if(substr($key, 0, 5) != "input")continue;
+            if($parms[$key] == "")continue;
+            $checkpoints += array(intval(substr($key, 5, -1)));
+        }
+
+        $n = count($checkpoints);
+        $startPos = $parms["startPos"];
+
+        $inputData = "";
+        $inputData .= sprintf("%d %d\n", $n, $startPos);
+        for($i = 0; $i < $n; $i++){
+            $eventID = $checkpoints[$i];
+            $startTime = getStartTime($eventID);
+            $endTime = getEndTime($eventID);
+            $inputData .= sprintf("%d %d %d\n", $eventID, $startTime, $endTime);
+        }
+        for($i = 0;$i < count($checkpoitns); $i++){
+            for($j = -1;$j < $n; $j++){
+                $from = $i;
+                $to = $j;
+                if($to == -1)$to = $startPos;
+                $inputData .= sprintf("%d ", getDist($from, $to));
+            }
+        }
+
+
+        $inout = array(
+            0 => array('pipe', 'r'),
+            1 => array('pipe', 'w'),
+            2 => array('pipe', 'w')
+        );
+
+        $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes);
+
+        if(is_resource($proc)){
+            fwrite($pipes[0], $inputData);
+            fclose($pipes[0]);
+            $answer = array_map(intval, explode($pipes[1], "\n"));
+
+            //setparams ... not yet
+
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+        }
+        $this->view->result = "test";
+
+
+
+ 
+ 
+     }
 
 }

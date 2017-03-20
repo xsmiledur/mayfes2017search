@@ -25,7 +25,9 @@ li {
     padding: 0;
     text-align: center;
 }
-.dropmenu li a{
+.dropmenu li a,
+.dropmenu li button{
+
     display: block;
     margin: 0;
     padding: 7px 0 7px;
@@ -50,14 +52,16 @@ li {
 .dropmenu li ul li{
     width: 100%;
 }
-.dropmenu li ul li a{
+.dropmenu li ul li a,
+.dropmenu li ul li button{
     padding: 7px 7px;
     /*border-top: 1px solid #ffffff;*/
     background: #fff;
     opacity:1;
     text-align: left;
 }
-.dropmenu li:hover > a{
+.dropmenu li:hover > a,
+.dropmenu li:hover > button{
     background: #ffffe0;
     cursor: pointer;
 }
