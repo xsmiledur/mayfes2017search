@@ -329,15 +329,49 @@ class MainModel
         return $stmt->fetch();
     }
 
+    //建物間の
     public function getTimeInfo($bd_pid1, $bd_pid2)
     {
         $select = $this->_read->select();
         $select->from('checkpos_data_89');
         $select->where('cd_active_flg = ?', 1)
-            ->where('cd_pd_pid = ?', $bd_pid1)
-            ->where('ps_pid2 = ?', $bd_pid2);
+            ->where('cd_bd_pid1 = ?', $bd_pid1)
+            ->where('cd_bd_pid2 = ?', $bd_pid2);
         $stmt = $select->query();
-        return $stmt->fetch();
+        $data = $stmt->fetch();
+        return $data['cd_time'];
+    }
+
+    public function getOrderWay($bd_pid1,$bd_pid2)
+    {
+        $select = $this->_read->select();
+        $select->from('checkpos_data_89');
+        $select->where('cd_active_flg = ?', 1)
+            ->where('cd_bd_pid1 = ?', $bd_pid1)
+            ->where('cd_bd_pid2 = ?', $bd_pid2);
+        $stmt = $select->query();
+        $res = $stmt->fetch();
+
+        $data = array();
+        if ($res['cd_pid']) {
+            $select = $this->_read->select();
+            $select->from('checkpos_order_89');
+            $select->where('co_active_flg = ?', 1)
+                ->where('co_cd_pid = ?', $res['cd_pid'])
+                ->order('co_order');
+            $stmt = $select->query();
+            $_data = $stmt->fetchAll();
+            $node_num = count($_data) + 1;
+
+            foreach ($_data as $key => $item) {
+                $data[$_data['co_order']] = $_data['co_node1'];
+                if ($key == $node_num - 1) {
+                    $data[$node_num] = $_data['co_node2'];
+                }
+            }
+        }
+        return $data;
+
     }
 
 

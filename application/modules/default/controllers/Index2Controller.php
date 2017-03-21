@@ -116,8 +116,9 @@ class Index2Controller extends Zend_Controller_Action
     }
 
 
-
-
+    /**
+     * アルゴリズム説明ページ
+     */
     public function algorithmAction()
     {
 
@@ -129,30 +130,10 @@ class Index2Controller extends Zend_Controller_Action
         $this->_main->__________timeFix();
     }
 
-
-    /****
-     *
+    /**
+     * index.phtmlで入力されたデータを整形してC++programに渡し、
+     * 受け取った結果をresultActionに受け渡す
      */
-
-
-
-
-    public function getDist($a, $b){
-        //get the length of the shortest from $a to $b
-        return $a+$b;//just a dummy
-    }
-    public function getStartTime($id)
-    {
-        //get the start time of the event $id
-        return 0;
-    }
-
-    public function getEndTime($id)
-    {
-        //get the start time of the event $id
-        return 0;
-    }
-
     public function searchAction()
     {
         /*
@@ -189,8 +170,8 @@ class Index2Controller extends Zend_Controller_Action
         $request    = $this->getRequest();
         $search     = $request->getPost('search');
         $N          = count($search);
-        $startpos   = $request->getPost('startpos');
-        $inputData .= sprintf("%d %d\n", $N, $startpos);
+        $start_pos   = $request->getPost('start-pos');
+        $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $clock1     = $request->getPost('clock1');
         $clock2     = $request->getPost('clock2');
         $inputData .= sprintf("%d %d\n", $clock1, $clock2);
@@ -257,15 +238,13 @@ class Index2Controller extends Zend_Controller_Action
             $order = array();
             foreach ($bd_pid as $i => $item) {
                 if ($i < $N) {
-                    $order[$i]['time'] = $this->_main->getOrderTime($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
+                    $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
                     $order[$i]['way']  = $this->_main->getOrderWay($item, $bd_pid[$i + 1]);  //ある企画の場所から次の企画の場所への道順
                 }
             }
 
             $this->_session->pd_pid = $pd_pid;
             $this->_session->order = $order;
-
-            //setparams ... not yet
 
             fclose($pipes[1]);
             fclose($pipes[2]);
@@ -437,6 +416,9 @@ class Index2Controller extends Zend_Controller_Action
     }
 
 
+    /**
+     * 結果表示画面
+     */
     public function resultAction()
     {
         $pd_pid = $this->_session->pd_pid;  //企画の回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
