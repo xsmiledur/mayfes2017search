@@ -140,15 +140,9 @@
                                         <h2><i class="fa fa-map-marker"> 現在地</i></h2>
                                         <p class="text-muted" style="padding-left: 20px;">現在地を選択してください。</p>
                                     </div>
-
-                                                    <!--
-                                                    <p>
-                                                        あああ
-                                                    </p>
-                                                    -->
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md">
-                                            <select class="select2_demo_1 form-control" style="width:100%;">
+                                            <select class="select2_demo_1 form-control" name="start-pos" style="width:100%;">
                                                 <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
                                                 <?php foreach ($this->result as $item): ?>
                                                     <option value=""><?php echo $item['fw_name']; ?>　（<small style="text-align:right;"><?php echo $item['fw_area']; ?>　<?php echo $item['fw_place_index']; ?></small>）</option>
@@ -642,13 +636,13 @@
                         search[j] = hidden;
                         j++;
                     }
-                    console.log(name);
-                    console.log(hidden);
                 }
 
                 // Disable validation on fields that are disabled.
                 // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
                 form.validate().settings.ignore = ":disabled";
+
+                console.log(search);
 
                 // Start validation; Prevent form submission if false
 
@@ -675,10 +669,12 @@
                         url: "/index2/search",
                         type: "POST",
                         data: {
-                            search : search
+                            search : search,
+                            clock1 : $('input[name="clock1"]').val(),
+                            clock2 : $('input[name="clock2"]').val(),
+                            start_pos : $('input[name="start-pos"]').val()
                         },
                         success: function(arr) {
-                            console.log("aaa");
                             console.log(arr);
                             window.location.href = "/index2/result";
 
