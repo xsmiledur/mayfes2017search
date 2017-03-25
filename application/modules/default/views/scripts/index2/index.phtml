@@ -102,17 +102,23 @@
 
 
                                                             <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在時間</strong></h3>
-                                                            <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
-                                                                <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
+                                                            <div id="clock-check">
+                                                                <div class="input-group clockpicker" id="clock1">
+                                                                    <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
+                                                                    <span class="input-group-addon">
+                                                                    <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group clockpicker" id="clock2">
+                                                                    <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" >
+                                                                    <span class="input-group-addon">
+                                                                    <span class="fa fa-clock-o"></span>
                                                                 </span>
-                                                            </div>
-                                                            <div class="input-group clockpicker" id="clock2">
-                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="16:00" >
-                                                                <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
-                                                            </span>
+                                                                </div>
+                                                                <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none; text-align: left;">滞在終了時刻が開始時刻より早くなっています。</span>
+                                                                <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
+                                                                <span id="clock-check-help3" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の開始時刻より滞在終了時刻が早くなっています。</span>
+
                                                             </div>
 
                                                         </a>
@@ -262,8 +268,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['genre'] == 'exhibition' && $item['genre_detail'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                        <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                        <li ><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -288,8 +296,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['genre'] == 'join' && $item['genre_detail'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                        <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                        <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -314,8 +324,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['genre'] == 'lec_or_critic' && $item['genre_detail'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -342,8 +354,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['genre'] == 'performance' && $item['genre_detail'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -367,8 +381,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['genre'] == 'music' && $item['genre_detail'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -405,8 +421,10 @@
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['area'] == 'no_dept' && $item['place_index'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -423,15 +441,17 @@
                                                                                 <h3><strong>工学部エリア</strong></h3>
                                                                             </div>
 
-                                                                            <div id="jQueryBox2" class="contact-box" style="background-image: url(/img/kougaku.jpg);background-size: cover;">
+                                                                            <div id="jQueryBox2" class="contact-box jQueryBox" style="background-image: url(/img/kougaku.jpg);background-size: cover;">
                                                                                 <?php foreach ($this->contents['list']['ko_dept'] as $key => $place) : ?>
                                                                                     <ul id="dropmenu" class="dropmenu">
                                                                                         <li><a href="#"><?php echo $place; ?></a>
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['area'] == 'ko_dept' && $item['place_index'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -449,15 +469,17 @@
                                                                                 <h3><strong>安田講堂エリア</strong></h3>
                                                                             </div>
 
-                                                                            <div id="jQueryBox3" class="contact-box" style="background-image: url(/img/yasuko.jpg);background-size: cover;">
+                                                                            <div id="jQueryBox3" class="contact-box jQueryBox" style="background-image: url(/img/yasuko.jpg);background-size: cover;">
                                                                                 <?php foreach ($this->contents['list']['yasuko'] as $key => $place) : ?>
                                                                                     <ul id="dropmenu" class="dropmenu">
                                                                                         <li><a href="#"><?php echo $place; ?></a>
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['area'] == 'yasuko' && $item['place_index'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                    <div>
+                                                                                                        <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                        <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                    </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -473,15 +495,17 @@
                                                                                 <h3 style="color: #696969;"><strong>赤門エリア</strong></h3>
                                                                             </div>
 
-                                                                            <div id="jQueryBox4" class="contact-box" style="background-image: url(/img/akamon.jpg);background-size: cover;">
+                                                                            <div id="jQueryBox4" class="contact-box jQueryBox" style="background-image: url(/img/akamon.jpg);background-size: cover;">
                                                                                 <?php foreach ($this->contents['list']['akamon'] as $key => $place) : ?>
                                                                                     <ul id="dropmenu" class="dropmenu">
                                                                                         <li><a href="#"><?php echo $place; ?></a>
                                                                                             <ul>
                                                                                                 <?php foreach($this->data as $item) : ?>
                                                                                                     <?php if ($item['area'] == 'akamon' && $item['place_index'] == $key) : ?>
-
-                                                                                                        <li id="pid<?php echo $item['pid']; ?>"><a><?php echo $item['name']; ?></a></li>
+                                                                                                        <div>
+                                                                                                            <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                                            <li><a class="pid-btn" id="pid<?php echo $item['pid']; ?>"><?php echo $item['name']; ?></a></li>
+                                                                                                        </div>
                                                                                                     <?php endif; ?>
                                                                                                 <?php endforeach;?>
 
@@ -506,14 +530,14 @@
                                                                         <?php foreach ($this->data as $item) : ?>
                                                                             <?php if ($item['recommend_flg'] == 1) : ?>
                                                                                 <tr id="pid<?php echo $item['pid']; ?>">
-                                                                                    <td><a id="<?php echo $item['pid']; ?>" class="client-link"><?php echo $item['name']; ?></a></td>
+                                                                                    <input type="hidden" name="pid-val" value="<?php echo $item['pid']; ?>">
+                                                                                    <td><a id="pickup<?php echo $item['pid']; ?>" class="client-link pid-btn"><?php echo $item['name']; ?></a></td>
                                                                                     <td><?php echo $item['body']; ?></td>
                                                                                     <!--<td><small class="text-muted"><?php echo $this->contents['list']['area'][$item['area']]; ?></small></td>-->
                                                                                     <td><small class="text-muted"><?php echo $this->contents['list'][$item['area']][$item['place_index']]; ?></small></td>
                                                                                     <!--<td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                                                                     <td class="client-status"><span class="label label-primary"></span></td>-->
-                                                                                    <td><button data-toggle="modal" href="#detail<?php echo $item['pid']; ?>" class="btn
-                                                                                     btn-outline btn-xs btn-warning">detail</button></td>
+                                                                                    <td><button data-toggle="modal" href="#detail<?php echo $item['pid']; ?>" class="btn btn-outline btn-xs btn-warning">detail</button></td>
                                                                                 </tr>
                                                                             <?php endif; ?>
                                                                         <?php endforeach; ?>
@@ -720,9 +744,7 @@
 
                 // Start validation; Prevent form submission if false
 
-                if (j == 1) {
-                    return form.valid();
-                } else {
+                if (j  == 0) {
                     swal({
                         title: "企画が選択されてません",
                         text: "検索するには、企画を１つ以上選択してください",
@@ -731,11 +753,7 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
-                }
-
-                if (j > 10) {
-                    return form.valid();
-                } else {
+                } else if (j > 10) {
                     swal({
                         title: "選択された企画が多すぎます",
                         text: "選択する企画は１０個以下にしてください",
@@ -744,10 +762,15 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
+                } else {
+                    window.location.href = '/result';
+                    //return form.valid();
                 }
+
             },
             onFinished: function (event, currentIndex)
             {
+                window.location.href = '/result';
                 var form = $(this);
 
                 // Submit form input
@@ -798,20 +821,20 @@
             c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
             d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
 
-            console.log(parseInt(c) >= 1020);
+            console.log(parseInt(c) >= 1080);
             if (parseInt(c) >= parseInt(d)) {
                 $('#clock-check').addClass('has-error');
                 $('#clock-check-help1').show();
             } else {
                 $('#clock-check-help1').hide();
             }
-            if (parseInt(c) >= 1020) {
+            if (parseInt(c) >= 1080) {
                 $('#clock-check').addClass('has-error');
                 $('#clock-check-help2').show();
             } else {
                 $('#clock-check-help2').hide();
             }
-            if (parseInt(c) < parseInt(d) && parseInt(c) < 1020 && parseInt(d) > 540) {
+            if (parseInt(c) < parseInt(d) && parseInt(c) < 1080 && parseInt(d) > 540) {
                 $('#clock-check').removeClass('has-error');
             }
         });
@@ -839,7 +862,7 @@
             } else {
                 $('#clock-check-help3').hide();
             }
-            if (parseInt(c) < parseInt(d) && parseInt(d) > 540 && parseInt(c) < 1020) {
+            if (parseInt(c) < parseInt(d) && parseInt(d) > 540 && parseInt(c) < 1080) {
                 $('#clock-check').removeClass('has-error');
             }
 
@@ -1015,7 +1038,11 @@
             $("#jQueryBox9").toggle();
         });
     });
-    //企画の項目を選んで表示
+
+
+
+    /* 企画の項目を選んで表示 */
+
     $(function() {
 
 
@@ -1031,10 +1058,13 @@
                     val1 = "input" + elem;
                     $('[name=' + val1 + ']').val(elem);
 
-                    val2 = '#pid'+elem+' a';
+                    val2 = 'a#pid'+elem;
                     console.log(val2);
                     $(val2).addClass("highlight",1000);
                     //$("#pid28 a").toggleClass("highlight",1000);
+
+                    val3 = 'a#pickup' + elem;
+                    $(val3).addClass("highlight",1000);
 
                 }
             );
@@ -1052,14 +1082,15 @@
 
             $('[name=val]').val();
 
-            val2 = '#pid'+e.params.data.id+' a';
+            val2 = 'a#pid'+e.params.data.id;
             console.log(val2);
             $(val2).removeClass("highlight",1000);
 
+            val3 = 'a#pickup' + e.params.data.id;
+            $(val3).removeClass("highlight",1000);
+
 
         });
-
-
 
         $("#dropmenu").click(function (e) {
             e.stopPropagation(); // 追加
@@ -1067,150 +1098,25 @@
         $("#dropmenu li").click(function (e) {
             e.stopPropagation(); // 追加
         });
-
-
     });
 
     $(function() {
-        $("#pid1 a").click(function () {
-            $("#form_pid1").toggle();
-            $("#pid1 a").toggleClass("highlight",1000);
-            $("[name=input1]").val("1");
-        });
-        $("#pid2 a").click(function () {
-            $("#form_pid2").toggle();
-            $("#pid2 a").toggleClass("highlight",1000);
-            $("[name=input2]").val(2);
-        });
-        $("#pid3 a").click(function () {
-            $("#form_pid3").toggle();
-            $("#pid3 a").toggleClass("highlight",1000);
-            $("[name=input3]").val(3);
-        });
-        $("#pid4 a").click(function () {
-            $("#form_pid4").toggle();
-            $("#pid4 a").toggleClass("highlight",1000);
-            $("[name=input4]").val(4);
-        });
-        $("#pid5 a").click(function () {
-            $("#form_pid5").toggle();
-            $("#pid5 a").toggleClass("highlight",1000);
-            $("[name=input5]").val(5);
-        });
-        $("#pid6 a").click(function () {
-            $("#form_pid6").toggle();
-            $("#pid6 a").toggleClass("highlight",1000);
-            $("n[ame=input6]").val(6);
-        });
-        $("#pid7 a").click(function () {
-            $("#form_pid7").toggle();
-            $("#pid7 a").toggleClass("highlight",1000);
-            $("[name=input7]").val(7);
-        });
-        $("#pid8 a").click(function () {
-            $("#form_pid8").toggle();
-            $("#pid8 a").toggleClass("highlight",1000);
-            $("[name=input8]").val(8);
-        });
-        $("#pid9 a").click(function () {
-            $("#form_pid9").toggle();
-            $("#pid9 a").toggleClass("highlight",1000);
-            $("[name=input9]").val(9);
-        });
-        $("#pid10 a").click(function () {
-            $("#form_pid10").toggle();
-            $("#pid10 a").toggleClass("highlight",1000);
-            $("[name=input10]").val(10);
-        });
-        $("#pid11 a").click(function () {
-            $("#form_pid11").toggle();
-            $("#pid11 a").toggleClass("highlight",1000);
-            $("[name=input11]").val(11);
-        });
-        $("#pid12 a").click(function () {
-            $("#form_pid12").toggle();
-            $("#pid12 a").toggleClass("highlight",1000);
-            $("[name=input12]").val(12);
-        });
-        $("#pid13 a").click(function () {
-            $("#form_pid13").toggle();
-            $("#pid13 a").toggleClass("highlight",1000);
-            $("[name=input13]").val(13);
-        });
-        $("#pid14 a").click(function () {
-            $("#form_pid14").toggle();
-            $("#pid14 a").toggleClass("highlight",1000);
-            $("[name=input14]").val(14);
-        });
-        $("#pid15 a").click(function () {
-            $("#form_pid15").toggle();
-            $("#pid15 a").toggleClass("highlight",1000);
-            $("[name=input15]").val(15);
-        });
-        $("#pid16 a").click(function () {
-            $("#form_pid16").toggle();
-            $("#pid16 a").toggleClass("highlight",1000);
-            $("[name=input16]").val(16);
-        });
-        $("#pid17 a").click(function () {
-            $("#form_pid17").toggle();
-            $("#pid17 a").toggleClass("highlight",1000);
-            $("[name=input17]").val(17);
-        });
-        $("#pid18 a").click(function () {
-            $("#form_pid18").toggle();
-            $("#pid18 a").toggleClass("highlight",1000);
-            $("[name=input18]").val(18);
-        });
-        $("#pid19 a").click(function () {
-            $("#form_pid19").toggle();
-            $("#pid19 a").toggleClass("highlight",1000);
-            $("[name=input19]").val(19);
-        });
-        $("#pid20 a").click(function () {
-            $("#form_pid20").toggle();
-            $("#pid20 a").toggleClass("highlight",1000);
-            $("[name=input20]").val(20);
-        });
-        $("#pid21 a").click(function () {
-            $("#form_pid21").toggle();
-            $("#pid21 a").toggleClass("highlight",1000);
-            $("[name=input21]").val(21);
-        });
-        $("#pid22 a").click(function () {
-            $("#form_pid22").toggle();
-            $("#pid22 a").toggleClass("highlight",1000);
-            $("[name=input22]").val(22);
-        });
-        $("#pid23 a").click(function () {
-            $("#form_pid23").toggle();
-            $("#pid23 a").toggleClass("highlight",1000);
-            $("[name=input23]").val(23);
-        });
-        $("#pid24 a").click(function () {
-            $("#form_pid24").toggle();
-            $("#pid24 a").toggleClass("highlight",1000);
-            $("[name=input24]").val(24);
-        });
-        $("#pid25 a").click(function () {
-            $("#form_pid25").toggle();
-            $("#pid25 a").toggleClass("highlight",1000);
-            $("[name=input25]").val(25);
-        });
-        $("#pid26 a").click(function () {
-            $("#form_pid26").toggle();
-            $("#pid26 a").toggleClass("highlight",1000);
-            $("[name=input26]").val(26);
-        });
-        $("#pid27 a").click(function () {
-            $("#form_pid27").toggle();
-            $("#pid27 a").toggleClass("highlight",1000);
-            $("[name=input27]").val(27);
-        });
-        $("#pid28 a").click(function () {
-            $("#form_pid28").toggle();
-            $("#pid28 a").toggleClass("highlight",1000);
-            $("[name=input28]").val(28);
+        $("a.pid-btn").click(function () {
+            var id = $(this).parent().parent().find('input[name="pid-val"]').val();
+            console.log(id);
+            var name1 = '#form_pid' + id;
+            $(name1).toggle();
+            $(this).toggleClass("highlight", 1000);
+            var name2 = '[name=input' + id + ']';
+            var now_val = $(name2).val();
+            console.log(now_val);
+            if (now_val) {
+                $(name2).val("");
+            } else {
+                $(name2).val(id);
+            }
+            var name3  = "a#pickup" + id;
+            $(name3).toggleClass("highlight", 1000);
         });
     });
 
