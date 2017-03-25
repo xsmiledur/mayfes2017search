@@ -13,8 +13,6 @@
     <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
     <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
 
-    <!-- common2 -->
-    <link href="/css/common2.css" rel="stylesheet">
 
     <!--checkbox-->
     <link href="/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -37,6 +35,8 @@
     <!-- Sweet Alert -->
     <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
+    <!-- common2 -->
+    <link href="/css/common2.css" rel="stylesheet">
 
 
 </head>
@@ -142,6 +142,9 @@
                                     </div>
                                     <div class="ibox">
                                         <div class="ibox-content outside b-r-md">
+                                            <input id="search1" type="text" class="form-control" value="" placeholder="企画名・建物名・団体名で検索できます。"/>
+
+
                                             <select class="select2_demo_1 form-control" name="start-pos" style="width:100%;">
                                                 <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
                                                 <?php foreach ($this->result as $item): ?>
@@ -209,7 +212,7 @@
                                                         <div class="panel-heading" style="font-size: medium;"><label><i class="fa fa-clock-o" style="font-size: x-large;"></i> 滞在予定時刻</label></div>
                                                         <div class="panel-body">
                                                             <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
-                                                            <label id="clockText2" style="font-weight:normal;">16:00</label>
+                                                            <label id="clockText2" style="font-weight:normal;">18:00</label>
                                                         </div>
                                                     </div>
                                                     <div class="panel panel-info">
@@ -435,9 +438,10 @@
                         type: "POST",
                         data: {
                             search : search,
+                            start_pos : $('input[name="start-pos"]').val(),
+                            date   : $('input[name="date"]:checked').val(),
                             clock1 : $('input[name="clock1"]').val(),
-                            clock2 : $('input[name="clock2"]').val(),
-                            start_pos : $('input[name="start-pos"]').val()
+                            clock2 : $('input[name="clock2"]').val()
                         },
                         success: function(arr) {
                             console.log(arr);
@@ -476,9 +480,8 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
-        $('input').on('ifChecked', function(event){
+        $('input[name="date"]').on('ifChecked', function(event){
             $("#jQuery1").toggle();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#jQuery2").toggle();
         });
 
@@ -551,6 +554,7 @@
 
         });
 
+        /*
         //select2
         $(".select2_demo_1").select2();
         $(".select2_demo_2").select2();
@@ -558,68 +562,7 @@
             placeholder: "Select a state",
             allowClear: true
         });
-    });
-
-
-
-
-    /* 企画の項目を選んで表示 */
-
-    $(function() {
-
-
-        //キーワード検索
-        $("#search_pid").on("select2:select", function () {
-            pid = $(this).val();
-
-            $.each(pid,
-                function(index, elem) {
-                    val = "#form_pid" + elem;
-                    $(val).show();
-
-                    val1 = "input" + elem;
-                    $('[name=' + val1 + ']').val(elem);
-
-                    val2 = 'a#pid'+elem;
-                    console.log(val2);
-                    $(val2).addClass("highlight",1000);
-                    //$("#pid28 a").toggleClass("highlight",1000);
-
-                    val3 = 'a#pickup' + elem;
-                    $(val3).addClass("highlight",1000);
-
-                }
-            );
-        });
-
-        //キーワード検索　消す
-        $("#search_pid").on("select2:unselect", function (e) {
-
-            val = "#form_pid" + e.params.data.id;
-            $(val).hide();
-
-            val1 = "input" + e.params.data.id;
-            console.log(val1);
-            $('[name=' + val1 + ']').val("");
-
-            $('[name=val]').val();
-
-            val2 = 'a#pid'+e.params.data.id;
-            console.log(val2);
-            $(val2).removeClass("highlight",1000);
-
-            val3 = 'a#pickup' + e.params.data.id;
-            $(val3).removeClass("highlight",1000);
-
-
-        });
-
-        $("#dropmenu").click(function (e) {
-            e.stopPropagation(); // 追加
-        });
-        $("#dropmenu li").click(function (e) {
-            e.stopPropagation(); // 追加
-        });
+        */
     });
 
     $(function() {
