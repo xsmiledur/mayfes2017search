@@ -205,6 +205,7 @@ class Index2Controller extends Zend_Controller_Action
         $N          = count($search);
         $start_pos   = $request->getPost('start-pos');
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
+        $date       = $request->getPost('date');
         $clock1     = $request->getPost('clock1');
         $clock2     = $request->getPost('clock2');
         $inputData .= sprintf("%d %d\n", $clock1, $clock2);
@@ -234,6 +235,7 @@ class Index2Controller extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         foreach ($pp_search as $i => $item) {
+            $time = array();
             foreach ($pp_search as $j => $item2) {
                 if ($item['bd_pid'] == $item2['bd_pid']) {
                     $time[$j] = 0;
@@ -281,8 +283,9 @@ class Index2Controller extends Zend_Controller_Action
 
             fclose($pipes[1]);
             fclose($pipes[2]);
+        } else {
+            $this->_session->errMsg = "エラーが発生しました。";
         }
-        $this->view->result = "test";
 
 
         //この後はいらない。
@@ -454,10 +457,17 @@ class Index2Controller extends Zend_Controller_Action
      */
     public function resultAction()
     {
+        $errMsg = $this->_session->errMsg;
+        if (strlen($errMsg) > 0) {
+            echo $errMsg;
+            exit();
+        }
         $pd_pid = $this->_session->pd_pid;  //企画の回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
         $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
                                             //キーiに対してキー"time"には経路にかかる時間、
                                             //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
+
+        $pd_pid = array(1,4,67,9,2,4,7,99);
 
         foreach ($pd_pid as $key => $item) {
             $project[$key]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る

@@ -48,21 +48,9 @@ try {
     $front->dispatch();
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
-//<<<<<<< HEAD
-    echo $e->getMessage();
-    exit();
-    //return false;
-//=======
-/*<<<<<<< hikaru
-    echo $e->getMessage();
-    //exit();
-    //return false;
-=======*/
     //echo $e->getMessage();
-    //exit();
+    //return false;
     return false;
-//>>>>>>> master
-//>>>>>>> origin/Yuri3
 }
 
 
