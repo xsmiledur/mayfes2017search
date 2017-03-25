@@ -166,7 +166,7 @@ class MainModel
         try {
         */
             $select = $this->_read->select();
-            $select->from('project_data');
+            $select->from('project_data_89');
             $select->where('active_flg = ?', 1);
                 //->order('sc_order ASC')
 
