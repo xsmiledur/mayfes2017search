@@ -84,7 +84,7 @@ li {
 
 .contact-box {
     height: 200px;
-    color: #ffffe0;
+    /*color: #ffffe0;*/
     font-weight: normal;
     transition: .2s;
 }
@@ -287,3 +287,6 @@ a#footer:active {
 .contact-box.center-version > a:hover {
     background-color: #ffffe0;
 }*/
+.wizard > .content > .body {
+    width: 100% !important;
+}

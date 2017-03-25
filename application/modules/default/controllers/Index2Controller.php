@@ -58,7 +58,8 @@ class Index2Controller extends Zend_Controller_Action
 
         // テキストデータを取得
 
-        $this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
+        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
+        //$this->view->contents = $this->_main->getContentsData();
 
         /**
          * Viewに必要データを渡す
@@ -72,7 +73,6 @@ class Index2Controller extends Zend_Controller_Action
 
         // pathとユーザー情報をviewに渡す
         $this->view->path       = $this->getRequest()->getPathInfo();
-        $this->view->contents   = $this->_contents;
         $this->view->lang       = $this->_session->lang;
 
         //$this->_helper->layout->setLayout('index');
@@ -81,33 +81,10 @@ class Index2Controller extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->data = $this->_main->getProjectData();
-        $this->view->data_area = $this->_main->getProjectDataArea();
-
-        $this->view->area = $this->_main->getAreaInfo();
-        $this->view->arr_area = array(
-            1 => array(
-                'label' => '農学部エリア',
-                'name' => 'no_dept',
-            ),
-            2 => array(
-                'label' => '工学部エリア',
-                'name' => 'ko_dept',
-            ),
-            3 => array(
-                'label' => '安田講堂エリア',
-                'name' => 'yasuko',
-            ),
-            4 => array(
-                'label' => '赤門エリア',
-                'name' => 'akamon',
-            ),
-        );
-        $this->view->data_all = $this->_main->getProjectDataAll();
-        //$this->view->data_area = $this->_main->getProjectDataGenre();
 
         $request = $this->getRequest();
         $search = $request->getParam('search');
+        $this->view->data_all   = $this->_main->getProjectData(null,null);
 
         //$result = $this->_main->searchFree();
 
@@ -115,6 +92,62 @@ class Index2Controller extends Zend_Controller_Action
 
     }
 
+    public function refresh01Action()
+    {
+        $start = $this->_session->start;
+        $end   = $this->_session->end;
+        $this->view->data_all   = $this->_main->getProjectData($start, $end);
+        $this->view->data_area  = $this->_main->getProjectDataArea($start, $end);
+        $this->view->data_genre = $this->_main->getProjectDataGenre($start, $end);
+        $this->view->data_rec   = $this->_main->getProjectDataRec($start, $end);
+
+        $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
+
+    }
+
+    public function timePostAction()
+    {
+        $request = $this->getRequest();
+        $radio  = $request->getPost('radio');
+        $clock1 = $request->getPost('clock1');
+        $clock2 = $request->getPost('clock2');
+
+        if (strlen($clock1) == 0) {
+            $clock1 = date("h:i");
+        }
+        if ($radio == "1day") {
+            $start = "2016-05-14 ".$clock1.":00";
+            $end   = "2016-05-14 ".$clock2.":00";
+        } elseif ($radio == "2day") {
+            $start = "2016-05-15 ".$clock1.":00";
+            $end   = "2016-05-15 ".$clock2.":00";
+        }
+
+        $this->_session->start =  strtotime($start);
+        $this->_session->end = strtotime($end);
+    }
+
+    public function timePost2Action()
+    {
+        $request = $this->getRequest();
+        $radio  = $request->getPost('radio');
+        $clock1 = $request->getPost('clock1');
+        $clock2 = $request->getPost('clock2');
+
+        if (strlen($clock1) == 0) {
+            $clock1 = date("h:i");
+        }
+        if ($radio == "1day") {
+            $start = "2016-05-14 ".$clock1.":00";
+            $end   = "2016-05-14 ".$clock2.":00";
+        } elseif ($radio == "2day") {
+            $start = "2016-05-15 ".$clock1.":00";
+            $end   = "2016-05-15 ".$clock2.":00";
+        }
+
+        $this->_session->start =  strtotime($start);
+        $this->_session->end = strtotime($end);
+    }
 
     /**
      * アルゴリズム説明ページ
@@ -127,7 +160,7 @@ class Index2Controller extends Zend_Controller_Action
     public function testAction()
     {
         //$data = $this->_main->getProjectData();
-        $this->_main->__________timeFix();
+        $this->_main->___timeFix();
     }
 
     /**
