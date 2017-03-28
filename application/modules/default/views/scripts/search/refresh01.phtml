@@ -3,11 +3,14 @@
         <div class="full-height-scroll">
             <input id="search1" type="text" class="form-control" value="" placeholder="企画名・建物名・団体名で検索できます。"/>
 
-            <div style="overflow:scroll; height: 360px;">
+            <div style="overflow:scroll; height: 400px;">
                 <ul id="search-all" class="list-group clear-list m-t">
 
                     <?php foreach ($this->data_all as $key => $item) : ?>
                         <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
+                            <span class="pull-right m-r-md" style="width: 3%; text-align: right;">
+                                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" style="padding-left: 8px; padding-right: 8px;"><i class="fa fa-exclamation"></i></button>
+                            </span>
                             <span class="pull-right" style="width: 25%; text-align: right;">
                                 <?php echo $item['pd_body']; ?>
                             </span>
@@ -44,15 +47,16 @@
     </div>
 </div>
 <div id="tab-2" class="tab-pane">
-    <div class="panel-body" style="height:480px;overflow: scroll;">
+    <div class="panel-body">
         <div class="full-height-scroll">
             <div class="table-responsive">
                 <div class="row">
                     <?php foreach ($this->data_genre as $key => $val) : ?>
                         <div class="col-sm-2">
-                            <div id="PushGenre<?php echo $key; ?>" class="genre-push contact-box m-b-sm" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
+                            <div id="PushGenre<?php echo $key; ?>" class="genre-push contact-box m-b-sm b-r-md" style="background-image: url(/img/logo/logo_<?php echo $val['kind']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
                                 <input type="hidden" name="name" value="<?php echo $key; ?>">
                                 <h3><strong><?php echo $val['name']; ?></strong></h3>
+                                <i class="fa fa-5x fa-<?php echo $this->icon[$val['kind']]; ?> m-md" style="color: rgba(255,255,255,0.5); position: absolute; bottom: 0; right: 0;"></i>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -68,24 +72,28 @@
                                         <input type="hidden" name="btn-val" value="genre<?php echo $item['gd_pid']; ?>">
                                     </button>
                                     <div class="select-box m-b-md" id="genre<?php echo $item['gd_pid']; ?>">
-                                        <ul class="list-group clear-list m-t">
-                                            <?php foreach ($item['data'] as $key2 => $item2) : ?>
-                                                <li class="list-group-item <?php echo ($key2 == 0) ? 'fist-item' : ''; ?>">
-                                                    <span class="pull-right">
-                                                        <?php echo $item2['pt_start']; ?>
-                                                    </span>
-                                                    <div class="i-checks">
-                                                        <label> <input type="checkbox" value="<?php echo $item2['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item2['pd_name']; ?> </label>
-                                                    </div>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        </ul>
+                                        <?php if (count($item['data']) > 0) : ?>
+                                            <ul class="list-group clear-list m-t">
+                                                <?php foreach ($item['data'] as $key2 => $item2) : ?>
+                                                    <li class="list-group-item <?php echo ($key2 == 0) ? 'fist-item' : ''; ?>">
+                                                        <span class="pull-right" style="text-align: right;">
+                                                            <button type="button" class="btn btn-warning btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item2['ps_pid']; ?>" value="<?php echo $item2['ps_pid']; ?>" style="padding-left: 8px; padding-right: 8px;"><i class="fa fa-exclamation"></i></button>
+                                                        </span>
+                                                        <span class="pull-right">
+                                                            <?php echo $item2['pt_start']; ?>
+                                                        </span>
+                                                        <div class="i-checks">
+                                                            <label> <input type="checkbox" value="<?php echo $item2['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item2['pd_name']; ?> </label>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php else : ?>
+                                            企画はありません。
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <?php echo ($i%4 == 3 || !$val['info'][$i+1]) ? '</div>' : ''; ?>
-                            <?php endforeach; ?>
-                            <?php foreach ($val['info'] as $i => $item) : ?>
-
                             <?php endforeach; ?>
 
                         </div>
@@ -105,7 +113,7 @@
                 <div class="row">
                     <?php foreach ($this->data_area as $key => $val) : ?>
                         <div class="col-sm-3">
-                            <div id="PushArea<?php echo $key; ?>" class="area-push contact-box m-b-sm" style="background-image: url(/img/nougaku.jpg);background-size: cover; cursor: pointer;">
+                            <div id="PushArea<?php echo $key; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/logo/<?php echo $val['kind']; ?>.png);background-size: cover; cursor: pointer;">
                                 <input type="hidden" name="name" value="<?php echo $key; ?>">
                                 <h3><strong><?php echo $val['name']; ?></strong></h3>
                             </div>
@@ -114,7 +122,7 @@
                 </div>
                 <?php foreach ($this->data_area as $key => $val) : ?>
                     <div class="row">
-                        <div id="BoxArea<?php echo $key; ?>" class="area-box contact-box" style="background-image: url(/img/nougaku.jpg);background-size: cover;">
+                        <div id="BoxArea<?php echo $key; ?>" class="area-box contact-box" style="background-size: cover;">
                             <?php foreach ($val['info'] as $i => $item) : ?>
                                 <?php echo ($i%4 == 0) ? '<div class="row m-n">' : ''; ?>
                                 <div class="col-sm-3">
@@ -123,26 +131,29 @@
                                         <input type="hidden" name="btn-val" value="area<?php echo $item['bd_pid']; ?>">
                                     </button>
                                     <div class="select-box m-b-md" id="area<?php echo $item['bd_pid']; ?>">
-                                        <ul class="list-group clear-list m-t">
+                                        <?php if (count($item['data']) > 0) : ?>
+                                            <ul class="list-group clear-list m-t">
 
-                                            <?php foreach ($item['data'] as $key2 => $item2) : ?>
-                                                <li class="list-group-item <?php echo ($key2 == 0) ? 'fist-item' : ''; ?>">
-                                                    <span class="pull-right">
-                                                        <?php echo $item2['pt_start']; ?>
-                                                    </span>
-                                                    <div class="i-checks">
-                                                        <label> <input type="checkbox" value="<?php echo $item2['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item2['pd_name']; ?> </label>
-                                                    </div>
-                                                </li>
-                                            <?php endforeach; ?>
-
-                                        </ul>
+                                                <?php foreach ($item['data'] as $key2 => $item2) : ?>
+                                                    <li class="list-group-item <?php echo ($key2 == 0) ? 'fist-item' : ''; ?>">
+                                                        <span class="pull-right" style="text-align: right;">
+                                                            <button type="button" class="btn btn-warning btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item2['ps_pid']; ?>" value="<?php echo $item2['ps_pid']; ?>" style="padding-left: 8px; padding-right: 8px;"><i class="fa fa-exclamation"></i></button>
+                                                        </span>
+                                                        <span class="pull-right">
+                                                            <?php echo $item2['pt_start']; ?>
+                                                        </span>
+                                                        <div class="i-checks">
+                                                            <label> <input type="checkbox" value="<?php echo $item2['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item2['pd_name']; ?> </label>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php else : ?>
+                                            企画はありません。
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <?php echo ($i%4 == 3 || !$val['info'][$i+1]) ? '</div>' : ''; ?>
-                            <?php endforeach; ?>
-                            <?php foreach ($val['info'] as $i => $item) : ?>
-
                             <?php endforeach; ?>
 
                         </div>
@@ -155,15 +166,24 @@
     </div>
 </div>
 <div id="tab-4" class="tab-pane">
-    <div class="panel-body" style="height:540px;overflow: scroll;">
+    <div class="panel-body">
         <div class="full-height-scroll">
             <ul class="list-group clear-list m-t">
 
             <?php foreach ($this->data_rec as $key => $item) : ?>
                 <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                    <span class="pull-right">
-                        <?php echo $item['pt_start']; ?>
-                    </span>
+                    <span class="pull-right m-r-md" style="width: 3%; text-align: right;">
+                        <button type="button" class="btn btn-warning btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" style="padding-left: 8px; padding-right: 8px;"><i class="fa fa-exclamation"></i></button>
+                            </span>
+                    <span class="pull-right" style="width: 25%; text-align: right;">
+                                <?php echo $item['pd_body']; ?>
+                            </span>
+                    <span class="pull-right m-r-lg" style="width:20%; text-align: right;">
+                                <?php echo $item['pp_place']; ?>
+                            </span>
+                    <span class="pull-right m-r-lg" style="width:20%; text-align: right;">
+                                <?php echo $item['pt_start']; ?>
+                            </span>
                     <div class="i-checks">
                         <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_name']; ?> </label>
                     </div>
@@ -245,6 +265,7 @@
         });
 
         $(".area-box").click(function(e){
+            e.stopPropagation();
             $(".area-push").show();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $(".area-box").hide();
@@ -260,7 +281,11 @@
             e.stopPropagation();
             var key = $(this).find('input[name="btn-val"]').val();
             //$('.select-box').hide();
-            $("div#" + key).toggle();
+            $("div#" + key).slideToggle('fast');
+        });
+        $(".btn-modal").click(function(event) {
+            event.stopPropagation();
+            $("#Modal_ps_pid" + $(this).val()).modal('show');
         });
     });
 

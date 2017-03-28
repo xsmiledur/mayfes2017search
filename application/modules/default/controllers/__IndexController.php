@@ -8,7 +8,7 @@ require_once 'Zend/Session.php';
 
 require_once '../application/modules/default/models/MainModel.php';
 
-class IndexController extends Zend_Controller_Action
+class __IndexController extends Zend_Controller_Action
 {
     private $_config;                         // 設定情報
     private $_session;                        // セッションのインスタンス
@@ -58,8 +58,7 @@ class IndexController extends Zend_Controller_Action
 
         // テキストデータを取得
 
-        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
-        //$this->view->contents = $this->_main->getContentsData();
+        $this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
 
         /**
          * Viewに必要データを渡す
@@ -73,6 +72,7 @@ class IndexController extends Zend_Controller_Action
 
         // pathとユーザー情報をviewに渡す
         $this->view->path       = $this->getRequest()->getPathInfo();
+        $this->view->contents   = $this->_contents;
         $this->view->lang       = $this->_session->lang;
 
         //$this->_helper->layout->setLayout('index');
@@ -81,8 +81,37 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $this->view->data = $this->_main->getProjectData();
+
+        $request = $this->getRequest();
+        $search = $request->getParam('search');
+
+        //var_dump($search);
+        //exit();
+
+
+        $result = $this->_main->searchFree();
+        //var_dump($result);
+        //exit();
+        $this->view->result = $result;
 
     }
 
+
+    /*
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $search = $request->getParam('search');
+
+
+        //$sql = "SELECT * FROM テーブル WHERE title_name LIKE '%$user_search%'";
+
+        $result = $this->_main->searchFree($search);
+
+        $this->view->result = $result;
+
+    }
+    */
 
 }

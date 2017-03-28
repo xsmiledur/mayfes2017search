@@ -218,47 +218,46 @@ class MainModel
 
             $select = $this->_read->select();
             $select->from('building_data', array('bd_kind', 'bd_kind_label'))
+                ->where('bd_kind = "ko_dept" || bd_kind = "no_dept" || bd_kind = "yasuko" || bd_kind = "akamon"')
                 ->distinct();
             $stmt = $select->query();
             $_blding =  $stmt->fetchAll();
             $data = array();
             foreach ($_blding as $key => $name) {
-                if ($name['bd_kind'] == 'ko_dept' || $name['bd_kind'] == 'no_dept' || $name['bd_kind'] == 'yasuko' || $name['bd_kind'] == 'akamon' ) {
+                $select = $this->_read->select();
+                $select->from('building_data')
+                    ->where('bd_kind = ?', $name['bd_kind']);
+                $stmt = $select->query();
+                $data[$key]['name'] = $name['bd_kind_label'];
+                $data[$key]['kind'] = $name['bd_kind'];
+                $data[$key]['info'] = $stmt->fetchAll();
+
+                foreach ($data[$key]['info'] as $name => $item) {
+                    //fulltimeのものを先に
                     $select = $this->_read->select();
-                    $select->from('building_data')
-                        ->where('bd_kind = ?', $name['bd_kind']);
+                    $select->from('project_summary_89', 'ps_pid')
+                        ->join('project_data_89', 'ps_pd_pid = pd_pid')
+                        ->join('project_place_89', 'ps_pp_pid = pp_pid')
+                        ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid')
+                        ->where('pd_active_flg = ?', 1)
+                        ->where('pp_area = ?', $item['bd_kind'])
+                        ->where('pp_place_index = ?', $item['bd_name']);
                     $stmt = $select->query();
-                    $data[$key]['name'] = $name['bd_kind_label'];
-                    $data[$key]['kind'] = $name['bd_kind'];
-                    $data[$key]['info'] = $stmt->fetchAll();
+                    $_data = $stmt->fetchAll();
 
-                    foreach ($data[$key]['info'] as $name => $item) {
-                        //fulltimeのものを先に
-                        $select = $this->_read->select();
-                        $select->from('project_summary_89', 'ps_pid')
-                            ->join('project_data_89', 'ps_pd_pid = pd_pid')
-                            ->join('project_place_89', 'ps_pp_pid = pp_pid')
-                            ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid')
-                            ->where('pd_active_flg = ?', 1)
-                            ->where('pp_area = ?', $item['bd_kind'])
-                            ->where('pp_place_index = ?', $item['bd_name']);
-                        $stmt = $select->query();
-                        $_data = $stmt->fetchAll();
+                    if (!$start && !$end) {
+                        $data = $_data;
+                    } else {
+                        $i = 0;
+                        foreach ($_data as $item2) {
+                            if (!$item2['pt_pid']) {
+                                $data[$key]['info'][$name]['data'][$i] = $item2;
+                                $i++;
+                            } else {
+                                if (strtotime($item2['pt_start']) > $start && strtotime($item2['pt_end']) < $end) {
 
-                        if (!$start && !$end) {
-                            $data = $_data;
-                        } else {
-                            $i = 0;
-                            foreach ($_data as $item2) {
-                                if (!$item2['pt_pid']) {
                                     $data[$key]['info'][$name]['data'][$i] = $item2;
                                     $i++;
-                                } else {
-                                    if (strtotime($item2['pt_start']) > $start && strtotime($item2['pt_end']) < $end) {
-
-                                        $data[$key]['info'][$name]['data'][$i] = $item2;
-                                        $i++;
-                                    }
                                 }
                             }
                         }
@@ -418,6 +417,21 @@ class MainModel
             ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid');
         $select->where('ps_pd_active_flg = ?', 1)
             ->where('ps_pid = ?', $ps_pid);
+        $stmt = $select->query();
+        return $stmt->fetch();
+    }
+
+    /**
+     * 現在地のbd_pidから建物情報を返す
+     * @param $bd_pid
+     * @return array
+     */
+    public function getBuildingData($bd_pid)
+    {
+        $select = $this->_read->select();
+        $select->from('building_data');
+        $select->where('bd_active_flg = ?', 1)
+            ->where('bd_pid = ?', $bd_pid);
         $stmt = $select->query();
         return $stmt->fetch();
     }
