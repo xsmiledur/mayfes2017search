@@ -79,13 +79,15 @@
 
 }
 
-.contact-box {
+.genre-push,
+.area-push {
     height: 200px;
     /*color: #ffffe0;*/
     font-weight: normal;
     transition: .2s;
 }
-.contact-box:hover {
+.genre-push:hover,
+.area-push:hover {
     filter:brightness(1.1);
 }
 
@@ -101,31 +103,30 @@
     color:#ffa500 !important;
 }
 fieldset .ibox .ibox-content {
-    height:510px;
+    height:575px;
     overflow: scroll;
 }
-#tab-1 .panel-body {
-    min-height:460px;
+.panel-body {
+    height:535px;
+    overflow: scroll;
+    border-bottom-left-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
 }
-
-#tab-2 .panel-body {
-    height:460px;
+.search-in {
+    height: 450px;
     overflow: scroll;
 }
-#tab-3 .panel-body {
-    height:460px;
-    overflow: scroll;
-}
-#tab-4 .panel-body {
-    height:460px;
-    overflow: scroll;
+.modal-exp {
+    background-color: #fcf8e3;
+    text-align: left;
+    margin-bottom: 0;
 }
 
 #page-wrapper {
     min-height: 700px;
 }
 .wizard-big.wizard > .content {
-    min-height: 600px !important;
+    min-height: 680px !important;
 }
 
 .outside {
@@ -226,24 +227,25 @@ li.disabled > a#form-t-1,
 li.disabled > a#form-t-2,
 li.disabled >a#form-t-3,
 .content.clearfix {
-    background-color: #f5fffa !important;
+    background-color: #7fc9b9 !important;
+    /*color: white !important;*/
 }
 li.current > a#form-t-0,
 li.current > a#form-t-1,
 li.current > a#form-t-2,
 li.current > a#form-t-3 {
-    background-color: #a3ffd1 !important;
+    background-color: #2baf95 !important;
 }
 li.done > a#form-t-0,
 li.done > a#form-t-1,
 li.done > a#form-t-2,
 li.done > a#form-t-3 {
-    background-color: #d1ffe8 !important;
+    background-color: #70c2a3 !important;
 }
 
-h2 {
+/*h2 {
     background-color: rgba(255,255,255,0.8);
-}
+}*/
 
 h2.alg {
     background-color: inherit;
@@ -379,4 +381,65 @@ h1.top-title {
     font-size: 12em;
     text-align: center;
     margin-top: 100px;
+}
+.modal-content .ibox-content {
+    height: initial !important;
+}
+.modal-content .h2 {
+    background-color: initial;
+}
+li.fist-item {
+    border-bottom: none;
+}
+.contact-box {
+    border: none;
+}
+.transparent {
+    background-color: rgba(255,255,255,0.8);
+    margin: -20px;
+    padding: 20px;
+}
+.body-text,
+.place-text {
+    width:25%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+
+}
+.time-text {
+    width:6%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+fieldset .tabs-container .i-checks {
+    margin-right: 5px;
+}
+.panel-last-kikaku {
+    height: 400px;
+}
+
+/*search/resultのエリア毎のバッジ*/
+.akamon-bg {
+    background-color: #da415a;
+    color: #ffffff;
+}
+.yasuko-bg {
+    background-color: #dc8c00;
+    color: #ffffff;
+}
+.ko_dept-bg {
+    background-color: #0097ca;
+    color: #ffffff;
+}
+.no_dept-bg {
+    background-color: #6da62b;
+    color: #ffffff;
 }

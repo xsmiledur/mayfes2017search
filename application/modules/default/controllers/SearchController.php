@@ -92,7 +92,8 @@ class SearchController extends Zend_Controller_Action
 
         $request = $this->getRequest();
         $search = $request->getParam('search');
-        $this->view->data_all   = $this->_main->getProjectData(null,null);
+        $this->view->data_all   = $this->_main->getProjectData();
+
 
         //$result = $this->_main->searchFree();
 
@@ -102,12 +103,13 @@ class SearchController extends Zend_Controller_Action
 
     public function refresh01Action()
     {
-        $start = $this->_session->start;
-        $end   = $this->_session->end;
-        $this->view->data_all   = $this->_main->getProjectData($start, $end);
-        $this->view->data_area  = $this->_main->getProjectDataArea($start, $end);
-        $this->view->data_genre = $this->_main->getProjectDataGenre($start, $end);
-        $this->view->data_rec   = $this->_main->getProjectDataRec($start, $end);
+        $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
+        //unset ($this->view->data);
+        //unset ($this->view->info);
+
+        //$this->view->data_area  = $this->_main->getProjectDataArea($start, $end);
+        //$this->view->data_genre = $this->_main->getProjectDataGenre($start, $end);
+        //$this->view->data_rec   = $this->_main->getProjectDataRec($start, $end);
 
         $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
         $this->view->icon = array(
@@ -120,6 +122,7 @@ class SearchController extends Zend_Controller_Action
             'lecture' => 'mortar-board',
         );
 
+        $this->_session->research = 1;
     }
 
     public function timePostAction()
@@ -128,20 +131,25 @@ class SearchController extends Zend_Controller_Action
         $radio  = $request->getPost('radio');
         $clock1 = $request->getPost('clock1');
         $clock2 = $request->getPost('clock2');
+        $no_time = $request->getPost('no_time');
 
-        if (strlen($clock1) == 0) {
+        var_dump($radio);
+        var_dump($clock1);
+        var_dump($clock2);
+
+        if (!$no_time && strlen($clock1) == 0) {
             $clock1 = date("h:i");
         }
-        if ($radio == "1day") {
-            $start = "2016-05-14 ".$clock1.":00";
-            $end   = "2016-05-14 ".$clock2.":00";
-        } elseif ($radio == "2day") {
-            $start = "2016-05-15 ".$clock1.":00";
-            $end   = "2016-05-15 ".$clock2.":00";
-        }
+        $this->_session->date = $radio;
+        $this->_session->no_time = $no_time;
+        $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1));
+        $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2));
 
-        $this->_session->start =  strtotime($start);
-        $this->_session->end = strtotime($end);
+        var_dump($this->_session->date);
+        var_dump($this->_session->start);
+        var_dump($this->_session->end);
+
+
     }
 
 
@@ -156,7 +164,8 @@ class SearchController extends Zend_Controller_Action
     public function testAction()
     {
         //$data = $this->_main->getProjectData();
-        $this->_main->___timeFix();
+        //$this->_main->____timeFix();
+        //$this->_main->___Fix2();
     }
 
     /**
@@ -197,14 +206,16 @@ class SearchController extends Zend_Controller_Action
         $inputData = "";
 
         $request    = $this->getRequest();
-        $search     = $request->getPost('search');
+        $search     = $request->getParam('search');
         $N          = count($search);
-        $start_pos   = $request->getPost('start-pos');
+        $start_pos   = $request->getParam('start-pos');
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
-        $date       = $request->getPost('date');
-        $clock1     = $request->getPost('clock1');
-        $clock2     = $request->getPost('clock2');
+        $date       = $request->getParam('date');
+        $clock1     = $request->getParam('clock1');
+        $clock2     = $request->getParam('clock2');
         $inputData .= sprintf("%d %d\n", $clock1, $clock2);
+
+        $research = $this->_session->research;
 
         $this->_session->start = $clock1;
         $this->_session->start_pos = $start_pos;
@@ -217,7 +228,13 @@ class SearchController extends Zend_Controller_Action
             //企画情報
 
             $ps_pid = $_result['ps_pid']; //企画summaryID
-            $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
+
+            if ($research) {
+                $time = $request->getParam('re-time'.$_result['ps_pid']);
+                var_dump($time);
+            } else {
+                $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
+            }
             $__start = $_result['pt_start']; //企画start
             if (!$__start) {
                 $start = -1;
@@ -284,6 +301,17 @@ class SearchController extends Zend_Controller_Action
             fclose($pipes[2]);
         } else {
             $this->_session->errMsg = "エラーが発生しました。";
+        }
+
+        //再検索のためのsession保存
+        $this->_setParam('search', $search);
+        $this->_setParam('start-pos', $start_pos);
+        $this->_setParam('date', $date);
+        $this->_setParam('clock1', $clock1);
+        $this->_setParam('clock2', $clock2);
+
+        if ($research) {
+            return $this->_redirect('/search/result');
         }
 
 
@@ -472,7 +500,7 @@ class SearchController extends Zend_Controller_Action
         $start = "10:00";
         $_start_pos = 43;
         $start_pos = $this->_main->getBuildingData($_start_pos);
-        $pd_pid = array(3,4,1,338);
+        $pd_pid = array(3,4,1,336);
         $order  = array(
             array(
                  //orderのキー0には何も入ってない
@@ -513,7 +541,13 @@ class SearchController extends Zend_Controller_Action
         $this->view->end     = date("h:i", $end);
         $this->view->start_pos = $start_pos;
         $this->view->order = $order;
-        $this->view->color = array('navy', 'yellow', 'red', 'blue');
+        //$this->view->color = array('navy', 'yellow', 'red', 'blue');
+        /*$this->view->icon  = array(
+            'akamon' => '';
+            'yasuko' => '';
+            'ko_dept' => '';
+            'no_dept' => '';
+        );*/
 
     }
 
