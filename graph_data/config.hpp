@@ -1,0 +1,2 @@
+int NODE_NUMBER = 82;
+int BUILDING_NUMBER = 57;
