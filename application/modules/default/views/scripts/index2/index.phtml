@@ -38,6 +38,8 @@
     <!-- common2 -->
     <link href="/css/common2.css" rel="stylesheet">
 
+    <script src="/Static_Full_Version/js/plugins/mapper/mapper.js"></script>
+
 
 </head>
 
@@ -136,6 +138,12 @@
                                 </fieldset>
                                 <h1>You are here</h1>
                                 <fieldset>
+                                    <div>
+                                      <img src="/img/map.png" class="mapper showcoords noborder iopacity50 icolorff0000" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                    </div>
+                                    <map name="shape1">
+                                      <area shape="default" href="#" alt="全体" region="all">
+                                    </map>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-map-marker"> 現在地</i></h2>
                                         <p class="text-muted" style="padding-left: 20px;">現在地を選択してください。</p>
@@ -155,9 +163,6 @@
                                                 <?php endforeach; ?>
                                             </select>
                                             <br>
-                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:900px; height:600px;" usemap="#shape1" id="shape1">
-
-
                                         </div>
                                     </div>
 
@@ -276,16 +281,11 @@
     </div>
 </div>
 
-
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
 <!-- Mainly scripts -->
 <script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
 <script src="/Static_Full_Version/js/bootstrap.min.js"></script>
 <script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
 <!-- Custom and plugin javascript -->
 <script src="/Static_Full_Version/js/inspinia.js"></script>
 <script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
@@ -635,4 +635,3 @@
 </body>
 
 </html>
-
