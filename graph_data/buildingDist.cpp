@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdio>
+#include<cstring>
 #include<sstream>
 #include<memory>
 #include<mysql_driver.h>
@@ -41,9 +42,17 @@ while (res->next()) {
 *********************/
 
 int shortest[1080][1080];
+int distB[1080][1080];
+  P usedExit[1080][1080];
 
 void init(){
   stmt->execute("USE " + DATABASE);
+  /*
+  stmt->execute("DROP TABLE IF EXISTS checkpos_data_89");
+  stmt->execute("CREATE TABLE checkpos_data_89(cd_pid int(11) unsigned NOT NULL AUTO_INCREMENT, cd_bd_pid1 int(11) DEFAULT NULL, cd_bd_pid2 int(11) DEFAULT NULL, cd_node1 int(11) DEFAULT NULL, cd_node2 int(11) DEFAULT NULL, cd_time int(11) DEFAULT NULL, cd_active_flg tinyint(1) NOT NULL DEFAULT 1, primary key(cd_pid))");
+  */
+  stmt->execute("DROP TABLE IF EXISTS graph_data_89.dist_data_89");
+  stmt->execute("CREATE TABLE graph_data_89.dist_data_89(dist_pid int(11) unsigned NOT NULL AUTO_INCREMENT, from_id int(3) DEFAULT NULL, to_id int(3) DEFAULT NULL, distance int(11) DEFAULT NULL, primary key(dist_pid))");
 }
 
 int getNodeNumber(){
@@ -60,8 +69,6 @@ int readInt(string str){
   os >> res;
   return res;
 }
-
-
 
 int dist(int u, int v){
   char str[1080];
@@ -80,6 +87,23 @@ int realDist(int u, int v){
 }
 
 
+void setDistance(int n){
+  char str[108000];
+  char tmp[108000];  
+  sprintf(str, "INSERT INTO graph_data_89.dist_data_89 (%s, %s, %s) VALUES(%d, %d, %d)",
+	  "from_id", "to_id", "distance"
+	  ,1, 1, realDist(1, 1));
+  for(int i = 1;i <= n;i++){
+    for(int j = 1;j <= n;j++){
+      if(i == 1 && j == 1)continue;
+      sprintf(tmp, "%s", str);
+      sprintf(str, "%s ,(%d, %d, %d)", tmp, i, j, realDist(i, j));
+    }
+  }
+  stmt->execute(str);  
+}
+
+
 
 vector<int> buildingList(int id){
   vector<int> resV;
@@ -92,18 +116,28 @@ vector<int> buildingList(int id){
   return resV;
 }
 
-void setBuildingDist(int u, int v, int t, P exits){
-  char str[1080];
-
-  
+void setBuildingDist(int n){
+  char str[108000];
+  char tmp[108000];
+  int B = getBuildingNumber();
   sprintf(str, "INSERT INTO checkpos_data_89 (%s, %s, %s, %s, %s) VALUES(%d, %d, %d, %d, %d)",
 	 "cd_bd_pid1", "cd_bd_pid2", "cd_node1", "cd_node2", "cd_time",
-	  u, v, exits.first, exits.second, t
+	  1, 1, usedExit[1][1].first, usedExit[1][1].second, 0
 	 );
+  stmt->execute(str);
+
   
-  cout << str << endl;
-  stmt->executeQuery(str);
+  for(int i = 1;i <= B;i++){
+    for(int j = 1;j <= B;j++){
+      if(i == 1 && j == 1)continue;
+      sprintf(tmp, "%s", str);
+      sprintf(str, "%s ,(%d, %d, %d, %d, %d)", tmp
+	      ,i, j, usedExit[i][j].first, usedExit[i][j].second, distB[i][j]);
+    }
+  }  
+  stmt->execute(str);
 }
+
 
 void wf(){
   int N = getNodeNumber();
@@ -125,8 +159,6 @@ int main(){
   int N = getNodeNumber();
   int B = getBuildingNumber();
   
-  int distB[B+1][B+1];
-  P usedExit[B+1][B+1];
   for(int i = 1;i <= B;i++){
     for(int j = 1;j <= B;j++){
       distB[i][j] = INF;
@@ -134,7 +166,10 @@ int main(){
   }
 
   wf();
-  
+  cout << "STEP1 : All to All distance" << endl;
+  setDistance(N);
+  cout << "Done" << endl;
+
   for(int i = 1;i <= N;i++){
     vector<int> buildI = buildingList(i);
     for(int j = 1;j <= N;j++){
@@ -153,14 +188,8 @@ int main(){
     }
   }
 
-  
-  for(int i = 1;i <= B;i++){
-    for(int j = 1;j <= B;j++){
-      if(i == j)continue;
-      cout << i << " " << j << endl;
-      setBuildingDist(i, j, distB[i][j], usedExit[i][j]);
-    }
-  }
-  
+  cout << "STEP2 : Building to Building distance" << endl;
+  setBuildingDist(N);
+  cout << "Done" << endl;
   return 0;
 }

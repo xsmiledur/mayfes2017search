@@ -10,6 +10,7 @@
 
 #include<algorithm>
 #include<vector>
+#include<string>
 #include<map>
 using namespace std;
 typedef pair<int, int> P;
@@ -38,10 +39,12 @@ while (res->next()) {
 }
 *********************/
 
-
+vector<string> queries;
 
 void init(){
   stmt->execute("USE " + DATABASE);
+  stmt->execute("DROP TABLE IF EXISTS checkpos_order_89");
+  stmt->execute("CREATE TABLE checkpos_order_89(co_pid int(11) unsigned NOT NULL AUTO_INCREMENT, co_cd_pid int(11) DEFAULT NULL, co_node1 int(11) DEFAULT NULL, co_node2 int(11) DEFAULT NULL, co_order int(11) DEFAULT NULL, co_active_flg tinyint(1) NOT NULL DEFAULT 1, primary key(co_pid))");
 }
 
 
@@ -63,14 +66,28 @@ int readInt(string str){
 void setRoute(int from, int to, vector<int> route, int row){
   char str[1080];
   for(int i = 1;i < route.size();i++){
-    sprintf(str, "INSERT INTO checkpos_order_89 (%s, %s, %s, %s) VALUES(%d, %d, %d, %d)",
-	   "co_cd_pid", "co_node1", "co_node2", "co_order",
-	   row, route[i-1], route[i], i
-	   );
-    stmt->execute(str);
+    
+    sprintf(str, "(%d, %d, %d, %d)", row, route[i-1], route[i], i);
+    queries.push_back(str);
+  
   }
   return;
 }
+
+void doAllQueries(){
+  char str[1080];
+  sprintf(str, "INSERT INTO checkpos_order_89 (%s, %s, %s, %s) VALUES",
+	  "co_cd_pid", "co_node1", "co_node2", "co_order"
+	  );
+  string q(str);
+
+  for(int i = 0;i < queries.size();i++){
+    if(i)q += ",";
+    q += queries[i];
+  }
+  stmt->execute(q);
+}
+
 P getUsedExit(int from, int to){
   char str[1080];
   sprintf(str, "SELECT cd_node1, cd_node2 FROM checkpos_data_89 WHERE cd_bd_pid1 = %d AND cd_bd_pid2 = %d",
@@ -79,15 +96,17 @@ P getUsedExit(int from, int to){
 
   unique_ptr<sql::ResultSet> res(stmt->executeQuery(str));
   P resP;
-  resP.first = readInt(res->getString("cd_node1"));
-  resP.second = readInt(res->getString("cd_node2"));
-  return resP; 
+  while(res->next()){
+    resP.first = readInt(res->getString("cd_node1"));
+    resP.second = readInt(res->getString("cd_node2"));
+    return resP;
+  }
 }
 
 vector<int> adjacentList(int node){
   vector<int> resV;
   char str[1080];
-  sprintf(str, "SELECT graph_data_89.adjacent_data_89 WHERE from_id = %d", node);
+  sprintf(str, "SELECT to_id FROM graph_data_89.adjacent_data_89 WHERE from_id = %d", node);
   unique_ptr<sql::ResultSet> res(stmt->executeQuery(str));
   while(res->next()){
     resV.push_back(readInt(res->getString("to_id")));
@@ -98,10 +117,11 @@ vector<int> adjacentList(int node){
 
 int dist(int u, int v){
   char str[1080];
-  sprintf(str, "SELECT graph_data_89.adjacent_data_89 WHERE from_id = %d AND to_id = %d", u, v);
+  sprintf(str, "SELECT distance FROM graph_data_89.dist_data_89 WHERE from_id = %d AND to_id = %d", u, v);
   unique_ptr<sql::ResultSet> res(stmt->executeQuery(str));
-  return readInt(res->getString("move_time"));
-
+  while(res->next()){
+    return readInt(res->getString("distance"));
+  }
 }
 
 
@@ -120,7 +140,9 @@ int getRouteRow(int from, int to){
 	 );
 
   unique_ptr<sql::ResultSet> res(stmt->executeQuery(str));
-  return readInt(res->getString("cd_pid"));
+  while(res->next()){
+    return readInt(res->getString("cd_pid"));
+  }
 }
 
 void reconstruct(int from, int to){
@@ -152,10 +174,13 @@ int main(){
   int B = getBuildingNumber();
 
   for(int i = 1;i <= B;i++){
+    cout << i << "/" << B << " Done..." << endl;
     for(int j = 1;j <= B;j++){
       if(i == j)continue;
       reconstruct(i, j);
     }
   }
+
+  doAllQueries();
 }
 	  
