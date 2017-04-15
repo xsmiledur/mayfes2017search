@@ -82,6 +82,16 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
 
+
+        $request = $this->getRequest();
+        $search = $request->getParam('search');
+        $this->view->data_all   = $this->_main->getProjectData();
+
+
+        //$result = $this->_main->searchFree();
+
+        //$this->view->result = $result;
+
     }
 
 

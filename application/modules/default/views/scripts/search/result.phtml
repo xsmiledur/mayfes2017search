@@ -29,152 +29,191 @@
 
 <div id="wrapper">
 
-    <div id="page-wrapper" class="gray-bg" style="margin-left: 0px;">
-
-        <div class="row wrapper border-bottom white-bg page-heading" style="height: 120px;">
-            <div class="col-lg-9">
-                <a id="jump" href="#id"><div><h1 class="p-xs" style="color: #ff69b4; font-weight: bold;">May Festival 2017 Search Form</h1></div></a>
-                <div class="pull-right tooltip-demo" style="background-color:rgba(255,255,255,0.8);"><button type="button" id="ap" class="btn btn-link">工学部応用物理系 五月祭企画展示経路探索サイト</button></div>
-            </div>
-
+    <div id="page-wrapper" class="gray-bg">
+        <div class="sk-spinner sk-spinner-double-bounce">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
         </div>
+        <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
 
-        <div class="wrapper wrapper-content">
-            <div class="row animated fadeInRight">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
+        <div class="row no-padding animated fadeInRight">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
 
+                <h1 class="top-title">MAY SEARCH</h1>
+
+
+            </div>
+            <div class="col-md-3">
+                <div id="row1" class="row">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <a href="/search/algorithm">
+                            <div class="widget lazur-bg widget1">
+                                <i class="fa fa-codepen fa-first"></i>
+                                <i class="fa fa-codepen fa-second"></i>
+                                <p>このアプリで使われている<br>アルゴリズムについて</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="/">
+                            <div class="widget navy-bg widget2">
+                                <i class="fa fa-codepen fa-first"></i>
+                                <i class="fa fa-codepen fa-second"></i>
+                                <p>工学部応用物理系<br>工學博覧会について</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-content no-borders">
 
                         <div class="row">
                             <div class="col-md-4" id="block1">
-                                <div class="ibox-content" id="ibox-content">
-                                    <form action="/search/search" method="post">
-                                        <div id="vertical-timeline" class="vertical-container dark-timeline">
+                                <form action="/search/search" method="post">
+                                    <div id="vertical-timeline" class="vertical-container dark-timeline">
+
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                <?php echo $this->start; ?>
+                                            </div>
+
+                                            <div class="vertical-timeline-icon blue-bg">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+
+                                            <div class="vertical-timeline-content">
+                                                <h2>現在地
+                                                </h2>
+                                                <?php echo $this->start_pos['bd_label']; ?>
+                                            </div>
+
+                                        </div>
+                                        <?php foreach ($this->project as $key => $item) : ?>
+                                            <div class="modal inmodal fade"
+                                                 id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
+                                                 role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header"
+                                                             style="background-image: url('/img/logo/logo_<?php echo $item['info']['pd_genre']; ?>.png');">
+                                                            <div class="row">
+                                                                <span class="pull-right m-r-md text-success">
+                                                                    <?php echo $item['info']['pd_genre1_']; ?>
+                                                                    / <?php echo $item['info']['pd_genre2_']; ?>
+                                                                </span>
+                                                                <div class="pull-left m-l-md">
+                                                                    <?php echo ($item['info']['pd_rec_flg']) ? '<span class="label label-success"><i class="fa fa-flag"></i> おすすめ企画</span>' : ''; ?>
+                                                                    <?php echo ($item['info']['pd_pickup_flg']) ? '<span class="label label-danger"><i class="fa fa-star"></i> ピックアップ企画</span>' : ''; ?>
+                                                                    <?php echo ($item['info']['pd_academic_flg']) ? '<span class="label label-info"><i class="fa fa-mortar-board"></i> 学術企画</span>' : ''; ?>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h2 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h2>
+                                                                <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
+                                                                <div class="row m-t-sm text-muted">
+                                                                    <div class="col-lg-offset-1 col-lg-10">
+                                                                        <div class="col-lg-5">
+                                                                            <i class="fa fa-calendar m-r-md"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                                                                        </div>
+                                                                        <div class="col-lg-7">
+                                                                            <i class="fa fa-map-marker m-r-md"></i><?php echo $item['info']['pp_place']; ?>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-header modal-exp">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="alert alert-warning">
+                                                                        <h4 style="text-align: center;">企画説明</h4>
+                                                                        <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="col-lg-10 col-lg-offset-1 bg-muted b-r-md p-md">
+                                                                    <h4 style="text-align: center;" class="text-muted">
+                                                                        団体説明</h4>
+                                                                    <?php echo nl2br($item['info']['pd_web_long_org']); ?>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-white"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="fa-timeline">
+                                                <i class="fa fa-male fa-timeline-icon"></i>
+                                                移動：<?php echo $item['time']; ?>分
+                                            </div>
 
                                             <div class="vertical-timeline-block draggable-front">
                                                 <div class="vertical-timeline-time-block">
-                                                    <?php echo $this->start; ?>
+                                                    <?php echo $item['start']; ?>
                                                 </div>
 
-                                                <div class="vertical-timeline-icon blue-bg">
-                                                    <i class="fa fa-briefcase"></i>
+                                                <div class="vertical-timeline-icon <?php echo $item['info']['pp_name1']; ?>-bg">
+                                                    <i class="fa fa-<?php echo $this->icon[$item['info']['pp_name1']]; ?>"></i>
                                                 </div>
 
                                                 <div class="vertical-timeline-content">
-                                                    <h2>現在地
+                                                    <h2>
+                                                        <?php echo $item['info']['pd_label']; ?>
+                                                        <a href="#" class="btn btn-xs btn-primary pull-right"
+                                                           data-toggle="modal"
+                                                           data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
+                                                            Detail</a>
                                                     </h2>
-                                                    <?php echo $this->start_pos['bd_label']; ?>
+                                                    <?php echo $item['info']['pp_place']; ?>
+                                                    <div class="vertical-timeline-time">
+                                                        <p id="r1d0name">
+                                                            標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?></p>
+                                                        <input type="text"
+                                                               name="re-time<?php echo $item['info']['ps_pid']; ?>"
+                                                               id="ionrange<?php echo $key; ?>">
+                                                    </div>
                                                 </div>
 
                                             </div>
-                                            <?php foreach ($this->project as $key => $item) : ?>
-                                                <div class="modal inmodal fade" id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1" role="dialog"  aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="background-image: url('/img/logo/logo_<?php echo $item['info']['pd_genre']; ?>.png');">
-                                                                <div class="row">
-                                                                    <span class="pull-right m-r-md text-success">
-                                                                        <?php echo $item['info']['pd_genre1_']; ?> / <?php echo $item['info']['pd_genre2_']; ?>
-                                                                    </span>
-                                                                    <div class="pull-left m-l-md">
-                                                                        <?php echo ($item['info']['pd_rec_flg']) ? '<span class="label label-success"><i class="fa fa-flag"></i> おすすめ企画</span>' : ''; ?>
-                                                                        <?php echo ($item['info']['pd_pickup_flg']) ? '<span class="label label-danger"><i class="fa fa-star"></i> ピックアップ企画</span>' : ''; ?>
-                                                                        <?php echo ($item['info']['pd_academic_flg']) ? '<span class="label label-info"><i class="fa fa-mortar-board"></i> 学術企画</span>' : ''; ?>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <h2 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h2>
-                                                                    <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
-                                                                    <div class="row m-t-sm text-muted">
-                                                                        <div class="col-lg-offset-1 col-lg-10">
-                                                                            <div class="col-lg-5">
-                                                                                <i class="fa fa-calendar m-r-md"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start']." <small> 〜 ".$item['info']['pt_end']."</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：'.$item['info']['pt_open'].'）' : ''; ?>
-                                                                            </div>
-                                                                            <div class="col-lg-7">
-                                                                                <i class="fa fa-map-marker m-r-md"></i><?php echo $item['info']['pp_place']; ?>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-header modal-exp">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="alert alert-warning">
-                                                                            <h4 style="text-align: center;">企画説明</h4>
-                                                                            <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
-                                                                        </div>
-                                                                    </div>
+                                        <?php endforeach; ?>
 
+                                        <div class="vertical-timeline-block draggable-front">
+                                            <div class="vertical-timeline-time-block">
+                                                <?php echo $this->end; ?>
+                                            </div>
+                                            <div class="vertical-timeline-icon <?php echo $this->color[($key + 1) % 4]; ?>-bg">
 
-                                                                    <div class="col-lg-10 col-lg-offset-1 bg-muted b-r-md p-md">
-                                                                        <h4 style="text-align: center;" class="text-muted">団体説明</h4>
-                                                                        <?php echo nl2br($item['info']['pd_web_long_org']); ?>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fa-timeline">
-                                                    <i class="fa fa-male fa-timeline-icon"></i> 移動：<?php echo $item['time']; ?>分
-                                                </div>
-
-                                                <div class="vertical-timeline-block draggable-front">
-                                                    <div class="vertical-timeline-time-block">
-                                                        <?php echo $item['start']; ?>
-                                                    </div>
-
-                                                    <div class="vertical-timeline-icon <?php echo $item['info']['pp_name1']; ?>-bg">
-                                                        <i class="fa fa-<?php echo $this->icon[$item['info']['pp_name1']; ?>"></i>
-                                                    </div>
-
-                                                    <div class="vertical-timeline-content">
-                                                        <h2>
-                                                            <?php echo $item['info']['pd_label']; ?>
-                                                            <a href="#" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>"> Detail</a>
-                                                        </h2>
-                                                        <?php echo $item['info']['pp_place']; ?>
-                                                        <div class="vertical-timeline-time">
-                                                            <p id="r1d0name">標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time']." 分" : " なし"; ?></p>
-                                                            <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            <?php endforeach; ?>
-
-                                            <div class="vertical-timeline-block draggable-front">
-                                                <div class="vertical-timeline-time-block">
-                                                    <?php echo $this->end; ?>
-                                                </div>
-                                                <div class="vertical-timeline-icon <?php echo $this->color[($key+1)%4]; ?>-bg">
-
-                                                    <i class="fa fa-briefcase"></i>
-
-                                                </div>
-
-                                                <div class="vertical-timeline-content">
-                                                    終了
-
-                                                </div>
+                                                <i class="fa fa-briefcase"></i>
 
                                             </div>
+
+                                            <div class="vertical-timeline-content">
+                                                終了
+
+                                            </div>
+
                                         </div>
-                                        <div class="row" style="text-align: center;">
-                                            <button type="submit" class="btn btn-info">滞在時間も考慮して再検索</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div class="row" style="text-align: center;">
+                                        <button type="submit" class="btn btn-info">滞在時間も考慮して再検索</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-md-8">
-                                <img src="/img/maps/big_origin.png" style="width: 100%; z-index:1; position: absolute;" usemap="#shape1" id="shape1">
+                                <img src="/img/maps/big_origin.png" style="width: 100%; z-index:1; position: absolute;"
+                                     usemap="#shape1" id="shape1">
                                 <div id="map_img">
                                     <!--
                                     <?php foreach ($this->project as $item) : ?>
@@ -188,8 +227,12 @@
                                     <?php endforeach; ?>
                                     -->
 
-                                    <p><img src="/img/maps/route1-3.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1"></p>
-                                    <p><img src="/img/maps/route3-11.png" style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1" id="shape1"></p>
+                                    <p><img src="/img/maps/route1-3.png"
+                                            style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1"
+                                            id="shape1"></p>
+                                    <p><img src="/img/maps/route3-11.png"
+                                            style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1"
+                                            id="shape1"></p>
                                     <!--
                                         <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
                                         <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
@@ -199,7 +242,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -250,28 +292,37 @@
     <area shape="poly" coords="2070,610,2470,720,2410,975,1995,920" href="#shikoku" alt="御殿下グラウンド" region="gotenshita">
 
     <!--法文-->
-    <area shape="poly" coords="1435,1305,1498,1255,1562,1305,1567,1465,1430,1465" href="#shikoku" alt="法文１号館（東）" region="hobun_1east">
+    <area shape="poly" coords="1435,1305,1498,1255,1562,1305,1567,1465,1430,1465" href="#shikoku" alt="法文１号館（東）"
+          region="hobun_1east">
     <area shape="rect" coords="1430,1290,1567,1465" href="#shikoku" alt="法文１号館（西）" region="hobun_1west">
-    <area shape="poly" coords="1600,1305,1623,1255,1727,1305,1732,1465,1600,1465" href="#shikoku" alt="法文２号館" region="hobun_2">
-
+    <area shape="poly" coords="1600,1305,1623,1255,1727,1305,1732,1465,1600,1465" href="#shikoku" alt="法文２号館"
+          region="hobun_2">
 
 
     <!--!!!!赤門エリア!!!!-->
     <area shape="poly" coords="2470,860,2570,870,2560,965,2460,955" href="#shikoku" alt="七徳堂" region="shichitokudo">
-    <area shape="poly" coords="2585,1515, 2660,1515, 2660,1739, 2750,1739, 2750,1794, 2585,1795" href="#shikoku" alt="赤門総合研究棟" region="akamon_sogokenkyuto">
+    <area shape="poly" coords="2585,1515, 2660,1515, 2660,1739, 2750,1739, 2750,1794, 2585,1795" href="#shikoku"
+          alt="赤門総合研究棟" region="akamon_sogokenkyuto">
     <area shape="rect" coords="2660,1420,2800,1500" href="#shikoku" alt="合格通り広場" region="gokakudoriarea">
     <area shape="rect" coords="2450,1840,2650,1950" href="#shikoku" alt="赤門" region="akamon">
 
 
     <!--<area shape="rect" coords="0,0,3100,2100" href="#shikoku" alt="工学部３号館" region="ko_3">-->
     <!--<area shape="default" href="#shikoku" alt="工学部６号館" region="ko_6">-->
-    <area shape="poly" coords="302,83,349,83,349,141,343,141,343,169,279,169,279,149,291,150,291,141,302,141" href="#tohoku" alt="東北" region="tohoku">
-    <area shape="poly" coords="286,168,342,169,342,177,347,177,348,236,332,235,332,213,319,213,320,227,295,228,297,202,291,202,291,191,285,191" href="#kanto" alt="関東" region="kanto">
-    <area shape="poly" coords="278,150,279,169,287,169,287,191,291,190,291,202,296,202,296,249,239,248,238,195,208,195,208,180,243,180,242,135,254,135,254,150" href="#tyubu" alt="中部" region="tyubu">
-    <area shape="poly" coords="207,180,207,195,238,194,238,252,182,252,181,228,171,229,171,219,159,219,159,180" href="#kinki" alt="近畿" region="kinki">
+    <area shape="poly" coords="302,83,349,83,349,141,343,141,343,169,279,169,279,149,291,150,291,141,302,141"
+          href="#tohoku" alt="東北" region="tohoku">
+    <area shape="poly"
+          coords="286,168,342,169,342,177,347,177,348,236,332,235,332,213,319,213,320,227,295,228,297,202,291,202,291,191,285,191"
+          href="#kanto" alt="関東" region="kanto">
+    <area shape="poly"
+          coords="278,150,279,169,287,169,287,191,291,190,291,202,296,202,296,249,239,248,238,195,208,195,208,180,243,180,242,135,254,135,254,150"
+          href="#tyubu" alt="中部" region="tyubu">
+    <area shape="poly" coords="207,180,207,195,238,194,238,252,182,252,181,228,171,229,171,219,159,219,159,180"
+          href="#kinki" alt="近畿" region="kinki">
     <area shape="rect" coords="101,179,159,220" href="#tyugoku" alt="中国" region="tyugoku">
     <area shape="rect" coords="109,226,169,259" href="#shikoku" alt="四国" region="shikoku">
-    <area shape="poly" coords="33,195,87,195,87,217,99,218,98,293,84,293,77,290,65,290,31,280,14,281,14,262,33,226" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
+    <area shape="poly" coords="33,195,87,195,87,217,99,218,98,293,84,293,77,290,65,290,31,280,14,281,14,262,33,226"
+          href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
     <!--AREA for text-->
     <area shape="rect" coords="132,30,209,48" href="#hokkaido" alt="北海道" region="hokkaido">
     <area shape="rect" coords="132,58,209,76" href="#tohoku" alt="東北" region="tohoku">
@@ -280,7 +331,8 @@
     <area shape="rect" coords="31,30,105,48" href="#kinki" alt="近畿" region="kinki">
     <area shape="rect" coords="31,58,105,76" href="#tyugoku" alt="中国" region="tyugoku">
     <area shape="rect" coords="31,86,105,104" href="#shikoku" alt="四国" region="shikoku">
-    <area shape="rect" coords="31,114,105,132" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
+    <area shape="rect" coords="31,114,105,132" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州"
+          region="kyusyu">
 </map>
 
 
@@ -388,7 +440,7 @@
     //最初の画像以外を非表示にする
     $('#map_img img:gt(0)').hide();
     //タイマー
-    setInterval(function() {
+    setInterval(function () {
         //フェードインとアウトを繰り返す
         $('#map_img :first-child').next('img').show().end().appendTo('#map_img');
     }, 1000);
@@ -461,39 +513,39 @@
      button.addEventListener('click', animateBlocks);
      });
      */
-    $(function() {
+    $(function () {
         /*var time0 = new Date(2017,4,15,9,0);
-        $("#time0").html(timeToString(time0));
-        var time1 = new Date(time0*1+<?php echo $route1[2]; ?>*60*1000);
-        $("#time1").html(timeToString(time1));
-        var from1 = 0,
-            from2 = 0,
-            from3 = 0;
-        var saveResult1 = function (data) {
-            from1 = data.from;
-        };
-        var saveResult2 = function (data) {
-            from2 = data.from;
-        };
-        var saveResult3 = function (data) {
-            from3 = data.from;
-        };
-        var writeResult = function () {
-            var time2 = new Date(time1*1+ (from1+<?php echo $route2[2]; ?>)*60*1000);
-            var time3 = new Date(time2*1+ (from2+<?php echo $route3[2]; ?>)*60*1000);
-            var time4 = new Date(time3*1+ from3*60*1000);
-            $("#time2").html(timeToString(time2));
-            $("#time3").html(timeToString(time3));
-            $("#time4").html(timeToString(time4));
-        };
-        function timeToString(time) {
-            var hr = time.getHours();
-            var min = time.getMinutes();
-            if (min < 10) {
-                min = "0" + min;
-            }
-            return hr + ":" + min;
-        };*/
+         $("#time0").html(timeToString(time0));
+         var time1 = new Date(time0*1+<?php echo $route1[2]; ?>*60*1000);
+         $("#time1").html(timeToString(time1));
+         var from1 = 0,
+         from2 = 0,
+         from3 = 0;
+         var saveResult1 = function (data) {
+         from1 = data.from;
+         };
+         var saveResult2 = function (data) {
+         from2 = data.from;
+         };
+         var saveResult3 = function (data) {
+         from3 = data.from;
+         };
+         var writeResult = function () {
+         var time2 = new Date(time1*1+ (from1+<?php echo $route2[2]; ?>)*60*1000);
+         var time3 = new Date(time2*1+ (from2+<?php echo $route3[2]; ?>)*60*1000);
+         var time4 = new Date(time3*1+ from3*60*1000);
+         $("#time2").html(timeToString(time2));
+         $("#time3").html(timeToString(time3));
+         $("#time4").html(timeToString(time4));
+         };
+         function timeToString(time) {
+         var hr = time.getHours();
+         var min = time.getMinutes();
+         if (min < 10) {
+         min = "0" + min;
+         }
+         return hr + ":" + min;
+         };*/
 
         <?php foreach ($this->project as $key => $item) : ?>
         $("#ionrange<?php echo $key; ?>").ionRangeSlider({
@@ -503,15 +555,16 @@
             postfix: "分",
             grid: true,
             /*onStart: function (data) {
-                saveResult1(data);
-                writeResult();
-            },
-            onChange: saveResult1,
-            onFinish: function (data) {
-                saveResult1(data);
-                writeResult();
-            }*/
+             saveResult1(data);
+             writeResult();
+             },
+             onChange: saveResult1,
+             onFinish: function (data) {
+             saveResult1(data);
+             writeResult();
+             }*/
         });
         <?php endforeach; ?>
     });
 </script>
+</html>

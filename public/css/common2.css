@@ -1,10 +1,49 @@
-
+#page-wrapper {
+    margin-left: 0;
+    background: linear-gradient(0deg, rgba(130, 210,133, .7), rgba(255, 244, 98, .7)), url('/img/background.jpeg');
+}
+#page-wrapper.sk-loading {
+    position: relative;
+}
+#page-wrapper.sk-loading:after {
+    content: '';
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#page-wrapper > .sk-spinner,
+#page-wrapper > .sk-spinner-text {
+    display: none;
+}
+#page-wrapper.sk-loading > .sk-spinner {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+}
+#page-wrapper.sk-loading > p.sk-spinner-text {
+    display: block;
+    position: absolute;
+    top: 46%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2000;
+}
+#page-next-wrapper {
+    /*background-color: rgba(255,255,255,0.5);*/
+}
 .dropmenu{
     *zoom: 1;
     list-style-type: none;
     width: 100%;
     height:30px;
-    margin: 0px auto 0px;
+    margin: 0 auto 0;
     padding: 0;
 }
 .dropmenu:before, .dropmenu:after{
@@ -102,18 +141,30 @@
     background: #ffffe0 !important;
     color:#ffa500 !important;
 }
+#all-cover {
+    margin-bottom: 0;
+}
+#all-cover > .ibox-content {
+    height: 758px;
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+}
 fieldset .ibox .ibox-content {
-    height:575px;
-    overflow: scroll;
+    height:540px;
+    overflow: hidden;
 }
 .panel-body {
-    height:535px;
-    overflow: scroll;
+    height:500px;
+    overflow: hidden;
     border-bottom-left-radius: 6px !important;
     border-bottom-right-radius: 6px !important;
 }
 .search-in {
-    height: 450px;
+    height: 430px;
+    overflow: scroll;
+}
+.search-in2 {
+    height: 470px;
     overflow: scroll;
 }
 .modal-exp {
@@ -126,7 +177,7 @@ fieldset .ibox .ibox-content {
     min-height: 700px;
 }
 .wizard-big.wizard > .content {
-    min-height: 680px !important;
+    min-height: 640px !important;
 }
 
 .outside {
@@ -380,7 +431,7 @@ h1.top-title {
     color: #ffffe0;
     font-size: 12em;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 .modal-content .ibox-content {
     height: initial !important;
@@ -396,28 +447,9 @@ li.fist-item {
 }
 .transparent {
     background-color: rgba(255,255,255,0.8);
-    margin: -20px;
     padding: 20px;
-}
-.body-text,
-.place-text {
-    width:25%;
-    text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-
-}
-.time-text {
-    width:6%;
-    text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
+    height: 100%;
+    overflow: scroll;
 }
 fieldset .tabs-container .i-checks {
     margin-right: 5px;
@@ -442,4 +474,169 @@ fieldset .tabs-container .i-checks {
 .no_dept-bg {
     background-color: #6da62b;
     color: #ffffff;
+}
+
+.nav-tabs > li > a {
+    padding: 10px 15px 10px 15px;
+}
+.area-box.contact-box,
+.genre-box.contact-box {
+    height:480px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+}
+.check-text {
+    width: 30%;
+}
+
+.body-text,
+.place-text,
+.time-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.body-text {
+    width: 25%;
+    margin-right: 2%;
+    text-align: right;
+    float: right;
+}
+.place-text {
+    width: 20%;
+    margin-right: 2%;
+    text-align: right;
+    float: right;
+}
+.time-text {
+    width: 6%;
+    margin-right: 2%;
+    text-align: right;
+    float: right;
+}
+.exp-text {
+    width: 3%;
+    margin-right: 20px;
+    text-align: right;
+    float: right;
+}
+.widget {
+    position: relative;
+}
+#row1 .widget {
+    height: 150px;
+}
+.navy-bg {
+    background-color: rgba(26, 179, 148, 0.8);
+}
+.lazur-bg {
+    background-color: rgba(35, 198, 200, 0.8);
+}
+.yellow-bg {
+    background-color: rgba(248, 172, 89, 0.8);
+}
+.red-bg {
+    background-color: rgba(237, 85, 101, 0.8);
+}
+.widget p {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 15px;
+}
+.widget1 {
+    margin-right: -20px;
+}
+.widget2 {
+    margin-left: -20px;
+}
+.widget1:hover {
+    margin-right: 0;
+    margin-left: -20px;
+}
+.widget2:hover {
+    margin-left: 0;
+    margin-right: -20px;
+}
+
+.fa-first {
+    position: absolute;
+    font-size: 80px;
+}
+.fa-second {
+    position: absolute;
+    font-size: 70px;
+    color: rgba(255,255,255,0.8);
+    left: 50px;
+
+}
+.push-outside {
+    overflow: scroll;
+}
+.phone-display {
+    display: none;
+}
+@media screen and ( max-width:1199px ) {
+    #all-cover > .ibox-content {
+        height: 850px;
+    }
+    .wizard-big.wizard > .content {
+        min-height: 735px !important;
+    }
+    .panel-body {
+        height: 590px;
+    }
+    .search-in {
+        height: 510px;
+    }
+    .search-in2 {
+        height: 560px;
+    }
+    .area-box.contact-box,
+    .genre-box.contact-box {
+        height: 550px;
+    }
+    fieldset .ibox .ibox-content {
+        height: 630px;
+    }
+}
+@media screen and ( max-width:767px ) {
+    .table-responsive {
+        border: none;
+    }
+    .push-outside {
+        height: 570px;
+    }
+}
+@media screen and ( max-width:752px ) {
+    .phone-display {
+        display: block;
+    }
+    .search-in {
+        height: 450px;
+    }
+    .search-in2 {
+        height: 500px;
+    }
+    .nav-tabs > li > a > span {
+        display: none;
+    }
+    .nav-tabs > li > a {
+        padding: 10px 8px 10px 13px;
+    }
+    span.place-text,
+    span.body-text,
+    span.time-text {
+        display: none;
+    }
+    .check-text {
+        width: 95%;
+    }
+    fieldset > div.background-muted > p {
+        display: none;
+    }
 }
