@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/search/form.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/search/form.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/search/result.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/search/result.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/Static_Full_Version/css/style.css" afterPath="$PROJECT_DIR$/public/Static_Full_Version/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/common2.css" afterPath="$PROJECT_DIR$/public/css/common2.css" />
     </list>
     <ignored path="mayfes2017search.iws" />
@@ -37,8 +30,8 @@
           <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="84" column="22" lean-forward="true" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
+                <state relative-caret-position="249">
+                  <caret line="506" column="20" lean-forward="false" selection-start-line="506" selection-start-column="20" selection-end-line="506" selection-end-column="20" />
                   <folding>
                     <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                   </folding>
@@ -49,8 +42,8 @@
           <file leaf-file-name="result.phtml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/result.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="247">
-                  <caret line="39" column="34" lean-forward="false" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+                <state relative-caret-position="136">
+                  <caret line="278" column="41" lean-forward="false" selection-start-line="278" selection-start-column="41" selection-end-line="278" selection-end-column="41" />
                   <folding />
                 </state>
               </provider>
@@ -72,7 +65,7 @@
             <entry file="file://$PROJECT_DIR$/public/css/common2.css">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="264">
-                  <caret line="583" column="18" lean-forward="false" selection-start-line="583" selection-start-column="18" selection-end-line="583" selection-end-column="18" />
+                  <caret line="649" column="18" lean-forward="false" selection-start-line="649" selection-start-column="18" selection-end-line="649" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -95,8 +88,8 @@
           <file leaf-file-name="common2.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/public/css/common2.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="31" column="11" lean-forward="false" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+                <state relative-caret-position="573">
+                  <caret line="640" column="0" lean-forward="true" selection-start-line="640" selection-start-column="0" selection-end-line="640" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -118,7 +111,6 @@
       <find>clearfix</find>
       <find>wizard &gt; .c</find>
       <find>ジャンル</find>
-      <find>ibox-content</find>
       <find>float: none !impor</find>
       <find>full</find>
       <find>panel-body</find>
@@ -127,8 +119,12 @@
       <find>選択できる</find>
       <find>fieldset .ibox</find>
       <find>toggle</find>
-      <find>return false</find>
       <find>おすすめ</find>
+      <find>height</find>
+      <find>return false</find>
+      <find>swal</find>
+      <find>ibox-content</find>
+      <find>入力</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,8 +160,8 @@
         <option value="$PROJECT_DIR$/public/Static_Full_Version/css/style.css" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml" />
         <option value="$PROJECT_DIR$/public/.htaccess" />
-        <option value="$PROJECT_DIR$/public/css/common2.css" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" />
+        <option value="$PROJECT_DIR$/public/css/common2.css" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/search/result.phtml" />
       </list>
     </option>
@@ -856,12 +852,12 @@
       <workItem from="1486045350537" duration="9480000" />
       <workItem from="1486087598450" duration="515000" />
       <workItem from="1488623165109" duration="12000" />
-      <workItem from="1492160220128" duration="8252000" />
+      <workItem from="1492160220128" duration="10186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67570000" />
+    <option name="totallyTimeSpent" value="69504000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1219,24 +1215,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/common2.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="583" column="18" lean-forward="false" selection-start-line="583" selection-start-column="18" selection-end-line="583" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="84" column="22" lean-forward="true" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3735">
@@ -1247,10 +1225,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="506" column="20" lean-forward="false" selection-start-line="506" selection-start-column="20" selection-end-line="506" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/common2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="649" column="18" lean-forward="false" selection-start-line="649" selection-start-column="18" selection-end-line="649" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/result.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="39" column="34" lean-forward="false" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
+        <state relative-caret-position="136">
+          <caret line="278" column="41" lean-forward="false" selection-start-line="278" selection-start-column="41" selection-end-line="278" selection-end-column="41" />
           <folding />
         </state>
       </provider>

@@ -433,6 +433,11 @@ h1.top-title {
     text-align: center;
     margin-top: 30px;
 }
+.sub-title {
+    padding: 10px;
+    background-color: rgba(243, 243, 244, 0.3);
+    margin-bottom: 20px;
+}
 .modal-content .ibox-content {
     height: initial !important;
 }
@@ -530,6 +535,18 @@ fieldset .tabs-container .i-checks {
 #row1 .widget {
     height: 150px;
 }
+.row2 .widget {
+    height: 150px;
+}
+.widget-back {
+    height: 100px;
+}
+.widget-back:hover {
+    cursor: pointer;
+}
+.widget-vote {
+    height: 200px;
+}
 .navy-bg {
     background-color: rgba(26, 179, 148, 0.8);
 }
@@ -547,6 +564,22 @@ fieldset .tabs-container .i-checks {
     bottom: 10px;
     right: 10px;
     font-size: 15px;
+}
+.widget-back p {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    font-size: 15px;
+}
+.widget-vote p {
+    position: absolute;
+    right: 10px;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    overflow: hidden;
 }
 .widget1 {
     margin-right: -20px;
@@ -572,6 +605,39 @@ fieldset .tabs-container .i-checks {
     font-size: 70px;
     color: rgba(255,255,255,0.8);
     left: 50px;
+
+}
+.widget-back .fa-first {
+    right: 10px;
+    text-align: right;
+}
+
+.widget-back .fa-second {
+    top: 10px;
+    right: 50px;
+    text-align: right;
+}
+.vote-comment {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
+    padding: 4px 0;
+    background-color: rgba(255,255,255,0.8);
+    color: #00a67b;
+    text-align: center;
+    z-index: 1000;
+    width: 100%;
+}
+.vote-maychan {
+    position: absolute;
+    top: initial !important;
+    bottom: 0 !important;
+    height: 40%;
+}
+.vote-maychan img {
+    z-index: 500;
 
 }
 .push-outside {
