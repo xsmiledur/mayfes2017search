@@ -56,6 +56,7 @@
             <div class="sk-double-bounce2"></div>
         </div>
         <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
+        <button type="button" class="sk-spinner-btn btn btn-default btn-outline">検索をやめる</button>
         <div id="page-next-wrapper" class="no-padding animated fadeInRight">
 
             <div class="row">
@@ -140,7 +141,7 @@
                                                             </div>
                                                             <div class="checkbox checkbox-primary">
                                                                 <input type="checkbox" id="no-time" value="1" name="no-time">
-                                                                <label class="i-checks" for="no-time"> 時間を特に指定しない </label>
+                                                                <label class="i-checks" for="no-time"> 終了時間を特に指定しない </label>
                                                             </div>
                                                             <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none; text-align: left;">滞在終了時刻が開始時刻より早くなっています。</span>
                                                             <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
@@ -285,8 +286,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-calendar"></i> </a>
-                                                        <label id="jQuery1" style="font-weight:normal;">１日目</label>
-                                                        <label id="jQuery2" style="font-weight:normal; display: none;">２日目</label>
+                                                        <label id="jQueryTime" style="font-weight:normal;">１日目</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -522,6 +522,9 @@
                     });
                 } else {
                     $('#page-wrapper').addClass('sk-loading');
+                    $('.sk-spinner-btn').click(function() {
+                        $('#page-wrapper').removeClass('sk-loading');
+                    });
                     $.ajax({
                         url: "/search/search",
                         type: "POST",
@@ -535,9 +538,7 @@
                         success: function(arr) {
                             console.log(arr);
                             window.location.href = "/result";
-                            $('#page-wrapper.sk-loading').click(function() {
-                                $('#page-wrapper').removeClass('sk-loading');
-                            });
+
 
                         },
                         error:function() {
@@ -573,8 +574,11 @@
             radioClass: 'iradio_square-green',
         });
         $('input[name="date"]').on('ifChecked', function(event){
-            $("#jQuery1").toggle();
-            $("#jQuery2").toggle();
+            if (event.target.value == "20") {
+                $("#jQueryTime").text('１日目');
+            } else {
+                $("#jQueryTime").text('２日目');
+            }
         });
 
         //clockpicker
@@ -589,6 +593,16 @@
             align: 'left',
             //autoclose: true,
         });
+        $('input[name="no-time"]').change(function(){
+            if ($(this).is(':checked')) {
+                console.log("aa");
+                $('#input-clock2').val("18:00");
+                $('#input-clock2').prop("disabled", true);
+            } else {
+                $('#input-clock2').prop("disabled", false);
+            }
+        });
+
 
         $('#input-clock1').change(function() {
             if ($('#input-clock1').val()) {

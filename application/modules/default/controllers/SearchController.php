@@ -139,6 +139,8 @@ class SearchController extends Zend_Controller_Action
 
         if (!$no_time && strlen($clock1) == 0) {
             $clock1 = date("h:i");
+        } elseif ($no_time) {
+            $clock2 = "18:00";
         }
         $this->_session->date = $radio;
         $this->_session->no_time = $no_time;
