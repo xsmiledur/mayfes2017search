@@ -208,14 +208,27 @@ class SearchController extends Zend_Controller_Action
         $request    = $this->getRequest();
         $search     = $request->getParam('search');
         $N          = count($search);
-        $start_pos   = $request->getParam('start-pos');
+        //$start_pos   = $request->getParam('start-pos');
+        $start_pos = 6;
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $date       = $request->getParam('date');
         $clock1     = $request->getParam('clock1');
+        if (!$clock1) $clock1 = date("H:i");
         $clock2     = $request->getParam('clock2');
-        $inputData .= sprintf("%d %d\n", $clock1, $clock2);
+        $clock1_ = (int)substr($clock1,0,2) * 60 + (int)substr($clock1,3,2);
+        $clock2_ = (int)substr($clock2,0,2) * 60 + (int)substr($clock2,3,2);
+        $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
-        $research = $this->_session->research;
+        var_dump($search);
+        var_dump($N);
+        var_dump($start_pos);
+        var_dump($date);
+        var_dump($clock1);
+        var_dump($clock1_);
+        var_dump($clock2);
+        var_dump($clock2_);
+
+        //$research = $this->_session->research;
 
         $this->_session->start = $clock1;
         $this->_session->start_pos = $start_pos;
@@ -225,15 +238,19 @@ class SearchController extends Zend_Controller_Action
         foreach ($search as $i => $item) { //$itemは$ps_pid
             $_result = $this->_main->getProjectInfo($item);
 
+            //var_dump($_result);
+
             //企画情報
 
-            $ps_pid = $_result['ps_pid']; //企画summaryID
+            $ps_pid = $item; //企画summaryID
 
             if ($research) {
                 $time = $request->getParam('re-time'.$_result['ps_pid']);
-                var_dump($time);
-            } else {
+                //var_dump($time);
+            } elseif ($_result['pt_time']) {
                 $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
+            } else {
+                $time = 30;
             }
             $__start = $_result['pt_start']; //企画start
             if (!$__start) {
@@ -250,6 +267,7 @@ class SearchController extends Zend_Controller_Action
         }
 
         //企画の建物間のかかる時間
+        var_dump($pp_search);
         foreach ($pp_search as $i => $item) {
             $time = array();
             foreach ($pp_search as $j => $item2) {
@@ -260,10 +278,11 @@ class SearchController extends Zend_Controller_Action
                 }
             }
             foreach ($time as $key => $val) {
-                $inputData .= sprintf("%d ", $item);
+                $inputData .= sprintf("%d ", $val);
             }
             $inputData .= sprintf("\n");
         }
+        var_dump($inputData);
 
         $inout = array(
             0 => array('pipe', 'r'),
@@ -271,7 +290,13 @@ class SearchController extends Zend_Controller_Action
             2 => array('pipe', 'w')
         );
 
+        //ここまでは多分完成
+        //search.outとの接続
+
         $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes);
+        var_dump(is_resource($proc));
+        var_dump($inout);
+        var_dump($pipes);
 
         if(is_resource($proc)){
             fwrite($pipes[0], $inputData);
@@ -311,8 +336,9 @@ class SearchController extends Zend_Controller_Action
         $this->_setParam('clock2', $clock2);
 
         if ($research) {
-            return $this->_redirect('/search/result');
+            //return $this->_redirect('/search/result');
         }
+        echo 1;
 
 
         //この後はいらない。

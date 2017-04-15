@@ -98,7 +98,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4" id="block1">
-                                        <form action="/search/search" method="post">
+                                        <form id="research-form" action="/search/search" method="post">
                                             <div id="vertical-timeline" class="vertical-container dark-timeline">
 
                                                 <div class="vertical-timeline-block draggable-front">
@@ -196,18 +196,17 @@
                                                         <div class="vertical-timeline-content">
                                                             <h2>
                                                                 <?php echo $item['info']['pd_label']; ?>
-                                                                <a href="#" class="btn btn-xs btn-primary pull-right"
+                                                                <a href="#" class="btn btn-xs btn-info pull-right"
                                                                    data-toggle="modal"
                                                                    data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
-                                                                    Detail</a>
+                                                                    <span class="glyphicon glyphicon-info-sign"></span></a>
                                                             </h2>
                                                             <?php echo $item['info']['pp_place']; ?>
                                                             <div class="vertical-timeline-time">
+                                                                <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
                                                                     標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?></p>
-                                                                <input type="text"
-                                                                       name="re-time<?php echo $item['info']['ps_pid']; ?>"
-                                                                       id="ionrange<?php echo $key; ?>">
+                                                                <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>
                                                         </div>
 
@@ -233,7 +232,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="pull-right">
-                                                <button type="submit" class="btn btn-info">滞在時間も考慮して再検索</button>
+                                                <button type="submit" class="btn btn-info btn-research" disabled="">滞在時間も考慮して再検索</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -255,12 +254,13 @@
                                                 <?php endforeach; ?>
                                                 -->
 
-                                                <p><img src="/img/maps/route1-3.png"
-                                                        style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1"
-                                                        id="shape1"></p>
-                                                <p><img src="/img/maps/route3-11.png"
-                                                        style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1"
-                                                        id="shape1"></p>
+                                                <p>
+                                                    <img src="/img/maps/route1-3.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1">
+                                                    <img src="/img/maps/route3-4.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1">
+                                                </p>
+                                                <p>
+                                                    <img src="/img/maps/route4-8.png" style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1" id="shape1">
+                                                </p>
                                                 <!--
                                                     <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
                                                     <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
@@ -477,11 +477,19 @@
 <!-- 地図のルートを点滅画像で表示 -->
 <script type="text/javascript">
     //最初の画像以外を非表示にする
-    $('#map_img img:gt(0)').hide();
+    var map = $('#map_img p:first-child');
+    $('#map_img p').hide();
     //タイマー
     setInterval(function () {
         //フェードインとアウトを繰り返す
-        $('#map_img :first-child').next('img').show().end().appendTo('#map_img');
+        if (map.get(0) != undefined) {
+            map.show();
+            map = map.next('p');
+        } else {
+            $('#map_img p').hide();
+            map = $('#map_img p:first-child');
+        }
+        //('#map_img :first-child').next('img').show().end().appendTo('#map_img');
     }, 1000);
 </script>
 
@@ -576,6 +584,9 @@
                 height: "40%"
             });
         });
+        $('.btn-research').click(function() {
+            $('#page-wrapper').addClass('sk-loading');
+        });
         /*var time0 = new Date(2017,4,15,9,0);
          $("#time0").html(timeToString(time0));
          var time1 = new Date(time0*1+<?php echo $route1[2]; ?>*60*1000);
@@ -616,6 +627,10 @@
             from: <?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] : $item['time']; ?>,
             postfix: "分",
             grid: true,
+            onChange: function(data) {
+                $('#range-change<?php echo $key; ?>').text("変更後： " + data.from + " 分");
+                $('button.btn-research').prop('disabled', false);
+            }
             /*onStart: function (data) {
              saveResult1(data);
              writeResult();

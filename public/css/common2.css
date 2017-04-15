@@ -537,6 +537,9 @@ fieldset .tabs-container .i-checks {
 .widget {
     position: relative;
 }
+.widget:hover {
+    filter: brightness(1.1);
+}
 #row1 .widget {
     height: 150px;
 }

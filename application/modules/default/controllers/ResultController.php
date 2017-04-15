@@ -81,8 +81,75 @@ class ResultController extends Zend_Controller_Action
 
     public function indexAction() {
 
+        $errMsg = $this->_session->errMsg;
+        if (strlen($errMsg) > 0) {
+            echo $errMsg;
+            exit();
+        }
+        $pd_pid = $this->_session->pd_pid;  //企画の回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
+        $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
+        //キーiに対してキー"time"には経路にかかる時間、
+        //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
+        $start = $this->_session->start;
+        $_start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
+
+        //例
+        $start = "10:00";
+        $_start_pos = 43;
+        $start_pos = $this->_main->getBuildingData($_start_pos);
+        $pd_pid = array(3,4,1,336);
+        $order  = array(
+            array(
+                //orderのキー0には何も入ってない
+            ),
+            array(
+                'time' => 10,
+                'way'  => 9
+            ),
+            array(
+                'time' => 10,
+                'way'  => 12
+            ),
+            array(
+                'time' => 10,
+                'way'  => 5
+            ),
+        );
+
+        $_start = strtotime($start);
+        $project = array();
+        foreach ($pd_pid as $key => $item) {
+            if ($key != 0) {
+                $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
+                $project[$key-1]['time'] = $order[$key]['time'];
+                $project[$key-1]['pre']  = $_start;
+                $_start = $_start + $order[$key]['time'] * 60;
+                if ($project[$key-2]['info']['pt_time']) {
+                    $_start += $project[$key-2]['info']['pt_time'] * 60;
+                }
+                $project[$key-1]['after'] = $_start;
+                $project[$key-1]['start'] = date("h:i", $_start);
+            }
+        }
+        $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
+
+        $this->view->project = $project;
+        $this->view->start   = $start;
+        $this->view->end     = date("h:i", $end);
+        $this->view->start_pos = $start_pos;
+        $this->view->order = $order;
+        //$this->view->color = array('navy', 'yellow', 'red', 'blue');
+        /*$this->view->icon  = array(
+            'akamon' => '';
+            'yasuko' => '';
+            'ko_dept' => '';
+            'no_dept' => '';
+        );*/
+
+
     }
 
+    /*
     public function result2Action()
     {
 
@@ -120,5 +187,6 @@ class ResultController extends Zend_Controller_Action
         $this->view->result = $result;
 
     }
+    */
 
 }

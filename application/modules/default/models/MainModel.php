@@ -518,7 +518,8 @@ class MainModel
     {
         $select = $this->_read->select();
         $select->from('checkpos_data_89');
-        $select->where('cd_active_flg = ?', 1)
+        $select
+            ->where('cd_active_flg = ?', 1)
             ->where('cd_bd_pid1 = ?', $bd_pid1)
             ->where('cd_bd_pid2 = ?', $bd_pid2);
         $stmt = $select->query();

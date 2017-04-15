@@ -360,14 +360,12 @@
 
         $('input.select-p').on('ifChecked', function(event) {
             var val = $(this).val();
-            console.log(val);
             $('input[value="' + val + '"]').iCheck('check');
             $('li#' + val).show();
         });
 
         $('input.select-p').on('ifUnchecked', function(event) {
             var val = $(this).val();
-            console.log(val);
             $('input[value="' + val + '"]').iCheck('uncheck');
             $('li#' + val).hide();
         });

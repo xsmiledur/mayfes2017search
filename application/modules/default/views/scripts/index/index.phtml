@@ -280,24 +280,24 @@
                                         <p class="text-muted" style="padding-left: 20px;">      検索前のチェックを行ってください。</p>
                                     </div>
                                     <div class="ibox">
-                                        <div class="ibox-content b-r-md" style="overflow:hidden;">
+                                        <div class="ibox-content b-r-md">
                                             <div class="row" style="padding: 15px;">
                                                 <div class="col-sm-4">
-                                                    <div class=" well well-sm text-center">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-calendar"></i> </a>
                                                         <label id="jQuery1" style="font-weight:normal;">１日目</label>
                                                         <label id="jQuery2" style="font-weight:normal; display: none;">２日目</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class=" well well-sm text-center">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-clock-o"></i> </a>
                                                         <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class=" well well-sm text-center">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-map-marker"></i> </a>
                                                         <label id="here" style="font-weight:normal;">現在時刻</label>
                                                     </div>
@@ -495,7 +495,6 @@
                     search[j] = $(this).val();
                     j++;
                 });
-                console.log(search);
 
                 // Disable validation on fields that are disabled.
                 // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
@@ -535,7 +534,10 @@
                         },
                         success: function(arr) {
                             console.log(arr);
-                            window.location.href = "/search/result";
+                            window.location.href = "/result";
+                            $('#page-wrapper.sk-loading').click(function() {
+                                $('#page-wrapper').removeClass('sk-loading');
+                            });
 
                         },
                         error:function() {
@@ -658,13 +660,11 @@
     $(function() {
         $("a.pid-btn").click(function () {
             var id = $(this).parent().parent().find('input[name="pid-val"]').val();
-            console.log(id);
             var name1 = '#form_pid' + id;
             $(name1).toggle();
             $(this).toggleClass("highlight", 1000);
             var name2 = '[name="input' + id + '"]';
             var now_val = $(name2).val();
-            console.log(now_val);
             if (now_val) {
                 $(name2).val("");
             } else {
