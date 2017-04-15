@@ -90,10 +90,10 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins" id="all-cover2">
 
-                    <div class="ibox-content no-borders">
-                        <div class="ibox" id="all-cover">
+                    <div class="ibox-content">
+                        <div class="ibox">
                             <div class="ibox-content">
 
                                 <div class="row">
@@ -189,8 +189,8 @@
                                                             <?php echo $item['start']; ?>
                                                         </div>
 
-                                                        <div class="vertical-timeline-icon <?php echo $item['info']['pp_name1']; ?>-bg">
-                                                            <i class="fa fa-<?php echo $this->icon[$item['info']['pp_name1']]; ?>"></i>
+                                                        <div class="vertical-timeline-icon">
+                                                            <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
                                                         </div>
 
                                                         <div class="vertical-timeline-content">
@@ -218,7 +218,7 @@
                                                     <div class="vertical-timeline-time-block">
                                                         <?php echo $this->end; ?>
                                                     </div>
-                                                    <div class="vertical-timeline-icon <?php echo $this->color[($key + 1) % 4]; ?>-bg">
+                                                    <div class="vertical-timeline-icon navy-bg">
 
                                                         <i class="fa fa-briefcase"></i>
 
@@ -231,41 +231,53 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row" style="text-align: center;">
+                                            <div class="row">
+                                                <div class="pull-right">
                                                 <button type="submit" class="btn btn-info">滞在時間も考慮して再検索</button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="col-md-8">
-                                        <img src="/img/maps/big_origin.png" style="width: 100%; z-index:1; position: absolute;"
-                                             usemap="#shape1" id="shape1">
-                                        <div id="map_img">
-                                            <!--
-                                            <?php foreach ($this->project as $item) : ?>
-                                                <?php foreach ($item['way'] as $key => $order) : ?>
-                                                    <p>
-                                                    <?php if ($key < count($item['way'])) : ?>
-                                                        <img src="/img/maps/route<?php echo $item; ?>-<?php echo $order[$key + 1]; ?>.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1">
-                                                    <?php endif; ?>
-                                                    </p>
+                                    <div class="col-md-8 position-tip">
+                                        <div class="row">
+                                            <img src="/img/maps/big_origin.png" style="width: 100%; z-index:1; position: absolute;"
+                                                 usemap="#shape1" id="shape1">
+                                            <div id="map_img">
+                                                <!--
+                                                <?php foreach ($this->project as $item) : ?>
+                                                    <?php foreach ($item['way'] as $key => $order) : ?>
+                                                        <p>
+                                                        <?php if ($key < count($item['way'])) : ?>
+                                                            <img src="/img/maps/route<?php echo $item; ?>-<?php echo $order[$key + 1]; ?>.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1">
+                                                        <?php endif; ?>
+                                                        </p>
+                                                    <?php endforeach; ?>
                                                 <?php endforeach; ?>
-                                            <?php endforeach; ?>
-                                            -->
+                                                -->
 
-                                            <p><img src="/img/maps/route1-3.png"
-                                                    style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1"
-                                                    id="shape1"></p>
-                                            <p><img src="/img/maps/route3-11.png"
-                                                    style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1"
-                                                    id="shape1"></p>
-                                            <!--
-                                                <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                <img src="/img/maps/map2.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                <img src="/img/maps/map3.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                            -->
+                                                <p><img src="/img/maps/route1-3.png"
+                                                        style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1"
+                                                        id="shape1"></p>
+                                                <p><img src="/img/maps/route3-11.png"
+                                                        style="width: 100%; z-index: 3; position: absolute;" usemap="#shape1"
+                                                        id="shape1"></p>
+                                                <!--
+                                                    <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
+                                                    <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
+                                                    <img src="/img/maps/map2.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
+                                                    <img src="/img/maps/map3.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
+                                                -->
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="tooltip-btn">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-primary btn-print"><i class="fa fa-print"></i> このページを印刷</button>
+                                            <button type="button" class="btn btn-info btn-fav"><i class="fa fa-book"></i> ブックマーク保存</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

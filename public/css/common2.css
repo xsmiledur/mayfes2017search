@@ -149,6 +149,11 @@
     background-color: rgba(255,255,255,0.5);
     border: none;
 }
+#all-cover2 > .ibox-content {
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+
+}
 fieldset .ibox .ibox-content {
     height:540px;
     overflow: hidden;
@@ -547,16 +552,16 @@ fieldset .tabs-container .i-checks {
 .widget-vote {
     height: 200px;
 }
-.navy-bg {
+.widget.navy-bg {
     background-color: rgba(26, 179, 148, 0.8);
 }
-.lazur-bg {
+.widget.lazur-bg {
     background-color: rgba(35, 198, 200, 0.8);
 }
-.yellow-bg {
+.widget.yellow-bg {
     background-color: rgba(248, 172, 89, 0.8);
 }
-.red-bg {
+.widget.red-bg {
     background-color: rgba(237, 85, 101, 0.8);
 }
 .widget p {
@@ -645,6 +650,14 @@ fieldset .tabs-container .i-checks {
 }
 .phone-display {
     display: none;
+}
+#all-cover2 > .ibox-content > .ibox > .ibox-content > .row  {
+    position: relative;
+}
+.tooltip-btn {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
 }
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {
