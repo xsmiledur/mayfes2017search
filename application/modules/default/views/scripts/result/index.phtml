@@ -301,7 +301,7 @@
                                     <div class="col-lg-8 position-tip">
                                         <div id="map_img" class="ibox">
                                             <p class="origin-map">
-                                                <img src="/img/maps/big_origin.png" usemap="#shape1" id="shape1">
+                                                <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
                                             </p>
                                             <!--
                                             <?php foreach ($this->project as $item) : ?>
@@ -316,8 +316,7 @@
                                             -->
 
                                             <p class="over-map" >
-                                                <img src="/img/maps/route1-3.png" usemap="#shape1" id="shape1">
-                                                <img src="/img/maps/route3-4.png" usemap="#shape1" id="shape1">
+                                                <img src="/img/maps/route70-59.png" usemap="#shape1" id="shape1">
                                             </p>
                                             <p class="over-map" >
                                                 <img src="/img/maps/route4-8.png" usemap="#shape1" id="shape1">
@@ -539,6 +538,7 @@
 
 <!-- 地図のルートを点滅画像で表示 -->
 <script type="text/javascript">
+    /*
     //最初の画像以外を非表示にする
     var map = $('#map_img p:first-child');
     $('#map_img p').not(':first').hide();
@@ -555,6 +555,7 @@
         //('#map_img :first-child').next('img').show().end().appendTo('#map_img');
     }, 1000);
 
+*/
 </script>
 
 
@@ -636,8 +637,11 @@
                 type: "warning",
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "OK",
+                showCancelButton: true,
                 closeOnConfirm: false,
                 allowOutsideClick: true,
+            }, function() {
+                window.location.href = "/"
             });
         });
         $('.widget-vote').hover(function() {
