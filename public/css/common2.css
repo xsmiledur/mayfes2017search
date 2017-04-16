@@ -49,7 +49,8 @@
     z-index: 2000;
 }
 #page-next-wrapper {
-    /*background-color: rgba(255,255,255,0.5);*/
+    padding: 0 0 39px;
+    /*padding: 0;*/
 }
 .dropmenu{
     *zoom: 1;
@@ -158,7 +159,7 @@
     margin-bottom: 0;
 }
 #all-cover > .ibox-content {
-    height: 758px;
+    height: 760px;
     background-color: rgba(255,255,255,0.5);
     border: none;
 }

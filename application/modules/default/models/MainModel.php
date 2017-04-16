@@ -480,9 +480,10 @@ class MainModel
     }
 
 
-        /**
+    /**
      * 企画を取ってくる
      * @param $ps_pid
+     * @return array
      */
     public function getProjectInfo($ps_pid)
     {

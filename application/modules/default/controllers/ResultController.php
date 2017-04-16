@@ -79,7 +79,59 @@ class ResultController extends Zend_Controller_Action
 
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
+
+        // ディレクトリのパスを記述
+        $dir = "/var/www/public/img/maps/" ;
+
+        /*
+        // ディレクトリの存在を確認し、ハンドルを取得
+        if( is_dir( $dir ) && $handle = opendir( $dir ) ) {
+            // [ul]タグ
+            echo "<ul>" ;
+
+            // ループ処理
+            $i = 0;
+            $file_data = array();
+            while( ($file = readdir($handle)) !== false ) {
+                // ファイルのみ取得
+                if( filetype( $path = $dir . $file ) == "file" ) {
+                    /********************
+
+                    各ファイルへの処理
+
+                    $file ファイル名
+                    $path ファイルのパス
+
+                     ********************/
+
+                    $file_data[$i] = $file;
+                    ++$i;
+                    /*
+
+                    // [li]タグ
+                    echo "<li>" ;
+
+                    // ファイル名を出力する
+                    echo $file ;
+
+                    // ファイルのパスを出力する
+                    echo " (" . $path . ")" ;
+
+                    // [li]タグ
+                    echo "</li>" ;
+                    */
+                    /*
+                    if ($i == 50) break;
+                }
+            }
+            $this->view->file_data = $file_data;
+
+            // [ul]タグ
+            //echo "</ul>" ;
+        }
+                    */
 
         $errMsg = $this->_session->errMsg;
         if (strlen($errMsg) > 0) {
@@ -92,8 +144,13 @@ class ResultController extends Zend_Controller_Action
         //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
         $start = $this->_session->start;
         $_start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
+        var_dump($pd_pid);
+        var_dump($order);
+        var_dump($start);
+        var_dump($_start_pos);
 
         //例
+        /*
         $start = "10:00";
         $_start_pos = 43;
         $start_pos = $this->_main->getBuildingData($_start_pos);
@@ -115,6 +172,8 @@ class ResultController extends Zend_Controller_Action
                 'way'  => 5
             ),
         );
+        */
+
 
         $_start = strtotime($start);
         $project = array();

@@ -182,6 +182,7 @@ class SearchController extends Zend_Controller_Action
             入力形式
 
             N v_0
+            現在時刻分 終了時刻分
             v_1 s_1 t_1
             v_2 s_2 t_2
             :
@@ -221,6 +222,7 @@ class SearchController extends Zend_Controller_Action
         $clock2_ = (int)substr($clock2,0,2) * 60 + (int)substr($clock2,3,2);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
+        /*
         var_dump($search);
         var_dump($N);
         var_dump($start_pos);
@@ -229,6 +231,7 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
+        */
 
         //$research = $this->_session->research;
 
@@ -237,6 +240,7 @@ class SearchController extends Zend_Controller_Action
 
         $result = null;
         $pp_search = array();
+        $pp_search[0]['bd_pid'] = $start_pos;
         foreach ($search as $i => $item) { //$itemは$ps_pid
             $_result = $this->_main->getProjectInfo($item);
 
@@ -258,18 +262,16 @@ class SearchController extends Zend_Controller_Action
             if (!$__start) {
                 $start = -1;
             } else {
-                $_start = strtotime($__start); //タイムスタンプに直す
-                $start = $_start/60; //分単位に直す
+                $start = $_result['pt_start_'];
             }
             $inputData .= sprintf("%d %d %d\n", $ps_pid, $start, $time);
 
             //for企画の建物間のかかる時間
             //$pp_search[$i]['ps_pid'] = $_result['ps_pid']; //企画のsummaryID 保険のため？
-            $pp_search[$i]['bd_pid'] = $_result['pp_bd_pid']; //建物のid
+            $pp_search[$i + 1]['bd_pid'] = $_result['pp_bd_pid']; //建物のid
         }
 
         //企画の建物間のかかる時間
-        var_dump($pp_search);
         foreach ($pp_search as $i => $item) {
             $time = array();
             foreach ($pp_search as $j => $item2) {
@@ -282,29 +284,42 @@ class SearchController extends Zend_Controller_Action
             foreach ($time as $key => $val) {
                 $inputData .= sprintf("%d ", $val);
             }
-            $inputData .= sprintf("\n");
+            if ($i < $N) $inputData .= sprintf("\n");
         }
-        var_dump($inputData);
 
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
-            2 => array('pipe', 'w')
+            2 => array('file', '/tmp/error-output.txt', 'a'),
+            //2 => array("file", "/var/www/c_file/error-output", "a")
         );
 
         //ここまでは多分完成
         //search.outとの接続
+        //var_dump($inputData);
 
-        $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes);
+        $proc = proc_open('/var/www/scripts/test.out', $inout, $pipes);
         var_dump(is_resource($proc));
-        var_dump($inout);
-        var_dump($pipes);
 
         if(is_resource($proc)){
+
             fwrite($pipes[0], $inputData);
             fclose($pipes[0]);
             //resultのpd_pidを返す
-            $pd_pid = array_map('intval', explode("\n", $pipes[1])); //explodeは文字列を文字列で分解する関数
+
+            //sleep(2);
+
+            $result__ =  stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+            $return_value = proc_close($proc);
+
+            var_dump($inputData);
+            var_dump($result__);
+            var_dump($return_value);
+
+
+            //var_dump($return_value);
+            $pd_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
 
             $bd_pid = array();
             foreach ($pd_pid as $i => $item) {
@@ -324,8 +339,6 @@ class SearchController extends Zend_Controller_Action
             $this->_session->pd_pid = $pd_pid;
             $this->_session->order = $order;
 
-            fclose($pipes[1]);
-            fclose($pipes[2]);
         } else {
             $this->_session->errMsg = "エラーが発生しました。";
         }
