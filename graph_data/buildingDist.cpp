@@ -47,10 +47,8 @@ int distB[1080][1080];
 
 void init(){
   stmt->execute("USE " + DATABASE);
-  /*
   stmt->execute("DROP TABLE IF EXISTS checkpos_data_89");
   stmt->execute("CREATE TABLE checkpos_data_89(cd_pid int(11) unsigned NOT NULL AUTO_INCREMENT, cd_bd_pid1 int(11) DEFAULT NULL, cd_bd_pid2 int(11) DEFAULT NULL, cd_node1 int(11) DEFAULT NULL, cd_node2 int(11) DEFAULT NULL, cd_time int(11) DEFAULT NULL, cd_active_flg tinyint(1) NOT NULL DEFAULT 1, primary key(cd_pid))");
-  */
   stmt->execute("DROP TABLE IF EXISTS graph_data_89.dist_data_89");
   stmt->execute("CREATE TABLE graph_data_89.dist_data_89(dist_pid int(11) unsigned NOT NULL AUTO_INCREMENT, from_id int(3) DEFAULT NULL, to_id int(3) DEFAULT NULL, distance int(11) DEFAULT NULL, primary key(dist_pid))");
 }
@@ -130,6 +128,7 @@ void setBuildingDist(int n){
   for(int i = 1;i <= B;i++){
     for(int j = 1;j <= B;j++){
       if(i == 1 && j == 1)continue;
+      if(distB[i][j] > 1000)cout << i << " " << j << endl;
       sprintf(tmp, "%s", str);
       sprintf(str, "%s ,(%d, %d, %d, %d, %d)", tmp
 	      ,i, j, usedExit[i][j].first, usedExit[i][j].second, distB[i][j]);
@@ -162,6 +161,7 @@ int main(){
   for(int i = 1;i <= B;i++){
     for(int j = 1;j <= B;j++){
       distB[i][j] = INF;
+      if(i == j)distB[i][j] = 0;
     }
   }
 
@@ -173,7 +173,6 @@ int main(){
   for(int i = 1;i <= N;i++){
     vector<int> buildI = buildingList(i);
     for(int j = 1;j <= N;j++){
-      if(i == j)continue;
       vector<int> buildJ = buildingList(j);
       for(int k = 0;k < buildI.size();k++){
 	for(int l = 0;l < buildJ.size();l++){
