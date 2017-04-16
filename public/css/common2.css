@@ -769,6 +769,12 @@ fieldset .tabs-container .i-checks {
         margin-left: 3px;
         top: 50px;
     }
+    .vote-maychan {
+        height: 70%;
+    }
+    .vote-comment {
+        display: block;
+    }
     h2 {
         font-size: 18px;
     }
