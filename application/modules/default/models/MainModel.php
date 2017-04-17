@@ -488,15 +488,32 @@ class MainModel
     public function getProjectInfo($ps_pid)
     {
 
-        $select = $this->_read->select();
-        $select->from('90_project_summary');
-        $select->join('90_project_data', 'ps_pd_pid = pd_pid')
-            ->join('90_project_place','ps_pp_pid = pp_pid')
-            ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
-        $select->where('ps_pd_active_flg = ?', 1)
-            ->where('ps_pid = ?', $ps_pid);
-        $stmt = $select->query();
-        return $stmt->fetch();
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('90_project_summary');
+            $select->join('90_project_data', 'ps_pd_pid = pd_pid')
+                ->join('90_project_place','ps_pp_pid = pp_pid');
+            //$select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
+            $select->where('ps_pd_active_flg = ?', 1)
+                ->where('ps_pid = ?', $ps_pid);
+            $stmt = $select->query();
+            $result = $stmt->fetch();
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $result;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
     /**
@@ -517,46 +534,82 @@ class MainModel
     //建物間の
     public function getTimeInfo($bd_pid1, $bd_pid2)
     {
-        $select = $this->_read->select();
-        $select->from('checkpos_data_89');
-        $select
-            ->where('cd_active_flg = ?', 1)
-            ->where('cd_bd_pid1 = ?', $bd_pid1)
-            ->where('cd_bd_pid2 = ?', $bd_pid2);
-        $stmt = $select->query();
-        $data = $stmt->fetch();
-        return $data['cd_time'];
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('checkpos_data_89');
+            $select->where('cd_active_flg = ?', 1)
+                ->where('cd_bd_pid1 = ?', $bd_pid1)
+                ->where('cd_bd_pid2 = ?', $bd_pid2);
+            $stmt = $select->query();
+            $data = $stmt->fetch();
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data['cd_time'];
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
     public function getOrderWay($bd_pid1,$bd_pid2)
     {
-        $select = $this->_read->select();
-        $select->from('checkpos_data_89');
-        $select->where('cd_active_flg = ?', 1)
-            ->where('cd_bd_pid1 = ?', $bd_pid1)
-            ->where('cd_bd_pid2 = ?', $bd_pid2);
-        $stmt = $select->query();
-        $res = $stmt->fetch();
 
-        $data = array();
-        if ($res['cd_pid']) {
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
             $select = $this->_read->select();
-            $select->from('checkpos_order_89');
-            $select->where('co_active_flg = ?', 1)
-                ->where('co_cd_pid = ?', $res['cd_pid'])
-                ->order('co_order');
+            $select->from('checkpos_data_89');
+            $select->where('cd_active_flg = ?', 1)
+                ->where('cd_bd_pid1 = ?', $bd_pid1)
+                ->where('cd_bd_pid2 = ?', $bd_pid2);
             $stmt = $select->query();
-            $_data = $stmt->fetchAll();
-            $node_num = count($_data) + 1;
+            $res = $stmt->fetch();
 
-            foreach ($_data as $key => $item) {
-                $data[$_data['co_order']] = $_data['co_node1'];
-                if ($key == $node_num - 1) {
-                    $data[$node_num] = $_data['co_node2'];
+            if ($res['cd_pid'] && $res['cd_bd_pid1'] != $res['cd_bd_pid2']) {
+                $select = $this->_read->select();
+                $select->from('checkpos_order_89');
+                $select->where('co_active_flg = ?', 1)
+                    ->where('co_cd_pid = ?', $res['cd_pid'])
+                    ->order('co_order');
+                $stmt = $select->query();
+                $_data = $stmt->fetchAll();
+
+                $node_num = count($_data) + 1;
+
+                foreach ($_data as $key => $item) {
+                    $data[$item['co_order']] = $item['co_node1'];
+                    if ($key == $node_num - 1) {
+                        $data[$node_num] = $item['co_node2'];
+                    }
                 }
+            } else {
+                $data = false;
             }
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
         }
-        return $data;
 
     }
 

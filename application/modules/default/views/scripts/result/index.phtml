@@ -174,7 +174,7 @@
                                                     <div class="vertical-timeline-content">
                                                         <h2>現在地
                                                         </h2>
-                                                        <?php echo $this->start_pos['bd_label']; ?>
+                                                        <?php echo $this->start_pos['bd_p_label2']; ?>
                                                     </div>
 
                                                 </div>
@@ -242,7 +242,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo $item['time']; ?>分
+                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -266,7 +266,8 @@
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
-                                                                    標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?></p>
+                                                                    標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                </p>
                                                                 <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>
                                                         </div>
@@ -299,28 +300,45 @@
                                         </form>
                                     </div>
                                     <div class="col-lg-8 position-tip">
+                                        <!--
+                                        <?php foreach ($this->order as $item) : ?>
+                                        <pre><?php var_dump($item); ?></pre>
+                                            <?php if ($item['way']) : ?>
+                                                <?php foreach ($item['way'] as $key => $order) : ?>
+                                                    <pre><?php var_dump($order); var_dump($key); ?></pre>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        -->
+
+
                                         <div id="map_img" class="ibox">
                                             <p class="origin-map">
                                                 <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
                                             </p>
-                                            <!--
-                                            <?php foreach ($this->project as $item) : ?>
-                                                <?php foreach ($item['way'] as $key => $order) : ?>
-                                                    <p>
-                                                    <?php if ($key < count($item['way'])) : ?>
-                                                        <img src="/img/maps/route<?php echo $item; ?>-<?php echo $order[$key + 1]; ?>.png" style="width: 100%; z-index: 2; position: absolute;" usemap="#shape1" id="shape1">
-                                                    <?php endif; ?>
-                                                    </p>
-                                                <?php endforeach; ?>
-                                            <?php endforeach; ?>
-                                            -->
 
+                                            <?php foreach ($this->order as $item) : ?>
+                                                <p class="over-map">
+                                                    <?php if ($item['way']) : ?>
+
+                                                        <?php foreach ($item['way'] as $key => $order) : ?>
+                                                            <?php if ($key < count($item)) : ?>
+                                                            <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </p>
+
+                                            <?php endforeach; ?>
+
+                                            <!--
                                             <p class="over-map" >
                                                 <img src="/img/maps/route70-59.png" usemap="#shape1" id="shape1">
                                             </p>
                                             <p class="over-map" >
                                                 <img src="/img/maps/route4-8.png" usemap="#shape1" id="shape1">
                                             </p>
+                                            -->
                                             <!--
                                                 <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
                                                 <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
@@ -538,15 +556,17 @@
 
 <!-- 地図のルートを点滅画像で表示 -->
 <script type="text/javascript">
-    /*
+
     //最初の画像以外を非表示にする
     var map = $('#map_img p:first-child');
+    var map_pre;
     $('#map_img p').not(':first').hide();
     //タイマー
     setInterval(function () {
         //フェードインとアウトを繰り返す
         if (map.get(0) != undefined) {
             map.show();
+            map_pre = map;
             map = map.next('p');
         } else {
             $('#map_img p').not(':first').hide();
@@ -555,7 +575,6 @@
         //('#map_img :first-child').next('img').show().end().appendTo('#map_img');
     }, 1000);
 
-*/
 </script>
 
 
@@ -695,7 +714,7 @@
         $("#ionrange<?php echo $key; ?>").ionRangeSlider({
             min: 0,
             max: 120,
-            from: <?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] : $item['time']; ?>,
+            from: <?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] : 30; ?>,
             postfix: "分",
             grid: true,
             onChange: function(data) {
