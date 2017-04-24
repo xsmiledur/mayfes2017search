@@ -11,6 +11,13 @@
     <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
+
+    <!--chosen select-->
+    <link href="/Static_Full_Version/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+
+    <!--select2-->
+    <link href="/Static_Full_Version/css/plugins/select2/select2.min.css" rel="stylesheet">
+
     <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
 
 
@@ -19,9 +26,6 @@
 
     <!--Clockpicker-->
     <link href="/Static_Full_Version/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-
-    <!--select2-->
-    <link href="/Static_Full_Version/css/plugins/select2/select2.min.css" rel="stylesheet">
 
     <!--checkbox-->
     <link href="/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -162,26 +166,18 @@
                                 </fieldset>
                                 <h1>You are here</h1>
                                 <fieldset>
+                                    <!--<div>
+                                        <img src="/img/map.png" class="mapper showcoords noborder iopacity50 icolorff0000" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                    </div>
+                                    <map name="shape1">
+                                      <area shape="default" href="#" alt="全体" region="all">
+                                    </map>-->
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-map-marker"> 現在地</i></h2>
                                         <p class="text-muted" style="padding-left: 20px;">現在地を選択してください。</p>
                                     </div>
                                     <div class="ibox">
-                                        <div class="ibox-content b-r-md">
-                                            <input id="search1" type="text" class="form-control" value="" placeholder="企画名・建物名・団体名で検索できます。"/>
-
-
-                                            <select class="select2_demo_1 form-control" name="start-pos" style="width:100%;">
-                                                <option value="">近くに見える建物の名称,たった今見てきた企画名を記入</option>
-                                                <?php foreach ($this->result as $item): ?>
-                                                    <option value=""><?php echo $item['fw_name']; ?>　（<small style="text-align:right;"><?php echo $item['fw_area']; ?>　<?php echo $item['fw_place_index']; ?></small>）</option>
-                                                <?php endforeach; ?>
-                                                <?php foreach ($this->data as $item) : ?>
-                                                    <option value=""><?php echo $item['name']."　（".$item['body']."　".$this->contents['list']['area'][$item['area']]."　".$this->contents['list'][$item['area']][$item['place_index']]; ?>）</option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <br>
-                                            <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:900px; height:600px;" usemap="#shape1" id="shape1">
+                                        <div id="sample02" class="ibox-content b-r-md">
 
 
                                         </div>
@@ -351,8 +347,8 @@
 
 
 <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
 
 <!-- Mainly scripts -->
 <script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
@@ -363,6 +359,10 @@
 <!-- Custom and plugin javascript -->
 <script src="/Static_Full_Version/js/inspinia.js"></script>
 <script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
+
+
+<!-- Chosen -->
+<script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
 
 <!-- Steps -->
 <script src="/Static_Full_Version/js/plugins/steps/jquery.steps.min.js"></script>
@@ -385,6 +385,8 @@
 <!-- Sweet alert -->
 <script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+<!--mapper-->
+<script src="/js/plugins/mapper/mapper.js"></script>
 <script>
     $('.chosen-select').chosen({width: "15%"});
 
@@ -404,6 +406,36 @@
 
                 if (newIndex == 1 && currentIndex < newIndex)
                 {
+                    $.ajax({
+                        url: "/search/time-post2",
+                        type: "POST",
+                        data: {
+                            clock1 : $('input[name="date"]').val(),
+                            clock2 : $('input[name="clock1"]').val(),
+                        },
+                        success: function(arr) {
+                            $.ajax({
+                                type: 'GET',
+                                url: '/search/refresh02',
+                                dataType: 'html',
+                                success: function(data) {
+                                    $('#sample02').empty();
+                                    $('#sample02').append(data);
+                                    //window.scrollTo(0,document.body.scrollHeight);
+
+                                },
+                                error:function() {
+                                    alert('問題がありました。');
+                                }
+                            });
+                        },
+                        error:function(arr) {
+                            alert('問題がありました。');
+                        }
+                    });
+                }
+
+                if (newIndex == 2 && currentIndex < newIndex) {
                     a = $('#input-clock1').val();
                     b = $('#input-clock2').val();
                     c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
@@ -451,7 +483,8 @@
                     });
                 }
 
-                var form = $(this);
+
+                    var form = $(this);
 
                 // Clean up if user went backward before
                 if (currentIndex < newIndex)
@@ -565,6 +598,13 @@
                 }
             }
         });
+
+        //chosen select
+        $('.chosen-select').chosen({width: "100%"});
+
+        //select2
+        $(".select2_demo_2").select2({ width: '100%' });
+
 
         //iCheck
         $('.i-checks').iCheck({

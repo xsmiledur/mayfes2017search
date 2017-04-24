@@ -125,6 +125,19 @@ class SearchController extends Zend_Controller_Action
         $this->_session->research = 1;
     }
 
+    public function refresh02Action()
+    {
+        $this->view->freewds = $this->_main->getFreeWords($this->_session->date, $this->_session->start);
+    }
+
+    public function timePost2Action()
+    {
+        $request = $this->getRequest();
+        $this->_session->date = $request->getPost('date');
+        $start = $request->getPost('start');
+        $this->_session->start = intval(substr($start, 0, 2)) * 60 + intval(substr($start, 3, 2));
+    }
+
     public function timePostAction()
     {
         $request = $this->getRequest();

@@ -614,6 +614,87 @@ class MainModel
     }
 
 
+    /**
+     * step2用　フリーワード
+     * @param $date
+     * @param $start
+     * @return bool
+     */
+    public function getFreeWords($date, $start)
+    {
+        $result = array();
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('building_data', 'bd_p_label2', 'bd_pid');
+            $select->where('pd_active_flg = ?', 1);
+            $stmt = $select->query();
+            $data = $stmt->fetch();
+
+            foreach ($data as $key => $item) {
+                $data[$key]['bd_pid'] = $item['bd_pid'];
+                $data[$key]['name'] = $item['bd_p_label2'];
+            }
+
+            $select = $this->_read->select();
+            $select->from('90_project_summary', 'ps_pid')
+                ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
+                ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
+                ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start_', 'pt_end_', 'pt_open_'))
+                ->where('pd_active_flg = ?', 1)
+                ->where('pp_day = ?', $date)
+                ->order('pd_pid');
+            $select->from('90_project_data', 'pd_body, pd_label', 'pd_bd_pid');
+            $select->where('pd_active_flg = ?', 1);
+            $stmt = $select->query();
+            $data = $stmt->fetch();
+
+            foreach ($data as $item) {
+                if ($item['pp_full']) {
+                    $arr['bd_pid'] = $item['pp_bd_pid'];
+                    $arr['name'] = $item['pd_label'];
+                    $arr['body'] = $item['pd_body'];
+                    array_push($data, $arr);
+                } else {
+                    if ($item['pt_start_']) {
+                        if ($item['pt_end_']) {
+                            if ($start < $item['pt_end_'] + 60 || $start > $item['pt_start_'] - 60 ) {
+                                $arr['bd_pid'] = $item['pp_bd_pid'];
+                                $arr['name'] = $item['pd_label'];
+                                $arr['body'] = $item['pd_body'];
+                                array_push($data, $arr);
+                            }
+                        } else {
+                            if ($start > $item['pt_start'] - 60) {
+                                $arr['bd_pid'] = $item['pp_bd_pid'];
+                                $arr['name'] = $item['pd_label'];
+                                $arr['body'] = $item['pd_body'];
+                                array_push($data, $arr);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
+    }
+
+
 
     /* public function getProjectDataForArea()
      {
@@ -723,7 +804,7 @@ class MainModel
      *
      * @return array
      */
-    public function searchFree()
+    public function getFreeWords()
     {
         //$contents = $this->getContentsData('ja',null);
 

@@ -720,6 +720,32 @@ fieldset .tabs-container .i-checks {
     overflow-x: scroll;
     overflow-y: hidden;
 }
+.pos-cover {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+.select2-container--default .select2-search--inline .select2-search__field {
+    border: none !important;
+}
+li.select2-search.select2-search--inline {
+    width: 100% !important;
+}
+input.select2-search__field {
+    width: 100% !important;
+}
+input.select2-search__field::-moz-placeholder {
+    color: #999 !important;
+}
+input.select2-search__field:-ms-input-placeholder {
+    color: #999 !important;
+}
+input.select2-search__field:-moz-placeholder {
+    color: #999 !important;
+}
+input.select2-search__field::-webkit-input-placeholder {
+    color: #999 !important;
+}
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {
         height: 850px;

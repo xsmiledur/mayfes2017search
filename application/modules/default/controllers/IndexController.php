@@ -86,6 +86,7 @@ class IndexController extends Zend_Controller_Action
         $request = $this->getRequest();
         $search = $request->getParam('search');
         $this->view->data_all   = $this->_main->getProjectData();
+        $this->view->freewds = $this->_main->getFreeWords();
 
 
         //$result = $this->_main->searchFree();
