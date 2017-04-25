@@ -622,42 +622,58 @@ class MainModel
      */
     public function getFreeWords($date, $start)
     {
-        $result = array();
-
         // トランザクション開始
         $this->_read->beginTransaction();
         $this->_read->query('begin');
         try {
 
+            //建物名から検索
             $select = $this->_read->select();
-            $select->from('building_data', 'bd_p_label2', 'bd_pid');
-            $select->where('pd_active_flg = ?', 1);
+            $select->from('building_data', array('bd_p_label2', 'bd_pid'));
+            $select->where('bd_pos_flg = ?', 1);
             $stmt = $select->query();
-            $data = $stmt->fetch();
+            $_data = $stmt->fetchAll();
 
-            foreach ($data as $key => $item) {
+            foreach ($_data as $key => $item) {
                 $data[$key]['bd_pid'] = $item['bd_pid'];
                 $data[$key]['name'] = $item['bd_p_label2'];
+                $data[$key]['bd_flg'] = 1;
             }
 
+            //その他の建物名から検索
+            $select = $this->_read->select();
+            $select->from('building_other', array('bo_label', 'bo_bd_pid'))
+                ->join('building_data', 'bo_bd_pid = bd_pid', 'bd_p_label2');
+            $select->where('bo_active_flg = ?', 1);
+            $stmt = $select->query();
+            $_data = $stmt->fetchAll();
+
+            foreach ($_data as $key => $item) {
+                $data[$key]['bd_pid'] = $item['bo_bd_pid'];
+                $data[$key]['name'] = $item['bd_p_label2'];
+                $data[$key]['data'] = $item['bo_label'];
+            }
+
+
+            //企画名から検索
             $select = $this->_read->select();
             $select->from('90_project_summary', 'ps_pid')
                 ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
                 ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
                 ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start_', 'pt_end_', 'pt_open_'))
+                ->join('building_data', 'pp_bd_pid = bd_pid', array('bd_pos_flg'))
                 ->where('pd_active_flg = ?', 1)
+                ->where('bd_pos_flg = ?', 1)
                 ->where('pp_day = ?', $date)
                 ->order('pd_pid');
-            $select->from('90_project_data', 'pd_body, pd_label', 'pd_bd_pid');
-            $select->where('pd_active_flg = ?', 1);
             $stmt = $select->query();
-            $data = $stmt->fetch();
+            $_data = $stmt->fetchAll();
 
-            foreach ($data as $item) {
+            foreach ($_data as $item) {
                 if ($item['pp_full']) {
                     $arr['bd_pid'] = $item['pp_bd_pid'];
                     $arr['name'] = $item['pd_label'];
-                    $arr['body'] = $item['pd_body'];
+                    $arr['data'] = $item['pd_body'];
                     array_push($data, $arr);
                 } else {
                     if ($item['pt_start_']) {
@@ -689,7 +705,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
+            var_dump($e->getMessage());exit();
             return false;
         }
     }
@@ -798,33 +814,6 @@ class MainModel
 
          return $data;
      }*/
-
-    /**
-     * フリーワード検索
-     *
-     * @return array
-     */
-    public function getFreeWords()
-    {
-        //$contents = $this->getContentsData('ja',null);
-
-        /*
-        $select = $this->_read->select();
-        $select->from('free_words_data')
-            ->where('fw_active_flg = ? ', 1);
-        //$data = $this->_read->quoteInto('fw_name LIKE ?', '%'.$search.'%');
-        /*$select->where('fw_name LIKE ?', '%'.$search.'%')
-            ->orwhere('fw_area LIKE ?', '%'.$search.'%')
-            ->orwhere('fw_place_index LIKE ?', '%'.$search.'%');*/
-
-        //var_dump($data);exit();
-        /*
-                $stmt = $select->query();
-                $data = $stmt->fetchAll();
-                */
-
-        return $data;
-    }
 
     /*
     /**

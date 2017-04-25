@@ -135,6 +135,7 @@ class SearchController extends Zend_Controller_Action
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
         $start = $request->getPost('start');
+        if (strlen($start) == 0) $start = date("h:i");
         $this->_session->start = intval(substr($start, 0, 2)) * 60 + intval(substr($start, 3, 2));
     }
 

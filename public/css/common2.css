@@ -721,18 +721,21 @@ fieldset .tabs-container .i-checks {
     overflow-y: hidden;
 }
 .pos-cover {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     overflow: scroll;
+}
+.mapper {
+    cursor: crosshair;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;
 }
 li.select2-search.select2-search--inline {
-    width: 100% !important;
+    /*width: 100% !important;*/
 }
 input.select2-search__field {
-    width: 100% !important;
+    /*width: 100% !important;*/
 }
 input.select2-search__field::-moz-placeholder {
     color: #999 !important;
@@ -745,6 +748,16 @@ input.select2-search__field:-moz-placeholder {
 }
 input.select2-search__field::-webkit-input-placeholder {
     color: #999 !important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: initial !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-top: 6px !important;
+    margin-left: 1px;
+}
+span.select2-selection__choice__remove {
+    /*display: none !important;*/
 }
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {

@@ -379,6 +379,9 @@
 <!-- Select2 -->
 <script src="/Static_Full_Version/js/plugins/select2/select2.full.min.js"></script>
 
+<!--select2 その２-->
+<script src="/js/select2/select2.full.min.js"></script>
+
 <!-- Chosen -->
 <script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
 
@@ -386,7 +389,11 @@
 <script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <!--mapper-->
-<script src="/js/plugins/mapper/mapper.js"></script>
+<!--<script src="/js/mapper/mapper.js"></script>-->
+
+<!--mapper-->
+<script src="/js/mapper/cvi_map_lib.js"></script>
+
 <script>
     $('.chosen-select').chosen({width: "15%"});
 
@@ -410,8 +417,8 @@
                         url: "/search/time-post2",
                         type: "POST",
                         data: {
-                            clock1 : $('input[name="date"]').val(),
-                            clock2 : $('input[name="clock1"]').val(),
+                            date : $('input[name="date"]').val(),
+                            start : $('input[name="clock1"]').val(),
                         },
                         success: function(arr) {
                             $.ajax({
@@ -601,9 +608,6 @@
 
         //chosen select
         $('.chosen-select').chosen({width: "100%"});
-
-        //select2
-        $(".select2_demo_2").select2({ width: '100%' });
 
 
         //iCheck
