@@ -84,13 +84,11 @@ class ResultController extends Zend_Controller_Action
 
         // ディレクトリのパスを記述
         $dir = "/var/www/public/img/maps/" ;
-
         /*
         // ディレクトリの存在を確認し、ハンドルを取得
         if( is_dir( $dir ) && $handle = opendir( $dir ) ) {
             // [ul]タグ
             echo "<ul>" ;
-
             // ループ処理
             $i = 0;
             $file_data = array();
@@ -98,41 +96,31 @@ class ResultController extends Zend_Controller_Action
                 // ファイルのみ取得
                 if( filetype( $path = $dir . $file ) == "file" ) {
                     /********************
-
                     各ファイルへの処理
-
                     $file ファイル名
                     $path ファイルのパス
-
                      ********************/
-
-                    $file_data[$i] = $file;
-                    ++$i;
-                    /*
-
-                    // [li]タグ
-                    echo "<li>" ;
-
-                    // ファイル名を出力する
-                    echo $file ;
-
-                    // ファイルのパスを出力する
-                    echo " (" . $path . ")" ;
-
-                    // [li]タグ
-                    echo "</li>" ;
-                    */
-                    /*
-                    if ($i == 50) break;
-                }
-            }
-            $this->view->file_data = $file_data;
-
-            // [ul]タグ
-            //echo "</ul>" ;
-        }
-                    */
-
+        //$file_data[$i] = $file;
+        //++$i;
+        /*
+        // [li]タグ
+        echo "<li>" ;
+        // ファイル名を出力する
+        echo $file ;
+        // ファイルのパスを出力する
+        echo " (" . $path . ")" ;
+        // [li]タグ
+        echo "</li>" ;
+        */
+        /*
+        if ($i == 50) break;
+    }
+}
+$this->view->file_data = $file_data;
+// [ul]タグ
+//echo "</ul>" ;
+}
+        */
         $errMsg = $this->_session->errMsg;
         if (strlen($errMsg) > 0) {
             echo $errMsg;
@@ -143,16 +131,14 @@ class ResultController extends Zend_Controller_Action
         //キーiに対してキー"time"には経路にかかる時間、
         //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
         $start = $this->_session->start;
-        $_start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
-        /*
+        $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
         echo "<pre>";
         var_dump($pd_pid);
         var_dump($order);
         var_dump($start);
-        var_dump($_start_pos);
+        var_dump($start_pos);
         echo "</pre>";
-        */
-
+        //exit();
         //例
         /*
         $start = "10:00";
@@ -177,11 +163,9 @@ class ResultController extends Zend_Controller_Action
             ),
         );
         */
-
-
         $_start = strtotime($start);
         $project = array();
-        foreach ($pd_pid as $key => $item) {
+        foreach ($pd_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
                 $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
                 $project[$key-1]['time'] = $order[$key]['time'];
@@ -195,17 +179,11 @@ class ResultController extends Zend_Controller_Action
             }
         }
         $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
-
         $this->view->project = $project;
         $this->view->start   = $start;
         $this->view->end     = date("h:i", $end);
-        $this->view->start_pos = $this->_main->getBuildingData($_start_pos);
-        //var_dump($this->view->start_pos);exit();
+        $this->view->start_pos = $this->_main->getBuildingData($start_pos);
         $this->view->order = $order;
-        echo "<pre>";
-        var_dump($order);
-        echo "</pre>";
-
         //$this->view->color = array('navy', 'yellow', 'red', 'blue');
         /*$this->view->icon  = array(
             'akamon' => '';

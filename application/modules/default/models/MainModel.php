@@ -497,7 +497,7 @@ class MainModel
             $select->from('90_project_summary');
             $select->join('90_project_data', 'ps_pd_pid = pd_pid')
                 ->join('90_project_place','ps_pp_pid = pp_pid');
-            //$select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
+            $select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
             $select->where('ps_pd_active_flg = ?', 1)
                 ->where('ps_pid = ?', $ps_pid);
             $stmt = $select->query();
@@ -591,7 +591,7 @@ class MainModel
 
                 foreach ($_data as $key => $item) {
                     $data[$item['co_order']] = $item['co_node1'];
-                    if ($key == $node_num - 1) {
+                    if ($key == $node_num - 2) {
                         $data[$node_num] = $item['co_node2'];
                     }
                 }
@@ -649,9 +649,11 @@ class MainModel
             $_data = $stmt->fetchAll();
 
             foreach ($_data as $key => $item) {
-                $data[$key]['bd_pid'] = $item['bo_bd_pid'];
-                $data[$key]['name'] = $item['bd_p_label2'];
-                $data[$key]['data'] = $item['bo_label'];
+                $arr = array();
+                $arr['bd_pid'] = $item['bo_bd_pid'];
+                $arr['name'] = $item['bd_p_label2'];
+                $arr['data'] = $item['bo_label'];
+                array_push($data, $arr);
             }
 
 

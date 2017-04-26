@@ -1,13 +1,18 @@
 <div class="row">
     <div class="col-md-12">
         <input type="hidden" name="start-pos" value="">
+        <?php foreach ($this->freewds as $item) : if ($item['bd_flg']) : ?>
+            <input type="hidden" name="name-map<?php echo $item['bd_pid']; ?>" value="<?php echo $item['name']; ?>">
+        <?php endif; endforeach; ?>
         <select data-placeholder="近くに見える建物の名称たった今見てきた企画名を記入" class="select2_demo_2 form-control" multiple="multiple">
             <?php foreach ($this->freewds as $item) : ?>
-                    <option value="<?php echo ($item['bd_flg']) ? 'map' : ''; ?><?php echo $item['bd_pid']; ?>"><?php echo $item['name']; ?></option>
+                <?php if ($item['bd_flg']) : ?>
+                    <option value="map<?php echo $item['bd_pid']; ?>"><?php echo $item['name']; ?></option>
+                <?php endif; ?>
                 <?php if ($item['data']) : ?>
                     <option href="#" value="<?php echo $item['bd_pid']; ?>"><?php echo $item['data']." （".$item['name']."）"; ?></option>
                 <?php endif; ?>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </select>
     </div>
 </div>
@@ -64,11 +69,13 @@
 <script src="/js/mapper/cvi_map_lib.js"></script>
 <script>
     $(document).ready(function(e) {
+
         cvi_map.add(document.getElementById('shape1'),{
             opacity: 25,
             areacolor: '#ffe4b5',
             bordercolor: '#ff6600'
         });
+
 
         //select2
         $(".select2_demo_2").select2({
@@ -76,6 +83,10 @@
             multiple: true,
             maximumSelectionLength: 1,
             minimumResultsForSearch: Infinity
+        }).on('select2:focus', function(params) {
+            console.log(params);
+            console.log('focus');
+            console.log(e);
         }).on('select2:select', function(e) {
             if (e.target.value.substr(0,3) == 'map') {
                 var id = e.target.value;
@@ -84,44 +95,21 @@
                 var id = "map" + e.target.value;
                 $('input[name="start-pos"]').val(e.target.value);
             }
-            /*
-            cvi_map.add(document.getElementById('shape1'),{
-                opacity: 25,
-                areacolor: '#ffe4b5',
-                bordercolor: '#ff6600'
-            });
-            */
+            $('#here').text($('input[name="name-' + id + '"]').val());
             extAreaOver('shape1', id);
         }).on('select2:unselect', function() {
             var id = "map" + $('input[name="start-pos"]').val();
-            console.log(id);
+            $('#here').text("");
             $('input[name="start-pos"]').val("");
-            //extAreaOut('shape1', id);
-        });
-
-        $('.select2-results__option').on('results:focus', function (params) {
-            console.log(params);
-            //params.element.addClass('select2-results__option--highlighted');
-        });
-
-        $('.select2-results__option').click(function(e) {
-            colsole.log("bbb");
-        });
-
-        $('.select2-results__option').hover(function(e) {
-            var id = e.target.id;
-            console.log(id);
+            extAreaOut('shape1', id);
         });
 
         $('area').click(function(e) {
-            console.log("aaaaa");
             var id = e.target.id.substr(3,2);
-            console.log(id);
             $('input[name="start-pos"]').val(id);
+            $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');
         });
-
-
 
 /*
         function extAreaOver(image,area){

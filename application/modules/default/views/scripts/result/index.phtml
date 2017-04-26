@@ -242,7 +242,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo ($this->project[$key - 1]['time']) ? $this->project[$key - 1]['time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -322,7 +322,7 @@
                                                     <?php if ($item['way']) : ?>
 
                                                         <?php foreach ($item['way'] as $key => $order) : ?>
-                                                            <?php if ($key < count($item)) : ?>
+                                                            <?php if ($key < count($item['way'])) : ?>
                                                             <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>

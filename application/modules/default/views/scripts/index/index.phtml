@@ -174,7 +174,7 @@
                                     </map>-->
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-map-marker"> 現在地</i></h2>
-                                        <p class="text-muted" style="padding-left: 20px;">現在地を選択してください。</p>
+                                        <p class="text-muted select-start-pos-error" style="padding-left: 20px;">現在地を選択してください。</p>
                                     </div>
                                     <div class="ibox">
                                         <div id="sample02" class="ibox-content b-r-md">
@@ -293,7 +293,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-map-marker"></i> </a>
-                                                        <label id="here" style="font-weight:normal;">現在時刻</label>
+                                                        <label id="here" style="font-weight:normal;"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -443,6 +443,13 @@
                 }
 
                 if (newIndex == 2 && currentIndex < newIndex) {
+                    if ($('input[name="start-pos"]').val() == "") {
+                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger');
+                        return false;
+                    } else {
+                        $('.select-start-pos-error').removeClass('text-danger').addClass('text-muted');
+                    }
+
                     a = $('#input-clock1').val();
                     b = $('#input-clock2').val();
                     c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
@@ -562,6 +569,7 @@
                     $('#page-wrapper').addClass('sk-loading');
                     $('.sk-spinner-btn').click(function() {
                         $('#page-wrapper').removeClass('sk-loading');
+                        return false;
                     });
                     $.ajax({
                         url: "/search/search",
@@ -575,7 +583,19 @@
                         },
                         success: function(arr) {
                             console.log(arr);
-                            window.location.href = "/result";
+                            if (arr == 0) {
+                                $('#page-wrapper').removeClass('sk-loading');
+                                swal({
+                                    title: "あなたが選択した条件では最適経路が見つかりませんでした",
+                                    text: "お手数ですが、条件を変更して再度検索してください",
+                                    type: "warning",
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "OK",
+                                    closeOnConfirm: false
+                                });
+                                return false;
+                            }
+                            //window.location.href = "/result";
 
 
                         },
