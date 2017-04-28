@@ -671,9 +671,14 @@ fieldset .tabs-container .i-checks {
 #all-cover2 > .ibox-content > .ibox > .ibox-content > .row  {
     position: relative;
 }
-.tooltip-btn {
+.foot-btn1 {
     position: absolute;
     bottom: 0;
+    right: 20px;
+}
+.foot-btn2 {
+    position: absolute;
+    top: 650px;
     right: 20px;
 }
 #id1 {
@@ -682,22 +687,29 @@ fieldset .tabs-container .i-checks {
 #id2 {
     display: none;
 }
+.position-tip {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 650px;
+}
+#map_img {
+    height: 650px;
+    overflow: hidden;
+}
 .origin-map {
-    height: 100%;
-    width: 100%;
+    height: 640px;
+    width: 900px;
     z-index:1;
     position: absolute;
 }
 .over-map {
-    width: 100%;
+    width: 900px;
     z-index: 2;
     position: absolute;
 }
 .origin-map img,
 .over-map img {
     width: 100%;
-}
-.over-map img {
     position: absolute;
 }
 .row-cover {
@@ -705,20 +717,12 @@ fieldset .tabs-container .i-checks {
     /*overflow-y: auto;
     overflow-x: hidden;*/
 }
-#map_img {
-    height: 800px;
-    overflow-x: scroll;
-}
 #map_img:after {
     content: ".";
     display: block;
     clear: both;
     height: 0;
     visibility: hidden;
-}
-.position-tip {
-    overflow-x: scroll;
-    overflow-y: hidden;
 }
 .pos-cover {
     width: 100% !important;

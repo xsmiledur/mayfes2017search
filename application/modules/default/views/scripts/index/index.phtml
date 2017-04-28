@@ -113,8 +113,8 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
 
                                                         <address class="m-t-md">
-                                                            <label class="i-checks" for="1day"><input type="radio" id="1day" checked="checked" value="20" name="date"> <i></i> １日目 </label>
-                                                            <label class="i-checks" for="2day"><input type="radio" id="2day" value="21" name="date"> <i></i> ２日目 </label>
+                                                            <label class="i-checks" for="1day"><input type="radio" id="1day" checked="checked" value="20" name="date"> <i></i> １日目（２０日） </label>
+                                                            <label class="i-checks" for="2day"><input type="radio" id="2day" value="21" name="date"> <i></i> ２日目（２１日） </label>
                                                         </address>
 
                                                     </a>
@@ -280,7 +280,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
                                                         <a href="#" class="check-link"><i class="fa fa-calendar"></i> </a>
-                                                        <label id="jQueryTime" style="font-weight:normal;">１日目</label>
+                                                        <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -595,7 +595,7 @@
                                 });
                                 return false;
                             }
-                            //window.location.href = "/result";
+                            window.location.href = "/result";
 
 
                         },
@@ -637,9 +637,9 @@
         });
         $('input[name="date"]').on('ifChecked', function(event){
             if (event.target.value == "20") {
-                $("#jQueryTime").text('１日目');
+                $("#jQueryTime").text('１日目（２０日）');
             } else {
-                $("#jQueryTime").text('２日目');
+                $("#jQueryTime").text('２日目（２１日）');
             }
         });
 

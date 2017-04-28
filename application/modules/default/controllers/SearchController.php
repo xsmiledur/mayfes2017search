@@ -222,20 +222,34 @@ class SearchController extends Zend_Controller_Action
         */
 
         $inputData = "";
-
         $request    = $this->getRequest();
-        $search     = $request->getParam('search');
-        $N          = count($search);
-        $start_pos   = $request->getParam('start_pos');
-        $inputData .= sprintf("%d %d\n", $N, $start_pos);
-        $date       = $request->getParam('date');
-        $clock1     = $request->getParam('clock1');
-        if (!$clock1) $clock1 = date("H:i");
-        $clock2     = $request->getParam('clock2');
-        $clock1_ = (int)substr($clock1,0,2) * 60 + (int)substr($clock1,3,2);
-        $clock2_ = (int)substr($clock2,0,2) * 60 + (int)substr($clock2,3,2);
-        $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
+        $research = $request->getPost('research');
+        //var_dump($research);
+        if (!$research) {
+            $search    = $request->getParam('search');
+            $start_pos = $request->getParam('start_pos');
+            $date      = $request->getParam('date');
+            $clock1    = $request->getParam('clock1');
+            $clock2    = $request->getParam('clock2');
+        } else {
+            $search    = $this->_getParam('search');
+            $start_pos = $this->_getParam('start-pos');
+            $date      = $this->_getParam('date');
+            $clock1    = $this->_getParam('clock1');
+            $clock2    = $this->_getParam('clock2');
+            if (!$search) {
+                $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
+                return $this->_redirect('/');
+            }
+        }
 
+        $N = count($search);
+        if (!$clock1) $clock1 = date("H:i");
+        $clock1_ = (int)substr($clock1, 0, 2) * 60 + (int)substr($clock1, 3, 2);
+        $clock2_ = (int)substr($clock2, 0, 2) * 60 + (int)substr($clock2, 3, 2);
+
+        $inputData .= sprintf("%d %d\n", $N, $start_pos);
+        $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
         /*
         var_dump($search);
@@ -246,7 +260,6 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
-        exit();
         */
 
         //$research = $this->_session->research;
@@ -357,7 +370,7 @@ class SearchController extends Zend_Controller_Action
                         $bd_pid[$i] = $start_pos;
                     } else {
                         $info = $this->_main->getProjectInfo($item);
-                        var_dump($info['pp_bd_pid']);
+                        //var_dump($info['pp_bd_pid']);
                         $bd_pid[$i] = $info['pp_bd_pid'];
                     }
                 }
@@ -372,7 +385,7 @@ class SearchController extends Zend_Controller_Action
                     $order[$i]['way'] = $this->_main->getOrderWay($item, $bd_pid[$i + 1]);  //ある企画の場所から次の企画の場所への道順
                     //$order[$i]['way'][count($order[$i]['way']) + 1] = $bd_pid[$i + 1];
                 }
-                var_dump($order);
+                //var_dump($order);
 
                 $this->_session->pd_pid = $pd_pid;
                 $this->_session->order = $order;

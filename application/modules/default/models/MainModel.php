@@ -496,7 +496,8 @@ class MainModel
             $select = $this->_read->select();
             $select->from('90_project_summary');
             $select->join('90_project_data', 'ps_pd_pid = pd_pid')
-                ->join('90_project_place','ps_pp_pid = pp_pid');
+                ->join('90_project_place','ps_pp_pid = pp_pid')
+                ->join('building_data', 'pp_bd_pid = bd_pid');
             $select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
             $select->where('ps_pd_active_flg = ?', 1)
                 ->where('ps_pid = ?', $ps_pid);
@@ -541,7 +542,7 @@ class MainModel
         try {
 
             $select = $this->_read->select();
-            $select->from('checkpos_data_89');
+            $select->from('90_checkpos_data');
             $select->where('cd_active_flg = ?', 1)
                 ->where('cd_bd_pid1 = ?', $bd_pid1)
                 ->where('cd_bd_pid2 = ?', $bd_pid2);
@@ -571,7 +572,7 @@ class MainModel
         try {
 
             $select = $this->_read->select();
-            $select->from('checkpos_data_89');
+            $select->from('90_checkpos_data');
             $select->where('cd_active_flg = ?', 1)
                 ->where('cd_bd_pid1 = ?', $bd_pid1)
                 ->where('cd_bd_pid2 = ?', $bd_pid2);
@@ -580,7 +581,7 @@ class MainModel
 
             if ($res['cd_pid'] && $res['cd_bd_pid1'] != $res['cd_bd_pid2']) {
                 $select = $this->_read->select();
-                $select->from('checkpos_order_89');
+                $select->from('90_checkpos_order');
                 $select->where('co_active_flg = ?', 1)
                     ->where('co_cd_pid = ?', $res['cd_pid'])
                     ->order('co_order');

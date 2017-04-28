@@ -164,13 +164,15 @@ $this->view->file_data = $file_data;
         );
         */
         $_start = strtotime($start);
+        var_dump($start);
+        var_dump($_start);
         $project = array();
         foreach ($pd_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
                 $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
-                $project[$key-1]['time'] = $order[$key]['time'];
+                $project[$key-1]['time'] = $order[$key-1]['time'];
                 $project[$key-1]['pre']  = $_start;
-                $_start = $_start + $order[$key]['time'] * 60;
+                $_start = $_start + $order[$key-1]['time'] * 60;
                 if ($project[$key-2]['info']['pt_time']) {
                     $_start += $project[$key-2]['info']['pt_time'] * 60;
                 }
@@ -178,10 +180,19 @@ $this->view->file_data = $file_data;
                 $project[$key-1]['start'] = date("h:i", $_start);
             }
         }
+        /*
+        foreach ($project as $item) {
+            unset($item['info']);
+            echo "<pre>";
+            var_dump($item);
+            echo "</pre>";
+        }
+        */
         $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
         $this->view->project = $project;
         $this->view->start   = $start;
         $this->view->end     = date("h:i", $end);
+        $this->view->start_pos_bd_pid = $start_pos;
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
         $this->view->order = $order;
         //$this->view->color = array('navy', 'yellow', 'red', 'blue');

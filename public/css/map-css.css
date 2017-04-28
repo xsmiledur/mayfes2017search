@@ -1,0 +1,44 @@
+.well {
+    padding: 10px 10px 20px;
+    width: initial;
+    position: absolute;
+    color: #171717;
+    background-color: rgba(255, 240, 240, 0.5);
+    z-index: 3;
+    border-color: rgba(255, 0, 0, 0.5);
+}
+.well::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    margin-left: -10px;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: rgba(255, 0, 0, 0.5) transparent transparent transparent;
+}
+.well > .map-cm-b {
+    background-color: rgba(255, 0, 0, 0.5);
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.well1 {
+    display: block;
+}
+.well2 {
+    display: none;
+}
+@media screen and ( max-width:767px ) {
+    .well1 {
+        display: none;
+    }
+    .well2 {
+        display: block;
+    }
+}
