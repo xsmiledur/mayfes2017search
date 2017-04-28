@@ -138,10 +138,58 @@
     /*color: #ffffe0;*/
     font-weight: normal;
     transition: .2s;
+    cursor: pointer;
+    position: relative;
+}
+#BoxGenreexhibition {
+    background-color: rgba(112, 194, 163, 0.25);
+}
+#PushGenreexhibition {
+    background-color: #70c2a3;
+}
+#BoxGenremusic {
+    background-color: rgba(234, 209, 82, 0.25);
+}
+#PushGenremusic {
+    background-color: #ead152;
+}
+#BoxGenreshop {
+    background-color: rgba(161, 203, 237, 0.25);
+}
+#PushGenreshop {
+    background-color: #a1cbed;
+}
+#BoxGenreperformance {
+    background-color: rgba(243, 162, 159, 0.25);
+}
+#PushGenreperformance {
+    background-color: #f3a29f;
+}
+#BoxGenrejoin {
+    background-color: rgba(191, 154, 198, 0.25);
+}
+#PushGenrejoin {
+    background-color: #bf9ac6;
+}
+#BoxGenrelecture {
+    background-color: rgba(238, 189, 128, 0.25);
+}
+#PushGenrelecture {
+    background-color: #eebd80;
 }
 .genre-push:hover,
 .area-push:hover {
     filter:brightness(1.1);
+}
+.genre-push img {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    margin: auto;
+    opacity: 0.9;
 }
 
 #jQueryPush2 {
@@ -469,12 +517,6 @@ li.fist-item {
 .contact-box {
     border: none;
 }
-.transparent {
-    background-color: rgba(255,255,255,0.8);
-    padding: 20px;
-    height: 100%;
-    overflow: scroll;
-}
 fieldset .tabs-container .i-checks {
     margin-right: 5px;
 }
@@ -505,10 +547,23 @@ fieldset .tabs-container .i-checks {
 }
 .area-box.contact-box,
 .genre-box.contact-box {
-    height:480px;
+    height:458px;
     margin: 0;
     padding: 0;
     border-radius: 10px;
+}
+.genre-box.contact-box {
+    padding: 20px;
+    overflow: scroll;
+}
+.genre-box.contact-box .list-group.clear-list .list-group-item {
+    border-color: #fffff0 !important;
+}
+.transparent {
+    background-color: rgba(255,255,255,0.8);
+    padding: 20px;
+    height: 100%;
+    overflow: scroll;
 }
 .check-text {
     width: 30%;

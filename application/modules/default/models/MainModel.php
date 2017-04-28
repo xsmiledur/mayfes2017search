@@ -250,7 +250,7 @@ class MainModel
                 'label' => '音楽',
             ),
             2 => array(
-                'name' => 'food',
+                'name' => 'shop',
                 'label' => '飲食・販売',
             ),
             3 => array(

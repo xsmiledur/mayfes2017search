@@ -84,7 +84,7 @@ class SearchController extends Zend_Controller_Action
     public function indexAction()
     {
         //転送
-        return $this->_redirect('/');
+        //return $this->_redirect('/');
     }
 
     public function formAction()
@@ -224,7 +224,7 @@ class SearchController extends Zend_Controller_Action
         $inputData = "";
         $request    = $this->getRequest();
         $research = $request->getPost('research');
-        //var_dump($research);
+        var_dump($research);
         if (!$research) {
             $search    = $request->getParam('search');
             $start_pos = $request->getParam('start_pos');
@@ -232,14 +232,14 @@ class SearchController extends Zend_Controller_Action
             $clock1    = $request->getParam('clock1');
             $clock2    = $request->getParam('clock2');
         } else {
-            $search    = $this->_getParam('search');
-            $start_pos = $this->_getParam('start-pos');
-            $date      = $this->_getParam('date');
-            $clock1    = $this->_getParam('clock1');
-            $clock2    = $this->_getParam('clock2');
+            $search    = $this->_session->re_search;
+            $start_pos = $this->_session->re_start_pos;
+            $date      = $this->_session->re_date;
+            $clock1    = $this->_session->re_clock1;
+            $clock2    = $this->_session->re_clock2;
             if (!$search) {
                 $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                return $this->_redirect('/');
+                //return $this->_redirect('/');
             }
         }
 
@@ -251,7 +251,7 @@ class SearchController extends Zend_Controller_Action
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
-        /*
+
         var_dump($search);
         var_dump($N);
         var_dump($start_pos);
@@ -260,7 +260,6 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
-        */
 
         //$research = $this->_session->research;
 
@@ -269,6 +268,7 @@ class SearchController extends Zend_Controller_Action
 
         $result = null;
         $pp_search = array();
+        $research_t = array(); //再検索後の時間
         $pp_search[0]['bd_pid'] = $start_pos;
         foreach ($search as $i => $item) { //$itemは$ps_pid
             $_result = $this->_main->getProjectInfo($item);
@@ -281,12 +281,13 @@ class SearchController extends Zend_Controller_Action
 
             if ($research) {
                 $time = $request->getParam('re-time'.$_result['ps_pid']);
-                //var_dump($time);
             } elseif ($_result['pt_time']) {
                 $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
             } else {
                 $time = 30;
             }
+            $research_t[$item] = $time;
+
             $__start = $_result['pt_start']; //企画start
             if (!$__start) {
                 $start = -1;
@@ -359,13 +360,13 @@ class SearchController extends Zend_Controller_Action
             } else {
 
                 //var_dump($return_value);
-                $pd_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
-                unset($pd_pid[$N + 1]);
+                $ps_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
+                unset($ps_pid[$N + 1]);
 
-                //var_dump($pd_pid);
+                //var_dump($ps_pid);
                 //var_dump($N);
                 $bd_pid = array();
-                foreach ($pd_pid as $i => $item) {
+                foreach ($ps_pid as $i => $item) { //$itemの中身はps_pid
                     if ($i == 0) {
                         $bd_pid[$i] = $start_pos;
                     } else {
@@ -387,188 +388,26 @@ class SearchController extends Zend_Controller_Action
                 }
                 //var_dump($order);
 
-                $this->_session->pd_pid = $pd_pid;
+                $this->_session->ps_pid = $ps_pid;
+                $this->_session->research_t = $research_t;
                 $this->_session->order = $order;
 
 
                 //再検索のためのsession保存
-                $this->_setParam('search', $search);
-                $this->_setParam('start-pos', $start_pos);
-                $this->_setParam('date', $date);
-                $this->_setParam('clock1', $clock1);
-                $this->_setParam('clock2', $clock2);
+                $this->_session->re_search    = $search;
+                $this->_session->re_start_pos = $start_pos;
+                $this->_session->re_date      = $date;
+                $this->_session->re_clock1    = $clock1;
+                $this->_session->re_clock2    = $clock2;
                 echo 1;
                 if ($research) {
-                    //return $this->_redirect('/search/result');
+                    return $this->_redirect('/result');
                 }
             }
 
         } else {
             $this->_session->errMsg = "エラーが発生しました。";
         }
-
-
-
-        //この後はいらない。
-
-        /*
-                //続くN行のうちのi行目にはi番目の巡りたい企画のID v_i と
-                //それに到着したい時刻 s_i と
-                //費やす時間t_iが空白区切りで入力される。
-                $this->_session->result = $result;
-                $N = $i; //巡る企画数
-                $this->_session->num = $N;
-
-
-                //続くN+1行のうちi+1行目にはN+1個の整数d_i1, d_i2, .. , d_iNが
-                //空白区切りで与えられる。(0≦i≦N)
-                //d_ijはi番目の企画（の建物）からj番目の企画（の建物）に行くのに
-                //かかる時間である。
-
-                //ダイクストラで事前に算出した時間を取り出す
-
-
-                for($i = 0; $i < $n; $i++){
-                    $eventID = $checkpoints[$i];
-                    $startTime = getStartTime($eventID);
-                    $endTime = getEndTime($eventID);
-                    $inputData .= sprintf("%d %d %d\n", $eventID, $startTime, $endTime);
-                }
-
-
-                $req = $this->getRequest();
-                $params = $req->getParms();
-                $beginTime = $params["clock1"];
-                $endTime = $params["clock2"];
-                $param_keys = array_keys($parms);
-                $checkpoints = array();
-                foreach ($keys as $key){
-                    if(substr($key, 0, 5) != "input")continue;
-                    if($parms[$key] == "")continue;
-                    $checkpoints += array(intval(substr($key, 5, -1)));
-                }
-
-                $n = count($checkpoints);
-                $startPos = $parms["startPos"];
-
-                $inputData = "";
-                $inputData .= sprintf("%d %d\n", $n, $startPos);
-                for($i = 0; $i < $n; $i++){
-                    $eventID = $checkpoints[$i];
-                    $startTime = getStartTime($eventID);
-                    $endTime = getEndTime($eventID);
-                    $inputData .= sprintf("%d %d %d\n", $eventID, $startTime, $endTime);
-                }
-                for($i = 0;$i < count($checkpoitns); $i++){
-                    for($j = -1;$j < $n; $j++){
-                        $from = $i;
-                        $to = $j;
-                        if($to == -1)$to = $startPos;
-                        $inputData .= sprintf("%d ", getDist($from, $to));
-                    }
-                }
-
-
-
-
-
-                /*$startPos = $request->getPost('start_pos'); //始点
-
-
-
-
-                $beginTime = $request->getPost('clock1');
-                $endTime = $request->getPost('clock2');
-
-
-
-
-                /*
-                 * 全点対
-                 */
-
-        /*
-            N M
-            v_1 u_1 t_1
-            v_2 u_2 t_2
-            :
-            v_M u_M t_M
-            1行目に全頂点数Nと辺の数Mが与えられる。
-
-            続くM行のうちのi行目にはi番目の辺の情報が与えられる。
-            i番目の辺はv_iからu_iまでt_i分で結ぶ有向辺である。
-         */
-
-
-
-        /*
-                $ver = array(); //辺の情報
-                $j = 0;
-                foreach ($data as $key => $item) {
-                    foreach ($data as $key2 => $item2) { //$item,$item2は共にbd_pid
-                        if ($key != $key2) { //$key,$key2は共にpd_pid 企画pid
-                            $var[$j]['v'] = $item; //ベクトルの始点
-                            $var[$j]['u'] = $item2; //ベクトルの終点
-                            $var[$j]['t'] = $this->_main->getTimeInfo($item, $item2);
-                            $j++;
-                        }
-                    }
-                }
-
-
-                //$beginTime = $params["clock1"];
-                //$endTime = $params["clock2"];
-                //$param_keys = array_keys($parms);
-                $checkpoints = array();
-                foreach ($keys as $key){
-                    if(substr($key, 0, 5) != "input")continue;
-                    if($parms[$key] == "")continue;
-                    $checkpoints += array(intval(substr($key, 5, -1)));
-                }
-
-                $n = count($checkpoints);
-                $startPos = $parms["startPos"];
-
-                $inputData = "";
-                $inputData .= sprintf("%d %d\n", $n, $startPos);
-                for($i = 0; $i < $n; $i++){
-                    $eventID = $checkpoints[$i];
-                    $startTime = getStartTime($eventID);
-                    $endTime = getEndTime($eventID);
-                    $inputData .= sprintf("%d %d %d\n", $eventID, $startTime, $endTime);
-                }
-                for($i = 0;$i < count($checkpoitns); $i++){
-                    for($j = -1;$j < $n; $j++){
-                        $from = $i;
-                        $to = $j;
-                        if($to == -1)$to = $startPos;
-                        $inputData .= sprintf("%d ", getDist($from, $to));
-                    }
-                }
-
-
-                $inout = array(
-                    0 => array('pipe', 'r'),
-                    1 => array('pipe', 'w'),
-                    2 => array('pipe', 'w')
-                );
-
-                $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes);
-
-                if(is_resource($proc)){
-                    fwrite($pipes[0], $inputData);
-                    fclose($pipes[0]);
-                    $answer = array_map(intval, explode($pipes[1], "\n"));
-
-                    //setparams ... not yet
-
-                    fclose($pipes[1]);
-                    fclose($pipes[2]);
-                }
-                $this->_session->data = $result;*/
-
-
-
 
     }
 

@@ -46,49 +46,46 @@
                 <div class="row">
                     <?php foreach ($this->data['genre'] as $key => $val) : ?>
                         <div class="col-sm-6 col-md-4">
-                            <div id="PushGenre<?php echo $val['name']; ?>" class="genre-push contact-box m-b-sm b-r-md" style="background-image: url(/img/logo/logo_<?php echo $val['name']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
+                            <div id="PushGenre<?php echo $val['name']; ?>" class="genre-push contact-box m-b-sm b-r-lg">
+                                <img alt="<?php echo $val['label']; ?>" src="/img/genre/<?php echo $val['name']; ?>.png">
                                 <input type="hidden" name="name" value="<?php echo $val['name']; ?>">
-                                <h3><strong><?php echo $val['label']; ?></strong></h3>
-                                <i class="fa fa-5x fa-<?php echo $this->icon[$val['name']]; ?> m-md" style="color: rgba(255,255,255,0.5); position: absolute; top: 0; right: 0;"></i>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
                 <?php foreach ($this->data['genre'] as $key => $val) : ?>
-                    <div id="BoxGenre<?php echo $val['name']; ?>" class="genre-box contact-box" style="background-image: url(/img/logo/logo_<?php echo $val['name']; ?>.png); background-size: cover;">
-                        <div class="transparent">
-                            <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
-                                <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
-                                <div class="col-xs-12 col-sm-6 col-md-4">
-                                    <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
-                                        <?php echo $val2['gd_detail_label']; ?>
-                                        <input type="hidden" name="btn-val" value="genre<?php echo $val2['gd_pid']; ?>">
-                                    </button>
-                                    <div class="select-box m-b-md" id="genre<?php echo $val2['gd_pid']; ?>">
-                                        <ul class="list-group clear-list m-t">
-                                        <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
-                                            <?php if ($item['pd_genre1'] == $val['name'] && $item['pd_genre2'] == $val2['gd_detail']) : ?>
-                                                <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
-                                                            <span class="pull-right" style="text-align: right;">
-                                                                <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                            </span>
-                                                    <span class="pull-right m-r-xs">
-                                                                <?php echo $item['pt_start']; ?>
-                                                            </span>
-                                                    <div class="i-checks">
-                                                        <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
-                                                    </div>
-                                                </li>
-                                            <?php ++$i; endif; ?>
-                                        <?php endforeach; ?>
-                                        </ul>
-                                        <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
-                                    </div>
+                    <div id="BoxGenre<?php echo $val['name']; ?>" class="genre-box contact-box">
+                        <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
+                            <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
+                                    <?php echo $val2['gd_detail_label']; ?>
+                                    <input type="hidden" name="btn-val" value="genre<?php echo $val2['gd_pid']; ?>">
+                                </button>
+                                <div class="select-box m-b-md" id="genre<?php echo $val2['gd_pid']; ?>">
+                                    <ul class="list-group clear-list m-t">
+                                    <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
+                                        <?php if ($item['pd_genre1'] == $val['name'] && $item['pd_genre2'] == $val2['gd_detail']) : ?>
+                                            <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
+                                                        <span class="pull-right" style="text-align: right;">
+                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                        </span>
+                                                <span class="pull-right m-r-xs">
+                                                            <?php echo $item['pt_start']; ?>
+                                                        </span>
+                                                <div class="i-checks">
+                                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
+                                                </div>
+                                            </li>
+                                        <?php ++$i; endif; ?>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                    <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
                                 </div>
-                                <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
-                            <?php endforeach; ?>
-                        </div>
+                            </div>
+                            <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
+                        <?php endforeach; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
