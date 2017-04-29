@@ -224,7 +224,6 @@ class SearchController extends Zend_Controller_Action
         $inputData = "";
         $request    = $this->getRequest();
         $research = $request->getPost('research');
-        var_dump($research);
         if (!$research) {
             $search    = $request->getParam('search');
             $start_pos = $request->getParam('start_pos');
@@ -251,7 +250,7 @@ class SearchController extends Zend_Controller_Action
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
-
+        /*
         var_dump($search);
         var_dump($N);
         var_dump($start_pos);
@@ -260,6 +259,7 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
+        */
 
         //$research = $this->_session->research;
 

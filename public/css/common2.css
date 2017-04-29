@@ -234,12 +234,57 @@ fieldset .ibox .ibox-content {
     height: 470px;
     overflow: scroll;
 }
-.modal-exp {
-    background-color: #fcf8e3;
-    text-align: left;
-    margin-bottom: 0;
+.modal-head {
+    padding: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
 }
-
+.modal-contents {
+    width: 100%;
+    padding: 30px 30px 15px;
+}
+.modal-exp {
+    padding: 0 15px;
+}
+.exp {
+    width: 100%;
+    padding: 0 15px;
+}
+.modal-contents .modal-p {
+    background-color: #a9a9a9;
+    width: 250px;
+    margin-left: -30px;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 17px;
+    text-align: right;
+    position: relative;
+}
+.modal-contents .modal-p::before {
+    content: '';
+    height: 10px;
+    width: 250px;
+    position: absolute;
+    left: 0;
+    top: 44px;
+    margin-left: 10px;
+    background-color: #dcdcdc;
+}
+.modal-contents .modal-p::after {
+    content: '';
+    height: 44px;
+    width: 10px;
+    position: absolute;
+    padding: 5px;
+    margin-left: 10px;
+    background-color: #dcdcdc;
+}
+.modal-web {
+    margin: 25px;
+}
+.modal-footer {
+    background-color: #e5e5e5;
+}
 #page-wrapper {
     min-height: 700px;
 }
@@ -603,6 +648,10 @@ fieldset .tabs-container .i-checks {
     text-align: right;
     float: right;
 }
+.i-checks label {
+    padding-left: 27px;
+    text-indent: -27px;
+}
 .widget {
     position: relative;
 }
@@ -750,6 +799,7 @@ fieldset .tabs-container .i-checks {
 #map_img {
     height: 650px;
     overflow: hidden;
+    border: #dcdcdc solid 2px;
 }
 .origin-map {
     height: 640px;
@@ -771,6 +821,21 @@ fieldset .tabs-container .i-checks {
     width: 100%;
     /*overflow-y: auto;
     overflow-x: hidden;*/
+}
+.width-over {
+    width: 100%;
+    padding: 3px 0 3px 34px;
+    text-indent: -15px;
+}
+.width-over i {
+    font-size: 15px;
+    text-align: center;
+}
+.width-over i.fa-map-marker {
+    margin-right: 15px;
+}
+.width-over i.fa-calendar {
+    margin-right: 16px;
 }
 #map_img:after {
     content: ".";
@@ -815,8 +880,73 @@ input.select2-search__field::-webkit-input-placeholder {
     margin-top: 6px !important;
     margin-left: 1px;
 }
+.play-stop-row {
+    position: relative;
+    background-color: #dcdcdc;
+    padding: 5px 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.position-top {
+    height: 20px;
+    width: 100%;
+    background-color: #dcdcdc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
 span.select2-selection__choice__remove {
     /*display: none !important;*/
+}
+#print-page {
+    position: relative;
+}
+#print-table {
+    position: absolute;
+    top: 650px;
+}
+.print-off {
+    display: none;
+}
+.is-sticky {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 24px;
+}
+.rec_pku_acd_icon {
+    width: 180px;
+    float: right;
+    text-align: right;
+}
+.title-plain {
+    width: 270px;
+    margin-left: -30px;
+    margin-bottom: 20px;
+    padding: 10px 20px 10px 10px;
+    font-size: 17px;
+    position: relative;
+    background-color: rgba(245,245,245,0.5);
+    color: #2f4f4f;
+}
+.title-plain h2 {
+    display: inline;
+    float: right;
+}
+.title-plain .btn-link {
+    margin-top: -10px;
+    color: #888888 !important;
+}
+.title-plain .btn-link:hover {
+    color: #1ab394 !important;
+}
+.title-plain::before {
+    content: '';
+    height: 10px;
+    width: 270px;
+    position: absolute;
+    left: 0;
+    top: 44px;
+    background-color: #a9a9a9;
 }
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {

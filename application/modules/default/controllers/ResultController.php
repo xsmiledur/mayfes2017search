@@ -94,17 +94,19 @@ class ResultController extends Zend_Controller_Action
         //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
         $start = $this->_session->start;
         $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
+        /*
         echo "<pre>";
         var_dump($ps_pid);
         var_dump($order);
         var_dump($start);
         var_dump($start_pos);
         echo "</pre>";
+        */
         //exit();
 
         $_start = strtotime($start);
-        var_dump($start);
-        var_dump($_start);
+        //var_dump($start);
+        //var_dump($_start);
         $project = array();
         foreach ($ps_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
@@ -122,12 +124,14 @@ class ResultController extends Zend_Controller_Action
                 $project[$key-1]['start'] = date("h:i", $_start);
             }
         }
+        /*
         echo "<pre>";
         foreach ($project as $item) {
             var_dump($item['info']['pt_time']);
             var_dump($item['research_t']);
         }
         echo "</pre>";
+        */
         $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
         $this->view->project = $project;
         $this->view->start   = $start;

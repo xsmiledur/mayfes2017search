@@ -193,53 +193,66 @@
                                     </div>
                                     <div class="ibox">
                                         <?php foreach ($this->data_all as $item) : ?>
-                                            <div class="modal inmodal fade" id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1" role="dialog"  aria-hidden="true">
+                                            <div class="modal inmodal fade"
+                                                 id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1"
+                                                 role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <div class="modal-header" style="background-image: url('/img/logo/logo_<?php echo $item['pd_genre']; ?>.png');">
-                                                            <div class="row">
-                                                                <span class="pull-right m-r-md text-success">
-                                                                    <?php echo $item['pd_genre1_']; ?> / <?php echo $item['pd_genre2_']; ?>
-                                                                </span>
-                                                                <div class="pull-left m-l-md">
-                                                                    <?php echo ($item['pd_rec_flg']) ? '<span class="label label-success"><i class="fa fa-flag"></i> おすすめ企画</span>' : ''; ?>
-                                                                    <?php echo ($item['pd_pickup_flg']) ? '<span class="label label-danger"><i class="fa fa-star"></i> ピックアップ企画</span>' : ''; ?>
-                                                                    <?php echo ($item['pd_academic_flg']) ? '<span class="label label-info"><i class="fa fa-mortar-board"></i> 学術企画</span>' : ''; ?>
+                                                        <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
+                                                            <div class="transparent">
+                                                                <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['pd_genre1_']; ?>
+                                                                                / <?php echo $item['pd_genre2_']; ?>
+                                                                            </span>
                                                                 </div>
-                                                            </div>
-                                                            <div>
-                                                                <h2 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h2>
-                                                                <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
-                                                                <div class="row m-t-sm text-muted">
-                                                                    <div class="col-lg-offset-1 col-lg-10">
-                                                                        <div class="col-lg-5">
-                                                                            <i class="fa fa-calendar m-r-md"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start']." <small> 〜 ".$item['pt_end']."</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：'.$item['pt_open'].'）' : ''; ?>
+                                                                <div>
+                                                                    <h1 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h1>
+                                                                    <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
+                                                                    <div class="m-t-md" style="margin-left: -4px;">
+                                                                        <div class="rec_pku_acd_icon">
+                                                                            <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                                                            <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                                                         </div>
-                                                                        <div class="col-lg-7">
-                                                                            <i class="fa fa-map-marker m-r-md"></i><?php echo $item['pp_place']; ?>
+                                                                        <div class="width-over">
+                                                                            <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                                                        </div>
+                                                                        <div class="width-over">
+                                                                            <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-header modal-exp">
+                                                        <div class="modal-contents">
                                                             <div class="row">
-                                                                <div class="col-lg-12">
-                                                                        <h4 style="text-align: center;">企画説明</h4>
+                                                                <div class="exp">
+
+                                                                    <div class="modal-p">
+                                                                        企画説明
+                                                                    </div>
+                                                                    <div class="modal-web">
                                                                         <?php echo nl2br($item['pd_web_long_kikaku']); ?>
+                                                                    </div>
                                                                 </div>
 
 
-                                                                <div class="col-lg-10 col-lg-offset-1 bg-muted b-r-md p-md">
-                                                                    <h4 style="text-align: center;" class="text-muted">団体説明</h4>
-                                                                    <?php echo nl2br($item['pd_web_long_org']); ?>
+                                                                <div class="exp">
+                                                                    <div class="modal-p">
+                                                                        団体説明</div>
+                                                                    <div class="modal-web">
+                                                                        <?php echo nl2br($item['pd_web_long_org']); ?>
+                                                                    </div>
                                                                 </div>
 
                                                             </div>
                                                         </div>
 
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                            <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                                                            <button type="button" class="btn btn-white"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -556,7 +569,7 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
-                /*} else if (j > 10) {
+                } else if (j > 10) {
                     swal({
                         title: "選択された企画が多すぎます",
                         text: "選択する企画は１０個以下にしてください",
@@ -564,7 +577,7 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "OK",
                         closeOnConfirm: false
-                    });*/
+                    });
                 } else {
                     $('#page-wrapper').addClass('sk-loading');
                     $('.sk-spinner-btn').click(function() {

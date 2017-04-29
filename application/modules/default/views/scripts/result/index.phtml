@@ -27,6 +27,25 @@
     <!-- Sweet Alert -->
     <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
+    <style>
+
+        /* TOOLTIPS */
+        .tooltip-inner {
+            background-color: #2F4050;
+        }
+        .tooltip.top .tooltip-arrow {
+            border-top-color: #2F4050;
+        }
+        .tooltip.right .tooltip-arrow {
+            border-right-color: #2F4050;
+        }
+        .tooltip.bottom .tooltip-arrow {
+            border-bottom-color: #2F4050;
+        }
+        .tooltip.left .tooltip-arrow {
+            border-left-color: #2F4050;
+        }
+    </style>
 </head>
 
 
@@ -158,7 +177,7 @@
                         <div class="ibox">
                             <div class="ibox-content">
 
-                                <div class="row row-cover">
+                                <div class="row row-cover print-page">
                                     <div class="col-lg-4" id="block1">
                                         <form id="research-form" action="/search/search" method="post">
                                             <div id="vertical-timeline" class="vertical-container dark-timeline">
@@ -185,54 +204,58 @@
                                                          role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
-                                                                <div class="modal-header"
-                                                                     style="background-image: url('/img/logo/logo_<?php echo $item['info']['pd_genre']; ?>.png');">
-                                                                    <div class="row">
-                                                                        <span class="pull-right m-r-md text-success">
-                                                                            <?php echo $item['info']['pd_genre1_']; ?>
-                                                                            / <?php echo $item['info']['pd_genre2_']; ?>
-                                                                        </span>
-                                                                        <div class="pull-left m-l-md">
-                                                                            <?php echo ($item['info']['pd_rec_flg']) ? '<span class="label label-success"><i class="fa fa-flag"></i> おすすめ企画</span>' : ''; ?>
-                                                                            <?php echo ($item['info']['pd_pickup_flg']) ? '<span class="label label-danger"><i class="fa fa-star"></i> ピックアップ企画</span>' : ''; ?>
-                                                                            <?php echo ($item['info']['pd_academic_flg']) ? '<span class="label label-info"><i class="fa fa-mortar-board"></i> 学術企画</span>' : ''; ?>
+                                                                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
+                                                                    <div class="transparent">
+                                                                        <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['info']['pd_genre1_']; ?>
+                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
+                                                                            </span>
                                                                         </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <h2 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h2>
-                                                                        <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
-                                                                        <div class="row m-t-sm text-muted">
-                                                                            <div class="col-lg-offset-1 col-lg-10">
-                                                                                <div class="col-lg-5">
-                                                                                    <i class="fa fa-calendar m-r-md"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                                                                        <div>
+                                                                            <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
+                                                                            <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
+                                                                            <div class="m-t-md" style="margin-left: -4px;">
+                                                                                <div class="rec_pku_acd_icon">
+                                                                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                                                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                                                                 </div>
-                                                                                <div class="col-lg-7">
-                                                                                    <i class="fa fa-map-marker m-r-md"></i><?php echo $item['info']['pp_place']; ?>
+                                                                                <div class="width-over">
+                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                                                                </div>
+                                                                                <div class="width-over">
+                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-header modal-exp">
+                                                                <div class="modal-contents">
                                                                     <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                            <div class="alert alert-warning">
-                                                                                <h4 style="text-align: center;">企画説明</h4>
+                                                                        <div class="exp">
+
+                                                                            <div class="modal-p">
+                                                                            企画説明
+                                                                            </div>
+                                                                            <div class="modal-web">
                                                                                 <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
                                                                             </div>
                                                                         </div>
 
 
-                                                                        <div class="col-lg-10 col-lg-offset-1 bg-muted b-r-md p-md">
-                                                                            <h4 style="text-align: center;" class="text-muted">
-                                                                                団体説明</h4>
+                                                                        <div class="exp">
+                                                                            <div class="modal-p">
+                                                                                団体説明</div>
+                                                                            <div class="modal-web">
                                                                             <?php echo nl2br($item['info']['pd_web_long_org']); ?>
+                                                                            </div>
                                                                         </div>
 
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="modal-footer">
+                                                                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
                                                                     <button type="button" class="btn btn-white"
                                                                             data-dismiss="modal">Close
                                                                     </button>
@@ -258,7 +281,7 @@
                                                         <div class="vertical-timeline-content">
                                                             <h2>
                                                                 <?php echo $item['info']['pd_label']; ?>
-                                                                <a href="#" class="btn btn-xs btn-info pull-right"
+                                                                <a href="#" class="btn btn-xs btn-info pull-right "
                                                                    data-toggle="modal"
                                                                    data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
                                                                     <span class="glyphicon glyphicon-info-sign"></span></a>
@@ -293,7 +316,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row ">
                                                 <div class="pull-right">
                                                     <input type="hidden" name="research" value="1">
                                                     <button type="submit" class="btn btn-info btn-research" disabled="">滞在時間も考慮して再検索</button>
@@ -302,142 +325,81 @@
                                         </form>
                                     </div>
                                     <div class="col-lg-8">
-                                        <div class="row position-tip">
-                                            <div id="map_img">
-                                                <div class="origin-map">
-                                                    <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
-                                                </div>
-                                                <!--
-                                                <div class="origin-map">
-                                                    <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
-                                                </div>
-                                                -->
+                                        <div id="sticker">
+                                            <div class="row position-tip">
+                                                <div id="map_img">
+                                                    <div class="origin-map">
+                                                        <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
+                                                    </div>
+                                                    <!--
+                                                    <div class="origin-map">
+                                                        <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                                    </div>
+                                                    -->
 
-                                                <?php foreach ($this->order as $i => $item) : ?>
-                                                    <?php if ($i == 0) : ?>
-                                                        <div class="over-map well well1 map-comment map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
-                                                            &#<?php echo 9312 + $i; ?> 現在地
-                                                            <p class="map-cm-b"></p>
-                                                        </div>
-                                                        <?php else: ?>
-                                                        <div class="over-map well well1 map-comment map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
-                                                            &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
-                                                            <p class="map-cm-b"></p>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                    <?php if ($item['way']) : ?>
-                                                        <div class="over-map well1">
-                                                            <?php foreach ($item['way'] as $key => $order) : ?>
-                                                                <?php if ($key < count($item['way'])) : ?>
-                                                                <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
-                                                                <?php endif; ?>
-                                                            <?php endforeach; ?>
-                                                        </div>
-                                                    <?php endif; ?>
-
-                                                <?php endforeach; ?>
-
-                                                <?php foreach ($this->order as $i => $item) : ?>
-                                                    <?php if ($i == 0) : ?>
-
-                                                        <div class="over-map well well2 map-comment map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
-                                                            &#<?php echo 9312 + $i; ?> 現在地
-                                                            <div class="map-cm-b"></div>
-                                                        </div>
-                                                    <?php else : ?>
-                                                        <div class="over-map well well2 map-comment map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top2']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left2']; ?>px;">
-                                                            &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
-                                                            <div class="map-cm-b"></div>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                    <?php if ($item['way']) : ?>
-                                                        <div class="over-map well2">
-                                                            <?php foreach ($item['way'] as $key => $order) : ?>
-                                                                <?php if ($key < count($item['way'])) : ?>
+                                                    <?php foreach ($this->order as $i => $item) : ?>
+                                                        <?php if ($i == 0) : ?>
+                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> 現在地
+                                                                <p class="map-cm-b"></p>
+                                                            </div>
+                                                            <?php else: ?>
+                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                <p class="map-cm-b"></p>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($item['way']) : ?>
+                                                            <div class="over-map print-on well1">
+                                                                <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                    <?php if ($key < count($item['way'])) : ?>
                                                                     <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
-                                                                <?php endif; ?>
-                                                            <?php endforeach; ?>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                                <!--
-                                                <p class="over-map" >
-                                                    <img src="/img/maps/route70-59.png" usemap="#shape1" id="shape1">
-                                                </p>
-                                                <p class="over-map" >
-                                                    <img src="/img/maps/route4-8.png" usemap="#shape1" id="shape1">
-                                                </p>
-                                                -->
-                                                <!--
-                                                    <img src="/img/maps/original_map.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                    <img src="/img/maps/map1.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                    <img src="/img/maps/map2.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                    <img src="/img/maps/map3.jpg" alt="本郷キャンパスマップ" style="width:820px; height:560px;" usemap="#shape1" id="shape1">
-                                                -->
-                                                <!--<div style="clear: both;"></div>-->
-                                                <p style="clear: both;"></p>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        <?php endif; ?>
+
+                                                    <?php endforeach; ?>
+
+                                                    <?php foreach ($this->order as $i => $item) : ?>
+                                                        <?php if ($i == 0) : ?>
+
+                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> 現在地
+                                                                <div class="map-cm-b"></div>
+                                                            </div>
+                                                        <?php else : ?>
+                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top2']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left2']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                <div class="map-cm-b"></div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($item['way']) : ?>
+                                                            <div class="over-map  well2">
+                                                                <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                    <?php if ($key < count($item['way'])) : ?>
+                                                                        <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <p style="clear: both;"></p>
+                                                </div>
                                             </div>
-                                            <!--<map name="shape1">
-                                                <area id="map12" shape="poly" href="#" alt="農学部3号館" class="icolor00ff00" coords="61,321, 117,322, 117,326, 133,327, 134,330, 137,330, 137,332, 140,333, 140,376, 137,376, 137,379, 134,379, 134,382, 44,382, 44,378, 41,378, 41,376, 38,376, 37,333, 41,333, 41,329, 44,329, 44,326, 61,326">
-                                                <area id="map11" shape="poly" href="#" alt="農学部2号館" class="icolor00ff00" coords="14,424, 36,424, 36,421, 44,421, 44,424, 58,424, 59,427, 66,428, 66,448, 72,448, 72,464, 66,464, 66,485, 59,485, 59,488, 39,488, 39,491, 29,491, 29,488, 13,488, 12,472, 24,472, 24,438, 14,438">
-                                                <area id="map10" shape="poly" href="#" alt="農学部1号館" class="icolor00ff00" coords="114,424, 136,424, 136,421, 142,421, 142,424, 146,424, 146,421, 152,421, 152,424, 171,424, 171,438, 151,438, 151,477, 171,477, 171,491, 114,491, 114,485, 107,485, 107,464, 99,464, 99,448, 107,448, 107,430, 114,430">
-                                                <area id="map43" shape="poly" href="#" alt="弥生講堂アネックス" class="icolor00ff00" coords="21,513, 44,512, 44,522, 65,523, 65,531, 21,531, 20,522, 16,522, 17,515, 21,515">
-                                                <area id="map47" shape="poly" href="#" alt="弥生講堂一条ホール" class="icolor00ff00" coords="103,508, 167,508, 167,516, 154,517, 154,521, 147,521, 146,517, 134,517, 134,529, 107,529, 107,516, 102,516">
-
-                                                <area id="map5" shape="poly" href="#" alt="工学部13号館" class="icolor0000ff" coords="275,223, 287,211, 289,213, 291,210, 305,222, 305,261, 278,261, 278,256, 273,256, 274,261, 258,261, 258,245, 254,242, 267,230, 280,243, 289,235">
-                                                <area id="map6" shape="poly" href="#" alt="工学部4号館" class="icolor0000ff" coords="236,272, 267,272, 267,271, 275,271, 275,273, 305,272, 305,277, 307,277, 307,290, 314,290, 314,305, 307,304, 307,320, 305,320, 305,324, 267,324, 267,326, 261,326, 261,324, 231,324, 231,319, 228,319, 228,290, 236,277">
-                                                <area id="map4" shape="poly" href="#" alt="工学部3号館" class="icolor0000ff" coords="367,206, 397,206, 397,212, 404,212, 404,226, 409,226, 409,229, 406,229, 406,230, 409,230, 409,232, 407,232, 407,235, 409,235, 409,238, 406,238, 407,240, 409,240, 409,243, 404,242, 404,257, 397,257, 397,263, 394,263, 394,264, 388,264, 388,262, 384,262, 384,261, 349,261, 349,263, 345,263, 345,264, 339,264, 339,263, 336,263, 336,235, 346,226, 344,223, 355,212, 357,215">
-                                                <area id="map39" shape="poly" href="#" alt="工学部2号館" class="iborder000000 icolor0000ff" coords="330,272, 357,272, 356,285, 367,285, 368,272, 396,272, 396,274, 403,274, 403,294, 405,296, 405,303, 403,303, 403,324, 396,324, 396,326, 369,327, 368,315, 357,315, 357,326, 329,326">
-                                                <area id="map44" shape="poly" href="#" alt="工学部6号館" class="iborder000000 icolor0000ff" coords="343,345, 402,346, 402,351, 405,351, 405,384, 401,384, 401,389, 378,389, 378,392, 366,392, 366,389, 343,389, 343,384, 340,384, 340,350, 343,350">
-                                                <area id="map9" shape="poly" href="#" alt="工学部1号館" class="iborder000000 icolor0000ff" coords="287,418, 301,418, 300,424, 305,424, 305,419, 348,418, 348,420, 351,420, 351,424, 356,424, 356,444, 358,444, 358,448, 356,448, 355,460, 358,460, 358,466, 356,466, 356,481, 352,481, 353,485, 349,485, 349,488, 305,488, 305,482, 300,482, 300,488, 287,488, 287,462, 285,461, 284,446, 287,446">
-                                                <area id="map3" shape="poly" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="287,343, 309,343, 309,394, 287,394, 287,391, 263,391, 263,347, 287,347">
-                                                <area id="map3" shape="poly" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="290,328, 301,327, 301,330, 310,330, 311,334, 286,334, 286,330, 290,330">
-                                                <area id="map3" shape="poly" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="287,411, 306,411, 306,413, 310,413, 310,416, 287,416">
-                                                <area id="map8" shape="poly" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="228,344, 246,344, 247,355, 245,355, 245,401, 232,401, 232,355, 228,355">
-                                                <area id="map8" shape="poly" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="227,330, 247,330, 247,334, 227,333">
-                                                <area id="map8" shape="poly" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="232,408, 245,408, 245,419, 232,418">
-                                                <area id="map7" shape="poly" href="#" alt="工学部5号館" class="iborder000000 icolor0000ff" coords="256,414, 266,414, 266,416, 272,416, 272,496, 249,496, 249,416, 256,417">
-                                                <area id="map7" shape="poly" href="#" alt="工学部5号館" class="iborder000000 icolor0000ff" coords="249,507, 271,506, 271,508, 272,508, 272,523, 266,522, 266,525, 256,525, 256,522, 249,522">
-                                                <area id="map46" shape="poly" href="#" alt="工学部14号館" class="iborder000000 icolor0000ff" coords="282.794989,507.924249, 348.549249,508.081556, 348.549249,513.115375, 354.054988,513.115375, 354.526909,527.744911, 282.323068,527.902218">
-                                                <area id="map2" shape="poly" href="#" alt="工学部11号館" class="iborder000000 icolor0000ff" coords="368.973530,508.963206, 374.351229,509.219287, 374.607310,508.066922, 383.826223,508.066922, 383.826223,509.603408, 385.746829,509.603408, 386.002910,513.956783, 409.946475,514.340905, 410.330596,527.913193, 356.681647,527.529071, 356.297525,513.316581, 357.577930,513.188541, 357.321849,508.963206, 358.730294,508.963206, 358.858334,517.157795, 368.845490,517.157795">
-
-                                                <area id="map28" shape="poly" href="#" alt="第二食堂" class="iborder000000 icolorff6600" coords="500.646673,46.554561, 511.212450,46.960937, 511.009262,51.837450, 517.104902,52.243826, 516.901714,54.885270, 518.730406,54.885270, 516.495338,90.036794, 513.853894,89.630418, 514.260270,94.710118, 510.399698,102.837639, 506.945502,102.431263, 505.116809,100.805759, 499.833921,100.602571, 495.566973,101.618511, 491.706401,102.837639, 487.845829,104.666331, 485.407573,105.885459, 483.985257,103.040827, 480.531061,103.853579, 476.670489,103.244015, 473.825857,100.602571, 472.606729,97.757939, 472.606729,94.710118, 474.029045,93.287802, 473.825857,89.020854, 461.837765,88.411290, 461.634577,83.331590, 475.248173,70.937122, 476.060925,73.375378, 483.172505,73.578566, 482.156565,85.363470, 487.845829,86.379410, 487.642641,90.443170, 490.080897,88.411290, 493.331905,50.211946, 500.240297,51.227886">
-                                                <area id="map25" shape="poly" href="#" alt="理学部1号館" class="iborder000000 icolorff6200" coords="436.925970,170.201550, 471.798702,170.201550, 471.798702,168.075164, 479.241053,168.075164, 479.453692,170.626827, 486.470766,170.414189, 486.896043,193.166520, 483.068548,193.591797, 483.068548,195.505544, 476.902029,195.080267, 477.539945,203.798450, 484.344380,203.798450, 484.557019,230.165638, 465.206905,230.590915, 465.419544,203.585811, 471.586064,203.373173, 471.586064,194.442351, 436.713332,193.591797, 436.500693,203.160534, 444.580960,203.373173, 445.006237,229.952999, 439.690272,230.165638, 439.690272,228.251890, 431.184728,228.464529, 430.972089,230.378276, 424.805570,230.378276, 424.380292,203.585811, 430.972089,203.373173, 430.972089,194.654990, 426.931956,194.654990, 426.931956,192.741242, 423.104461,192.741242, 423.317099,170.414189, 428.633065,170.414189, 429.058342,167.862525, 436.713332,167.862525">
-                                                <area id="map26" shape="poly" href="#" alt="理学部4・7号館" class="iborder000000 icolorff6200" coords="511.873992,138.234879, 489.145287,227.613974, 547.195628,241.435484, 567.160030,165.877898, 556.409967,148.370653">
-                                                <area id="map19" shape="poly" href="#" alt="安田講堂" class="iborder000000 icolorff6200" coords="499.129851,280.164063, 505.211316,280.716923, 505.027029,293.985572, 494.891255,293.985572, 494.891255,298.224168, 481.806893,297.487021, 481.806893,301.909904, 470.381111,302.094191, 470.381111,297.302734, 456.743889,297.118448, 456.743889,293.616998, 446.608115,293.801285, 446.608115,279.979776, 452.136719,279.795489, 452.136719,279.795489, 452.689579,275.556893, 453.795300,272.055444, 455.453881,269.844002, 458.033896,266.711127, 454.716734,262.103957, 458.955330,258.602508, 462.456779,261.551096, 465.221081,260.629662, 468.538243,259.339655, 472.223979,258.971081, 475.909715,258.786794, 479.779738,259.339655, 483.281187,260.445376, 486.598349,261.551096, 490.468372,257.865360, 497.102697,263.025391, 493.416961,265.973979, 495.444115,268.553994, 497.839844,271.134010, 498.945565,273.714025, 499.314138,276.662613">
-                                                <area id="map16" shape="poly" href="#" alt="法文1号館" class="iborder000000 icolorff6200" coords="443.475239,343.743007, 449.188130,343.005859, 449.188130,344.480154, 452.505292,344.848727, 452.505292,347.428742, 459.508191,353.878780, 462.456779,354.247354, 462.088206,365.304561, 464.115360,365.304561, 464.115360,373.966041, 466.326802,373.966041, 466.511089,380.416079, 464.115360,380.416079, 464.299647,391.473286, 466.142515,393.500441, 466.142515,395.527596, 464.115360,395.711883, 462.272492,396.817603, 461.351058,397.923324, 460.798198,394.790449, 450.293851,394.790449, 450.293851,397.923324, 427.995149,397.186177, 426.336568,396.080456, 426.336568,392.210433, 427.810862,390.920426, 428.548009,380.231792, 425.783707,380.231792, 426.152281,373.413180, 428.363722,373.413180, 427.995149,365.673135, 430.022303,365.673135, 429.469443,354.247354, 432.233745,354.247354, 439.789504,346.138735, 439.973790,344.111580">
-                                                <area id="map41" shape="poly" href="#" alt="法文1号館" class="iborder000000 icolorff6200" coords="428.004599,410.228012, 462.811177,410.228012, 463.085244,414.064957, 466.374055,414.064957, 466.785156,415.983430, 465.551852,417.079700, 464.318548,417.216734, 464.455582,427.083165, 466.374055,429.001638, 466.237021,434.757056, 464.181515,435.031124, 464.181515,442.979083, 457.740927,443.253150, 458.014995,445.171623, 435.404423,445.445691, 435.404423,442.842049, 428.141633,442.842049, 428.415701,435.168158, 426.360194,434.620023, 426.497228,427.357233, 428.415701,426.946132, 428.278667,416.120464, 426.634262,414.750126, 426.497228,411.598349">
-                                                <area id="map45" shape="poly" href="#" alt="法文2号館" class="iborder000000 icolorff6200" coords="508.103201,343.105091, 513.589277,343.105091, 513.386089,344.730595, 516.840285,344.527407, 516.637097,346.762475, 524.561429,354.686807, 526.999685,354.686807, 526.593309,366.065335, 529.234753,366.065335, 528.625189,373.380103, 531.063445,373.380103, 530.860257,380.288495, 528.422001,380.288495, 527.812437,391.667024, 530.250693,392.886152, 530.250693,396.543536, 529.031565,398.169040, 492.864100,398.575416, 490.629032,395.730784, 490.425844,392.276588, 492.457724,391.260648, 492.660912,379.678931, 490.629032,379.678931, 490.425844,373.583291, 492.254536,373.583291, 492.254536,365.455771, 494.286416,365.455771, 494.286416,354.280431, 496.115108,354.280431, 504.445817,347.372039, 504.649005,344.527407, 507.696825,344.324219">
-                                                <area id="map17" shape="poly" href="#" alt="グランドフェスティバルステージ" class="iborder000000 icolorff6200" coords="455.587409,304.358221, 497.613944,304.358221, 497.496878,326.366545, 455.587409,326.366545">
-                                                <area id="map48" shape="poly" href="#" alt="御殿下記念館" class="iborder000000 icolorff6200" coords="597.581527,154.126071, 612.253591,157.712576, 589.430381,241.506363, 562.694619,234.659400, 581.605280,163.581401">
-                                                <area id="map21" shape="poly" href="#" alt="御殿下グラウンド" class="iborder000000 icolorff6200" coords="618.945077,159.848107, 652.645324,167.413469, 650.925924,171.883910, 736.208182,192.172834, 717.982538,258.541688, 610.691955,233.782323, 607.253154,246.505886, 596.592872,244.098725">
-
-                                                <area id="map30" shape="poly" href="#" alt="七徳堂" class="iborder000000 icolorff0000" coords="736.798387,229.641129, 766.737903,232.665323, 764.318548,257.161290, 734.681452,254.288306">
-                                                <area id="map31" shape="poly" href="#" alt="医学部2号館" class="iborder000000 icolorff0000" coords="774.978831,298.365927, 799.021169,301.314516, 797.660282,307.211694, 801.062500,308.345766, 799.701613,312.882056, 802.423387,313.789315, 795.165323,358.471774, 791.082661,357.110887, 791.082661,359.379032, 789.721774,361.193548, 787.907258,362.100806, 785.865927,361.193548, 784.278226,360.059476, 783.597782,358.925403, 783.597782,355.750000, 771.349798,354.389113, 770.442540,361.420363, 767.040323,358.925403, 754.792339,356.657258, 751.843750,358.925403, 752.070565,352.347782, 739.822581,349.172379, 739.368952,353.255040, 737.554435,353.935484, 735.059476,354.389113, 733.244960,353.481855, 731.657258,352.120968, 731.657258,349.852823, 729.162298,348.718750, 730.069556,342.141129, 724.172379,341.460685, 723.265121,339.646169, 725.079637,329.666331, 731.430444,330.800403, 732.110887,326.717742, 743.224798,328.759073, 740.276210,342.367944, 743.451613,342.821573, 745.266129,329.439516, 749.121976,326.944556, 755.699597,327.171371, 758.648185,309.479839, 791.082661,314.469758, 792.443548,305.623992, 780.422379,302.902218, 779.288306,305.623992, 777.246976,305.623992, 775.432460,304.263105, 774.525202,301.768145">
-                                                <area id="map36" shape="poly" href="#" alt="育徳堂" class="iborder000000 icolorff0000" coords="665.928301,367.440398, 702.171371,367.563256, 702.417087,384.149068, 665.805444,384.149068">
-                                                <area id="map57" shape="poly" href="#" alt="医学部教育研究棟" class="iborder000000 icolorff0000" coords="834.177419,351.213710, 899.500000,350.686915, 899.324402,375.797477, 833.650624,374.919485">
-                                                <area id="map37" shape="poly" href="#" alt="薬学部棟" class="iborder000000 icolorff0000" coords="848.173765,233.005544, 892.123803,237.702495, 888.768838,264.206716, 880.045930,264.206716, 879.374937,274.607107, 898.498236,277.291079, 895.143271,306.479272, 871.323022,302.788810, 871.323022,306.814768, 881.723412,307.821258, 881.052419,318.221648, 878.703944,318.221648, 877.697455,327.280053, 839.115360,322.918599, 840.121850,314.195691, 837.773374,313.524698, 841.128339,295.743385, 835.424899,294.065902, 837.102382,285.342994, 841.799332,285.342994">
-                                                <area id="map40" shape="poly" href="#" alt="赤門総合研究棟" class="iborder000000 icolorff0000" coords="773.187941,415.449471, 778.447203,415.699912, 778.447203,414.197266, 793.223223,414.948589, 793.473664,465.287235, 794.725869,465.287235, 794.725869,477.809287, 818.768208,478.811051, 818.517767,490.331338, 772.687059,489.830456">
-                                                <area id="map60" shape="poly" href="#" alt="教育学部棟" class="iborder000000 icolorff0000" coords="712.860005,412.850554, 731.742314,412.595388, 731.487147,414.891885, 744.245464,414.636719, 744.245464,443.215348, 747.307460,443.215348, 748.072959,461.076991, 744.245464,461.076991, 743.735131,489.910786, 730.721648,489.655620, 730.721648,491.696951, 710.818674,491.186618, 711.073841,474.855973, 726.128654,474.600806, 726.638987,461.332157, 712.604839,461.076991, 712.604839,441.429183, 726.383821,440.408518, 726.894153,427.395035, 712.860005,427.395035">
-                                            </map>-->
-                                        </div>
-                                        <div class="row" style="position: relative;">
-                                            <div class="btn-group" style="margin-right:auto; margin-left: auto; position: absolute; left: 0; right: 0; top: 0; ">
-                                                <button type="button" class="btn btn-default dim btn-animate-stop"><i class="fa fa-pause"></i></button>
-                                                <button type="button" class="btn btn-default dim btn-animate-again"><i class="fa fa-play"></i></button>
-                                                <button type="button" class="btn btn-default dim btn-showall"><i class="fa fa-stop"></i></button>
+                                            <div class="row play-stop-row">
+                                                <div class="btn-group pull-right tooltip-demo text-center">
+                                                    <button type="button" class="btn btn-default btn-play" data-toggle="tooltip" data-placement="left" title="アニメーションを再生します"><i class="fa fa-play"></i></button>
+                                                    <button type="button" class="btn btn-default btn-pause" data-toggle="tooltip" data-placement="bottom" title="アニメーションを一時停止します"><i class="fa fa-pause"></i></button>
+                                                    <button type="button" class="btn btn-default btn-stop" data-toggle="tooltip" data-placement="right" title="アニメーションを停止します"><i class="fa fa-stop"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row p-md">
-                                            <p>aaa</p>
+                                            <div class="row m-t-xs">
+                                                <div class="btn-group pull-right">
+                                                    <button type="button" class="btn btn-primary btn-print"><i class="fa fa-print"></i> 印刷</button>
+                                                </div>
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="btn-group pull-right">
-                                                <button type="button" class="btn btn-primary btn-print"><i class="fa fa-print"></i> このページを印刷</button>
-                                                <button type="button" class="btn btn-info btn-fav"><i class="fa fa-book"></i> ブックマーク保存</button>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -459,16 +421,86 @@
 
     </div>
 </div>
+<div id="print-page" class="print-off">
+    <div id="map_print" style="width: 100%;">
+        <div class="origin-map">
+            <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
+        </div>
+        <?php foreach ($this->order as $i => $item) : ?>
+            <?php if ($i == 0) : ?>
+                <div class="over-map well map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                    &#<?php echo 9312 + $i; ?> 現在地
+                    <p class="map-cm-b"></p>
+                </div>
+            <?php else: ?>
+                <div class="over-map well map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
+                    &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                    <p class="map-cm-b"></p>
+                </div>
+            <?php endif; ?>
+            <?php if ($item['way']) : ?>
+                <div class="over-map print-on">
+                    <?php foreach ($item['way'] as $key => $order) : ?>
+                        <?php if ($key < count($item['way'])) : ?>
+                            <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="row"></div>
+        <p style="clear: both;"></p>
+    </div>
+    <div id="print-table" class="p-lg" style="width: 100%;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>時刻</th>
+                <th></th>
+                <th>場所</th>
+                <th>企画名</th>
+                <th>標準滞在時間</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $this->start; ?></td>
+                <td></td>
+                <td><?php echo $this->start_pos['bd_p_label2']; ?></td>
+                <th>現在地</th>
+                <td></td>
+            </tr>
 
-<!--
-<p>
-    <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:1025px; height:700px;" usemap="#shape1" id="shape1">
-</p>
--->
-
-<!--3100*2100-->
-
-
+            <?php foreach ($this->project as $key => $item) : ?>
+            <tr>
+                <td class="no-borders" style="padding-left: 20px;">↓ 移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?></td>
+            </tr>
+            <tr>
+                <td><?php echo $item['start']; ?></td>
+                <td>
+                        <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
+                </td>
+                <td>
+                    <?php echo $item['info']['pp_place']; ?>
+                </td>
+                <th>
+                    <?php echo $item['info']['pd_label']; ?>
+                </th>
+                <td>
+                    <?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td><?php echo $this->end; ?></td>
+                <td></td>
+                <td></td>
+                <th>終了</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script>
     //$(document).ready(function ()
     // {
@@ -483,89 +515,6 @@
     //});
 </script>
 
-<!-- スライドバー -->
-<script src="/js/rangeslider.min.js"></script>
-
-<!-- スライドバー(インデントを消したい…) -->
-<!--        <script>-->
-<!--            $(function() {-->
-<!--                var $document = $(document);-->
-<!--                var selector = '[data-rangeslider]';-->
-<!--                var $element = $(selector);-->
-<!--                // For ie8 support-->
-<!--                var textContent = ('textContent' in document) ? 'textContent' : 'innerText';-->
-<!--                // Example functionality to demonstrate a value feedback-->
-<!--                function valueOutput(element) {-->
-<!--                    var value = element.value;-->
-<!--                    var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];-->
-<!--                    output[textContent] = value;-->
-<!--                }-->
-<!--                $document.on('input', 'input[type="range"], ' + selector, function(e) {-->
-<!--                    valueOutput(e.target);-->
-<!--                });-->
-<!--                // Example functionality to demonstrate disabled functionality-->
-<!--                $document .on('click', '#js-example-disabled button[data-behaviour="toggle"]', function(e) {-->
-<!--                    var $inputRange = $(selector, e.target.parentNode);-->
-<!--                    if ($inputRange[0].disabled) {-->
-<!--                        $inputRange.prop("disabled", false);-->
-<!--                    }-->
-<!--                    else {-->
-<!--                        $inputRange.prop("disabled", true);-->
-<!--                    }-->
-<!--                    $inputRange.rangeslider('update');-->
-<!--                });-->
-<!--                // Example functionality to demonstrate programmatic value changes-->
-<!--                $document.on('click', '#js-example-change-value button', function(e) {-->
-<!--                    var $inputRange = $(selector, e.target.parentNode);-->
-<!--                    var value = $('input[type="number"]', e.target.parentNode)[0].value;-->
-<!--                    $inputRange.val(value).change();-->
-<!--                });-->
-<!--                // Example functionality to demonstrate programmatic attribute changes-->
-<!--                $document.on('click', '#js-example-change-attributes button', function(e) {-->
-<!--                    var $inputRange = $(selector, e.target.parentNode);-->
-<!--                    var attributes = {-->
-<!--                        min: $('input[name="min"]', e.target.parentNode)[0].value,-->
-<!--                        max: $('input[name="max"]', e.target.parentNode)[0].value,-->
-<!--                        step: $('input[name="step"]', e.target.parentNode)[0].value-->
-<!--                    };-->
-<!--                    $inputRange.attr(attributes);-->
-<!--                    $inputRange.rangeslider('update', true);-->
-<!--                });-->
-<!--                // Example functionality to demonstrate destroy functionality-->
-<!--                $document-->
-<!--                    .on('click', '#js-example-destroy button[data-behaviour="destroy"]', function(e) {-->
-<!--                        $(selector, e.target.parentNode).rangeslider('destroy');-->
-<!--                    })-->
-<!--                    .on('click', '#js-example-destroy button[data-behaviour="initialize"]', function(e) {-->
-<!--                        $(selector, e.target.parentNode).rangeslider({ polyfill: false });-->
-<!--                    });-->
-<!--                // Example functionality to test initialisation on hidden elements-->
-<!--                $document-->
-<!--                    .on('click', '#js-example-hidden button[data-behaviour="toggle"]', function(e) {-->
-<!--                        var $container = $(e.target.previousElementSibling);-->
-<!--                        $container.toggle();-->
-<!--                    });-->
-<!--                // Basic rangeslider initialization-->
-<!--                $element.rangeslider({-->
-<!--                    // Deactivate the feature detection-->
-<!--                    polyfill: false,-->
-<!--                    // Callback function-->
-<!--                    onInit: function() {-->
-<!--                        valueOutput(this.$element[0]);-->
-<!--                    },-->
-<!--                    // Callback function-->
-<!--                    onSlide: function(position, value) {-->
-<!--                        console.log('onSlide');-->
-<!--                        console.log('position: ' + position, 'value: ' + value);-->
-<!--                    },-->
-<!--                    // Callback function-->
-<!--                    onSlideEnd: function(position, value) {-->
-<!--                        console.log('onSlideEnd');-->
-<!--                        console.log('position: ' + position, 'value: ' + value);-->
-<!--                    }-->
-<!--                });-->
-<!--            });-->
-<!--        </script>-->
 </body>
 
 <script src="/js/jquery.imagemapster.js"></script>
@@ -575,7 +524,6 @@
 
 <!-- Mainly scripts -->
 <script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
-<script src="/Static_Full_Version/js/bootstrap.min.js"></script>
 <script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
@@ -591,6 +539,7 @@
 
 <!-- jquery UI -->
 <script src="/Static_Full_Version/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/Static_Full_Version/js/bootstrap.min.js"></script> <!--この順序でないとtooltipが出ないので注意-->
 
 <!-- IonRangeSlider -->
 <script src="/js/ionRangeSlider/ion.rangeSlider.min.js"></script>
@@ -604,10 +553,14 @@
 <!--mapper-->
 <script src="/js/mapper/cvi_map_lib.js"></script>
 
+<!--sticky-->
+<script src="/js/jquery.sticky/jquery.sticky.js"></script>
+
 <script>
-    var timer1, timer2;
+
+    var timer_;
     var map;
-    function timer(num, map) {
+    function timer(num, map, quick) {
         //最初の画像以外を非表示にする
         //var map = $('#map_img div:first-child');
         var flg;
@@ -615,76 +568,106 @@
         //map.after().hide();
         //タイマー
 
-        timer1 = setInterval(function () {
-            console.log(map);
+        timer_ = setInterval(function () {
             //フェードインとアウトを繰り返す
-            if (map.get(0) != undefined) {
-                if (map.hasClass('map-comment')) {
-                    if (flg == 1) {
+            if (map[0] == undefined) {
+                map[0] = $('#map_img .over-map.well' + num + ':first');
+                $('#map_img div').not(':first').hide();
+            } else if (map[0].get(0) == undefined) {
+                map[0] = $('#map_img .over-map.well' + num + ':first');
+                $('#map_img div').not(':first').hide();
+            } else {
+                if (map[0].hasClass('map-comment')) {
+                    if (flg == 1 || quick == 1) {
                         $('#map_img div').not(':first').hide();
-                        map = map.next('div.over-map.well' + num);
+                        map[0] = map[0].next('div.over-map.well' + num);
+                        console.log(map[0]);
                         flg = 0;
                     } else {
-                        map.show();
+                        map[0].show();
                         flg = 1;
                     }
                 } else {
-                    map.show();
-                    map = map.next('div.over-map.well' + num);
+                    map[0].show();
+                    map[0] = map[0].next('div.over-map.well' + num);
                 }
-            } else {
-                map = $('#map_img div:first-child');
-                $('#map_img div').not(':first').hide();
             }
+            quick = 0;
+
         }, 1500);
     }
+    function stopAnimate(num, map) {
+        clearInterval(timer_);
+        $('#map_img .over-map.well' + num).show();
+        delete map[0].get(0);
+        delete map[0];
+        console.log(map[0]);
+        $('.btn-stop').prop('disabled', true);
+        $('.btn-pause').prop('disabled', true);
+        $('.btn-play').prop('disabled', false);
+
+    }
+    function pauseAnimate(num) {
+        clearInterval(timer_);
+        $('.btn-pause').prop('disabled', true);
+        $('.btn-stop').prop('disabled', true);
+        $('.btn-play').prop('disabled', false);
+
+    }
+    function playAnimate(num, map) {
+        console.log(map);
+        timer(num, map, 1);
+        $('.btn-play').prop('disabled', true);
+        $('.btn-stop').prop('disabled', false);
+        $('.btn-pause').prop('disabled', false);
+    }
+
 
     $(function () {
+
+
+
         <!-- 地図のルートを点滅画像で表示 -->
-        /*
-        cvi_map.add(document.getElementById('shape1'),{
-            opacity: 25,
-            areacolor: '#ffe4b5',
-            bordercolor: '#ff6600'
-        });
-        */
+
         $('#map_img div').not(':first').hide();
         if ($(window).width() > 767) {
-            map = $('#map_img').find('.well1:first');
-            timer(1, map);
-            $('.btn-animate-again').prop('disabled', true);
+            //map等はスクロールしてもついてくる
+            $("#sticker").sticky({
+                topSpacing: 10,
+                bottomSpacing: 90,
+                center: true
+            });
 
-            $('.btn-showall').click(function() {
-                $(this).prop('disabled', true);
-                $('.btn-animate-stop').prop('disabled', true);
-                $('.btn-animate-again').prop('disabled', false);
+            map = [$('#map_img .over-map.well1:first')];
+            timer(1, map, 0);
+            $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
-                /*
-                var a = $('#map-img > div').show();
-                console.log(a);
-                */
+            $('.btn-stop').click(function() {
+                stopAnimate(1, map);
             });
-            $('.btn-animate-stop').click(function() {
-                clearInterval(timer1);
-                $(this).prop('disabled', true);
-                $('.btn-showall').prop('disabled', true);
-                $('.btn-animate-again').prop('disabled', false);
+            $('.btn-pause').click(function() {
+                pauseAnimate(1);
             });
-            $('.btn-animate-again').click(function() {
-                map = $('#map_img').find('div.well1:last');
-                timer(1, map);
-                $(this).prop('disabled', true);
-                $('.btn-showall').prop('disabled', false);
-                $('.btn-animate-stop').prop('disabled', false);
+            $('.btn-play').click(function() {
+                playAnimate(1, map);
             });
+            $('.btn-print').show();
 
 
         } else {
 
             var timer2 = timer(2);
+            $('.btn-print').hide();
         }
 
 
+        /*
+        // Tooltips demo
+        $('.tooltip-demo').tooltip({
+            selector: '[data-toggle="tooltip"]',
+            container: "body"
+        });
+        */
 
         $('.widget-back').click(function () {
             swal({
@@ -714,39 +697,6 @@
         $('.btn-research').click(function() {
             $('#page-wrapper').addClass('sk-loading');
         });
-        /*var time0 = new Date(2017,4,15,9,0);
-         $("#time0").html(timeToString(time0));
-         var time1 = new Date(time0*1+<?php echo $route1[2]; ?>*60*1000);
-         $("#time1").html(timeToString(time1));
-         var from1 = 0,
-         from2 = 0,
-         from3 = 0;
-         var saveResult1 = function (data) {
-         from1 = data.from;
-         };
-         var saveResult2 = function (data) {
-         from2 = data.from;
-         };
-         var saveResult3 = function (data) {
-         from3 = data.from;
-         };
-         var writeResult = function () {
-         var time2 = new Date(time1*1+ (from1+<?php echo $route2[2]; ?>)*60*1000);
-         var time3 = new Date(time2*1+ (from2+<?php echo $route3[2]; ?>)*60*1000);
-         var time4 = new Date(time3*1+ from3*60*1000);
-         $("#time2").html(timeToString(time2));
-         $("#time3").html(timeToString(time3));
-         $("#time4").html(timeToString(time4));
-         };
-         function timeToString(time) {
-         var hr = time.getHours();
-         var min = time.getMinutes();
-         if (min < 10) {
-         min = "0" + min;
-         }
-         return hr + ":" + min;
-         };*/
-
         <?php foreach ($this->project as $key => $item) : ?>
         $("#ionrange<?php echo $key; ?>").ionRangeSlider({
             min: 0,
@@ -758,17 +708,26 @@
                 $('#range-change<?php echo $key; ?>').text("変更後： " + data.from + " 分");
                 $('button.btn-research').prop('disabled', false);
             }
-            /*onStart: function (data) {
-             saveResult1(data);
-             writeResult();
-             },
-             onChange: saveResult1,
-             onFinish: function (data) {
-             saveResult1(data);
-             writeResult();
-             }*/
         });
         <?php endforeach; ?>
+
+        //個別印刷ボタンをクリックした時
+        $('.btn-print').on('click', function(){
+            //プリントしたいエリアの取得
+            //「#print」以外の要素に非表示を指定
+            $('#print-page').removeClass('print-off');
+            $('body > :not(#print-page)').addClass('print-off');
+            window.print();
+
+            //window.print()の実行後、作成した「#print」と、非表示用のclass「print-off」を削除
+            $('#print-page').addClass('print-off');
+            $('body > :not(#print-page)').removeClass('print-off');
+
+
+        });
+
+
+
     });
 </script>
 </html>

@@ -56,6 +56,10 @@
 
                 <?php foreach ($this->data['genre'] as $key => $val) : ?>
                     <div id="BoxGenre<?php echo $val['name']; ?>" class="genre-box contact-box">
+                        <div class="title-plain">
+                            <button type="button" class="btn btn-link genre-link">戻る</button>
+                            <h2><?php echo $val['label']; ?></h2>
+                        </div>
                         <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
                             <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
                             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -113,6 +117,10 @@
         <?php foreach ($this->data['area'] as $key => $val) : ?>
             <div id="BoxArea<?php echo $val['name']; ?>" class="area-box contact-box" style="background-image: url(/img/logo/<?php echo $val['name']; ?>.png); background-size: cover;">
                 <div class="transparent">
+                    <div class="title-plain">
+                        <button type="button" class="btn btn-link area-link text-muted">戻る</button>
+                        <h2><?php echo $val['label']; ?></h2>
+                    </div>
                     <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
                         <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
                         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -308,7 +316,7 @@
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#BoxGenre" + key).show();
         });
-        $(".genre-box").click(function(e){
+        $(".genre-link").click(function(e){
             e.stopPropagation();
             $(".genre-push").show();
             // 「id="jQueryBox"」の表示、非表示を切り替える
@@ -329,7 +337,7 @@
             $("#BoxArea" + key).show();
         });
 
-        $(".area-box").click(function(e){
+        $(".area-link").click(function(e){
             e.stopPropagation();
             $(".area-push").show();
             // 「id="jQueryBox"」の表示、非表示を切り替える
