@@ -1,0 +1,33 @@
+div#toptitle {
+    color: #fff;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    background: #FF9900;
+    padding: 20px;
+    border: 1px
+    dashed rgba(255,255,255,0.8);
+    box-shadow: 0 0 0 5px #f08080;
+    -moz-box-shadow: 0 0 0 5px #f08080;
+    -webkit-box-shadow: 0 0 0 5px #f08080;
+    font-size: 90%;
+}
+img.alg_img{
+    width: 80%;
+}
+div.rule{
+    border:1px dashed #F90;
+    width: 100%;
+    border-radius: 10px;
+    background: #FFDBA6;
+}
+div.rule_outside{
+    width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+}
+@media screen and (max-width: 767px) {
+    div#toptitle {
+        width: 100%;
+    }
+}
