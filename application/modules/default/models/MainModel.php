@@ -177,7 +177,7 @@ class MainModel
         $select = $this->_read->select();
         $select->from('90_project_summary', 'ps_pid')
             ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long_kikaku', 'pd_web_long_org', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
-            ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full'))
+            ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
             ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note'))
             ->where('pd_active_flg = ?', 1)
             ->where('pp_day = ?', $date)
@@ -193,23 +193,17 @@ class MainModel
                 if ($item['pp_full']) {
                     $data['data'][$i] = $item;
                     $i++;
-                } else {
-                    if ($item['pt_start']) {
-                        if ($item['pt_end']) {
-                            if ($item['pt_open']) {
-                                if ($item['pt_open_'] > $start && $item['pt_end_'] < $end) {
-                                    $data['data'][$i] = $item;
-                                    $i++;
-                                } elseif ($item['pt_start_'] > $start && $item['pt_end_'] < $end) {
-                                    $data['data'][$i] = $item;
-                                    $i++;
-                                }
-                            }
+                } else { //$item['pt_start']は必ずある
+                    if ($item['pt_start_'] >= $start || ($item['pt_open_'] && $item['pt_open_'] >= $start)) {
+                        if ($item['pt_start_'] + $item['pt_time'] <= $end) {
+                            $data['data'][$i] = $item;
+                            $i++;
                         }
                     }
                 }
             }
         }
+
         $data['area'] = array(
             0 => array(
                 'name' => 'no_dept',
@@ -250,7 +244,7 @@ class MainModel
                 'label' => '音楽',
             ),
             2 => array(
-                'name' => 'food',
+                'name' => 'shop',
                 'label' => '飲食・販売',
             ),
             3 => array(
@@ -488,15 +482,33 @@ class MainModel
     public function getProjectInfo($ps_pid)
     {
 
-        $select = $this->_read->select();
-        $select->from('90_project_summary');
-        $select->join('90_project_data', 'ps_pd_pid = pd_pid')
-            ->join('90_project_place','ps_pp_pid = pp_pid')
-            ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
-        $select->where('ps_pd_active_flg = ?', 1)
-            ->where('ps_pid = ?', $ps_pid);
-        $stmt = $select->query();
-        return $stmt->fetch();
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('90_project_summary');
+            $select->join('90_project_data', 'ps_pd_pid = pd_pid')
+                ->join('90_project_place','ps_pp_pid = pp_pid')
+                ->join('building_data', 'pp_bd_pid = bd_pid');
+            $select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
+            $select->where('ps_pd_active_flg = ?', 1)
+                ->where('ps_pid = ?', $ps_pid);
+            $stmt = $select->query();
+            $result = $stmt->fetch();
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $result;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
     /**
@@ -517,47 +529,182 @@ class MainModel
     //建物間の
     public function getTimeInfo($bd_pid1, $bd_pid2)
     {
-        $select = $this->_read->select();
-        $select->from('checkpos_data_89');
-        $select
-            ->where('cd_active_flg = ?', 1)
-            ->where('cd_bd_pid1 = ?', $bd_pid1)
-            ->where('cd_bd_pid2 = ?', $bd_pid2);
-        $stmt = $select->query();
-        $data = $stmt->fetch();
-        return $data['cd_time'];
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('90_checkpos_data');
+            $select->where('cd_active_flg = ?', 1)
+                ->where('cd_bd_pid1 = ?', $bd_pid1)
+                ->where('cd_bd_pid2 = ?', $bd_pid2);
+            $stmt = $select->query();
+            $data = $stmt->fetch();
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data['cd_time'];
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
     public function getOrderWay($bd_pid1,$bd_pid2)
     {
-        $select = $this->_read->select();
-        $select->from('checkpos_data_89');
-        $select->where('cd_active_flg = ?', 1)
-            ->where('cd_bd_pid1 = ?', $bd_pid1)
-            ->where('cd_bd_pid2 = ?', $bd_pid2);
-        $stmt = $select->query();
-        $res = $stmt->fetch();
 
-        $data = array();
-        if ($res['cd_pid']) {
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
             $select = $this->_read->select();
-            $select->from('checkpos_order_89');
-            $select->where('co_active_flg = ?', 1)
-                ->where('co_cd_pid = ?', $res['cd_pid'])
-                ->order('co_order');
+            $select->from('90_checkpos_data');
+            $select->where('cd_active_flg = ?', 1)
+                ->where('cd_bd_pid1 = ?', $bd_pid1)
+                ->where('cd_bd_pid2 = ?', $bd_pid2);
+            $stmt = $select->query();
+            $res = $stmt->fetch();
+
+            if ($res['cd_pid'] && $res['cd_bd_pid1'] != $res['cd_bd_pid2']) {
+                $select = $this->_read->select();
+                $select->from('90_checkpos_order');
+                $select->where('co_active_flg = ?', 1)
+                    ->where('co_cd_pid = ?', $res['cd_pid'])
+                    ->order('co_order');
+                $stmt = $select->query();
+                $_data = $stmt->fetchAll();
+
+                $node_num = count($_data) + 1;
+
+                foreach ($_data as $key => $item) {
+                    $data[$item['co_order']] = $item['co_node1'];
+                    if ($key == $node_num - 2) {
+                        $data[$node_num] = $item['co_node2'];
+                    }
+                }
+            } else {
+                $data = false;
+            }
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
+
+    }
+
+
+    /**
+     * step2用　フリーワード
+     * @param $date
+     * @param $start
+     * @return bool
+     */
+    public function getFreeWords($date, $start)
+    {
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            //建物名から検索
+            $select = $this->_read->select();
+            $select->from('building_data', array('bd_p_label2', 'bd_pid'));
+            $select->where('bd_pos_flg = ?', 1);
             $stmt = $select->query();
             $_data = $stmt->fetchAll();
-            $node_num = count($_data) + 1;
 
             foreach ($_data as $key => $item) {
-                $data[$_data['co_order']] = $_data['co_node1'];
-                if ($key == $node_num - 1) {
-                    $data[$node_num] = $_data['co_node2'];
+                $data[$key]['bd_pid'] = $item['bd_pid'];
+                $data[$key]['name'] = $item['bd_p_label2'];
+                $data[$key]['bd_flg'] = 1;
+            }
+
+            //その他の建物名から検索
+            $select = $this->_read->select();
+            $select->from('building_other', array('bo_label', 'bo_bd_pid'))
+                ->join('building_data', 'bo_bd_pid = bd_pid', 'bd_p_label2');
+            $select->where('bo_active_flg = ?', 1);
+            $stmt = $select->query();
+            $_data = $stmt->fetchAll();
+
+            foreach ($_data as $key => $item) {
+                $arr = array();
+                $arr['bd_pid'] = $item['bo_bd_pid'];
+                $arr['name'] = $item['bd_p_label2'];
+                $arr['data'] = $item['bo_label'];
+                array_push($data, $arr);
+            }
+
+
+            //企画名から検索
+            $select = $this->_read->select();
+            $select->from('90_project_summary', 'ps_pid')
+                ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
+                ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
+                ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start_', 'pt_end_', 'pt_open_'))
+                ->join('building_data', 'pp_bd_pid = bd_pid', array('bd_pos_flg'))
+                ->where('pd_active_flg = ?', 1)
+                ->where('bd_pos_flg = ?', 1)
+                ->where('pp_day = ?', $date)
+                ->order('pd_pid');
+            $stmt = $select->query();
+            $_data = $stmt->fetchAll();
+
+            foreach ($_data as $item) {
+                if ($item['pp_full']) {
+                    $arr['bd_pid'] = $item['pp_bd_pid'];
+                    $arr['name'] = $item['pd_label'];
+                    $arr['data'] = $item['pd_body'];
+                    array_push($data, $arr);
+                } else {
+                    if ($item['pt_start_']) {
+                        if ($item['pt_end_']) {
+                            if ($start < $item['pt_end_'] + 60 || $start > $item['pt_start_'] - 60 ) {
+                                $arr['bd_pid'] = $item['pp_bd_pid'];
+                                $arr['name'] = $item['pd_label'];
+                                $arr['body'] = $item['pd_body'];
+                                array_push($data, $arr);
+                            }
+                        } else {
+                            if ($start > $item['pt_start'] - 60) {
+                                $arr['bd_pid'] = $item['pp_bd_pid'];
+                                $arr['name'] = $item['pd_label'];
+                                $arr['body'] = $item['pd_body'];
+                                array_push($data, $arr);
+                            }
+                        }
+                    }
                 }
             }
-        }
-        return $data;
 
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
 
@@ -664,33 +811,6 @@ class MainModel
 
          return $data;
      }*/
-
-    /**
-     * フリーワード検索
-     *
-     * @return array
-     */
-    public function searchFree()
-    {
-        //$contents = $this->getContentsData('ja',null);
-
-        /*
-        $select = $this->_read->select();
-        $select->from('free_words_data')
-            ->where('fw_active_flg = ? ', 1);
-        //$data = $this->_read->quoteInto('fw_name LIKE ?', '%'.$search.'%');
-        /*$select->where('fw_name LIKE ?', '%'.$search.'%')
-            ->orwhere('fw_area LIKE ?', '%'.$search.'%')
-            ->orwhere('fw_place_index LIKE ?', '%'.$search.'%');*/
-
-        //var_dump($data);exit();
-        /*
-                $stmt = $select->query();
-                $data = $stmt->fetchAll();
-                */
-
-        return $data;
-    }
 
     /*
     /**

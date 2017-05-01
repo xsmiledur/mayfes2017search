@@ -1176,16 +1176,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 @keyframes fadeInRight {
     0% {
         opacity: 0;
-        -webkit-transform: translateX(20px);
+        /*-webkit-transform: translateX(20px);
         -ms-transform: translateX(20px);
-        transform: translateX(20px);
+        transform: translateX(20px);*/
     }
 
     100% {
         opacity: 1;
-        -webkit-transform: translateX(0);
+        /*-webkit-transform: translateX(0);
         -ms-transform: translateX(0);
-        transform: translateX(0);
+        transform: translateX(0);*/
     }
 }
 
