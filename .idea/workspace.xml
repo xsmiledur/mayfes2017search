@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="" />
     <ignored path="mayfes2017search.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -66,11 +64,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-54">
-                  <caret line="616" column="22" lean-forward="false" selection-start-line="616" selection-start-column="22" selection-end-line="616" selection-end-column="22" />
+                <state relative-caret-position="651">
+                  <caret line="561" column="12" lean-forward="true" selection-start-line="561" selection-start-column="12" selection-end-line="561" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -86,7 +84,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
@@ -130,11 +128,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="config.ini" pinned="false" current-in-tab="true">
+          <file leaf-file-name="config.ini" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="16" column="24" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+                <state relative-caret-position="120">
+                  <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -155,6 +153,16 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1095">
                   <caret line="73" column="39" lean-forward="false" selection-start-line="73" selection-start-column="39" selection-end-line="73" selection-end-column="39" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="refresh02.phtml" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh02.phtml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="384">
+                  <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="76" selection-end-column="11" />
                   <folding />
                 </state>
               </provider>
@@ -373,7 +381,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="index/index&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/index/index.phtml&#10;animate&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/css/animate.css&#10;sticky.js&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/jquery.sticky/jquery.sticky.js&#10;resultco&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;searchcontroller&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/SearchController.php&#10;tooltip-inner&#9;null&#9;null&#10;ui-helper-hidden-accessible&#9;null&#9;null&#10;result/in&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/result/index.phtml&#10;refre&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/search/refresh01.phtml&#10;getprojectinfore&#9;null&#9;null&#10;searchcontro&#9;null&#9;null&#10;refresh01&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/search/refresh01.phtml&#10;mainmode&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/models/MainModel.php&#10;.mapper&#9;null&#9;null&#10;pos-cover&#9;null&#9;null&#10;getorderway&#9;null&#9;null&#10;index.phtml&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/result/index.phtml&#10;resultcont&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;select2.js&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2_mdf/select2.js&#10;select2.full&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2_mdf/select2.full.js&#10;sele&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2/select2.full.js&#10;select2&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/js/plugins/select2/select2.full.min.js&#10;common&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/css/common2.css&#10;indexcontroller&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/IndexController.php&#10;form_adva&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/form_advanced.html&#10;common2&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/css/common2.css&#10;resultc&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;style.css&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/css/style.css&#10;action.php&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Action.php&#10;zend_sess&#9;null&#9;null&#10;zend_controller_plugin&#9;null&#9;null&#10;zend_controller_ex&#9;null&#9;null&#10;broker&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Plugin/Broker.php&#10;front&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Front.php&#10;plugin/bro&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Plugin/Broker.php&#10;zend_controller_dispatcher_sta&#9;null&#9;null&#10;zend_controller_dispatcher&#9;null&#9;null&#10;jquery.min&#9;FILE&#9;file://C:/PHP/mayfes2017search/public/js/jquery.flot/jquery.min.js&#10;col-md-6&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="refresh02&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/search/refresh02.phtml&#10;index/index&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/index/index.phtml&#10;animate&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/css/animate.css&#10;sticky.js&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/jquery.sticky/jquery.sticky.js&#10;resultco&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;searchcontroller&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/SearchController.php&#10;tooltip-inner&#9;null&#9;null&#10;ui-helper-hidden-accessible&#9;null&#9;null&#10;result/in&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/result/index.phtml&#10;refre&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/search/refresh01.phtml&#10;getprojectinfore&#9;null&#9;null&#10;searchcontro&#9;null&#9;null&#10;refresh01&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/search/refresh01.phtml&#10;mainmode&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/models/MainModel.php&#10;.mapper&#9;null&#9;null&#10;pos-cover&#9;null&#9;null&#10;getorderway&#9;null&#9;null&#10;index.phtml&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/views/scripts/result/index.phtml&#10;resultcont&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;select2.js&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2_mdf/select2.js&#10;select2.full&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2_mdf/select2.full.js&#10;sele&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/js/select2/select2.full.js&#10;select2&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/js/plugins/select2/select2.full.min.js&#10;common&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/css/common2.css&#10;indexcontroller&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/IndexController.php&#10;form_adva&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/form_advanced.html&#10;common2&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/css/common2.css&#10;resultc&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/application/modules/default/controllers/ResultController.php&#10;style.css&#9;FILE&#9;file:///Users/xsmiledur/PHP/mayfes2017search/public/Static_Full_Version/css/style.css&#10;action.php&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Action.php&#10;zend_sess&#9;null&#9;null&#10;zend_controller_plugin&#9;null&#9;null&#10;zend_controller_ex&#9;null&#9;null&#10;broker&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Plugin/Broker.php&#10;front&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Front.php&#10;plugin/bro&#9;FILE&#9;file:///Users/xsmiledur/PHP/ZendFramework-1.12.20/library/Zend/Controller/Plugin/Broker.php&#10;zend_controller_dispatcher_sta&#9;null&#9;null&#10;zend_controller_dispatcher&#9;null&#9;null&#10;jquery.min&#9;FILE&#9;file://C:/PHP/mayfes2017search/public/js/jquery.flot/jquery.min.js&#10;col-md-6&#9;null&#9;null" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -847,16 +855,16 @@
       <workItem from="1493280759116" duration="163000" />
       <workItem from="1493290518030" duration="54103000" />
       <workItem from="1493636621812" duration="103000" />
-      <workItem from="1493652330841" duration="103000" />
+      <workItem from="1493652330841" duration="410000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187366000" />
+    <option name="totallyTimeSpent" value="187673000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -872,7 +880,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1066,13 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh02.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4035">
-          <caret line="149" column="2391" lean-forward="false" selection-start-line="149" selection-start-column="2390" selection-end-line="149" selection-end-column="2391" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/jquery.datatables/media/src/api/api.methods.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -1197,25 +1198,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="24" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index2/index.phtml" />
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/__IndexController.php" />
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/_IndexController.php" />
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="616" column="22" lean-forward="false" selection-start-line="616" selection-start-column="22" selection-end-line="616" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitattributes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1228,6 +1213,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh02.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="76" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="561" column="12" lean-forward="true" selection-start-line="561" selection-start-column="12" selection-end-line="561" selection-end-column="12" />
           <folding />
         </state>
       </provider>
