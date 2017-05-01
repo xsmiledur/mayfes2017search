@@ -48,15 +48,8 @@ try {
     $front->dispatch();
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
-/*<<<<<<< hikaru
-    echo $e->getMessage();
-    //exit();
-    //return false;
-=======*/
     //echo $e->getMessage();
-    //exit();
-    return false;
-//>>>>>>> master
+    //return false;
 }
 
 

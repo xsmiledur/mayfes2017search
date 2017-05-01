@@ -1,4 +1,4 @@
 RewriteEngine on
 RewriteBase /
-RewriteRule !\.(js|ico|gif|jpg|JPG|JPEG|png|css|eot|woff|ttf|svg|less|zip|xls|xlsx|php|json|GIF|pdf|csv)$ index.php
+RewriteRule !\.(js|ico|gif|jpg|jpeg|JPG|JPEG|png|css|eot|woff|ttf|svg|less|zip|xls|xlsx|php|json|GIF|pdf|csv|out)$ index.php
 
