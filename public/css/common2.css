@@ -1,6 +1,6 @@
 #page-wrapper {
     margin-left: 0;
-    background: linear-gradient(0deg, rgba(0,100,0, .7), rgba(255, 244, 98, .7)), url('/img/background2.jpg');
+    background: linear-gradient(0deg, rgba(126, 280, 123, .7), rgba(250,198,0, .7)), url('/img/background2.jpg');
 }
 #page-wrapper.sk-loading {
     position: relative;
@@ -648,9 +648,23 @@ fieldset .tabs-container .i-checks {
     text-align: right;
     float: right;
 }
+.i-checks,
+.i-checks {
+    margin-left: 27px;
+}
 .i-checks label {
-    padding-left: 27px;
-    text-indent: -27px;
+    display: inline !important;
+    text-indent: 27px;
+    margin-left: -27px;
+}
+#tab-2 .i-checks > span:first-child,
+#tab-3 .i-checks > span:first-child {
+    margin-left: -27px;
+}
+#tab-2 .i-checks > span:nth-child(2),
+#tab-3 .i-checks > span:nth-child(2) {
+    margin-right: 29px;
+    margin-left: -27px;
 }
 .widget {
     position: relative;

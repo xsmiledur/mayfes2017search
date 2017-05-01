@@ -177,7 +177,7 @@ class MainModel
         $select = $this->_read->select();
         $select->from('90_project_summary', 'ps_pid')
             ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long_kikaku', 'pd_web_long_org', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
-            ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full'))
+            ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
             ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note'))
             ->where('pd_active_flg = ?', 1)
             ->where('pp_day = ?', $date)
@@ -193,23 +193,17 @@ class MainModel
                 if ($item['pp_full']) {
                     $data['data'][$i] = $item;
                     $i++;
-                } else {
-                    if ($item['pt_start']) {
-                        if ($item['pt_end']) {
-                            if ($item['pt_open']) {
-                                if ($item['pt_open_'] > $start && $item['pt_end_'] < $end) {
-                                    $data['data'][$i] = $item;
-                                    $i++;
-                                } elseif ($item['pt_start_'] > $start && $item['pt_end_'] < $end) {
-                                    $data['data'][$i] = $item;
-                                    $i++;
-                                }
-                            }
+                } else { //$item['pt_start']は必ずある
+                    if ($item['pt_start_'] >= $start || ($item['pt_open_'] && $item['pt_open_'] >= $start)) {
+                        if ($item['pt_start_'] + $item['pt_time'] <= $end) {
+                            $data['data'][$i] = $item;
+                            $i++;
                         }
                     }
                 }
             }
         }
+
         $data['area'] = array(
             0 => array(
                 'name' => 'no_dept',

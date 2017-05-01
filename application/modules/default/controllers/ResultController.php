@@ -111,6 +111,7 @@ class ResultController extends Zend_Controller_Action
         foreach ($ps_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
                 $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
+                if (!$project[$key-1]['info']['pt_time']) $project[$key-1]['info']['pt_time'] = 30;
                 $project[$key-1]['time'] = $order[$key-1]['time'];
                 $project[$key-1]['pre']  = $_start;
                 $_start = $_start + $order[$key-1]['time'] * 60;
@@ -124,14 +125,14 @@ class ResultController extends Zend_Controller_Action
                 $project[$key-1]['start'] = date("h:i", $_start);
             }
         }
-        /*
+
         echo "<pre>";
         foreach ($project as $item) {
             var_dump($item['info']['pt_time']);
-            var_dump($item['research_t']);
+            var_dump($item['info']['pt_start']);
         }
         echo "</pre>";
-        */
+
         $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
         $this->view->project = $project;
         $this->view->start   = $start;

@@ -72,13 +72,15 @@
                                     <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
                                         <?php if ($item['pd_genre1'] == $val['name'] && $item['pd_genre2'] == $val2['gd_detail']) : ?>
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
-                                                        <span class="pull-right" style="text-align: right;">
+                                                <div class="i-checks">
+                                                    <span class="pull-right" style="text-align: right;">
                                                             <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                        </span>
+                                                    </span>
+                                            <?php if ($item['pt_start']) : ?>
                                                 <span class="pull-right m-r-xs">
                                                             <?php echo $item['pt_start']; ?>
                                                         </span>
-                                                <div class="i-checks">
+                                                <?php endif; ?>
                                                     <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
                                                 </div>
                                             </li>
@@ -133,13 +135,15 @@
                                     <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
                                         <?php if ($item['pp_name1'] == $val['name'] && $item['pp_name2'] == $val2['bd_p_name2']) : ?>
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
-                                                <span class="pull-right" style="text-align: right;">
+                                                <div class="i-checks">
+                                                    <span class="pull-right" style="text-align: right;">
                                                     <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                 </span>
-                                                <span class="pull-right m-r-xs">
+                                                    <?php if ($item['pt_start']) : ?>
+                                                    <span class="pull-right m-r-xs">
                                                     <?php echo $item['pt_start']; ?>
                                                 </span>
-                                                <div class="i-checks">
+                                                <?php endif; ?>
                                                     <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
                                                 </div>
                                             </li>

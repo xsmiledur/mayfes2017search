@@ -136,7 +136,10 @@ class SearchController extends Zend_Controller_Action
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
         $start = $request->getPost('start');
-        if (strlen($start) == 0) $start = date("h:i");
+        if (strlen($start) == 0) {
+            $time = time() + 9*3600;  //GMTとの時差9時間を足す
+            $start = date("h:i", $time);
+        }
         $this->_session->start = intval(substr($start, 0, 2)) * 60 + intval(substr($start, 3, 2));
     }
 
@@ -148,23 +151,19 @@ class SearchController extends Zend_Controller_Action
         $clock2 = $request->getPost('clock2');
         $no_time = $request->getPost('no_time');
 
-        var_dump($radio);
-        var_dump($clock1);
-        var_dump($clock2);
-
-        if (!$no_time && strlen($clock1) == 0) {
-            $clock1 = date("h:i");
-        } elseif ($no_time) {
+        if (strlen($clock1) == 0) {
+            $time = time() + 9*3600;  //GMTとの時差9時間を足す
+            $clock1 = date("h:i", $time);
+        }
+        if ($no_time) {
             $clock2 = "18:00";
         }
+
+
         $this->_session->date = $radio;
         $this->_session->no_time = $no_time;
-        $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1));
-        $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2));
-
-        var_dump($this->_session->date);
-        var_dump($this->_session->start);
-        var_dump($this->_session->end);
+        $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
+        $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 
 
     }
@@ -243,7 +242,10 @@ class SearchController extends Zend_Controller_Action
         }
 
         $N = count($search);
-        if (!$clock1) $clock1 = date("H:i");
+        if (!$clock1) {
+            $time = time() + 9*3600;  //GMTとの時差9時間を足す
+            $clock1 = date("h:i", $time);
+        }
         $clock1_ = (int)substr($clock1, 0, 2) * 60 + (int)substr($clock1, 3, 2);
         $clock2_ = (int)substr($clock2, 0, 2) * 60 + (int)substr($clock2, 3, 2);
 

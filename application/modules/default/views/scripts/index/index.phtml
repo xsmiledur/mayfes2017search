@@ -313,13 +313,13 @@
                                                     <ul id="search-all" class="list-group clear-list m-t">
                                                         <?php foreach($this->data_all as $key => $item) : ?>
                                                             <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['ps_pid']; ?>">
-                                                                <span class="pull-right" style="width: 30%; text-align: right;">
+                                                                <span class="pull-right body-text no-margins" style="width: 30%;">
                                                                     <?php echo $item['pd_body']; ?>
                                                                 </span>
                                                                 <span class="pull-right m-r-lg place-text">
                                                                     <?php echo $item['pp_place']; ?>
                                                                 </span>
-                                                                <span class="pull-right m-r-lg" style="width:14%; text-align: right;">
+                                                                <span class="pull-right m-r-lg time-text" style="width:14%;">
                                                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                                                 </span>
                                                                 <label> <?php echo $item['pd_label']; ?> </label>
@@ -470,15 +470,10 @@
 
                     var no_time = $('input[name="no-time"]:checked').val();
 
-                    console.log(parseInt(c) >= 1080);
                     if (no_time != 1 && (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(d) <= 540 )) {
                         return false;
                     }
 
-                    console.log($('input[name="date"]').val());
-                    console.log(no_time);
-                    console.log($('input[name="clock1"]').val());
-                    console.log($('input[name="clock2"]').val());
                     $.ajax({
                         url: "/search/time-post",
                         type: "POST",
@@ -489,6 +484,7 @@
                             clock2 : $('input[name="clock2"]').val(),
                         },
                         success: function(arr) {
+                            console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh01',
@@ -569,7 +565,7 @@
                         confirmButtonText: "OK",
                         closeOnConfirm: false
                     });
-                } else if (j > 10) {
+                /*} else if (j > 10) {
                     swal({
                         title: "選択された企画が多すぎます",
                         text: "選択する企画は１０個以下にしてください",
@@ -577,7 +573,7 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "OK",
                         closeOnConfirm: false
-                    });
+                    });*/
                 } else {
                     $('#page-wrapper').addClass('sk-loading');
                     $('.sk-spinner-btn').click(function() {

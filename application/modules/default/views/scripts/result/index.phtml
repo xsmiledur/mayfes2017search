@@ -217,14 +217,14 @@
                                                                             <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
                                                                             <div class="m-t-md" style="margin-left: -4px;">
                                                                                 <div class="rec_pku_acd_icon">
-                                                                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                                                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                                                                    <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                                                                    <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                                                                 </div>
                                                                                 <div class="width-over">
-                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
                                                                                 </div>
                                                                                 <div class="width-over">
-                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -628,7 +628,7 @@
 
 
         <!-- 地図のルートを点滅画像で表示 -->
-
+/*
         $('#map_img div').not(':first').hide();
         if ($(window).width() > 767) {
             //map等はスクロールしてもついてくる
@@ -659,7 +659,7 @@
             var timer2 = timer(2);
             $('.btn-print').hide();
         }
-
+*/
 
         /*
         // Tooltips demo
