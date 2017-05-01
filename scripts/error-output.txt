@@ -1,0 +1,15 @@
+sh: /var/www/scripts/test.out: cannot execute binary file
+sh: /var/www/public/c_file/test.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/public/c_file/search.out: cannot execute binary file
+sh: /var/www/scripts/search.out: cannot execute binary file

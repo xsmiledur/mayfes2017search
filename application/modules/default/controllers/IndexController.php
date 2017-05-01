@@ -58,7 +58,8 @@ class IndexController extends Zend_Controller_Action
 
         // テキストデータを取得
 
-        $this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
+        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
+        //$this->view->contents = $this->_main->getContentsData();
 
         /**
          * Viewに必要データを渡す
@@ -72,7 +73,6 @@ class IndexController extends Zend_Controller_Action
 
         // pathとユーザー情報をviewに渡す
         $this->view->path       = $this->getRequest()->getPathInfo();
-        $this->view->contents   = $this->_contents;
         $this->view->lang       = $this->_session->lang;
 
         //$this->_helper->layout->setLayout('index');
@@ -81,37 +81,18 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->data = $this->_main->getProjectData();
+
 
         $request = $this->getRequest();
         $search = $request->getParam('search');
-
-        //var_dump($search);
-        //exit();
+        $this->view->data_all   = $this->_main->getProjectData();
 
 
-        $result = $this->_main->searchFree();
-        //var_dump($result);
-        //exit();
-        $this->view->result = $result;
+        //$result = $this->_main->searchFree();
+
+        //$this->view->result = $result;
 
     }
 
-
-    /*
-    public function searchAction()
-    {
-        $request = $this->getRequest();
-        $search = $request->getParam('search');
-
-
-        //$sql = "SELECT * FROM テーブル WHERE title_name LIKE '%$user_search%'";
-
-        $result = $this->_main->searchFree($search);
-
-        $this->view->result = $result;
-
-    }
-    */
 
 }
