@@ -16,8 +16,14 @@
     <!-- common2 -->
     <link href="/css/common2.css" rel="stylesheet">
 
+    <!-- common_alg -->
+    <link href="/css/common_alg.css" rel="stylesheet">
+
     <style type="text/css">
     p,div{font-size: 18px;
+    }
+    div.pull-right,div.pull-left{
+        font-size: 13px;
     }
     </style>
 
@@ -39,20 +45,9 @@
 
                         <!--ここで高さ変更できる-->
                         <div class="ibox-content">
-
-                            <div class="pull-left">
-                                <a href="/index2" class="btn btn-white btn-xs" type="button"><i class="fa fa-mail-reply"></i> Back</a>
-
-                            </div>
-                            <div class="pull-right">
-                                <button class="btn btn-white btn-xs" type="button">Model</button>
-                                <button class="btn btn-white btn-xs" type="button">Publishing</button>
-                                <button class="btn btn-white btn-xs" type="button">Modern</button>
-                            </div>
                             <div class="text-center article-title">
-                                <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Oct 2015</span>
                                 <br><br>
-                                    <div style="color: #fff; width:700px; margin-left:auto;margin-right:auto; background: #FF9900; padding: 20px; border: 1px dashed rgba(255,255,255,0.8); box-shadow: 0 0 0 5px #f08080; -moz-box-shadow: 0 0 0 5px #f08080; -webkit-box-shadow: 0 0 0 5px #f08080;; font-size: 90%;">
+                                    <div id="toptitle" style="">
                                         <h1>
                                         <font size="5">〜このアプリに使われているアルゴリズムについて〜</font>
                                         </h1>
@@ -83,8 +78,8 @@
                                 <br>
                                 まとめると次のようになります。
                             </p>
-                                <td><div class="p-sm b-r-xl m-xl">
-                                    <div style="border:1px dashed #F90;padding:10px;border-radius:10px;background:#FFDBA6;"><strong>~このアプリの仕組み~
+                                <td><div class="rule_outside">
+                                    <div class="rule"><strong>~このアプリの仕組み~
                                         <br>
                                         <br>
                                         1. 二つの展示の間の最短移動時間をすべての組み合わせに対してあらかじめ計算しておいて、
@@ -93,7 +88,7 @@
                                         2.みなさんが行きたい展示を並べ替えて求めておいた時間を合計して一番最短で回ることのできる経路を表示する！</strong>
                                     </div>
                                     </div> </td>
-
+                                    <br>
                             <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
                                 二点間の最短経路を求める
                             </h2> </div> </td>
@@ -117,7 +112,7 @@
                             </p>
                             <br>
                             <div align="center">
-                                <img src="/img/graph.png" width="500" height="300">
+                                <img src="/img/graph.png" class="alg_img">
                             </div>
 
                             <p>
@@ -163,8 +158,8 @@
                                 各頂点の始点からの暫定での最短所要時間をすべて無限大に大きくしておき、始点の始点からの到達所要時間は0としておきます。
                                 それから以下のルールに従って点をグループからグループへ移動させていきます。
                             </p>
-                            <td><div class="p-sm b-r-xl m-xl">
-                                <div style="border:1px dashed #F90;padding:10px;border-radius:10px;background:#FFDBA6;"><strong>~ルール~
+                            <td><div class="rule_outside">
+                                <div class="rule" ><strong>~ルール~
                                     <br>
                                     <br>
                                     1. 最短経路が決まっていないグループのうち最短経路の所要時間が一番短いものを「最短経路が決まったグループ」に入れる。
@@ -276,20 +271,6 @@
                             </p>
 
                             <hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Tags:</h5>
-                                    <button class="btn btn-primary btn-xs" type="button">Model</button>
-                                    <button class="btn btn-white btn-xs" type="button">Publishing</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div> <i class="fa fa-comments-o"> </i> 56 comments </div>
-                                        <i class="fa fa-eye"> </i> 144 views
-                                    </div>
-                                </div>
-                            </div>
 
 
                         </div>
@@ -298,14 +279,19 @@
 
             </div>
         </div>
-        <div class="footer">
             <!--<div class="pull-right">
                     10GB of <strong>250GB</strong> Free.
                 </div>-->
-            <div>
-                <strong>Applied Physics ,University of Tokyo</strong> 東京大学工学部応用物理系 &copy; 2017
+            <div class="footer">
+                <div class="pull-right">
+                    東京大学工学部応用物理系（物理工学科・計数工学科）
+                </div>
+                <div class="pull-left">
+                    <strong>Applied Physics, University of Tokyo</strong> for May Festival 2017
+                </div>
             </div>
-        </div>
+
+
 
     </div>
 </div>
