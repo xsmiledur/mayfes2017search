@@ -2,236 +2,732 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ほんっとにはじめてのHTML5">
     <meta name="keywords" content="ほんっとにはじめてのHTML5,CSS3,html5">
-    <title>キャンパスマップ</title>
+    <title>Result | May Search</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- スライダー用CSS -->
     <link href="/css/rangeslider.css" rel="stylesheet">
 
+    <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/Static_Full_Version/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
+    <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
+
+    <link href="/css/common2.css" rel="stylesheet">
+    <link href="/css/map-css.css" rel="stylesheet">
+
+    <link href="/css/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="/css/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <style>
+
+        /* TOOLTIPS */
+        .tooltip-inner {
+            background-color: #2F4050;
+        }
+        .tooltip.top .tooltip-arrow {
+            border-top-color: #2F4050;
+        }
+        .tooltip.right .tooltip-arrow {
+            border-right-color: #2F4050;
+        }
+        .tooltip.bottom .tooltip-arrow {
+            border-bottom-color: #2F4050;
+        }
+        .tooltip.left .tooltip-arrow {
+            border-left-color: #2F4050;
+        }
+    </style>
 </head>
 
 
 <body>
-<p>
-    <img src="/img/map1.jpg" alt="本郷キャンパスマップ" style="width:1025px; height:700px;" usemap="#shape1" id="shape1">
-</p>
 
-<!--3100*2100-->
+<div id="wrapper">
 
-<map name="shape1">
-    <!--工学部-->
-    <area shape="rect" coords="1100,1010,1370,1215" href="#shikoku" alt="工学部２号館" region="ko_2">
-    <area shape="rect" coords="1130,1260,1370,1440" href="#shikoku" alt="工学部６号館" region="ko_6">
-    <area shape="rect" coords="880,1255,1055,1450" href="#shikoku" alt="工学部８号館" region="ko_8">
-    <area shape="rect" coords="765,1265,840,1475" href="#shikoku" alt="工学部７号館" region="ko_7">
-    <area shape="rect" coords="950,1520,1205,1790" href="#shikoku" alt="工学部１号館" region="ko_1">
-    <area shape="rect" coords="830,1520,930,1820" href="#shikoku" alt="工学部５号館" region="ko_5">
-    <area shape="rect" coords="830,1840,930,1920" href="#shikoku" alt="工学部５号館" region="ko_5">
-    <area shape="rect" coords="940,1840,1200,1930" href="#shikoku" alt="工学部１４号館" region="ko_14">
-    <area shape="rect" coords="1190,1850,1380,1930" href="#shikoku" alt="工学部１１号館" region="ko_11">
+    <div id="page-wrapper" class="gray-bg">
+        <div class="sk-spinner sk-spinner-double-bounce">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
+        </div>
+        <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
 
-    <!--農学部-->
-    <area shape="rect" coords="130,1190,480,1410" href="#shikoku" alt="農学部３号館" region="no_3">
+        <div class="row no-padding animated fadeInRight">
+            <div class="col-lg-12">
+                <div id="id1" class="row">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="widget yellow-bg widget2 widget-back">
+                                    <i class="fa fa-arrow-left fa-first"></i>
+                                    <i class="fa fa-arrow-left fa-second"></i>
+                                    <p>入力画面に戻る</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <a href="https://gogatsusai.jp/90/search/result?id=394">
+                                    <div class="widget red-bg widget2 widget-vote">
+                                        <p>投票はこちらから！</p>
+                                        <div class="vote-comment">投票よろしく、めぇ。</div>
+                                        <p class="vote-maychan"><img src="/img/vote-maychan.png"></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
 
-    <!---!!!!安田講堂エリア!!!!---->
-    <!--理学部-->
-    <area shape="rect" coords="1415,650,1640,750" href="#shikoku" alt="理学部１号館" region="sc_1">
-    <area shape="rect" coords="1420,770,1500,870" href="#shikoku" alt="理学部１号館" region="sc_1">
-    <area shape="rect" coords="1560,770,1630,870" href="#shikoku" alt="理学部１号館" region="sc_1">
+                        <h1 class="top-title">MAY SEARCH</h1>
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2 col-xs-12 sub-title b-r-md text-danger text-center">
+                                <h2>最適経路表示画面</h2>
+                                <p>あなたの選んだ企画を巡る最適経路を表示しています。<br>企画ごとに滞在時間を変更して、再検索を行うこともできます。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row row2">
+                            <div class="col-sm-12">
+                                <a href="/search/algorithm">
+                                    <div class="widget lazur-bg widget1">
+                                        <i class="fa fa-codepen fa-first"></i>
+                                        <i class="fa fa-codepen fa-second"></i>
+                                        <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-12">
+                                <a href="http://ap-phys.net/">
+                                    <div class="widget navy-bg widget1">
+                                        <i class="fa fa-codepen fa-first"></i>
+                                        <i class="fa fa-codepen fa-second"></i>
+                                        <p>工学部応用物理系<br>工學博覧会について</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="id2" class="row">
+                    <div class="col-sm-12">
 
-    <!--医学部近辺-->
-    <area shape="poly" coords="2070,610,2470,720,2410,975,1995,920" href="#shikoku" alt="御殿下グラウンド" region="gotenshita">
+                        <h1 class="top-title">MAY SEARCH</h1>
+                        <div class="row">
+                            <div class="col-md-12 sub-title b-r-md text-danger text-center">
+                                <h2>最適経路表示画面</h2>
+                                <p>あなたの選んだ企画を巡る最適経路を表示しています。<br>企画ごとに滞在時間を変更して、再検索を行うこともできます。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="widget yellow-bg widget2 widget-back">
+                                    <i class="fa fa-arrow-left fa-first"></i>
+                                    <i class="fa fa-arrow-left fa-second"></i>
+                                    <p>入力画面に戻る</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <a href="https://gogatsusai.jp/90/search/result?id=394">
+                                    <div class="widget red-bg widget2 widget-vote">
+                                        <p>投票はこちらから！</p>
+                                        <div class="vote-comment">投票よろしく、めぇ。</div>
+                                        <p class="vote-maychan"><img src="/img/vote-maychan.png"></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row row2">
+                            <div class="col-sm-12">
+                                <a href="/search/algorithm">
+                                    <div class="widget lazur-bg widget1">
+                                        <i class="fa fa-codepen fa-first"></i>
+                                        <i class="fa fa-codepen fa-second"></i>
+                                        <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-12">
+                                <a href="http://ap-phys.net/">
+                                    <div class="widget navy-bg widget1">
+                                        <i class="fa fa-codepen fa-first"></i>
+                                        <i class="fa fa-codepen fa-second"></i>
+                                        <p>工学部応用物理系<br>工學博覧会について</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins" id="all-cover2">
+                    <div class="ibox-content">
+                        <div class="ibox">
+                            <div class="ibox-content">
 
-    <!--法文-->
-    <area shape="poly" coords="1435,1305,1498,1255,1562,1305,1567,1465,1430,1465" href="#shikoku" alt="法文１号館（東）" region="hobun_1east">
-    <area shape="rect" coords="1430,1290,1567,1465" href="#shikoku" alt="法文１号館（西）" region="hobun_1west">
-    <area shape="poly" coords="1600,1305,1623,1255,1727,1305,1732,1465,1600,1465" href="#shikoku" alt="法文２号館" region="hobun_2">
+                                <div class="row row-cover print-page">
+                                    <div class="col-lg-4" id="block1">
+                                        <form id="research-form" action="/search/search" method="post">
+                                            <div id="vertical-timeline" class="vertical-container dark-timeline">
+
+                                                <div class="vertical-timeline-block draggable-front">
+                                                    <div class="vertical-timeline-time-block">
+                                                        <?php echo $this->start; ?>
+                                                    </div>
+
+                                                    <div class="vertical-timeline-icon blue-bg">
+                                                        <i class="fa fa-briefcase"></i>
+                                                    </div>
+
+                                                    <div class="vertical-timeline-content">
+                                                        <h2>現在地
+                                                        </h2>
+                                                        <?php echo $this->start_pos['bd_p_label2']; ?>
+                                                    </div>
+
+                                                </div>
+                                                <?php foreach ($this->project as $key => $item) : ?>
+                                                    <div class="modal inmodal fade"
+                                                         id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
+                                                         role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
+                                                                    <div class="transparent">
+                                                                        <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['info']['pd_genre1_']; ?>
+                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
+                                                                            <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
+                                                                            <div class="m-t-md" style="margin-left: -4px;">
+                                                                                <div class="rec_pku_acd_icon">
+                                                                                    <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                                                                    <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                                                                </div>
+                                                                                <div class="width-over">
+                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                                                                                </div>
+                                                                                <div class="width-over">
+                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-contents">
+                                                                    <div class="row">
+                                                                        <div class="exp">
+
+                                                                            <div class="modal-p">
+                                                                            企画説明
+                                                                            </div>
+                                                                            <div class="modal-web">
+                                                                                <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
+                                                                            </div>
+                                                                        </div>
 
 
+                                                                        <div class="exp">
+                                                                            <div class="modal-p">
+                                                                                団体説明</div>
+                                                                            <div class="modal-web">
+                                                                            <?php echo nl2br($item['info']['pd_web_long_org']); ?>
+                                                                            </div>
+                                                                        </div>
 
-    <!--!!!!赤門エリア!!!!-->
-    <area shape="poly" coords="2470,860,2570,870,2560,965,2460,955" href="#shikoku" alt="七徳堂" region="shichitokudo">
-    <area shape="poly" coords="2585,1515, 2660,1515, 2660,1739, 2750,1739, 2750,1794, 2585,1795" href="#shikoku" alt="赤門総合研究棟" region="akamon_sogokenkyuto">
-    <area shape="rect" coords="2660,1420,2800,1500" href="#shikoku" alt="合格通り広場" region="gokakudoriarea">
-    <area shape="rect" coords="2450,1840,2650,1950" href="#shikoku" alt="赤門" region="akamon">
+                                                                    </div>
+                                                                </div>
 
+                                                                <div class="modal-footer">
+                                                                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                                                                    <button type="button" class="btn btn-white"
+                                                                            data-dismiss="modal">Close
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-    <!--<area shape="rect" coords="0,0,3100,2100" href="#shikoku" alt="工学部３号館" region="ko_3">-->
-    <!--<area shape="default" href="#shikoku" alt="工学部６号館" region="ko_6">-->
-    <area shape="poly" coords="302,83,349,83,349,141,343,141,343,169,279,169,279,149,291,150,291,141,302,141" href="#tohoku" alt="東北" region="tohoku">
-    <area shape="poly" coords="286,168,342,169,342,177,347,177,348,236,332,235,332,213,319,213,320,227,295,228,297,202,291,202,291,191,285,191" href="#kanto" alt="関東" region="kanto">
-    <area shape="poly" coords="278,150,279,169,287,169,287,191,291,190,291,202,296,202,296,249,239,248,238,195,208,195,208,180,243,180,242,135,254,135,254,150" href="#tyubu" alt="中部" region="tyubu">
-    <area shape="poly" coords="207,180,207,195,238,194,238,252,182,252,181,228,171,229,171,219,159,219,159,180" href="#kinki" alt="近畿" region="kinki">
-    <area shape="rect" coords="101,179,159,220" href="#tyugoku" alt="中国" region="tyugoku">
-    <area shape="rect" coords="109,226,169,259" href="#shikoku" alt="四国" region="shikoku">
-    <area shape="poly" coords="33,195,87,195,87,217,99,218,98,293,84,293,77,290,65,290,31,280,14,281,14,262,33,226" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
-    <!--AREA for text-->
-    <area shape="rect" coords="132,30,209,48" href="#hokkaido" alt="北海道" region="hokkaido">
-    <area shape="rect" coords="132,58,209,76" href="#tohoku" alt="東北" region="tohoku">
-    <area shape="rect" coords="132,86,209,104" href="#kanto" alt="関東" region="kanto">
-    <area shape="rect" coords="132,114,209,132" href="#tyubu" alt="中部" region="tyubu">
-    <area shape="rect" coords="31,30,105,48" href="#kinki" alt="近畿" region="kinki">
-    <area shape="rect" coords="31,58,105,76" href="#tyugoku" alt="中国" region="tyugoku">
-    <area shape="rect" coords="31,86,105,104" href="#shikoku" alt="四国" region="shikoku">
-    <area shape="rect" coords="31,114,105,132" href="http://www.welcomekyushu.jp/" target="_blank" alt="九州" region="kyusyu">
+                                                    <div class="fa-timeline">
+                                                        <i class="fa fa-male fa-timeline-icon"></i>
+                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                    </div>
 
-    <!--ここで本田が検索結果表示のコードを書く-->
-    <div class="vertical-timeline-block">
-        <div class="vertical-timeline-icon navy-bg">
-            <i class="fa fa-briefcase"></i>
+                                                    <div class="vertical-timeline-block draggable-front">
+                                                        <div class="vertical-timeline-time-block">
+                                                            <?php echo $item['start']; ?>
+                                                        </div>
+
+                                                        <div class="vertical-timeline-icon">
+                                                            <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
+                                                        </div>
+
+                                                        <div class="vertical-timeline-content">
+                                                            <h2>
+                                                                <?php echo $item['info']['pd_label']; ?>
+                                                                <a href="#" class="btn btn-xs btn-info pull-right "
+                                                                   data-toggle="modal"
+                                                                   data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
+                                                                    <span class="glyphicon glyphicon-info-sign"></span></a>
+                                                            </h2>
+                                                            <?php echo $item['info']['pp_place']; ?>
+                                                            <div class="vertical-timeline-time">
+                                                                <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
+                                                                <p id="r1d0name">
+                                                                    標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                </p>
+                                                                <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                <?php endforeach; ?>
+
+                                                <div class="vertical-timeline-block draggable-front">
+                                                    <div class="vertical-timeline-time-block">
+                                                        <?php echo $this->end; ?>
+                                                    </div>
+                                                    <div class="vertical-timeline-icon navy-bg">
+
+                                                        <i class="fa fa-briefcase"></i>
+
+                                                    </div>
+
+                                                    <div class="vertical-timeline-content">
+                                                        終了
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="pull-right">
+                                                    <input type="hidden" name="research" value="1">
+                                                    <button type="submit" class="btn btn-info btn-research" disabled="">滞在時間も考慮して再検索</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div id="sticker">
+                                            <div class="row position-tip">
+                                                <div id="map_img">
+                                                    <div class="origin-map">
+                                                        <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
+                                                    </div>
+                                                    <!--
+                                                    <div class="origin-map">
+                                                        <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                                    </div>
+                                                    -->
+
+                                                    <?php foreach ($this->order as $i => $item) : ?>
+                                                        <?php if ($i == 0) : ?>
+                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> 現在地
+                                                                <p class="map-cm-b"></p>
+                                                            </div>
+                                                            <?php else: ?>
+                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                <p class="map-cm-b"></p>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($item['way']) : ?>
+                                                            <div class="over-map print-on well1">
+                                                                <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                    <?php if ($key < count($item['way'])) : ?>
+                                                                    <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        <?php endif; ?>
+
+                                                    <?php endforeach; ?>
+
+                                                    <?php foreach ($this->order as $i => $item) : ?>
+                                                        <?php if ($i == 0) : ?>
+
+                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> 現在地
+                                                                <div class="map-cm-b"></div>
+                                                            </div>
+                                                        <?php else : ?>
+                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top2']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left2']; ?>px;">
+                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                <div class="map-cm-b"></div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <?php if ($item['way']) : ?>
+                                                            <div class="over-map  well2">
+                                                                <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                    <?php if ($key < count($item['way'])) : ?>
+                                                                        <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <p style="clear: both;"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row play-stop-row">
+                                                <div class="btn-group pull-right tooltip-demo text-center">
+                                                    <button type="button" class="btn btn-default btn-play" data-toggle="tooltip" data-placement="left" title="アニメーションを再生します"><i class="fa fa-play"></i></button>
+                                                    <button type="button" class="btn btn-default btn-pause" data-toggle="tooltip" data-placement="bottom" title="アニメーションを一時停止します"><i class="fa fa-pause"></i></button>
+                                                    <button type="button" class="btn btn-default btn-stop" data-toggle="tooltip" data-placement="right" title="アニメーションを停止します"><i class="fa fa-stop"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="row m-t-xs">
+                                                <div class="btn-group pull-right">
+                                                    <button type="button" class="btn btn-primary btn-print"><i class="fa fa-print"></i> 印刷</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="vertical-timeline-content">
-            <h2>Meeting</h2>
-            <p>Conference on the sales results for the previous year. Monica please examine sales trends in marketing and products. Below please find the current status of the sale.
-            </p>
-            <span class="vertical-date">
-                                        Today <br>
-                                        <small>Dec 24</small>
-                                    </span>
+        <div class="footer">
+            <div class="pull-right">
+                東京大学工学部応用物理系（物理工学科・計数工学科）
+            </div>
+            <div>
+                <strong>Applied Physics, University of Tokyo</strong> for May Festival 2017
+            </div>
         </div>
+
     </div>
-    <div id="routes">
-
-        <div id="route1">
-            <h3>ルート1</h3>
-            <div class="visit">
-                10:00-10:30　東大音感　赤門総合研究棟
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" value="15" step="5" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                10:45-12:00　工学博覧会　工学部6号館
-            </div>
-            <div class="time">
-                <div class="u-cf">
-                    <div class="right">
-                        <input type="range" min="0" max="120" step="5" value="30" data-rangeslider data-orientation="vertical">
-                    </div>
-                    <div class="left">
-                        <output></output>分
-                    </div>
-                </div>
-            </div>
-            <div class="visit">
-                12:05-12:30　東大娘　工学部前広場
-            </div>
-
+</div>
+<div id="print-page" class="print-off">
+    <div id="map_print" style="width: 100%;">
+        <div class="origin-map">
+            <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
         </div>
+        <?php foreach ($this->order as $i => $item) : ?>
+            <?php if ($i == 0) : ?>
+                <div class="over-map well map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                    &#<?php echo 9312 + $i; ?> 現在地
+                    <p class="map-cm-b"></p>
+                </div>
+            <?php else: ?>
+                <div class="over-map well map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
+                    &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                    <p class="map-cm-b"></p>
+                </div>
+            <?php endif; ?>
+            <?php if ($item['way']) : ?>
+                <div class="over-map print-on">
+                    <?php foreach ($item['way'] as $key => $order) : ?>
+                        <?php if ($key < count($item['way'])) : ?>
+                            <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="row"></div>
+        <p style="clear: both;"></p>
+    </div>
+    <div id="print-table" class="p-lg" style="width: 100%;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>時刻</th>
+                <th></th>
+                <th>場所</th>
+                <th>企画名</th>
+                <th>標準滞在時間</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $this->start; ?></td>
+                <td></td>
+                <td><?php echo $this->start_pos['bd_p_label2']; ?></td>
+                <th>現在地</th>
+                <td></td>
+            </tr>
 
+            <?php foreach ($this->project as $key => $item) : ?>
+            <tr>
+                <td class="no-borders" style="padding-left: 20px;">↓ 移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?></td>
+            </tr>
+            <tr>
+                <td><?php echo $item['start']; ?></td>
+                <td>
+                        <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
+                </td>
+                <td>
+                    <?php echo $item['info']['pp_place']; ?>
+                </td>
+                <th>
+                    <?php echo $item['info']['pd_label']; ?>
+                </th>
+                <td>
+                    <?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td><?php echo $this->end; ?></td>
+                <td></td>
+                <td></td>
+                <th>終了</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    //$(document).ready(function ()
+    // {
+    //  $('#shape1').mapster({
+    //    singleSelect : true,
+    //clickNavigate : true,
+    // render_highlight : { fillColor: '2aff00' },
+    //  render_highlight : { altImage : '/img/map2.jpg' },
+    //mapKey: 'region',
+    //fillOpacity : 0.5
+    //   });
+    //});
+</script>
 
-
-        <!--ここまで本田-->
-
-    <script>
-        $(document).ready(function ()
-        {
-            $('#shape1').mapster({
-                singleSelect : true,
-                //clickNavigate : true,
-               // render_highlight : { fillColor: '2aff00' },
-               render_highlight : { altImage : '/img/map2.jpg' },
-                mapKey: 'region',
-                fillOpacity : 0.5
-            });
-        });
-    </script>
-
-        <!-- スライドバー -->
-        <script src="/js/rangeslider.min.js"></script>
-
-        <!-- スライドバー(インデントを消したい…) -->
-        <script>
-            $(function() {
-                var $document = $(document);
-                var selector = '[data-rangeslider]';
-                var $element = $(selector);
-                // For ie8 support
-                var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
-                // Example functionality to demonstrate a value feedback
-                function valueOutput(element) {
-                    var value = element.value;
-                    var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
-                    output[textContent] = value;
-                }
-                $document.on('input', 'input[type="range"], ' + selector, function(e) {
-                    valueOutput(e.target);
-                });
-                // Example functionality to demonstrate disabled functionality
-                $document .on('click', '#js-example-disabled button[data-behaviour="toggle"]', function(e) {
-                    var $inputRange = $(selector, e.target.parentNode);
-                    if ($inputRange[0].disabled) {
-                        $inputRange.prop("disabled", false);
-                    }
-                    else {
-                        $inputRange.prop("disabled", true);
-                    }
-                    $inputRange.rangeslider('update');
-                });
-                // Example functionality to demonstrate programmatic value changes
-                $document.on('click', '#js-example-change-value button', function(e) {
-                    var $inputRange = $(selector, e.target.parentNode);
-                    var value = $('input[type="number"]', e.target.parentNode)[0].value;
-                    $inputRange.val(value).change();
-                });
-                // Example functionality to demonstrate programmatic attribute changes
-                $document.on('click', '#js-example-change-attributes button', function(e) {
-                    var $inputRange = $(selector, e.target.parentNode);
-                    var attributes = {
-                        min: $('input[name="min"]', e.target.parentNode)[0].value,
-                        max: $('input[name="max"]', e.target.parentNode)[0].value,
-                        step: $('input[name="step"]', e.target.parentNode)[0].value
-                    };
-                    $inputRange.attr(attributes);
-                    $inputRange.rangeslider('update', true);
-                });
-                // Example functionality to demonstrate destroy functionality
-                $document
-                    .on('click', '#js-example-destroy button[data-behaviour="destroy"]', function(e) {
-                        $(selector, e.target.parentNode).rangeslider('destroy');
-                    })
-                    .on('click', '#js-example-destroy button[data-behaviour="initialize"]', function(e) {
-                        $(selector, e.target.parentNode).rangeslider({ polyfill: false });
-                    });
-                // Example functionality to test initialisation on hidden elements
-                $document
-                    .on('click', '#js-example-hidden button[data-behaviour="toggle"]', function(e) {
-                        var $container = $(e.target.previousElementSibling);
-                        $container.toggle();
-                    });
-                // Basic rangeslider initialization
-                $element.rangeslider({
-                    // Deactivate the feature detection
-                    polyfill: false,
-                    // Callback function
-                    onInit: function() {
-                        valueOutput(this.$element[0]);
-                    },
-                    // Callback function
-                    onSlide: function(position, value) {
-                        console.log('onSlide');
-                        console.log('position: ' + position, 'value: ' + value);
-                    },
-                    // Callback function
-                    onSlideEnd: function(position, value) {
-                        console.log('onSlideEnd');
-                        console.log('position: ' + position, 'value: ' + value);
-                    }
-                });
-            });
-        </script>
-
-    <!--altImage :   -->
 </body>
 
 <script src="/js/jquery.imagemapster.js"></script>
+
+<!--slider plugin-->
+<script src="/js/rangeslider.min.js"></script>
+
+<!-- Mainly scripts -->
+<script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
+<script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Peity -->
+<script src="/Static_Full_Version/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/Static_Full_Version/js/inspinia.js"></script>
+<script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
+
+<!-- Peity -->
+<script src="/Static_Full_Version/js/demo/peity-demo.js"></script>
+
+<!-- jquery UI -->
+<script src="/Static_Full_Version/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/Static_Full_Version/js/bootstrap.min.js"></script> <!--この順序でないとtooltipが出ないので注意-->
+
+<!-- IonRangeSlider -->
+<script src="/js/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+<!--animateTransition-->
+<script src="/js/animateTransition/animateTransition.min.js"></script>
+
+<!-- Sweet alert -->
+<script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!--mapper-->
+<script src="/js/mapper/cvi_map_lib.js"></script>
+
+<!--sticky-->
+<script src="/js/jquery.sticky/jquery.sticky.js"></script>
+
+<script>
+
+    var timer_;
+    var map;
+    function timer(num, map, quick) {
+        //最初の画像以外を非表示にする
+        //var map = $('#map_img div:first-child');
+        var flg;
+
+        //map.after().hide();
+        //タイマー
+
+        timer_ = setInterval(function () {
+            //フェードインとアウトを繰り返す
+            if (map[0] == undefined) {
+                map[0] = $('#map_img .over-map.well' + num + ':first');
+                $('#map_img div').not(':first').hide();
+            } else if (map[0].get(0) == undefined) {
+                map[0] = $('#map_img .over-map.well' + num + ':first');
+                $('#map_img div').not(':first').hide();
+            } else {
+                if (map[0].hasClass('map-comment')) {
+                    if (flg == 1 || quick == 1) {
+                        $('#map_img div').not(':first').hide();
+                        map[0] = map[0].next('div.over-map.well' + num);
+                        console.log(map[0]);
+                        flg = 0;
+                    } else {
+                        map[0].show();
+                        flg = 1;
+                    }
+                } else {
+                    map[0].show();
+                    map[0] = map[0].next('div.over-map.well' + num);
+                }
+            }
+            quick = 0;
+
+        }, 1500);
+    }
+    function stopAnimate(num, map) {
+        clearInterval(timer_);
+        $('#map_img .over-map.well' + num).show();
+        delete map[0].get(0);
+        delete map[0];
+        console.log(map[0]);
+        $('.btn-stop').prop('disabled', true);
+        $('.btn-pause').prop('disabled', true);
+        $('.btn-play').prop('disabled', false);
+
+    }
+    function pauseAnimate(num) {
+        clearInterval(timer_);
+        $('.btn-pause').prop('disabled', true);
+        $('.btn-stop').prop('disabled', true);
+        $('.btn-play').prop('disabled', false);
+
+    }
+    function playAnimate(num, map) {
+        console.log(map);
+        timer(num, map, 1);
+        $('.btn-play').prop('disabled', true);
+        $('.btn-stop').prop('disabled', false);
+        $('.btn-pause').prop('disabled', false);
+    }
+
+
+    $(function () {
+
+
+
+        <!-- 地図のルートを点滅画像で表示 -->
+/*
+        $('#map_img div').not(':first').hide();
+        if ($(window).width() > 767) {
+            //map等はスクロールしてもついてくる
+            $("#sticker").sticky({
+                topSpacing: 10,
+                bottomSpacing: 90,
+                center: true
+            });
+
+            map = [$('#map_img .over-map.well1:first')];
+            timer(1, map, 0);
+            $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
+
+            $('.btn-stop').click(function() {
+                stopAnimate(1, map);
+            });
+            $('.btn-pause').click(function() {
+                pauseAnimate(1);
+            });
+            $('.btn-play').click(function() {
+                playAnimate(1, map);
+            });
+            $('.btn-print').show();
+
+
+        } else {
+
+            var timer2 = timer(2);
+            $('.btn-print').hide();
+        }
+*/
+
+        /*
+        // Tooltips demo
+        $('.tooltip-demo').tooltip({
+            selector: '[data-toggle="tooltip"]',
+            container: "body"
+        });
+        */
+
+        $('.widget-back').click(function () {
+            swal({
+                title: "Are you OK?",
+                text: "入力画面に戻ると検索結果は保存されません。それでもよろしいですか？",
+                type: "warning",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "OK",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                allowOutsideClick: true,
+            }, function() {
+                window.location.href = "/"
+            });
+        });
+        $('.widget-vote').hover(function() {
+            $('.vote-comment').fadeIn();
+            $('.vote-maychan').animate({
+                height: "70%",
+            });
+        },function() {
+            $('.vote-comment').fadeOut();
+            $('.vote-maychan').animate({
+                height: "40%"
+            });
+        });
+        $('.btn-research').click(function() {
+            $('#page-wrapper').addClass('sk-loading');
+        });
+        <?php foreach ($this->project as $key => $item) : ?>
+        $("#ionrange<?php echo $key; ?>").ionRangeSlider({
+            min: 0,
+            max: 120,
+            from: <?php if ($item['research_t']) : echo $item['research_t']; elseif ($item['info']['pt_time']) : echo $item['info']['pt_time']; else : echo 30; endif; ?>,
+            postfix: "分",
+            grid: true,
+            onChange: function(data) {
+                $('#range-change<?php echo $key; ?>').text("変更後： " + data.from + " 分");
+                $('button.btn-research').prop('disabled', false);
+            }
+        });
+        <?php endforeach; ?>
+
+        //個別印刷ボタンをクリックした時
+        $('.btn-print').on('click', function(){
+            //プリントしたいエリアの取得
+            //「#print」以外の要素に非表示を指定
+            $('#print-page').removeClass('print-off');
+            $('body > :not(#print-page)').addClass('print-off');
+            window.print();
+
+            //window.print()の実行後、作成した「#print」と、非表示用のclass「print-off」を削除
+            $('#print-page').addClass('print-off');
+            $('body > :not(#print-page)').removeClass('print-off');
+
+
+        });
+
+
+
+    });
+</script>
+</html>

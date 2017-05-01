@@ -50,7 +50,6 @@ try {
     // ここで、自分自身で例外を処理します
     //echo $e->getMessage();
     //return false;
-    return false;
 }
 
 

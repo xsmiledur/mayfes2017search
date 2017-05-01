@@ -3012,7 +3012,7 @@ a.forum-item-title:hover {
 }
 @media (max-width: 767px) {
   .tabs-container .nav-tabs > li {
-    float: none !important;
+    /*float: none !important;*/
   }
   .tabs-container .nav-tabs > li.active > a {
     border-bottom: 1px solid #e7eaec !important;

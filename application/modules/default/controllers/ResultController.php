@@ -79,10 +79,71 @@ class ResultController extends Zend_Controller_Action
 
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
+
+        $errMsg = $this->_session->errMsg;
+        if (strlen($errMsg) > 0) {
+            echo $errMsg;
+            //exit();
+        }
+        $ps_pid = $this->_session->ps_pid;  //企画ps_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
+        $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
+        $research_t = $this->_session->research_t; //再検索の場合の、個別に設定した企画ごとの時間が格納されている配列
+        //キーiに対してキー"time"には経路にかかる時間、
+        //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
+        $start = $this->_session->start;
+        $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
+        /*
+        echo "<pre>";
+        var_dump($ps_pid);
+        var_dump($order);
+        var_dump($start);
+        var_dump($start_pos);
+        echo "</pre>";
+        */
+        //exit();
+
+        $_start = strtotime($start);
+        //var_dump($start);
+        //var_dump($_start);
+        $project = array();
+        foreach ($ps_pid as $key => $item) { //$key=0は企画の個数
+            if ($key != 0) {
+                $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
+                if (!$project[$key-1]['info']['pt_time']) $project[$key-1]['info']['pt_time'] = 30;
+                $project[$key-1]['time'] = $order[$key-1]['time'];
+                $project[$key-1]['pre']  = $_start;
+                $_start = $_start + $order[$key-1]['time'] * 60;
+                if ($project[$key-2]['info']['pt_time']) {
+                    $_start += $project[$key-2]['info']['pt_time'] * 60;
+                }
+                if ($research_t[$item]) { //再検索した時の個別に設定した企画毎の時間データがあるなら
+                    $project[$key-1]['research_t'] = $research_t[$item];
+                }
+                $project[$key-1]['after'] = $_start;
+                $project[$key-1]['start'] = date("h:i", $_start);
+            }
+        }
+
+        echo "<pre>";
+        foreach ($project as $item) {
+            var_dump($item['info']['pt_time']);
+            var_dump($item['info']['pt_start']);
+        }
+        echo "</pre>";
+
+        $end = $_start + $project[$key-1]['info']['pt_time'] * 60;
+        $this->view->project = $project;
+        $this->view->start   = $start;
+        $this->view->end     = date("h:i", $end);
+        $this->view->start_pos_bd_pid = $start_pos;
+        $this->view->start_pos = $this->_main->getBuildingData($start_pos);
+        $this->view->order = $order;
 
     }
 
+    /*
     public function result2Action()
     {
 
@@ -120,5 +181,6 @@ class ResultController extends Zend_Controller_Action
         $this->view->result = $result;
 
     }
+    */
 
 }
