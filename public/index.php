@@ -39,7 +39,7 @@ $front->setControllerDirectory(array(
 //$router = $front->getRouter();
 
 
-echo "aaa";
+//echo "aaa";
 
 // ディスパッチする
 //$front->dispatch();
@@ -49,7 +49,7 @@ try {
     $front->dispatch();
 } catch (Exception $e) {
     // ここで、自分自身で例外を処理します
-    //echo $e->getMessage();
+    echo $e->getMessage();
     //return false;
 }
 
