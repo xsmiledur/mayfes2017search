@@ -134,8 +134,8 @@ class SearchController extends Zend_Controller_Action
     public function timePost2Action()
     {
         // viewレンダリング停止
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
 
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
@@ -150,8 +150,8 @@ class SearchController extends Zend_Controller_Action
     public function timePostAction()
     {
         // viewレンダリング停止
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
 
         $request = $this->getRequest();
         $radio  = $request->getPost('radio');
@@ -199,8 +199,8 @@ class SearchController extends Zend_Controller_Action
     public function searchAction()
     {
         // viewレンダリング停止
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
 
         /*
             最短オイラー路問題

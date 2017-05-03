@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/SearchController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/SearchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" />
     </list>
     <ignored path="mayfes2017search.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,11 +39,9 @@
           <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="579">
-                  <caret line="348" column="37" lean-forward="false" selection-start-line="348" selection-start-column="37" selection-end-line="348" selection-end-column="37" />
-                  <folding>
-                    <marker date="1493771237000" expanded="true" signature="7828:8043" ph="..." />
-                  </folding>
+                <state relative-caret-position="354">
+                  <caret line="137" column="10" lean-forward="false" selection-start-line="137" selection-start-column="10" selection-end-line="137" selection-end-column="10" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -56,7 +53,7 @@
           <file leaf-file-name="index.phtml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="219">
+                <state relative-caret-position="3354">
                   <caret line="593" column="45" lean-forward="true" selection-start-line="593" selection-start-column="45" selection-end-line="593" selection-end-column="45" />
                   <folding />
                 </state>
@@ -923,12 +920,12 @@
       <workItem from="1493280759116" duration="163000" />
       <workItem from="1493290518030" duration="54103000" />
       <workItem from="1493636621812" duration="103000" />
-      <workItem from="1493652330841" duration="6569000" />
+      <workItem from="1493652330841" duration="6674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193832000" />
+    <option name="totallyTimeSpent" value="193937000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1298,7 +1295,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
+        <state relative-caret-position="3354">
           <caret line="593" column="45" lean-forward="true" selection-start-line="593" selection-start-column="45" selection-end-line="593" selection-end-column="45" />
           <folding />
         </state>
@@ -1306,11 +1303,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="348" column="37" lean-forward="false" selection-start-line="348" selection-start-column="37" selection-end-line="348" selection-end-column="37" />
-          <folding>
-            <marker date="1493771237000" expanded="true" signature="7828:8043" ph="..." />
-          </folding>
+        <state relative-caret-position="354">
+          <caret line="137" column="10" lean-forward="false" selection-start-line="137" selection-start-column="10" selection-end-line="137" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
