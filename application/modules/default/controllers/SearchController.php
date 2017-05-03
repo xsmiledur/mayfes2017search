@@ -334,7 +334,7 @@ class SearchController extends Zend_Controller_Action
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
-            2 => array('file', '/var/www/public/scripts/error-output.txt', 'a'),
+            //2 => array('file', '/var/www/public/scripts/error-output.txt', 'a'),
             //2 => array("file", "/var/www/c_file/error-output", "a")
         );
 
