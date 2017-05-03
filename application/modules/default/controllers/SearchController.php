@@ -133,6 +133,10 @@ class SearchController extends Zend_Controller_Action
 
     public function timePost2Action()
     {
+        // viewレンダリング停止
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
+
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
         $start = $request->getPost('start');
@@ -145,6 +149,10 @@ class SearchController extends Zend_Controller_Action
 
     public function timePostAction()
     {
+        // viewレンダリング停止
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
+
         $request = $this->getRequest();
         $radio  = $request->getPost('radio');
         $clock1 = $request->getPost('clock1');
@@ -190,6 +198,10 @@ class SearchController extends Zend_Controller_Action
      */
     public function searchAction()
     {
+        // viewレンダリング停止
+        //$this->_helper->layout->disableLayout();
+        //$this->_helper->viewRenderer->setNoRender();
+
         /*
             最短オイラー路問題
 
@@ -252,7 +264,7 @@ class SearchController extends Zend_Controller_Action
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
-        /*
+
         var_dump($search);
         var_dump($N);
         var_dump($start_pos);
@@ -261,7 +273,7 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
-        */
+
 
         //$research = $this->_session->research;
 
@@ -322,7 +334,7 @@ class SearchController extends Zend_Controller_Action
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
-            2 => array('file', '/var/www/scripts/error-output.txt', 'a'),
+            //2 => array('file', '/var/www/public/scripts/error-output.txt', 'a'),
             //2 => array("file", "/var/www/c_file/error-output", "a")
         );
 
@@ -332,8 +344,9 @@ class SearchController extends Zend_Controller_Action
         //var_dump($inputData);
 
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
-        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
-
+        $proc = proc_open('/var/www/public/scripts/search_.out', $inout, $pipes, $cwd);
+        //var_dump("opencheck");
+        var_dump(is_resource($proc));
         if(is_resource($proc)){
 
 
@@ -408,7 +421,7 @@ class SearchController extends Zend_Controller_Action
             }
 
         } else {
-            $this->_session->errMsg = "エラーが発生しました。";
+            echo 0;
         }
 
     }

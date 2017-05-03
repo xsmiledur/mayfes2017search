@@ -51,7 +51,72 @@
 <body>
 
 
+<?php foreach ($this->data_all as $item) : ?>
+    <div class="modal inmodal fade"
+         id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1"
+         role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
+                    <div class="transparent">
+                        <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['pd_genre1_']; ?>
+                                                                                / <?php echo $item['pd_genre2_']; ?>
+                                                                            </span>
+                        </div>
+                        <div>
+                            <h1 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h1>
+                            <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
+                            <div class="m-t-md" style="margin-left: -4px;">
+                                <div class="rec_pku_acd_icon">
+                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-contents">
+                    <div class="row">
+                        <div class="exp">
 
+                            <div class="modal-p">
+                                企画説明
+                            </div>
+                            <div class="modal-web">
+                                <?php echo nl2br($item['pd_web_long_kikaku']); ?>
+                            </div>
+                        </div>
+
+
+                        <div class="exp">
+                            <div class="modal-p">
+                                団体説明</div>
+                            <div class="modal-web">
+                                <?php echo nl2br($item['pd_web_long_org']); ?>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <button type="button" class="btn btn-white"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 <div id="wrapper">
 
     <div id="page-wrapper" class="gray-bg">
@@ -192,72 +257,7 @@
                                         <p class="text-muted" style="padding-left: 20px;">選択できる企画は５個までです。</p>
                                     </div>
                                     <div class="ibox">
-                                        <?php foreach ($this->data_all as $item) : ?>
-                                            <div class="modal inmodal fade"
-                                                 id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1"
-                                                 role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
-                                                            <div class="transparent">
-                                                                <div class="row">
-                                                                            <span class="pull-right m-r-md text-danger font-bold">
-                                                                                <?php echo $item['pd_genre1_']; ?>
-                                                                                / <?php echo $item['pd_genre2_']; ?>
-                                                                            </span>
-                                                                </div>
-                                                                <div>
-                                                                    <h1 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h1>
-                                                                    <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
-                                                                    <div class="m-t-md" style="margin-left: -4px;">
-                                                                        <div class="rec_pku_acd_icon">
-                                                                            <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                                                            <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
-                                                                        </div>
-                                                                        <div class="width-over">
-                                                                            <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
-                                                                        </div>
-                                                                        <div class="width-over">
-                                                                            <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-contents">
-                                                            <div class="row">
-                                                                <div class="exp">
 
-                                                                    <div class="modal-p">
-                                                                        企画説明
-                                                                    </div>
-                                                                    <div class="modal-web">
-                                                                        <?php echo nl2br($item['pd_web_long_kikaku']); ?>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="exp">
-                                                                    <div class="modal-p">
-                                                                        団体説明</div>
-                                                                    <div class="modal-web">
-                                                                        <?php echo nl2br($item['pd_web_long_org']); ?>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
-                                                            <button type="button" class="btn btn-white"
-                                                                    data-dismiss="modal">Close
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
 
                                         <div class="tabs-container">
                                             <ul class="nav nav-tabs">
@@ -389,6 +389,9 @@
 <!-- Clock picker -->
 <script src="/Static_Full_Version/js/plugins/clockpicker/clockpicker.js"></script>
 
+<!-- SetNow -->
+<script src="/js/setnow.js"></script>                                                                                    
+
 <!-- Select2 -->
 <script src="/Static_Full_Version/js/plugins/select2/select2.full.min.js"></script>
 
@@ -434,6 +437,7 @@
                             start : $('input[name="clock1"]').val(),
                         },
                         success: function(arr) {
+                            console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh02',
@@ -604,7 +608,7 @@
                                 });
                                 return false;
                             }
-                            window.location.href = "/result";
+                            //window.location.href = "/result";
 
 
                         },

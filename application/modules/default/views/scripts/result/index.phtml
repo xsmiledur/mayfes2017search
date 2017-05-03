@@ -51,6 +51,74 @@
 
 <body>
 
+<?php foreach ($this->project  as $item) : ?>
+<div class="modal inmodal fade"
+     id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
+     role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
+                <div class="transparent">
+                    <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['info']['pd_genre1_']; ?>
+                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
+                                                                            </span>
+                    </div>
+                    <div>
+                        <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
+                        <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
+                        <div class="m-t-md" style="margin-left: -4px;">
+                            <div class="rec_pku_acd_icon">
+                                <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                            </div>
+                            <div class="width-over">
+                                <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                            </div>
+                            <div class="width-over">
+                                <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-contents">
+                <div class="row">
+                    <div class="exp">
+
+                        <div class="modal-p">
+                            企画説明
+                        </div>
+                        <div class="modal-web">
+                            <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
+                        </div>
+                    </div>
+
+
+                    <div class="exp">
+                        <div class="modal-p">
+                            団体説明</div>
+                        <div class="modal-web">
+                            <?php echo nl2br($item['info']['pd_web_long_org']); ?>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                <button type="button" class="btn btn-white"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endforeach; ?>
+
 <div id="wrapper">
 
     <div id="page-wrapper" class="gray-bg">
@@ -199,70 +267,7 @@
 
                                                 </div>
                                                 <?php foreach ($this->project as $key => $item) : ?>
-                                                    <div class="modal inmodal fade"
-                                                         id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
-                                                         role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
-                                                                    <div class="transparent">
-                                                                        <div class="row">
-                                                                            <span class="pull-right m-r-md text-danger font-bold">
-                                                                                <?php echo $item['info']['pd_genre1_']; ?>
-                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div>
-                                                                            <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
-                                                                            <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
-                                                                            <div class="m-t-md" style="margin-left: -4px;">
-                                                                                <div class="rec_pku_acd_icon">
-                                                                                    <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                                                                    <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
-                                                                                </div>
-                                                                                <div class="width-over">
-                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
-                                                                                </div>
-                                                                                <div class="width-over">
-                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-contents">
-                                                                    <div class="row">
-                                                                        <div class="exp">
 
-                                                                            <div class="modal-p">
-                                                                            企画説明
-                                                                            </div>
-                                                                            <div class="modal-web">
-                                                                                <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                        <div class="exp">
-                                                                            <div class="modal-p">
-                                                                                団体説明</div>
-                                                                            <div class="modal-web">
-                                                                            <?php echo nl2br($item['info']['pd_web_long_org']); ?>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
-                                                                    <button type="button" class="btn btn-white"
-                                                                            data-dismiss="modal">Close
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
