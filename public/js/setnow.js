@@ -4,8 +4,8 @@ $(function (){
     var val = "";
     var h = now.getHours();
     if(h < 9 || h >= 18){//9時前あるいは18時以降
-	ph = "9:00";
-	val = "9:00";
+	ph = "09:00";
+	val = "09:00";
     }
     $("#input-clock1").attr("placeholder", ph);
     $("#input-clock1").attr("value", val);
