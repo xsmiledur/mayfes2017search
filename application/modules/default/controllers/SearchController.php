@@ -133,6 +133,10 @@ class SearchController extends Zend_Controller_Action
 
     public function timePost2Action()
     {
+        // viewレンダリング停止
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
         $start = $request->getPost('start');
@@ -145,6 +149,10 @@ class SearchController extends Zend_Controller_Action
 
     public function timePostAction()
     {
+        // viewレンダリング停止
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
         $request = $this->getRequest();
         $radio  = $request->getPost('radio');
         $clock1 = $request->getPost('clock1');
@@ -190,6 +198,10 @@ class SearchController extends Zend_Controller_Action
      */
     public function searchAction()
     {
+        // viewレンダリング停止
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
         /*
             最短オイラー路問題
 
@@ -408,7 +420,7 @@ class SearchController extends Zend_Controller_Action
             }
 
         } else {
-            $this->_session->errMsg = "エラーが発生しました。";
+            echo 0;
         }
 
     }
