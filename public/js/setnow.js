@@ -3,7 +3,7 @@ $(function (){
     var ph = "Now";
     var val = "";
     var h = now.getHours();
-    if(h < 9 || h >= 18){
+    if(h < 9 || h >= 18){//9時前あるいは18時以降
 	ph = "9:00";
 	val = "9:00";
     }
