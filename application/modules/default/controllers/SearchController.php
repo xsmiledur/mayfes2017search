@@ -334,7 +334,7 @@ class SearchController extends Zend_Controller_Action
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
-            2 => array('file', '/var/www/scripts/error-output.txt', 'a'),
+            2 => array('file', '/var/www/public/scripts/error-output.txt', 'a'),
             //2 => array("file", "/var/www/c_file/error-output", "a")
         );
 
@@ -344,7 +344,7 @@ class SearchController extends Zend_Controller_Action
         //var_dump($inputData);
 
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
-        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
+        $proc = proc_open('/var/www/public/scripts/search_.out', $inout, $pipes, $cwd);
         var_dump("opencheck");
         var_dump(is_resource($proc));
         if(is_resource($proc)){
