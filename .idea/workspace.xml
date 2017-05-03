@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e01f5e9-e743-42a9-b7d8-7d1d34a7bcba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/SearchController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/SearchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/lib/config.ini" afterPath="$PROJECT_DIR$/application/modules/default/lib/config.ini" />
     </list>
     <ignored path="mayfes2017search.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,21 +70,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="444">
-                  <caret line="422" column="19" lean-forward="false" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
+                <state relative-caret-position="114">
+                  <caret line="400" column="36" lean-forward="false" selection-start-line="400" selection-start-column="36" selection-end-line="400" selection-end-column="36" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="config.ini" pinned="false" current-in-tab="false">
+          <file leaf-file-name="config.ini" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="360">
-                  <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+                  <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
                   <folding />
                 </state>
               </provider>
@@ -144,7 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sticky</find>
       <find>fadeInRight</find>
       <find>印刷</find>
       <find>outerHeight</find>
@@ -174,6 +173,7 @@
       <find>img</find>
       <find>load</find>
       <find>modal</find>
+      <find>timepost</find>
     </findStrings>
     <replaceStrings>
       <replace>rel</replace>
@@ -237,10 +237,10 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/build/php.ini" />
-        <option value="$PROJECT_DIR$/application/modules/default/lib/config.ini" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml" />
         <option value="$PROJECT_DIR$/application/modules/default/views/scripts/result/index.phtml" />
         <option value="$PROJECT_DIR$/application/modules/default/controllers/SearchController.php" />
+        <option value="$PROJECT_DIR$/application/modules/default/lib/config.ini" />
       </list>
     </option>
   </component>
@@ -940,12 +940,12 @@
       <workItem from="1493280759116" duration="163000" />
       <workItem from="1493290518030" duration="54103000" />
       <workItem from="1493636621812" duration="103000" />
-      <workItem from="1493652330841" duration="6317000" />
+      <workItem from="1493652330841" duration="6394000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193580000" />
+    <option name="totallyTimeSpent" value="193657000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1281,14 +1281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1323,8 +1315,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="422" column="19" lean-forward="false" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
+        <state relative-caret-position="114">
+          <caret line="400" column="36" lean-forward="false" selection-start-line="400" selection-start-column="36" selection-end-line="400" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
           <folding />
         </state>
       </provider>
