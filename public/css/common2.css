@@ -812,7 +812,8 @@ fieldset .tabs-container .i-checks {
 }
 #map_img {
     height: 650px;
-    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
     border: #dcdcdc solid 2px;
 }
 .origin-map {

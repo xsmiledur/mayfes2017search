@@ -563,6 +563,11 @@
 
 <script>
 
+    //ページ遷移の前に警告
+    /*$(window).on('beforeunload', function(e) {
+        return 'ページを離れると検索結果は保存されない場合があります。このまま移動しますか？';
+    });*/
+
     var timer_;
     var map;
     function timer(num, map, quick) {
@@ -633,15 +638,10 @@
 
 
         <!-- 地図のルートを点滅画像で表示 -->
-/*
+
         $('#map_img div').not(':first').hide();
         if ($(window).width() > 767) {
-            //map等はスクロールしてもついてくる
-            $("#sticker").sticky({
-                topSpacing: 10,
-                bottomSpacing: 90,
-                center: true
-            });
+
 
             map = [$('#map_img .over-map.well1:first')];
             timer(1, map, 0);
@@ -661,10 +661,31 @@
 
         } else {
 
-            var timer2 = timer(2);
+            map = [$('#map_img .over-map.well2:first')];
+            timer(2, map, 0);
+            $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
+
+            $('.btn-stop').click(function() {
+                stopAnimate(2, map);
+            });
+            $('.btn-pause').click(function() {
+                pauseAnimate(2);
+            });
+            $('.btn-play').click(function() {
+                playAnimate(2, map);
+            });
             $('.btn-print').hide();
         }
-*/
+
+        if ($(window).width > 1200) {
+            //map等はスクロールしてもついてくる
+            $("#sticker").sticky({
+                topSpacing: 10,
+                bottomSpacing: 90,
+                center: true
+            });
+        }
+
 
         /*
         // Tooltips demo
@@ -677,7 +698,7 @@
         $('.widget-back').click(function () {
             swal({
                 title: "Are you OK?",
-                text: "入力画面に戻ると検索結果は保存されません。それでもよろしいですか？",
+                text: "入力画面に戻ると検索結果は保存されない場合があります。それでもよろしいですか？",
                 type: "warning",
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "OK",

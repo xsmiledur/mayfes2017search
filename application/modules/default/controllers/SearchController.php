@@ -188,7 +188,7 @@ class SearchController extends Zend_Controller_Action
     public function testAction()
     {
         //$data = $this->_main->getProjectData();
-        //$this->_main->____timeFix();
+        //$this->_main->_______timeFix();
         //$this->_main->___Fix2();
     }
 
@@ -344,9 +344,9 @@ class SearchController extends Zend_Controller_Action
         //var_dump($inputData);
 
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
-        $proc = proc_open('/var/www/public/scripts/search_.out', $inout, $pipes, $cwd);
+        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
         //var_dump("opencheck");
-        var_dump(is_resource($proc));
+        //var_dump(is_resource($proc));
         if(is_resource($proc)){
 
 
@@ -377,36 +377,15 @@ class SearchController extends Zend_Controller_Action
                 //var_dump($return_value);
                 $ps_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
                 unset($ps_pid[$N + 1]);
+                $this->_session->ps_pid = $ps_pid;
 
                 //var_dump($ps_pid);
                 //var_dump($N);
-                $bd_pid = array();
-                foreach ($ps_pid as $i => $item) { //$itemの中身はps_pid
-                    if ($i == 0) {
-                        $bd_pid[$i] = $start_pos;
-                    } else {
-                        $info = $this->_main->getProjectInfo($item);
-                        //var_dump($info['pp_bd_pid']);
-                        $bd_pid[$i] = $info['pp_bd_pid'];
-                    }
-                }
 
-                $order = array();
-                foreach ($bd_pid as $i => $item) { //bd_pidのキーは$i=1から
-                    if ($item != $bd_pid[$i + 1]) {
-                        $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
-                    } else {
-                        $order[$i]['time'] = false;
-                    }
-                    $order[$i]['way'] = $this->_main->getOrderWay($item, $bd_pid[$i + 1]);  //ある企画の場所から次の企画の場所への道順
-                    //$order[$i]['way'][count($order[$i]['way']) + 1] = $bd_pid[$i + 1];
-                }
                 //var_dump($order);
 
-                $this->_session->ps_pid = $ps_pid;
+                //$this->_session->ps_pid = $ps_pid;
                 $this->_session->research_t = $research_t;
-                $this->_session->order = $order;
-
 
                 //再検索のためのsession保存
                 $this->_session->re_search    = $search;

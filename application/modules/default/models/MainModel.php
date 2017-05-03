@@ -855,9 +855,10 @@ class MainModel
          $this->_read->query('begin');
          try {
              $select = $this->_read->select();
-             $select->from('90_project_time');
+             $select->from('90_project_data_nochange');
              $stmt = $select->query();
              $data = $stmt->fetchAll();
+
          } catch (Exception $e) {
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
@@ -872,52 +873,72 @@ class MainModel
          echo "</pre>";
          */
 
-         $arr4 = array('open', 'start', 'end');
+         $arr = array(
+             'パフォーマンス' => 'performance',
+             '音楽' => 'music',
+             '飲食・販売' => 'shop',
+             '参加型' => 'join',
+             '展示・実演' => 'exhibition',
+             '講演会・討論会' => 'lecture'
+         );
 
-         $i=0;
-         foreach ($data as $item) {
+         $genre = array();
+         foreach ($arr as $name => $val) {
 
+             $select = $this->_read->select();
+             $select->from('genre_data')
+                 ->where('gd_index_label = ?', $name);
+             $stmt = $select->query();
+             $genre[$val] = $stmt->fetchAll();
+         }
+         echo "<pre>";
+         var_dump($genre);
+         echo "</pre>";
 
+         foreach ($data as $key => $item) {
+             var_dump($item['pd_label']);
+             var_dump($item['pd_genre1_']);
+             var_dump($item['pd_genre2_']);
              $where = '';
-             $where[] = "pt_pid = '{$item['pt_pid']}'";
+             $where[] = "pd_pid = '{$item['pd_pid']}'";
 
              $update = array();
-
-             foreach ($arr4 as $name) {
-                 if ($item['pt_'.$name]) {
-                     $update['pt_' . $name . '_'] = intval(substr($item['pt_' . $name], 0, 2)) * 60 + intval(substr($item['pt_' . $name], 3, 2));
+             foreach ($arr as $name => $val) {
+                 if ($name == $item['pd_genre1_']) {
+                     $update['pd_genre1'] = $val;
+                     foreach ($genre[$val] as $genre_) {
+                         if ($genre_['gd_detail_label'] == $item['pd_genre2_']) {
+                             $update['pd_genre2'] = $genre_['gd_detail'];
+                             break;
+                         }
+                     }
                  }
              }
-
              echo "<pre>";
              var_dump($update);
              echo "</pre>";
 
+/*
+             $this->_write->beginTransaction();
+             $this->_write->query('begin');
 
+             try {
 
-             if (count($update) > 0) {
+                 $this->_write->update('90_project_data_nochange', $update, $where);
 
-                 $this->_write->beginTransaction();
-                 $this->_write->query('begin');
+                 // 成功した場合はコミットする
 
-                 try {
-
-                     $this->_write->update('90_project_time', $update, $where);
-
-                     // 成功した場合はコミットする
-
-                     $this->_write->commit();
-                     $this->_write->query('commit');
-                 } catch (Exception $e) {
-                     // 失敗した場合はロールバックしてエラーメッセージを返す
-                     $this->_write->rollBack();
-                     $this->_write->query('rollback');
-                     var_dump($e->getMessage());
-                     exit();
-                     return false;
-                 }
+                 $this->_write->commit();
+                 $this->_write->query('commit');
+             } catch (Exception $e) {
+                 // 失敗した場合はロールバックしてエラーメッセージを返す
+                 $this->_write->rollBack();
+                 $this->_write->query('rollback');
+                 var_dump($e->getMessage());
+                 exit();
+                 return false;
              }
-
+*/
 
          }
 
