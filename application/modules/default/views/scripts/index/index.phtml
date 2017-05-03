@@ -437,6 +437,7 @@
                             start : $('input[name="clock1"]').val(),
                         },
                         success: function(arr) {
+                            console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh02',
@@ -607,7 +608,7 @@
                                 });
                                 return false;
                             }
-                            window.location.href = "/result";
+                            //window.location.href = "/result";
 
 
                         },
