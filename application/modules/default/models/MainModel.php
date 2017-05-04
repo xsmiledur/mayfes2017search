@@ -1300,7 +1300,7 @@ class MainModel
             return false;
         }
 
-        $arr = array("20", "21");
+        $arr = array("20","21");
         $arr2 = array('open', 'start', 'end', 'note');
 
         foreach ($data as $item) {
