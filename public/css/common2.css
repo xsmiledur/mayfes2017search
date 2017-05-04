@@ -1047,6 +1047,14 @@ span.select2-selection__choice__remove {
         overflow-x: scroll;
         width: 100%;
     }
+    div.widget{
+        width: 99%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
 }
 @media screen and ( max-width:752px ) {
     .phone-display {
