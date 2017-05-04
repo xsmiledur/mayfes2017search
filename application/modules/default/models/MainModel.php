@@ -1152,6 +1152,108 @@ class MainModel
          exit();
      }
 
+     public function MakeNoActiveFlg()
+     {
+
+         $this->_read->beginTransaction();
+         $this->_read->query('begin');
+         try {
+             $select = $this->_read->select();
+             $select->from('90_project_data');
+             $stmt = $select->query();
+             $data = $stmt->fetchAll();
+
+         } catch (Exception $e) {
+             // 失敗した場合はロールバックしてエラーメッセージを返す
+             $this->_read->rollBack();
+             $this->_read->query('rollback');
+             var_dump($e->getMessage());exit();
+             //return false;
+         }
+
+         foreach ($data as $item) {
+             if ($item['pd_genre2_'] == '屋外模擬店（飲食物）') {
+                 $update['pd_active_flg'] = 0;
+                 $where = '';
+                 $where[] = "pd_pid = '{$item['pd_pid']}'";
+
+                 var_dump($item['pd_pid']);
+
+                 $this->_write->beginTransaction();
+                 $this->_write->query('begin');
+
+                 try {
+
+                     $this->_write->update('90_project_data', $update, $where);
+
+                     // 成功した場合はコミットする
+
+                     $this->_write->commit();
+                     $this->_write->query('commit');
+                 } catch (Exception $e) {
+                     // 失敗した場合はロールバックしてエラーメッセージを返す
+                     $this->_write->rollBack();
+                     $this->_write->query('rollback');
+                     var_dump($e->getMessage());
+                     exit();
+                     return false;
+                 }
+
+             }
+         }
+         exit();
+     }
+
+     public function timeFix2()
+     {
+         $this->_read->beginTransaction();
+         $this->_read->query('begin');
+         try {
+             $select = $this->_read->select();
+             $select->from('90_project_data');
+             $stmt = $select->query();
+             $data = $stmt->fetchAll();
+
+         } catch (Exception $e) {
+             // 失敗した場合はロールバックしてエラーメッセージを返す
+             $this->_read->rollBack();
+             $this->_read->query('rollback');
+             var_dump($e->getMessage());exit();
+             return false;
+         }
+
+         foreach ($data as $item) {
+             if (substr($item['pd_note9'],0,9) == "undefined") {
+                 $update['pd_note9'] = NULL;
+                 $where = '';
+                 $where[] = "pd_pid = '{$item['pd_pid']}'";
+
+
+                 $this->_write->beginTransaction();
+                 $this->_write->query('begin');
+
+                 try {
+
+                     $this->_write->update('90_project_data', $update, $where);
+
+                     // 成功した場合はコミットする
+
+                     $this->_write->commit();
+                     $this->_write->query('commit');
+                 } catch (Exception $e) {
+                     // 失敗した場合はロールバックしてエラーメッセージを返す
+                     $this->_write->rollBack();
+                     $this->_write->query('rollback');
+                     var_dump($e->getMessage());
+                     exit();
+                     return false;
+                 }
+
+             }
+         }
+
+     }
+
      public function timeFix()
      {
 
@@ -1189,9 +1291,6 @@ class MainModel
              var_dump($update);
              echo "</pre>";
              if (count($update) > 0) {
-
-
-
 
                  $this->_write->beginTransaction();
                  $this->_write->query('begin');

@@ -91,7 +91,7 @@
                                 企画説明
                             </div>
                             <div class="modal-web">
-                                <?php echo nl2br($item['pd_web_long_kikaku']); ?>
+                                <?php echo nl2br($item['pd_web_long']); ?>
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@
                             <div class="modal-p">
                                 団体説明</div>
                             <div class="modal-web">
-                                <?php echo nl2br($item['pd_web_long_org']); ?>
+                                <?php echo nl2br($item['pd_web_body']); ?>
                             </div>
                         </div>
 
@@ -404,6 +404,10 @@
 <!-- Sweet alert -->
 <script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+<!-- Input Mask-->
+<script src="/Static_Full_Version/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+
 <!--mapper-->
 <!--<script src="/js/mapper/mapper.js"></script>-->
 
@@ -656,18 +660,31 @@
             }
         });
 
-        //clockpicker
-        var input = $('#clock1').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-            'default': 'now'
-        });
-        $('#clock2').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-        });
+        var agent = navigator.userAgent;
+
+        if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){ //スマホかタブレット
+            $('input[name="clock1"]').inputmask({
+                mask: '99:99'
+            });
+            $('input[name="clock2"]').inputmask({
+                mask: '99:99'
+            });
+
+        } else { //PC
+            //clockpicker
+            var input = $('#clock1').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+                'default': 'now'
+            });
+            $('#clock2').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+            });
+        }
+
         $('input[name="no-time"]').change(function(){
             if ($(this).is(':checked')) {
                 console.log("aa");

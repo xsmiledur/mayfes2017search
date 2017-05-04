@@ -192,7 +192,8 @@ class SearchController extends Zend_Controller_Action
         //$this->_main->modifyDataPlace();
         //$this->_main->modifyPlaceTime();
         //$this->_main->timeFix();
-        //$this->_main->___Fix2();
+        //$this->_main->MakeNoActiveFlg();
+        //$this->_main->timeFix2();
     }
 
     /**
@@ -348,10 +349,10 @@ class SearchController extends Zend_Controller_Action
 
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
 
-        $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
-        //$proc = proc_open('/var/www/public/scripts/search_.out', $inout, $pipes, $cwd);
+        //$proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
+        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
         //var_dump("opencheck");
-        //var_dump(is_resource($proc));
+        var_dump(is_resource($proc));
         if(is_resource($proc)){
 
 
@@ -379,15 +380,14 @@ class SearchController extends Zend_Controller_Action
                 }
             } else {
 
-                //var_dump($return_value);
+                var_dump($result__);
                 $pt_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
                 unset($pt_pid[$N + 1]);
                 $this->_session->pt_pid = $pt_pid;
 
-                //var_dump($ps_pid);
+                //var_dump($pt_pid);
                 //var_dump($N);
 
-                //var_dump($order);
 
                 //$this->_session->ps_pid = $ps_pid;
                 $this->_session->research_t = $research_t;
