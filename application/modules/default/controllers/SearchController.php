@@ -347,7 +347,12 @@ class SearchController extends Zend_Controller_Action
         //var_dump($inputData);
 
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
+<<<<<<< Updated upstream
         $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
+=======
+        $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
+        //$proc = proc_open('/var/www/public/scripts/search_.out', $inout, $pipes, $cwd);
+>>>>>>> Stashed changes
         //var_dump("opencheck");
         //var_dump(is_resource($proc));
         if(is_resource($proc)){

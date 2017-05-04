@@ -1,25 +1,25 @@
 div#toptitle {
-    color: #fff;
+    color: #f1faed;
     width: 80%;
     margin-left:auto;
     margin-right:auto;
-    background: #FF9900;
+    background: #12ba55;
     padding: 20px;
     border: 1px
     dashed rgba(255,255,255,0.8);
-    box-shadow: 0 0 0 5px #f08080;
-    -moz-box-shadow: 0 0 0 5px #f08080;
-    -webkit-box-shadow: 0 0 0 5px #f08080;
+    box-shadow: 0 0 0 5px #12ba55;
+    -moz-box-shadow: 0 0 0 5px #12ba55;
+    -webkit-box-shadow: 0 0 0 5px #12ba55;
     font-size: 90%;
 }
 img.alg_img{
     width: 80%;
 }
 div.rule{
-    border:1px dashed #F90;
+    border:1px dashed #a2de86;
     width: 100%;
     border-radius: 10px;
-    background: #FFDBA6;
+    background: #a2de86;
 }
 div.rule_outside{
     width: 90%;
@@ -30,4 +30,25 @@ div.rule_outside{
     div#toptitle {
         width: 100%;
     }
+}
+div.section {
+    color: #f1faed;
+    width: 80%;
+    background: #55d21a;
+    padding: 20px;
+    border: 1px
+    box-shadow: 0 0 0 5px #a2de86;
+    -moz-box-shadow: 0 0 0 5px #a2de86;
+    -webkit-box-shadow: 0 0 0 5px #a2de86;
+    font-size: 90%;
+    border-radius: 10px;
+}
+div.row{
+    background: rgb(220, 238, 176);
+}
+div.ibox-content{
+    background: rgb(220, 238, 176);
+}
+tr{
+    background: rgb(251, 251, 246);
 }
