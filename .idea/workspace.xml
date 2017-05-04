@@ -32,18 +32,23 @@
             <entry file="file://$PROJECT_DIR$/Dockerfile">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="345">
-                  <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+                  <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="258">
+                  <caret line="380" column="20" lean-forward="false" selection-start-line="380" selection-start-column="17" selection-end-line="380" selection-end-column="20" />
+=======
 
                 <state relative-caret-position="267">
                   <caret line="335" column="30" lean-forward="true" selection-start-line="335" selection-start-column="30" selection-end-line="335" selection-end-column="30" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                   <folding />
                 </state>
               </provider>
@@ -52,19 +57,27 @@
           <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="369">
+                <state relative-caret-position="1155">
                   <caret line="77" column="24" lean-forward="false" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
+          <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/public/index.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="321">
+                  <caret line="32" column="63" lean-forward="false" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
+=======
 
           <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/index.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="399">
                   <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                   <folding />
                 </state>
               </provider>
@@ -80,9 +93,13 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="240">
                   <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+<<<<<<< HEAD
+                  <folding />
+=======
                   <folding>
                     <marker date="1493883966000" expanded="true" signature="2349:4785" ph="{...}" />
                   </folding>
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                 </state>
               </provider>
             </entry>
@@ -90,7 +107,7 @@
           <file leaf-file-name="index.phtml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/index/index.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="249">
+                <state relative-caret-position="4710">
                   <caret line="314" column="168" lean-forward="false" selection-start-line="314" selection-start-column="168" selection-end-line="314" selection-end-column="168" />
                   <folding>
                     <marker date="1493883966000" expanded="true" signature="1723:1783" ph="..." />
@@ -103,6 +120,10 @@
           <file leaf-file-name="MainModel.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/models/MainModel.php">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="27">
+                  <caret line="1181" column="48" lean-forward="false" selection-start-line="1181" selection-start-column="48" selection-end-line="1181" selection-end-column="48" />
+=======
                 <state relative-caret-position="147">
                   <caret line="951" column="26" lean-forward="false" selection-start-line="951" selection-start-column="26" selection-end-line="951" selection-end-column="26" />
                   <folding />
@@ -116,6 +137,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="360">
                   <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                   <folding />
                 </state>
               </provider>
@@ -134,9 +156,12 @@
           <file leaf-file-name="refresh01.phtml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
+                <state relative-caret-position="3360">
                   <caret line="224" column="85" lean-forward="false" selection-start-line="224" selection-start-column="85" selection-end-line="224" selection-end-column="85" />
+<<<<<<< HEAD
+=======
 
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                   <folding />
                 </state>
               </provider>
@@ -145,6 +170,11 @@
           <file leaf-file-name="common2.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/css/common2.css">
               <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="12045">
+                  <caret line="803" column="1" lean-forward="false" selection-start-line="803" selection-start-column="1" selection-end-line="803" selection-end-column="1" />
+                  <folding />
+=======
                 <state relative-caret-position="138">
                   <caret line="803" column="1" lean-forward="false" selection-start-line="803" selection-start-column="1" selection-end-line="803" selection-end-column="1" />
                   <folding>
@@ -211,6 +241,7 @@
                     <marker date="1493883966000" expanded="true" signature="18629:18656" ph="{...}" />
                     <marker date="1493883966000" expanded="true" signature="18697:18727" ph="{...}" />
                   </folding>
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
                 </state>
               </provider>
             </entry>
@@ -218,7 +249,7 @@
           <file leaf-file-name="refresh02.phtml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh02.phtml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
+                <state relative-caret-position="945">
                   <caret line="63" column="152" lean-forward="false" selection-start-line="63" selection-start-column="152" selection-end-line="63" selection-end-column="152" />
                   <folding />
                 </state>
@@ -383,8 +414,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -397,198 +426,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="index" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mayfes2017search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1073,12 +914,17 @@
       <workItem from="1493290518030" duration="54103000" />
       <workItem from="1493636621812" duration="103000" />
       <workItem from="1493652330841" duration="6317000" />
+      <workItem from="1493884402439" duration="21000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="220126000" />
+=======
 
     <option name="totallyTimeSpent" value="194649000" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1408,7 +1254,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh02.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="945">
           <caret line="63" column="152" lean-forward="false" selection-start-line="63" selection-start-column="152" selection-end-line="63" selection-end-column="152" />
           <folding />
         </state>
@@ -1449,13 +1295,24 @@
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/public/js/setnow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/lib/config.ini">
+=======
 
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/algorithm.phtml">
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
@@ -1465,12 +1322,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/bootstrap/dist/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="260">
+          <caret line="1411" column="3" lean-forward="true" selection-start-line="1411" selection-start-column="3" selection-end-line="1411" selection-end-column="3" />
+=======
 
         <state relative-caret-position="249">
           <caret line="314" column="168" lean-forward="false" selection-start-line="314" selection-start-column="168" selection-end-line="314" selection-end-column="168" />
           <folding>
             <marker date="1493883966000" expanded="true" signature="1723:1783" ph="..." />
           </folding>
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
         </state>
       </provider>
     </entry>
@@ -1485,18 +1347,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/common2.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="12045">
+          <caret line="803" column="1" lean-forward="false" selection-start-line="803" selection-start-column="1" selection-end-line="803" selection-end-column="1" />
+=======
 
         <state relative-caret-position="60">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="1155">
+          <caret line="77" column="24" lean-forward="false" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+=======
 
         <state relative-caret-position="360">
           <caret line="224" column="85" lean-forward="false" selection-start-line="224" selection-start-column="85" selection-end-line="224" selection-end-column="85" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
           <folding />
         </state>
       </provider>
@@ -1504,35 +1376,75 @@
 
     <entry file="file://$PROJECT_DIR$/application/modules/default/models/MainModel.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="4710">
+          <caret line="314" column="168" lean-forward="false" selection-start-line="314" selection-start-column="168" selection-end-line="314" selection-end-column="168" />
+=======
         <state relative-caret-position="147">
           <caret line="951" column="26" lean-forward="false" selection-start-line="951" selection-start-column="26" selection-end-line="951" selection-end-column="26" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/search/refresh01.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-
-          <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+<<<<<<< HEAD
+        <state relative-caret-position="3360">
+          <caret line="224" column="85" lean-forward="false" selection-start-line="224" selection-start-column="85" selection-end-line="224" selection-end-column="85" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/ResultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+=======
+        <state relative-caret-position="360">
+
+          <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/application/modules/default/models/MainModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1181" column="48" lean-forward="false" selection-start-line="1181" selection-start-column="48" selection-end-line="1181" selection-end-column="48" />
+=======
 
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="32" column="63" lean-forward="false" selection-start-line="32" selection-start-column="63" selection-end-line="32" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="380" column="20" lean-forward="false" selection-start-line="380" selection-start-column="17" selection-end-line="380" selection-end-column="20" />
+=======
 
     <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="335" column="30" lean-forward="true" selection-start-line="335" selection-start-column="30" selection-end-line="335" selection-end-column="30" />
+>>>>>>> b9512c61cf03f906120f7a1b95f9d8778a5669b8
           <folding />
         </state>
       </provider>
