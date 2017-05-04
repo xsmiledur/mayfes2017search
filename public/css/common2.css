@@ -207,7 +207,8 @@
     margin-bottom: 0;
 }
 #all-cover > .ibox-content {
-    height: 760px;
+    min-height: 760px;
+    height: 100%;
     background-color: rgba(255,255,255,0.5);
     border: none;
 }
@@ -963,9 +964,11 @@ span.select2-selection__choice__remove {
     top: 44px;
     background-color: #a9a9a9;
 }
+
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {
-        height: 850px;
+        min-height: 850px;
+        height: 100%;
     }
     .wizard-big.wizard > .content {
         min-height: 735px !important;
@@ -1053,5 +1056,14 @@ span.select2-selection__choice__remove {
     }
     fieldset > div.background-muted > p {
         display: none;
+    }
+    .footer div:not(.pull-right) {
+        display: none;
+    }
+}
+@media screen and ( max-width:500px) {
+    .footer {
+        font-size: 11px;
+        height: 39px;
     }
 }
