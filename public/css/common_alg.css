@@ -26,9 +26,19 @@ div.rule_outside{
     margin-left:auto;
     margin-right:auto;
 }
+p,div{font-size: 18px;
+}
+div.pull-right,div.pull-left{
+    font-size: 13px;
+}
 @media screen and (max-width: 767px) {
     div#toptitle {
         width: 100%;
+    }
+    p,div{font-size: 13px;
+    }
+    div.pull-right,div.pull-left{
+        font-size: 5px;
     }
 }
 div.section {
