@@ -42,7 +42,7 @@ class IndexController extends Zend_Controller_Action
         $db_write = $this->_config->datasource->database->toArray();
 
         // モデルのインスタンスを生成する
-        //$this->_main = new MainModel($db_read,$db_write);
+        $this->_main = new MainModel($db_read,$db_write);
 
         /**
          * 言語データを取得する
