@@ -39,6 +39,7 @@ class MainModel
             'driver_options' => $pdoParams
         );
 
+        exit();
         // データベースアダプタを作成する
         $this->_read = Zend_Db::factory($db_read['type'], $read_params);
         // 文字コードをUTF-8に設定する
