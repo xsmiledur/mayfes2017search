@@ -6,7 +6,7 @@ require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Session.php';
 
-//require_once '../application/modules/default/models/MainModel.php';
+require_once '../application/modules/default/models/MainModel.php';
 
 class IndexController extends Zend_Controller_Action
 {
