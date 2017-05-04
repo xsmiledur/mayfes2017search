@@ -43,9 +43,9 @@
         <div class="full-height-scroll">
             <div class="table-responsive">
 
-                <div class="row">
+                <div class="row push-outside">
                     <?php foreach ($this->data['genre'] as $key => $val) : ?>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-xs-6 col-md-4">
                             <div id="PushGenre<?php echo $val['name']; ?>" class="genre-push contact-box m-b-sm b-r-lg">
                                 <img alt="<?php echo $val['label']; ?>" src="/img/genre/<?php echo $val['name']; ?>.png">
                                 <input type="hidden" name="name" value="<?php echo $val['name']; ?>">
@@ -317,12 +317,14 @@
         $(".genre-push").click(function(){
             var key = $(this).find('input[name="name"]').val();
             $(".genre-push").hide();
+            $(this).closest('.push-outside').hide();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#BoxGenre" + key).show();
         });
         $(".genre-link").click(function(e){
             e.stopPropagation();
             $(".genre-push").show();
+            $('#tab-2 .push-outside').show();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $(".genre-box").hide();
         });
@@ -337,6 +339,7 @@
         $(".area-push").click(function(){
             var key = $(this).find('input[name="name"]').val();
             $(".area-push").hide();
+            $(this).closest('.push-outside').hide();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#BoxArea" + key).show();
         });
@@ -344,7 +347,8 @@
         $(".area-link").click(function(e){
             e.stopPropagation();
             $(".area-push").show();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $('#tab-3 .push-outside').show();
+// 「id="jQueryBox"」の表示、非表示を切り替える
             $(".area-box").hide();
         });
     });

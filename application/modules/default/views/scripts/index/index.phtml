@@ -132,7 +132,7 @@
                 <div class="col-lg-4">
                     <h1 class="top-title">MAY SEARCH</h1>
                     <div id="row1" class="row">
-                        <div class="col-sm-8 col-sm-offset-4">
+                        <div class="col-sm-8 col-sm-offset-4 col-xs-6">
                             <a href="/search/algorithm">
                                 <div class="widget lazur-bg widget1">
                                     <i class="fa fa-codepen fa-first"></i>
@@ -141,7 +141,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 col-xs-6">
                             <a href="/">
                                 <div class="widget navy-bg widget2">
                                     <i class="fa fa-codepen fa-first"></i>
@@ -465,7 +465,7 @@
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     if ($('input[name="start-pos"]').val() == "") {
-                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger');
+                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
                         return false;
                     } else {
                         $('.select-start-pos-error').removeClass('text-danger').addClass('text-muted');
@@ -612,7 +612,7 @@
                                 });
                                 return false;
                             }
-                            window.location.href = "/result";
+                            //window.location.href = "/result";
 
 
                         },
