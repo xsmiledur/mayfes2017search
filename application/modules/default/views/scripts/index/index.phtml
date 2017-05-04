@@ -53,7 +53,7 @@
 
 <?php foreach ($this->data_all as $item) : ?>
     <div class="modal inmodal fade"
-         id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1"
+         id="Modal_pt_pid<?php echo $item['pt_pid']; ?>" tabindex="-1"
          role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -312,7 +312,7 @@
                                                 <div class="col-sm-12">
                                                     <ul id="search-all" class="list-group clear-list m-t">
                                                         <?php foreach($this->data_all as $key => $item) : ?>
-                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['ps_pid']; ?>">
+                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
                                                                 <span class="pull-right body-text no-margins" style="width: 30%;">
                                                                     <?php echo $item['pd_body']; ?>
                                                                 </span>
@@ -608,7 +608,7 @@
                                 });
                                 return false;
                             }
-                            //window.location.href = "/result";
+                            window.location.href = "/result";
 
 
                         },

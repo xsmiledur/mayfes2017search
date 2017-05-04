@@ -119,10 +119,9 @@ class MainModel
     public function getProjectDataAll()
     {
         $select = $this->_read->select();
-        $select->from('90_project_summary')
-            ->join('90_project_data', 'ps_pd_pid = pd_pid')
-            ->join('90_project_place', 'ps_pp_pid = pp_pid')
-            ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
+        $select->from('90_project_time')
+            ->join('90_project_data', 'pt_pd_pid = pd_pid')
+            ->join('90_project_place', 'pt_pp_pid = pp_pid');
         $select->where('pd_active_flg = ?', 1);
         $stmt = $select->query();
         return $stmt->fetchAll();
@@ -141,10 +140,9 @@ class MainModel
         $this->_read->query('begin');
         try {
             $select = $this->_read->select();
-            $select->from('90_project_summary', 'ps_pid')
-                ->join('90_project_data', 'ps_pd_pid = pd_pid')
-                ->join('90_project_place', 'ps_pp_pid = pp_pid')
-                ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid')
+            $select->from('90_project_time')
+                ->join('90_project_data', 'pt_pd_pid = pd_pid')
+                ->join('90_project_place', 'pt_pp_pid = pp_pid')
                 ->where('pd_active_flg = ?', 1)
                 ->order('pd_pid');
             /*$select->from('project_data_89')
@@ -175,10 +173,9 @@ class MainModel
         $data = array();
 
         $select = $this->_read->select();
-        $select->from('90_project_summary', 'ps_pid')
-            ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long_kikaku', 'pd_web_long_org', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
-            ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
-            ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note'))
+        $select->from('90_project_time', array('pt_pid', 'pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note'))
+            ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long', 'pd_web_body', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
+            ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
             ->where('pd_active_flg = ?', 1)
             ->where('pp_day = ?', $date)
             ->order('pd_pid');
@@ -479,7 +476,7 @@ class MainModel
      * @param $ps_pid
      * @return array
      */
-    public function getProjectInfo($ps_pid)
+    public function getProjectInfo($pt_pid)
     {
 
         // トランザクション開始
@@ -488,13 +485,12 @@ class MainModel
         try {
 
             $select = $this->_read->select();
-            $select->from('90_project_summary');
-            $select->join('90_project_data', 'ps_pd_pid = pd_pid')
-                ->join('90_project_place','ps_pp_pid = pp_pid')
+            $select->from('90_project_time');
+            $select->join('90_project_data', 'pt_pd_pid = pd_pid')
+                ->join('90_project_place','pt_pp_pid = pp_pid')
                 ->join('building_data', 'pp_bd_pid = bd_pid');
-            $select->joinLeft('90_project_time', 'ps_pt_pid = pt_pid');
-            $select->where('ps_pd_active_flg = ?', 1)
-                ->where('ps_pid = ?', $ps_pid);
+            $select->where('pd_active_flg = ?', 1)
+                ->where('pt_pid = ?', $pt_pid);
             $stmt = $select->query();
             $result = $stmt->fetch();
 
@@ -654,10 +650,9 @@ class MainModel
 
             //企画名から検索
             $select = $this->_read->select();
-            $select->from('90_project_summary', 'ps_pid')
-                ->join('90_project_data', 'ps_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
-                ->join('90_project_place', 'ps_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
-                ->joinLeft('90_project_time', 'ps_pt_pid = pt_pid', array('pt_start_', 'pt_end_', 'pt_open_'))
+            $select->from('90_project_time',  array('pt_pid', 'pt_start_', 'pt_end_', 'pt_open_'))
+                ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
+                ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
                 ->join('building_data', 'pp_bd_pid = bd_pid', array('bd_pos_flg'))
                 ->where('pd_active_flg = ?', 1)
                 ->where('bd_pos_flg = ?', 1)
@@ -847,6 +842,315 @@ class MainModel
         }
     }*/
 
+    /**
+     * nochangeデータからproject_dataを作成
+     * @return bool
+     */
+     public function modifyProjectData()
+     {
+         $this->_read->beginTransaction();
+         $this->_read->query('begin');
+         try {
+             $select = $this->_read->select();
+             $select->from('90_project_data_nochange')
+                 ->order('pd_pid');
+             $stmt = $select->query();
+             $data = $stmt->fetchAll();
+
+         } catch (Exception $e) {
+             // 失敗した場合はロールバックしてエラーメッセージを返す
+             $this->_read->rollBack();
+             $this->_read->query('rollback');
+             var_dump($e->getMessage());exit();
+             return false;
+         }
+
+         $arr = array(
+             'pd_full_20',
+             'pd_full_21',
+             'pd_day_20',
+             'pd_day_21',
+         );
+
+         $arr2 = array('open', 'start', 'end', 'note');
+
+         $arr3 = array('pd_rec_flg','pd_pickup_flg','pd_academic_flg');
+
+         foreach ($data as $key => $item) {
+             $select = $this->_read->select();
+             $select->from('genre_data')
+                 ->where('gd_index_label = ?', $item['pd_genre1_'])
+                 ->where('gd_detail_label = ?', $item['pd_genre2_']);
+             $stmt = $select->query();
+             $genre = $stmt->fetch();
+
+             $insert = array();
+             $insert = $item;
+             $insert['pd_genre1'] = $genre['gd_index'];
+             $insert['pd_genre2'] = $genre['gd_detail'];
+
+             if ($genre['gd_genre2_'] == '屋外模擬店（飲食物）') {
+                 $insert['pd_active_flg'] = 0;
+             } else {
+                 $insert['pd_active_flg'] = 1;
+             }
+
+             foreach ($arr as $val) {
+                 if ($item[$val] == 'true') $insert[$val] = 1;
+                 else $insert[$val] = 0;
+             }
+
+             for ($i = 1; $i < 10; $i++) {
+                 foreach ($arr2 as $val) {
+                     if ($item['pd_'.$val.$i] == 'undefined' || strlen($item['pd_'.$val.$i]) == 0) {
+                         $insert['pd_'.$val.$i] = NULL;
+                     } elseif (strlen($item['pd_'.$val.$i]) == 4) {
+                         $insert['pd_'.$val.$i] = "0".$insert['pd_'.$val.$i];
+                     }
+                 }
+             }
+
+             $select = $this->_read->select();
+             $select->from('90_recommend', $arr3)
+                 ->where('pd_pid = ?', $item['pd_pid']);
+             $stmt = $select->query();
+             $rec = $stmt->fetch();
+
+             if ($rec) {
+                 foreach ($arr3 as $val) {
+                     if ($rec[$val]) $insert[$val] = 1;
+                 }
+             } else {
+                 var_dump("ERROR おすすめフラグ等がない");
+             }
+
+             echo "<pre>";
+             var_dump($insert);
+             echo "</pre>";
+
+             $this->_write->beginTransaction();
+             $this->_write->query('begin');
+
+             try {
+
+                 $this->_write->insert('90_project_data', $insert);
+
+                 // 成功した場合はコミットする
+
+                 $this->_write->commit();
+                 $this->_write->query('commit');
+             } catch (Exception $e) {
+                 // 失敗した場合はロールバックしてエラーメッセージを返す
+                 $this->_write->rollBack();
+                 $this->_write->query('rollback');
+                 var_dump($e->getMessage());
+                 exit();
+                 return false;
+             }
+
+
+
+         }
+
+         exit();
+     }
+
+     public function modifyDataPlace()
+     {
+         $this->_read->beginTransaction();
+         $this->_read->query('begin');
+         try {
+             $select = $this->_read->select();
+             $select->from('90_project_data')
+                 ->where('pd_active_flg = ?', 1)
+                 ->order('pd_pid');
+             $stmt = $select->query();
+             $data = $stmt->fetchAll();
+
+         } catch (Exception $e) {
+             // 失敗した場合はロールバックしてエラーメッセージを返す
+             $this->_read->rollBack();
+             $this->_read->query('rollback');
+             var_dump($e->getMessage());exit();
+             return false;
+         }
+
+         $arr = array('20', '21');
+         $arr2 = array('open', 'start', 'end', 'note');
+         foreach ($data as $item) {
+             foreach ($arr as $day) {
+                 if ($item['pd_day_'.$day]) {
+                     $insert = array();
+                     $insert['pp_pd_pid'] = $item['pd_pid'];
+                     $insert['pp_place']  = $item['pd_place'];
+                     $insert['pp_day']    = $day;
+                     $insert['pp_full']   = $item['pd_full_'.$day];
+                     $insert['pp_pd_active_flg'] = $item['pd_active_flg'];
+                     if ($day == "20") {
+                         $N = 1; $M = 5;
+                     } else {
+                         $N = 5; $M = 10;
+                     }
+                     $j = 1;
+                     for ($i = $N; $i < $M; $i++) {
+                         foreach ($arr2 as $val) {
+                             if ($item['pd_'.$val.$i]) {
+                                 $insert['pp_'.$val.$j] = $item['pd_'.$val.$i];
+                             }
+                         }
+                         ++$j;
+                     }
+
+                     $select = $this->_read->select();
+                     $select->from('__90_project_place', array('pp_bd_pid', 'pp_name1', 'pp_name2'))
+                         ->where('pp_pd_pid = ?', $item['pd_pid']);
+                     $stmt = $select->query();
+                     $bld = $stmt->fetch();
+
+                     if ($bld) {
+                         $insert = array_merge($insert, $bld);
+                     } else {
+                         var_dump("建物データがありません");
+                     }
+                     echo "<pre>";
+                     var_dump($insert);
+                     echo "</pre>";
+
+
+
+                     $this->_write->beginTransaction();
+                     $this->_write->query('begin');
+
+                     try {
+
+                         $this->_write->insert('90_project_place', $insert);
+
+                         // 成功した場合はコミットする
+
+                         $this->_write->commit();
+                         $this->_write->query('commit');
+                     } catch (Exception $e) {
+                         // 失敗した場合はロールバックしてエラーメッセージを返す
+                         $this->_write->rollBack();
+                         $this->_write->query('rollback');
+                         var_dump($e->getMessage());
+                         exit();
+                         return false;
+                     }
+
+
+                 }
+
+             }
+         }
+         exit();
+     }
+
+     public function modifyPlaceTime()
+     {
+         $this->_read->beginTransaction();
+         $this->_read->query('begin');
+         try {
+             $select = $this->_read->select();
+             $select->from('90_project_place')
+                 ->order('pp_pid');
+             $stmt = $select->query();
+             $data = $stmt->fetchAll();
+
+         } catch (Exception $e) {
+             // 失敗した場合はロールバックしてエラーメッセージを返す
+             $this->_read->rollBack();
+             $this->_read->query('rollback');
+             var_dump($e->getMessage());
+             exit();
+             return false;
+         }
+         $arr = array('open', 'start', 'end', 'note');
+
+         foreach ($data as $item) {
+             $insert = array();
+             $insert['pt_pd_pid'] = $item['pp_pd_pid'];
+             $insert['pt_pp_pid'] = $item['pp_pid'];
+             $insert['pt_pd_active_flg'] = $item['pp_pd_active_flg'];
+             $insert['pt_full'] = $item['pp_full'];
+
+             $select = $this->_read->select();
+             $select->from('90_staytime')
+                 ->where('id = ?', $item['pp_pd_pid']);
+             $stmt = $select->query();
+             $time = $stmt->fetch();
+             if ($time) $insert['pt_time'] = $time['滞在時間目安'];
+             else var_dump("ERROR 滞在時間目安がありません");
+
+             if ($item['pp_full']) {
+                 echo "<pre>";
+                 var_dump($insert);
+                 echo "</pre>";
+
+                 $this->_write->beginTransaction();
+                 $this->_write->query('begin');
+                 try {
+
+                     $this->_write->insert('90_project_time', $insert);
+
+                     // 成功した場合はコミットする
+
+                     $this->_write->commit();
+                     $this->_write->query('commit');
+                 } catch (Exception $e) {
+                     // 失敗した場合はロールバックしてエラーメッセージを返す
+                     $this->_write->rollBack();
+                     $this->_write->query('rollback');
+                     var_dump($e->getMessage());
+                     exit();
+                     return false;
+                 }
+             }
+
+             $flg = array();
+             for ($i=1; $i<6; $i++) {
+                 foreach ($arr as $val) {
+                     if ($item['pp_'.$val.$i]) {
+                         $flg[$i] = 1; break;
+                     }
+                 }
+             }
+
+             for ($i=1; $i<6; $i++) {
+                 if ($flg[$i]) {
+                     foreach ($arr as $val) {
+                         $insert['pt_' . $val] = $item['pp_' . $val . $i];
+                         if ($item['pt_'.$val]) {
+                             $update['pt_' . $val . '_'] = intval(substr($item['pt_' . $val], 0, 2)) * 60 + intval(substr($item['pt_' . $val],3,2));
+                         }
+                     }
+                     echo "<pre>";
+                     var_dump($insert);
+                     echo "</pre>";
+                     $this->_write->beginTransaction();
+                     $this->_write->query('begin');
+                     try {
+
+                         $this->_write->insert('90_project_time', $insert);
+
+                         // 成功した場合はコミットする
+
+                         $this->_write->commit();
+                         $this->_write->query('commit');
+                     } catch (Exception $e) {
+                         // 失敗した場合はロールバックしてエラーメッセージを返す
+                         $this->_write->rollBack();
+                         $this->_write->query('rollback');
+                         var_dump($e->getMessage());
+                         exit();
+                         return false;
+                     }
+                 }
+             }
+
+         }
+         exit();
+     }
 
      public function timeFix()
      {
@@ -858,6 +1162,7 @@ class MainModel
              $select->from('90_project_time');
              $stmt = $select->query();
              $data = $stmt->fetchAll();
+
          } catch (Exception $e) {
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
@@ -866,36 +1171,27 @@ class MainModel
              return false;
          }
 
-         /*
-         echo "<pre>";
-         var_dump($data);
-         echo "</pre>";
-         */
+         $arr = array('20', '21');
+         $arr2 = array('open', 'start', 'end');
 
-         $arr4 = array('open', 'start', 'end');
-
-         $i=0;
-         foreach ($data as $item) {
-
-
-             $where = '';
-             $where[] = "pt_pid = '{$item['pt_pid']}'";
+         foreach ($data as $key => $item) {
 
              $update = array();
-
-             foreach ($arr4 as $name) {
-                 if ($item['pt_'.$name]) {
-                     $update['pt_' . $name . '_'] = intval(substr($item['pt_' . $name], 0, 2)) * 60 + intval(substr($item['pt_' . $name], 3, 2));
+             foreach ($arr2 as $val) {
+                 if ($item['pt_'.$val]) {
+                     $update['pt_' . $val . '_'] = intval(substr($item['pt_' . $val], 0, 2)) * 60 + intval(substr($item['pt_' . $val],3,2));
                  }
              }
+             $where = '';
+             $where[] = "pt_pid = '{$item['pt_pid']}'";
 
              echo "<pre>";
              var_dump($update);
              echo "</pre>";
-
-
-
              if (count($update) > 0) {
+
+
+
 
                  $this->_write->beginTransaction();
                  $this->_write->query('begin');
@@ -916,10 +1212,65 @@ class MainModel
                      exit();
                      return false;
                  }
+
+
              }
 
-
          }
+
+
+             /*
+
+             foreach ($data as $key => $item) {
+
+                 $select = $this->_read->select();
+                 $select->from('_90_project_place')
+                     ->where('pp_pd_pid = ?', $item['pp_pd_pid'])
+                     ->where('pp_day = ?', $item['pp_day']);
+                 $stmt = $select->query();
+                 $place = $stmt->fetch();
+
+
+                 $update = array();
+                 $update['pp_bd_pid'] = $place['pp_bd_pid'];
+                 $update['pp_name1'] = $place['pp_name1'];
+                 $update['pp_name2'] = $place['pp_name2'];
+                 $update['pp_place_'] = $place['pp_place'];
+
+
+                 echo "<pre>";
+                 var_dump($place);
+                 var_dump($update);
+                 echo "</pre>";
+
+
+                 $where = '';
+                 $where[] = "pp_pid = '{$item['pp_pid']}";
+
+                 $this->_write->beginTransaction();
+                 $this->_write->query('begin');
+
+                 try {
+
+                     $this->_write->update('90_project_place', $update, $where);
+
+                     // 成功した場合はコミットする
+
+                     $this->_write->commit();
+                     $this->_write->query('commit');
+                 } catch (Exception $e) {
+                     // 失敗した場合はロールバックしてエラーメッセージを返す
+                     $this->_write->rollBack();
+                     $this->_write->query('rollback');
+                     var_dump($e->getMessage());
+                     exit();
+                     return false;
+                 }
+
+
+
+             }
+             */
 
          exit();
 
