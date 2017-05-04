@@ -10,7 +10,7 @@
                     <?php foreach ($this->data['data'] as $key => $item) : ?>
                         <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
                             <span class="exp-text">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                             </span>
                             <span class="body-text">
                                 <?php echo $item['pd_body']; ?>
@@ -25,7 +25,7 @@
                                 <?php echo $item['pp_place']," ",$item['pd_label_kana']," ",$item['pd_place_kana']," ",$item['pd_body_kana']; ?>
                             </span>
                             <div class="check-text i-checks">
-                                <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; ?> </label>
                             </div>
                         </li>
                     <?php endforeach; ?>
@@ -74,14 +74,14 @@
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                                                 <div class="i-checks">
                                                     <span class="pull-right" style="text-align: right;">
-                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                     </span>
                                             <?php if ($item['pt_start']) : ?>
                                                 <span class="pull-right m-r-xs">
                                                             <?php echo $item['pt_start']; ?>
                                                         </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
                                                 </div>
                                             </li>
                                         <?php ++$i; endif; ?>
@@ -137,14 +137,14 @@
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                                                 <div class="i-checks">
                                                     <span class="pull-right" style="text-align: right;">
-                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                 </span>
                                                     <?php if ($item['pt_start']) : ?>
                                                     <span class="pull-right m-r-xs">
                                                     <?php echo $item['pt_start']; ?>
                                                 </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
                                                 </div>
                                             </li>
                                             <?php ++$i; endif; ?>
@@ -175,7 +175,7 @@
                     <?php if ($item['pd_rec_flg']) : ?>
                     <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                         <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -187,7 +187,7 @@
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                         <div class="check-text i-checks">
-                            <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                            <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
                         </div>
                     </li>
                     <?php $i++; endif; ?>
@@ -210,7 +210,7 @@
                         <?php if ($item['pd_pickup_flg']) : ?>
                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                                 <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -222,7 +222,7 @@
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
@@ -245,7 +245,7 @@
                         <?php if ($item['pd_academic_flg']) : ?>
                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                                 <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -257,7 +257,7 @@
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
@@ -362,7 +362,7 @@
         });
         $(".btn-modal").click(function(event) {
             event.stopPropagation();
-            $("#Modal_ps_pid" + $(this).val()).modal('show');
+            $("#Modal_pt_pid" + $(this).val()).modal('show');
         });
     });
 

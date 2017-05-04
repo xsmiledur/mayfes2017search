@@ -87,7 +87,7 @@ class ResultController extends Zend_Controller_Action
             echo $errMsg;
             //exit();
         }
-        $ps_pid = $this->_session->ps_pid;  //企画ps_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
+        $pt_pid = $this->_session->pt_pid;  //企画pt_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
         $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
         $research_t = $this->_session->research_t; //再検索の場合の、個別に設定した企画ごとの時間が格納されている配列
 
@@ -98,7 +98,7 @@ class ResultController extends Zend_Controller_Action
         $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
         /*
         echo "<pre>";
-        var_dump($ps_pid);
+        var_dump($pt_pid);
         var_dump($order);
         var_dump($start);
         var_dump($start_pos);
@@ -108,7 +108,7 @@ class ResultController extends Zend_Controller_Action
 
         //建物情報
         $bd_pid = array();
-        foreach ($ps_pid as $i => $item) { //$itemの中身はps_pid
+        foreach ($pt_pid as $i => $item) { //$itemの中身はpt_pid
             if ($i == 0) {
                 $bd_pid[$i] = $start_pos;
             } else {
@@ -133,7 +133,7 @@ class ResultController extends Zend_Controller_Action
 
         $_start = intval(substr($start,0,2)) * 60 + intval(substr($start,3,2)); //分単位の開始時刻
         $project = array();
-        foreach ($ps_pid as $key => $item) { //$key=0は企画の個数
+        foreach ($pt_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
                 $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
                 if (!$project[$key-1]['info']['pt_time']) $project[$key-1]['info']['pt_time'] = 30;

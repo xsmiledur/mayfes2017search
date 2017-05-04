@@ -188,7 +188,10 @@ class SearchController extends Zend_Controller_Action
     public function testAction()
     {
         //$data = $this->_main->getProjectData();
-        //$this->_main->_______timeFix();
+        //$this->_main->modifyProjectData();
+        //$this->_main->modifyDataPlace();
+        //$this->_main->modifyPlaceTime();
+        //$this->_main->timeFix();
         //$this->_main->___Fix2();
     }
 
@@ -284,17 +287,17 @@ class SearchController extends Zend_Controller_Action
         $pp_search = array();
         $research_t = array(); //再検索後の時間
         $pp_search[0]['bd_pid'] = $start_pos;
-        foreach ($search as $i => $item) { //$itemは$ps_pid
+        foreach ($search as $i => $item) { //$itemは$pt_pid
             $_result = $this->_main->getProjectInfo($item);
 
             //var_dump($_result);
 
             //企画情報
 
-            $ps_pid = $item; //企画summaryID
+            $pt_pid = $item; //企画summaryID
 
             if ($research) {
-                $time = $request->getParam('re-time'.$_result['ps_pid']);
+                $time = $request->getParam('re-time'.$_result['pt_pid']);
             } elseif ($_result['pt_time']) {
                 $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
             } else {
@@ -308,7 +311,7 @@ class SearchController extends Zend_Controller_Action
             } else {
                 $start = $_result['pt_start_'];
             }
-            $inputData .= sprintf("%d %d %d\n", $ps_pid, $start, $time);
+            $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
 
             //for企画の建物間のかかる時間
             //$pp_search[$i]['ps_pid'] = $_result['ps_pid']; //企画のsummaryID 保険のため？
@@ -375,9 +378,9 @@ class SearchController extends Zend_Controller_Action
             } else {
 
                 //var_dump($return_value);
-                $ps_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
-                unset($ps_pid[$N + 1]);
-                $this->_session->ps_pid = $ps_pid;
+                $pt_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
+                unset($pt_pid[$N + 1]);
+                $this->_session->pt_pid = $pt_pid;
 
                 //var_dump($ps_pid);
                 //var_dump($N);
@@ -406,194 +409,6 @@ class SearchController extends Zend_Controller_Action
     }
 
 
-    /**
-     * 結果表示画面
-     */
-    public function resultAction()
-    {
-        /*
-        $errMsg = $this->_session->errMsg;
-        if (strlen($errMsg) > 0) {
-            echo $errMsg;
-            exit();
-        }
-        $pd_pid = $this->_session->pd_pid;  //企画の回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
-        $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
-        //キーiに対してキー"time"には経路にかかる時間、
-        //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
-        $start = $this->_session->start;
-        $_start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
-
-        //例
-        $start = "10:00";
-        $_start_pos = 43;
-        $start_pos = $this->_main->getBuildingData($_start_pos);
-        $pd_pid = array(3,4,1,336);
-        $order  = array(
-            array(
-                 //orderのキー0には何も入ってない
-            ),
-            array(
-                'time' => 10,
-                'way'  => 9
-            ),
-            array(
-                'time' => 10,
-                'way'  => 12
-            ),
-            array(
-                'time' => 10,
-                'way'  => 5
-            ),
-        );
-        */
-        /*
-                    最短オイラー路問題
-                    入力形式
-                    N v_0
-                    現在時刻分 終了時刻分
-                    v_1 s_1 t_1
-                    v_2 s_2 t_2
-                    :
-                    v_N s_N t_N
-                    d_00 d_01 .. d_0N
-                    d_10 d_11 .. d_1N
-                    :
-                    d_N0 d_N1 .. d_NN
-                    1行目に巡る企画数Nと始点v_0が与えられる。
-                    続くN行のうちのi行目にはi番目の巡りたい企画のID v_i とそれに到着したい時刻 s_i と費やす時間t_iが空白区切りで入力される。
-                    続くN+1行のうちi+1行目にはN+1個の整数d_i1, d_i2, .. , d_iNが
-                    空白区切りで与えられる。(0≦i≦N)
-                    d_ijはi番目の企画（の建物）からj番目の企画（の建物）に行くのに
-                    かかる時間である。
-                    時間、時刻の単位は分である。時刻は日付が変わってから何分経ったかで持つ。
-                    時間や時刻に指定がない場合はs_i = -1やt_i = -1。
-                    入力はすべて整数
-                */
-        $inputData = "";
-        $request    = $this->getRequest();
-        $search     = $request->getParam('search');
-        $N          = count($search);
-        $start_pos   = $request->getParam('start_pos');
-        $inputData .= sprintf("%d %d\n", $N, $start_pos);
-        $date       = $request->getParam('date');
-        $clock1     = $request->getParam('clock1');
-        if (!$clock1) $clock1 = date("H:i");
-        $clock2     = $request->getParam('clock2');
-        $clock1_ = (int)substr($clock1,0,2) * 60 + (int)substr($clock1,3,2);
-        $clock2_ = (int)substr($clock2,0,2) * 60 + (int)substr($clock2,3,2);
-        $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
-        /*
-        var_dump($search);
-        var_dump($N);
-        var_dump($start_pos);
-        var_dump($date);
-        var_dump($clock1);
-        var_dump($clock1_);
-        var_dump($clock2);
-        var_dump($clock2_);
-        */
-        //$research = $this->_session->research;
-        $this->_session->start = $clock1;
-        $this->_session->start_pos = $start_pos;
-        $result = null;
-        $pp_search = array();
-        $pp_search[0]['bd_pid'] = $start_pos;
-        foreach ($search as $i => $item) { //$itemは$ps_pid
-            $_result = $this->_main->getProjectInfo($item);
-            //var_dump($_result);
-            //企画情報
-            $ps_pid = $item; //企画summaryID
-            if ($research) {
-                $time = $request->getParam('re-time'.$_result['ps_pid']);
-                //var_dump($time);
-            } elseif ($_result['pt_time']) {
-                $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
-            } else {
-                $time = 30;
-            }
-            $__start = $_result['pt_start']; //企画start
-            if (!$__start) {
-                $start = -1;
-            } else {
-                $start = $_result['pt_start_'];
-            }
-            $inputData .= sprintf("%d %d %d\n", $ps_pid, $start, $time);
-            //for企画の建物間のかかる時間
-            //$pp_search[$i]['ps_pid'] = $_result['ps_pid']; //企画のsummaryID 保険のため？
-            $pp_search[$i + 1]['bd_pid'] = $_result['pp_bd_pid']; //建物のid
-        }
-        //企画の建物間のかかる時間
-        foreach ($pp_search as $i => $item) {
-            $time = array();
-            foreach ($pp_search as $j => $item2) {
-                if ($item['bd_pid'] == $item2['bd_pid']) {
-                    $time[$j] = 0;
-                } else {
-                    $time[$j] = $this->_main->getTimeInfo($item['bd_pid'], $item2['bd_pid']);
-                }
-            }
-            foreach ($time as $key => $val) {
-                $inputData .= sprintf("%d ", $val);
-            }
-            if ($i < $N) $inputData .= sprintf("\n");
-        }
-        $inout = array(
-            0 => array('pipe', 'r'),
-            1 => array('pipe', 'w'),
-            2 => array('file', '/tmp/error-output.txt', 'a'),
-            //2 => array("file", "/var/www/c_file/error-output", "a")
-        );
-        //ここまでは多分完成
-        //search.outとの接続
-        //var_dump($inputData);
-        $proc = proc_open('/var/www/scripts/test.out', $inout, $pipes);
-        var_dump(is_resource($proc));
-        if(is_resource($proc)){
-            fwrite($pipes[0], $inputData);
-            fclose($pipes[0]);
-            //resultのpd_pidを返す
-            //sleep(2);
-            $result__ =  stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            $return_value = proc_close($proc);
-            var_dump($inputData);
-            var_dump($result__);
-            var_dump($return_value);
-            //var_dump($return_value);
-            $pd_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
-            $bd_pid = array();
-            foreach ($pd_pid as $i => $item) {
-                if ($i != 0) {
-                    $info = $this->_main->getProjectInfo($item);
-                    $bd_pid[$i] = $info['pd_bd_pid'];
-                }
-            }
-            $order = array();
-            foreach ($bd_pid as $i => $item) { //bd_pidのキーは$i=1から
-                if ($i < $N) {
-                    $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
-                    $order[$i]['way']  = $this->_main->getOrderWay($item, $bd_pid[$i + 1]);  //ある企画の場所から次の企画の場所への道順
-                }
-            }
-            $this->_session->pd_pid = $pd_pid;
-            $this->_session->order = $order;
-        } else {
-            $this->_session->errMsg = "エラーが発生しました。";
-        }
-        //再検索のためのsession保存
-        $this->_setParam('search', $search);
-        $this->_setParam('start-pos', $start_pos);
-        $this->_setParam('date', $date);
-        $this->_setParam('clock1', $clock1);
-        $this->_setParam('clock2', $clock2);
-        if ($research) {
-            //return $this->_redirect('/search/result');
-        }
-        echo 1;
-
-
-    }
 
 
 }
