@@ -96,6 +96,11 @@ class ResultController extends Zend_Controller_Action
         //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
         $start = $this->_session->start;
         $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
+
+        if ($this->_session->errMsg) {
+            $this->view->errMsg = $this->_session->errMsg;
+            unset($this->_session->errMsg);
+        }
         /*
         echo "<pre>";
         var_dump($pt_pid);
@@ -120,9 +125,11 @@ class ResultController extends Zend_Controller_Action
 
         //順路
         $order = array();
+        $num = $this->_session->num;
+        $switch = $this->_session->switch;
         foreach ($bd_pid as $i => $item) { //bd_pidのキーは$i=1から
             if ($item != $bd_pid[$i + 1]) {
-                $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
+                $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1], $num, $switch); //ある企画の場所から次の企画の場所へ行くのに必要な時間
             } else {
                 $order[$i]['time'] = false;
             }
@@ -175,9 +182,6 @@ class ResultController extends Zend_Controller_Action
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
         $this->view->order = $order;
 
-	echo "<pre>";
-	var_dump($order);
-	echo "</pre>";
 
     }
 

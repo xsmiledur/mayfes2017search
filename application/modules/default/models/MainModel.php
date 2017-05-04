@@ -523,7 +523,14 @@ class MainModel
     }
 
     //建物間の
-    public function getTimeInfo($bd_pid1, $bd_pid2)
+    /**
+     * @param $bd_pid1
+     * @param $bd_pid2
+     * @param $time //定数
+     * @param $switch //足すかかけるか 1なら足す 0ならかける
+     * @return bool
+     */
+    public function getTimeInfo($bd_pid1, $bd_pid2, $time, $switch)
     {
 
         // トランザクション開始
@@ -542,7 +549,13 @@ class MainModel
             // 成功した場合はコミットする
             $this->_read->commit();
             $this->_read->query('commit');
-            return $data['cd_time'];
+
+            if ($switch == 1) {
+                $result = $data['cd_time'] + $time;
+            } else {
+                $result = $data['cd_time'] * $time;
+            }
+            return $result;
         } catch (Exception $e) {
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
