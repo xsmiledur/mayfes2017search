@@ -269,6 +269,7 @@ class SearchController extends Zend_Controller_Action
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
 
+        /*
         var_dump($search);
         var_dump($N);
         var_dump($start_pos);
@@ -277,6 +278,7 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1_);
         var_dump($clock2);
         var_dump($clock2_);
+        */
 
         //移動時間の修正
         $num = 3;
@@ -358,7 +360,7 @@ class SearchController extends Zend_Controller_Action
         $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
         //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
         //var_dump("opencheck");
-        var_dump(is_resource($proc));
+        //var_dump(is_resource($proc));
         if(is_resource($proc)){
 
 
@@ -387,7 +389,7 @@ class SearchController extends Zend_Controller_Action
                 }
             } else {
 
-                var_dump($result__);
+                //var_dump($result__);
                 $pt_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
                 unset($pt_pid[$N + 1]);
                 $this->_session->pt_pid = $pt_pid;
@@ -398,9 +400,7 @@ class SearchController extends Zend_Controller_Action
 
                 //$this->_session->ps_pid = $ps_pid;
                 $this->_session->research_t = $research_t;
-                echo "<pre>";
-                var_dump($research_t);
-                echo "</pre>";
+
 
                 //再検索のためのsession保存
                 $this->_session->re_search    = $search;
