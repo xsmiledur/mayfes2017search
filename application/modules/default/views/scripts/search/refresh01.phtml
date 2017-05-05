@@ -108,7 +108,7 @@
         <div class="row push-outside">
             <?php foreach ($this->data['area'] as $key => $val) : ?>
                 <div class="col-xs-12 col-sm-6">
-                    <div id="PushArea<?php echo $val['name']; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/logo/<?php echo $val['name']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
+                    <div id="PushArea<?php echo $val['name']; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/area/<?php echo $val['name']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
                         <input type="hidden" name="name" value="<?php echo $val['name']; ?>">
                         <h3><strong><?php echo $val['label']; ?></strong></h3>
                     </div>
@@ -117,7 +117,7 @@
         </div>
 
         <?php foreach ($this->data['area'] as $key => $val) : ?>
-            <div id="BoxArea<?php echo $val['name']; ?>" class="area-box contact-box" style="background-image: url(/img/logo/<?php echo $val['name']; ?>.png); background-size: cover;">
+            <div id="BoxArea<?php echo $val['name']; ?>" class="area-box contact-box" style="background-image: url(/img/area/<?php echo $val['name']; ?>.png); background-size: cover;">
                 <div class="transparent">
                     <div class="title-plain">
                         <button type="button" class="btn btn-link area-link text-muted">戻る</button>
