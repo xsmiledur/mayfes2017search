@@ -21,9 +21,9 @@
 }
 #page-wrapper.sk-loading > .sk-spinner {
     display: block;
-    position: absolute;
-    top: 40%;
-    left: 0;
+    position: fixed;
+    top: 32%;
+    left: 2%;
     right: 0;
     z-index: 2000;
 }
@@ -1091,14 +1091,6 @@ span.select2-selection__choice__remove {
         width: 150px;
         margin: auto;
         text-align: center;
-        z-index: 2000;
-    }
-    #page-wrapper.sk-loading > .sk-spinner {
-        display: block;
-        position: fixed;
-        top: 32%;
-        left: 2%;
-        right: 0;
         z-index: 2000;
     }
 }
