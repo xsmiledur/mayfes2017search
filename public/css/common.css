@@ -29,7 +29,7 @@
 }
 #page-wrapper.sk-loading > p.sk-spinner-text {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 46%;
     left: 0;
     right: 0;
@@ -1074,6 +1074,24 @@ span.select2-selection__choice__remove {
     }
     .vote-comment {
         width: 140px;
+    }
+    #page-wrapper.sk-loading > p.sk-spinner-text {
+        display: block;
+        position: fixed;
+        top:40%;
+        left:7%;
+        text-align: center;
+        z-index: 2000;
+    }
+    #page-wrapper.sk-loading > .sk-spinner-btn {
+        display: block;
+        position: fixed;
+        top: 45%;
+        left:5%;
+        width: 150px;
+        margin: auto;
+        text-align: center;
+        z-index: 2000;
     }
 }
 @media screen and ( max-width:752px ) {
