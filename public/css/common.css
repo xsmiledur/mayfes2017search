@@ -967,8 +967,21 @@ span.select2-selection__choice__remove {
     .ibox-content {
         padding: 10px 5px;
     }
+    #id2 .widget.widget1 {
+        height: 60px;
+    }
+    #id2 .widget.widget-back {
+        height: 40px;
+    }
+    #id2 .widget.widget-vote {
+        height: 80px;
+    }
+    #id2 .widget {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
     .widget p {
-        font-size: 12px !important;
+        font-size: 9px !important;
         bottom: 0px;
         left: 5px;
     }
@@ -1017,6 +1030,9 @@ span.select2-selection__choice__remove {
         margin-left: auto;
         margin-right: auto;
     }
+    #row1 .widget {
+        height: 60px;
+    }
     .widget1:hover {
         margin-right: 0;
         margin-left: 0px;
@@ -1024,6 +1040,40 @@ span.select2-selection__choice__remove {
     .widget2:hover {
         margin-left: 0;
         margin-right: 0px;
+    }
+    .fa-first {
+        position: absolute;
+        font-size: 40px;
+        right: 10px;
+    }
+    .fa-second {
+        position: absolute;
+        font-size: 30px;
+        color: rgba(255,255,255,0.8);
+        left: initial;
+        right: 30px;
+
+    }
+    .widget-back .fa-first {
+        right: 10px;
+        top: 0;
+        text-align: right;
+    }
+    .widget-back .fa-second {
+        top: 0;
+        right: 35px;
+        text-align: right;
+    }
+    .vote-maychan {
+        margin: initial !important;
+        right: 10px !important;
+        left: initial !important;
+    }
+    .vote-maychan img {
+        height: 140px;
+    }
+    .vote-comment {
+        width: 140px;
     }
 }
 @media screen and ( max-width:752px ) {
