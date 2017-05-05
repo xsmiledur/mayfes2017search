@@ -1093,6 +1093,14 @@ span.select2-selection__choice__remove {
         text-align: center;
         z-index: 2000;
     }
+    #page-wrapper.sk-loading > .sk-spinner {
+        display: block;
+        position: fixed;
+        top: 32%;
+        left: 2%;
+        right: 0;
+        z-index: 2000;
+    }
 }
 @media screen and ( max-width:752px ) {
     .phone-display {
