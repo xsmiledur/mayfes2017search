@@ -553,6 +553,7 @@ fieldset .tabs-container .i-checks {
     margin: 0;
     padding: 0;
     border-radius: 10px;
+    position: relative;
 }
 .genre-box.contact-box {
     padding: 20px;
@@ -808,6 +809,9 @@ fieldset .tabs-container .i-checks {
 .width-over i.fa-calendar {
     margin-right: 16px;
 }
+.width-over i.fa-clock-o {
+    margin-right: 16px;
+}
 #map_img:after {
     content: ".";
     display: block;
@@ -822,6 +826,11 @@ fieldset .tabs-container .i-checks {
 }
 .mapper {
     cursor: crosshair;
+}
+.contact-box.center-version i.fa.fa-clock-o,
+.contact-box.center-version i.fa.fa-calendar {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;
@@ -1124,6 +1133,17 @@ span.select2-selection__choice__remove {
     }
     .footer div:not(.pull-right) {
         display: none;
+    }
+    .genre-push, .area-push {
+        height: 100px;
+    }
+    .contact-box.center-version {
+        margin-bottom :5px;
+    }
+    .contact-box.center-version i.fa.fa-clock-o,
+    .contact-box.center-version i.fa.fa-calendar {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 @media screen and ( max-width:500px) {

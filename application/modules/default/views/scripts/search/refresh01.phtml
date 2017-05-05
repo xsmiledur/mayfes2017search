@@ -361,8 +361,25 @@
         $(".btn-open").click(function(e){
             e.stopPropagation();
             var key = $(this).find('input[name="btn-val"]').val();
-            //$('.select-box').hide();
             $("div#" + key).slideToggle('fast');
+
+            // スクロールの速度
+            var speed = 400; // ミリ秒
+            // 移動先を数値で取得
+            var th = $(this).offset().top;
+            // スムーススクロール
+            if (key.substr(0,5) == 'genre') {
+                var body = $(this).closest('.contact-box');
+            } else {
+                var body = $(this).closest('.transparent');
+            }
+            var sh = body.scrollTop();
+            var topsize = body.offset().top;
+            var pos = th - topsize + sh - 10;
+
+            body.animate({
+                scrollTop: pos
+            }, speed, "swing");
         });
         $(".btn-modal").click(function(event) {
             event.stopPropagation();

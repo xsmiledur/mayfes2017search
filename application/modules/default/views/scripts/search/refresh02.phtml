@@ -77,7 +77,7 @@
             // 移動先を数値で取得
             var position = $('#sample02').offset().top;
             // スムーススクロール
-            $('body,html').animate({scrollTop:position}, speed, 'swing');
+            $('body').animate({scrollTop:position}, speed, 'swing');
         });
 
         cvi_map.add(document.getElementById('shape1'),{

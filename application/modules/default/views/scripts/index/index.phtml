@@ -73,10 +73,13 @@
                                     <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
                                 </div>
                                 <div class="width-over">
                                     <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-clock-o"></i><?php echo $item['pt_time']; ?> 分
                                 </div>
                             </div>
                         </div>
@@ -182,7 +185,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-calendar fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+                                                        <i class="fa fa-calendar fa-5x"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
@@ -201,7 +204,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-clock-o fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+                                                        <i class="fa fa-clock-o fa-5x"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在時間</strong></h3>
