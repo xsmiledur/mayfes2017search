@@ -1,6 +1,7 @@
 .well {
     padding: 10px 10px 20px;
     width: initial;
+    height: initial;
     position: absolute;
     color: #171717;
     font-weight: 500;
@@ -46,5 +47,8 @@
     }
     .well2 {
         display: block;
+    }
+    .well2 > .map-cm-b {
+        display: block !important;
     }
 }

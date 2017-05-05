@@ -433,6 +433,13 @@
             bodyTag: "fieldset",
             onStepChanging: function (event, currentIndex, newIndex)
             {
+                // スクロールの速度
+                var speed = 400; // ミリ秒
+                // 移動先を数値で取得
+                var position = $('#all-cover').offset().top;
+                // スムーススクロール
+                $('body,html').animate({scrollTop:position}, speed, 'swing');
+
                 // Always allow going backward even if the current step contains invalid fields!
                 if (currentIndex > newIndex)
                 {
@@ -540,22 +547,6 @@
 
                 // Start validation; Prevent going forward if false
                 return form.valid();
-            },
-            onStepChanged: function (event, currentIndex, priorIndex)
-            {
-                // Suppress (skip) "Warning" step if the user is old enough.
-                if (currentIndex === 2 && Number($("#age").val()) >= 18)
-                {
-                    $(this).steps("next");
-                }
-
-                /*
-                 // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-                 if (currentIndex === 2 && priorIndex === 3)
-                 {
-                 $(this).steps("previous");
-                 }
-                 */
             },
             onFinishing: function (event, currentIndex)
             {
