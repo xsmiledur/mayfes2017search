@@ -1052,9 +1052,14 @@ span.select2-selection__choice__remove {
         margin-left: auto;
         margin-right: auto;
     }
-
-
-
+    .widget1:hover {
+        margin-right: 0;
+        margin-left: 0px;
+    }
+    .widget2:hover {
+        margin-left: 0;
+        margin-right: 0px;
+    }
 }
 @media screen and ( max-width:752px ) {
     .phone-display {
