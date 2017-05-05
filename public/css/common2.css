@@ -207,7 +207,8 @@
     margin-bottom: 0;
 }
 #all-cover > .ibox-content {
-    height: 760px;
+    min-height: 760px;
+    height: 100%;
     background-color: rgba(255,255,255,0.5);
     border: none;
 }
@@ -963,9 +964,11 @@ span.select2-selection__choice__remove {
     top: 44px;
     background-color: #a9a9a9;
 }
+
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {
-        height: 850px;
+        min-height: 850px;
+        height: 100%;
     }
     .wizard-big.wizard > .content {
         min-height: 735px !important;
@@ -986,6 +989,8 @@ span.select2-selection__choice__remove {
     fieldset .ibox .ibox-content {
         height: 630px;
     }
+
+
 }
 @media screen and ( max-width:991px ) {
 
@@ -997,21 +1002,43 @@ span.select2-selection__choice__remove {
     }
 }
 @media screen and ( max-width:767px ) {
+    body {
+        font-size: 12px;
+    }
+    h2 {
+        font-size: 15px;
+    }
+    .ibox-content {
+        padding: 10px 5px;
+    }
+    .widget p {
+        font-size: 12px !important;
+        bottom: 0px;
+        left: 5px;
+    }
     .table-responsive {
         border: none;
     }
     .push-outside {
-        height: 570px;
+        height: 500px;
     }
     .vertical-container {
         margin-left: 0;
         margin-right: 0;
         width: 100%;
     }
+    .vertical-timeline-time {
+        font-size: 12px;
+    }
     .vertical-timeline-time-block {
         position: absolute;
         margin-left: 3px;
         top: 50px;
+    }
+    .vertical-timeline-content {
+        margin-right: -30px;
+
+
     }
     .vote-maychan {
         height: 70%;
@@ -1019,17 +1046,33 @@ span.select2-selection__choice__remove {
     .vote-comment {
         display: block;
     }
-    h2 {
-        font-size: 18px;
+
+    .origin-map img,
+    .over-map img {
+        width: 700px;
     }
     .origin-map,
     .over-map {
-        width: 700px;
+        overflow-x: scroll;
+        width: 100%;
+    }
+    div.widget{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .widget1:hover {
+        margin-right: 0;
+        margin-left: 0px;
+    }
+    .widget2:hover {
+        margin-left: 0;
+        margin-right: 0px;
     }
 }
 @media screen and ( max-width:752px ) {
     .phone-display {
-        display: block;
+        display: block !important;
     }
     .search-in {
         height: 450px;
@@ -1053,5 +1096,14 @@ span.select2-selection__choice__remove {
     }
     fieldset > div.background-muted > p {
         display: none;
+    }
+    .footer div:not(.pull-right) {
+        display: none;
+    }
+}
+@media screen and ( max-width:500px) {
+    .footer {
+        font-size: 11px;
+        height: 39px;
     }
 }

@@ -53,7 +53,7 @@
 
 <?php foreach ($this->project  as $item) : ?>
 <div class="modal inmodal fade"
-     id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
+     id="Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>" tabindex="-1"
      role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,7 +91,7 @@
                             企画説明
                         </div>
                         <div class="modal-web">
-                            <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
+                            <?php echo nl2br($item['info']['pd_web_long']); ?>
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@
                         <div class="modal-p">
                             団体説明</div>
                         <div class="modal-web">
-                            <?php echo nl2br($item['info']['pd_web_long_org']); ?>
+                            <?php echo nl2br($item['info']['pd_web_body']); ?>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                                     <div class="widget lazur-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
                                         <i class="fa fa-codepen fa-second"></i>
-                                        <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                        <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                     </div>
                                 </a>
                             </div>
@@ -195,16 +195,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <div class="widget yellow-bg widget2 widget-back">
                                     <i class="fa fa-arrow-left fa-first"></i>
                                     <i class="fa fa-arrow-left fa-second"></i>
                                     <p>入力画面に戻る</p>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="https://gogatsusai.jp/90/search/result?id=394">
                                     <div class="widget red-bg widget2 widget-vote">
                                         <p>投票はこちらから！</p>
@@ -215,9 +215,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="row row2">
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="/search/algorithm">
                                     <div class="widget lazur-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
@@ -226,7 +226,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="http://ap-phys.net/">
                                     <div class="widget navy-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
@@ -247,6 +247,13 @@
 
                                 <div class="row row-cover print-page">
                                     <div class="col-lg-4" id="block1">
+                                        <?php if ($this->view->errMsg) : ?>
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                            <?php echo $this->view->errMsg; ?>
+                                        </div>
+                                        <?php endif; ?>
+
                                         <form id="research-form" action="/search/search" method="post">
                                             <div id="vertical-timeline" class="vertical-container dark-timeline">
 
@@ -288,16 +295,16 @@
                                                                 <?php echo $item['info']['pd_label']; ?>
                                                                 <a href="#" class="btn btn-xs btn-info pull-right "
                                                                    data-toggle="modal"
-                                                                   data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
+                                                                   data-target="#Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>">
                                                                     <span class="glyphicon glyphicon-info-sign"></span></a>
                                                             </h2>
                                                             <?php echo $item['info']['pp_place']; ?>
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
-                                                                    標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                    滞在時間目安：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
                                                                 </p>
-                                                                <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
+                                                                <input type="text" name="re-time<?php echo $item['info']['pt_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>
                                                         </div>
 
@@ -639,6 +646,8 @@
 
         <!-- 地図のルートを点滅画像で表示 -->
 
+
+        /*
         $('#map_img div').not(':first').hide();
         if ($(window).width() > 767) {
 
@@ -676,8 +685,10 @@
             });
             $('.btn-print').hide();
         }
+        */
 
-        if ($(window).width > 1200) {
+        console.log($(window).width());
+        if ($(window).width() > 1200) {
             //map等はスクロールしてもついてくる
             $("#sticker").sticky({
                 topSpacing: 10,
@@ -685,6 +696,7 @@
                 center: true
             });
         }
+
 
 
         /*

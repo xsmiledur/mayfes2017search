@@ -20,7 +20,6 @@
 
     <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
 
-
     <!--checkbox-->
     <link href="/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
@@ -91,7 +90,7 @@
                                 企画説明
                             </div>
                             <div class="modal-web">
-                                <?php echo nl2br($item['pd_web_long_kikaku']); ?>
+                                <?php echo nl2br($item['pd_web_long']); ?>
                             </div>
                         </div>
 
@@ -100,7 +99,7 @@
                             <div class="modal-p">
                                 団体説明</div>
                             <div class="modal-web">
-                                <?php echo nl2br($item['pd_web_long_org']); ?>
+                                <?php echo nl2br($item['pd_web_body']); ?>
                             </div>
                         </div>
 
@@ -132,16 +131,16 @@
                 <div class="col-lg-4">
                     <h1 class="top-title">MAY SEARCH</h1>
                     <div id="row1" class="row">
-                        <div class="col-sm-8 col-sm-offset-4">
+                        <div class="col-sm-8 col-sm-offset-4 col-xs-6">
                             <a href="/search/algorithm">
                                 <div class="widget lazur-bg widget1">
                                     <i class="fa fa-codepen fa-first"></i>
                                     <i class="fa fa-codepen fa-second"></i>
-                                    <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                    <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 col-xs-6">
                             <a href="/">
                                 <div class="widget navy-bg widget2">
                                     <i class="fa fa-codepen fa-first"></i>
@@ -390,7 +389,7 @@
 <script src="/Static_Full_Version/js/plugins/clockpicker/clockpicker.js"></script>
 
 <!-- SetNow -->
-<script src="/js/setnow.js"></script>                                                                                    
+<script src="/js/setnow.js"></script>
 
 <!-- Select2 -->
 <script src="/Static_Full_Version/js/plugins/select2/select2.full.min.js"></script>
@@ -403,6 +402,10 @@
 
 <!-- Sweet alert -->
 <script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Input Mask-->
+<script src="/Static_Full_Version/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
 
 <!--mapper-->
 <!--<script src="/js/mapper/mapper.js"></script>-->
@@ -461,7 +464,7 @@
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     if ($('input[name="start-pos"]').val() == "") {
-                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger');
+                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
                         return false;
                     } else {
                         $('.select-start-pos-error').removeClass('text-danger').addClass('text-muted');
@@ -608,7 +611,7 @@
                                 });
                                 return false;
                             }
-                            window.location.href = "/result";
+                            //window.location.href = "/result";
 
 
                         },
@@ -656,18 +659,31 @@
             }
         });
 
-        //clockpicker
-        var input = $('#clock1').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-            'default': 'now'
-        });
-        $('#clock2').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-        });
+        var agent = navigator.userAgent;
+
+        if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){ //スマホかタブレット
+            $('input[name="clock1"]').inputmask({
+                mask: '99:99'
+            });
+            $('input[name="clock2"]').inputmask({
+                mask: '99:99'
+            });
+
+        } else { //PC
+            //clockpicker
+            var input = $('#clock1').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+                'default': 'now'
+            });
+            $('#clock2').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+            });
+        }
+
         $('input[name="no-time"]').change(function(){
             if ($(this).is(':checked')) {
                 console.log("aa");
@@ -814,4 +830,3 @@
 </body>
 
 </html>
-
