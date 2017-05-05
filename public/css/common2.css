@@ -1008,6 +1008,9 @@ span.select2-selection__choice__remove {
     h2 {
         font-size: 15px;
     }
+    .ibox.float-e-margins > .ibox-content {
+        padding: 10px 5px;
+    }
     .widget p {
         font-size: 12px !important;
         bottom: 0px;
