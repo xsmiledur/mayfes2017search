@@ -1010,9 +1010,8 @@ span.select2-selection__choice__remove {
     }
     .widget p {
         font-size: 12px !important;
-    }
-    .widget.widget-back {
-        text-align: left !important;
+        bottom: 0px;
+        left: 5px;
     }
     .table-responsive {
         border: none;
