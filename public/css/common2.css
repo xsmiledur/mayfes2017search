@@ -1,6 +1,6 @@
 #page-wrapper {
     margin-left: 0;
-    background: linear-gradient(0deg, rgba(126, 280, 123, .7), rgba(250,198,0, .7)), url('/img/background2.jpg');
+    background: linear-gradient(0deg, rgba(126, 280, 123, .7), rgba(250,198,0, .7)), url('/img/background.jpg');
 }
 #page-wrapper.sk-loading {
     position: relative;
@@ -474,23 +474,6 @@ a#jump div:active {
     background-color:rgba(255,255,255,0.9);
 }
 
-div#may-chan {
-    background-image : url('/img/may-chan2-2.png');
-    width:360px;
-    height:300px;
-    position: absolute;
-    left: -10px;
-    bottom: 0px;
-    transition: all .3s;
-}
-div#may-chan:hover {
-    left: 10px;
-    bottom: 20px;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-name: flash;
-    animation-duration: 1.5s;
-    animation-name: flash;
-}
 @-webkit-keyframes flash {
     0% {
         opacity: .4;
@@ -507,33 +490,6 @@ div#may-chan:hover {
         opacity: 1;
     }
 }
-div#may-chan:active {
-    left: 10px;
-    bottom: 20px;
-}
-
-div#comment {
-    background-image : url('/img/comment-3.png');
-    display: none;
-    width:253px;
-    height:200px;
-    position: absolute;
-    left: 370px;
-    bottom: 150px;
-}
-
-a#footer:hover,
-a#footer:active {
-
-}
-
-/*
-.contact-box.center-version > a {
-    background-color: #ffffe0;
-}
-.contact-box.center-version > a:hover {
-    background-color: #ffffe0;
-}*/
 .wizard > .content > .body {
     width: 100% !important;
 }
