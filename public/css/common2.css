@@ -1008,6 +1008,9 @@ span.select2-selection__choice__remove {
     h2 {
         font-size: 15px;
     }
+    .widget p {
+        font-size: 12px !important;
+    }
     .table-responsive {
         border: none;
     }
