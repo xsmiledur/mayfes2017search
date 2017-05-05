@@ -989,6 +989,8 @@ span.select2-selection__choice__remove {
     fieldset .ibox .ibox-content {
         height: 630px;
     }
+
+
 }
 @media screen and ( max-width:991px ) {
 
@@ -1005,9 +1007,6 @@ span.select2-selection__choice__remove {
     }
     h2 {
         font-size: 15px;
-    }
-    .widget p {
-        font-size: 13px;
     }
     .table-responsive {
         border: none;
@@ -1030,6 +1029,8 @@ span.select2-selection__choice__remove {
     }
     .vertical-timeline-content {
         margin-right: -30px;
+
+
     }
     .vote-maychan {
         height: 70%;
