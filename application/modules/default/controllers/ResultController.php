@@ -149,10 +149,10 @@ class ResultController extends Zend_Controller_Action
                 if ($project[$key-1]['info']['pt_start']) { //もしこの企画に開始時刻が存在すれば
                     $project[$key-1]['start'] = $project[$key-1]['info']['pt_start']; //開始時刻はそのまま
                     $_start = $project[$key-1]['info']['pt_start_'];
-                    if ($project[$key-1]['info']['pt_end_']) {
-                        $_start = $project[$key - 1]['info']['pt_end_']; //次の開始時刻の式に今回の終了時刻を分で代入
-                    } else {
+                    if ($project[$key-1]['info']['pt_time']) {
                         $_start += $project[$key-1]['info']['pt_time'];
+                    } else {
+                        $_start = $project[$key-1]['info']['pt_end_']; //次の開始時刻の式に今回の終了時刻を分で代入
                     }
                 } else { //なければ、前の開始時刻に
                     $_start = $_start + $order[$key-1]['time']; //移動時間を足して
