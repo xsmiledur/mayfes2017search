@@ -510,7 +510,7 @@
                         url: "/search/time-post",
                         type: "POST",
                         data: {
-                            radio  : $('input[name="date"]').val(),
+                            radio  : $('input[name="date"]:checked').val(),
                             no_time: no_time,
                             clock1 : $('input[name="clock1"]').val(),
                             clock2 : $('input[name="clock2"]').val(),
