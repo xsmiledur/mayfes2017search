@@ -174,7 +174,7 @@ class MainModel
         $data = array();
 
         $select = $this->_read->select();
-        $select->from('90_project_time', array('pt_pid', 'pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note'))
+        $select->from('90_project_time', array('pt_pid', 'pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note', 'pt_time'))
             ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long', 'pd_web_body', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
             ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
             ->where('pd_active_flg = ?', 1)

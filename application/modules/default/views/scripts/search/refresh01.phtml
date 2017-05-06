@@ -18,6 +18,9 @@
                             <span class="place-text">
                                 <?php echo $item['pp_place']; ?>
                             </span>
+                            <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                             <span class="time-text">
                                 <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                             </span>
@@ -25,7 +28,7 @@
                                 <?php echo $item['pp_place']," ",$item['pd_label_kana']," ",$item['pd_place_kana']," ",$item['pd_body_kana']; ?>
                             </span>
                             <div class="check-text i-checks">
-                                <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                             </div>
                         </li>
                     <?php endforeach; ?>
@@ -76,12 +79,15 @@
                                                     <span class="pull-right" style="text-align: right;">
                                                             <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                     </span>
+                                                    <span class="pull-right m-r-xs">
+                                                        <?php echo $item['pt_time']; ?> 分
+                                                    </span>
                                             <?php if ($item['pt_start']) : ?>
                                                 <span class="pull-right m-r-xs">
                                                             <?php echo $item['pt_start']; ?>
                                                         </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                                 </div>
                                             </li>
                                         <?php ++$i; endif; ?>
@@ -139,12 +145,15 @@
                                                     <span class="pull-right" style="text-align: right;">
                                                     <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                 </span>
+                                                    <span class="pull-right m-r-xs">
+                                                        <?php echo $item['pt_time']; ?> 分
+                                                    </span>
                                                     <?php if ($item['pt_start']) : ?>
                                                     <span class="pull-right m-r-xs">
                                                     <?php echo $item['pt_start']; ?>
                                                 </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                                 </div>
                                             </li>
                                             <?php ++$i; endif; ?>
@@ -183,11 +192,14 @@
                         <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                        <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                         <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                         <div class="check-text i-checks">
-                            <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                            <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                         </div>
                     </li>
                     <?php $i++; endif; ?>
@@ -218,11 +230,14 @@
                                 <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                                <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                                 <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
@@ -253,11 +268,14 @@
                                 <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                                <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                                 <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? " <small>".$item['pt_note']."</small>" : ''; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
