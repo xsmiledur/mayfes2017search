@@ -6,44 +6,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Form | May Search</title>
+    <title>MaySearch</title>
 
-    <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
+    <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/plugin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/plugin/css/animate.css" rel="stylesheet">
 
     <!--chosen select-->
-    <link href="/Static_Full_Version/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
     <!--select2-->
-    <link href="/Static_Full_Version/css/plugins/select2/select2.min.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/select2/select2.min.css" rel="stylesheet">
 
-    <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
-
+    <link href="/plugin/css/style.css" rel="stylesheet">
 
     <!--checkbox-->
-    <link href="/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
     <!--Clockpicker-->
-    <link href="/Static_Full_Version/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 
     <!--checkbox-->
-    <link href="/Static_Full_Version/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 
     <!-- chosen -->
-    <link href="/Static_Full_Version/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
     <!-- iCheck -->
-    <link href="/Static_Full_Version/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/iCheck/custom.css" rel="stylesheet">
 
     <!-- steps-->
-    <link href="/Static_Full_Version/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
 
     <!-- Sweet Alert -->
-    <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <!-- common2 -->
-    <link href="/css/common2.css" rel="stylesheet">
+    <!-- common -->
+    <link href="/css/common.css" rel="stylesheet">
 
 
 </head>
@@ -51,7 +50,76 @@
 <body>
 
 
+<?php foreach ($this->data_all as $item) : ?>
+    <div class="modal inmodal fade"
+         id="Modal_pt_pid<?php echo $item['pt_pid']; ?>" tabindex="-1"
+         role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
+                    <div class="transparent">
+                        <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['pd_genre1_']; ?>
+                                                                                / <?php echo $item['pd_genre2_']; ?>
+                                                                            </span>
+                        </div>
+                        <div>
+                            <h1 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h1>
+                            <h2><small><?php echo $item['pt_note']; ?></small></h2>
+                            <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
+                            <div class="m-t-md" style="margin-left: -4px;">
+                                <div class="rec_pku_acd_icon">
+                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                </div>
+                                <div class="width-over">
+                                    <i class="fa fa-clock-o"></i><?php echo $item['pt_time']; ?> 分
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-contents">
+                    <div class="row">
+                        <div class="exp">
 
+                            <div class="modal-p">
+                                企画説明
+                            </div>
+                            <div class="modal-web">
+                                <?php echo nl2br($item['pd_web_long']); ?>
+                            </div>
+                        </div>
+
+
+                        <div class="exp">
+                            <div class="modal-p">
+                                団体説明</div>
+                            <div class="modal-web">
+                                <?php echo nl2br($item['pd_web_body']); ?>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <button type="button" class="btn btn-white"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 <div id="wrapper">
 
     <div id="page-wrapper" class="gray-bg">
@@ -65,19 +133,30 @@
 
             <div class="row">
                 <div class="col-lg-4">
-                    <h1 class="top-title">MAY SEARCH</h1>
+                    <div id="id1" class="m-t-md m-b-md">
+                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
+
+                    </div>
+                    <div id="id2" class="p-h-md p-w-sm">
+                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
+                    </div>
+                    <div class="col-xs-12 sub-title b-r-md text-primary text-center">
+                        MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
+                        五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
+                        MaySearchを活用して、充実した五月祭を過ごしましょう！
+                    </div>
                     <div id="row1" class="row">
-                        <div class="col-sm-8 col-sm-offset-4">
+                        <div class="col-sm-8 col-sm-offset-4 col-xs-6">
                             <a href="/search/algorithm">
                                 <div class="widget lazur-bg widget1">
                                     <i class="fa fa-codepen fa-first"></i>
                                     <i class="fa fa-codepen fa-second"></i>
-                                    <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                    <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-8">
-                            <a href="/">
+                        <div class="col-sm-8 col-xs-6">
+                            <a href="https://ap-phys.net/">
                                 <div class="widget navy-bg widget2">
                                     <i class="fa fa-codepen fa-first"></i>
                                     <i class="fa fa-codepen fa-second"></i>
@@ -107,7 +186,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-calendar fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+                                                        <i class="fa fa-calendar fa-5x"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
@@ -126,7 +205,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-clock-o fa-5x" style="margin-top: 30px; margin-bottom: 30px;"></i>
+                                                        <i class="fa fa-clock-o fa-5x"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在時間</strong></h3>
@@ -189,75 +268,10 @@
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
                                         <h2><i class="fa fa-eye"> 企画の選択</i></h2>
-                                        <p class="text-muted" style="padding-left: 20px;">選択できる企画は５個までです。</p>
+                                        <p class="text-muted" style="padding-left: 20px;">行きたい企画を選択してください。</p>
                                     </div>
                                     <div class="ibox">
-                                        <?php foreach ($this->data_all as $item) : ?>
-                                            <div class="modal inmodal fade"
-                                                 id="Modal_ps_pid<?php echo $item['ps_pid']; ?>" tabindex="-1"
-                                                 role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
-                                                            <div class="transparent">
-                                                                <div class="row">
-                                                                            <span class="pull-right m-r-md text-danger font-bold">
-                                                                                <?php echo $item['pd_genre1_']; ?>
-                                                                                / <?php echo $item['pd_genre2_']; ?>
-                                                                            </span>
-                                                                </div>
-                                                                <div>
-                                                                    <h1 class="m-b-md font-bold"><?php echo $item['pd_label']; ?></h1>
-                                                                    <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
-                                                                    <div class="m-t-md" style="margin-left: -4px;">
-                                                                        <div class="rec_pku_acd_icon">
-                                                                            <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                                                            <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
-                                                                        </div>
-                                                                        <div class="width-over">
-                                                                            <i class="fa fa-calendar"></i><?php echo (!$item['pt_pid']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
-                                                                        </div>
-                                                                        <div class="width-over">
-                                                                            <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-contents">
-                                                            <div class="row">
-                                                                <div class="exp">
 
-                                                                    <div class="modal-p">
-                                                                        企画説明
-                                                                    </div>
-                                                                    <div class="modal-web">
-                                                                        <?php echo nl2br($item['pd_web_long_kikaku']); ?>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="exp">
-                                                                    <div class="modal-p">
-                                                                        団体説明</div>
-                                                                    <div class="modal-web">
-                                                                        <?php echo nl2br($item['pd_web_long_org']); ?>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
-                                                            <button type="button" class="btn btn-white"
-                                                                    data-dismiss="modal">Close
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
 
                                         <div class="tabs-container">
                                             <ul class="nav nav-tabs">
@@ -312,12 +326,15 @@
                                                 <div class="col-sm-12">
                                                     <ul id="search-all" class="list-group clear-list m-t">
                                                         <?php foreach($this->data_all as $key => $item) : ?>
-                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['ps_pid']; ?>">
+                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
                                                                 <span class="pull-right body-text no-margins" style="width: 30%;">
                                                                     <?php echo $item['pd_body']; ?>
                                                                 </span>
                                                                 <span class="pull-right m-r-lg place-text">
                                                                     <?php echo $item['pp_place']; ?>
+                                                                </span>
+                                                                <span class="pull-right stay-text">
+                                                                    <?php echo $item['pt_time']; ?> 分
                                                                 </span>
                                                                 <span class="pull-right m-r-lg time-text" style="width:14%;">
                                                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
@@ -364,42 +381,49 @@
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
 
 <!-- Mainly scripts -->
-<script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
-<script src="/Static_Full_Version/js/bootstrap.min.js"></script>
-<script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/plugin/js/jquery-3.1.1.min.js"></script>
+<script src="/plugin/js/bootstrap.min.js"></script>
+<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="/Static_Full_Version/js/inspinia.js"></script>
-<script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
+<script src="/plugin/js/inspinia.js"></script>
+<script src="/plugin/js/plugins/pace/pace.min.js"></script>
 
 
 <!-- Chosen -->
-<script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
 
 <!-- Steps -->
-<script src="/Static_Full_Version/js/plugins/steps/jquery.steps.min.js"></script>
+<script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
 
 <!-- Jquery Validate -->
-<script src="/Static_Full_Version/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/plugin/js/plugins/validate/jquery.validate.min.js"></script>
 
 <!-- iCheck -->
-<script src="/Static_Full_Version/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/plugin/js/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Clock picker -->
-<script src="/Static_Full_Version/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- SetNow -->
+<script src="/js/setnow.js"></script>
 
 <!-- Select2 -->
-<script src="/Static_Full_Version/js/plugins/select2/select2.full.min.js"></script>
+<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>
 
 <!--select2 その２-->
 <script src="/js/select2/select2.full.min.js"></script>
 
 <!-- Chosen -->
-<script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
 
 <!-- Sweet alert -->
-<script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- Input Mask-->
+<script src="/plugin/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
 
 <!--mapper-->
 <!--<script src="/js/mapper/mapper.js"></script>-->
@@ -416,6 +440,13 @@
             bodyTag: "fieldset",
             onStepChanging: function (event, currentIndex, newIndex)
             {
+                // スクロールの速度
+                var speed = 400; // ミリ秒
+                // 移動先を数値で取得
+                var position = $('#all-cover').offset().top;
+                // スムーススクロール
+                $('body,html').animate({scrollTop:position}, speed, 'swing');
+
                 // Always allow going backward even if the current step contains invalid fields!
                 if (currentIndex > newIndex)
                 {
@@ -434,6 +465,7 @@
                             start : $('input[name="clock1"]').val(),
                         },
                         success: function(arr) {
+                            console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh02',
@@ -457,7 +489,7 @@
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     if ($('input[name="start-pos"]').val() == "") {
-                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger');
+                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
                         return false;
                     } else {
                         $('.select-start-pos-error').removeClass('text-danger').addClass('text-muted');
@@ -478,13 +510,13 @@
                         url: "/search/time-post",
                         type: "POST",
                         data: {
-                            radio  : $('input[name="date"]').val(),
+                            radio  : $('input[name="date"]:checked').val(),
                             no_time: no_time,
                             clock1 : $('input[name="clock1"]').val(),
                             clock2 : $('input[name="clock2"]').val(),
                         },
                         success: function(arr) {
-                            console.log(arr);
+                            //console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh01',
@@ -522,22 +554,6 @@
 
                 // Start validation; Prevent going forward if false
                 return form.valid();
-            },
-            onStepChanged: function (event, currentIndex, priorIndex)
-            {
-                // Suppress (skip) "Warning" step if the user is old enough.
-                if (currentIndex === 2 && Number($("#age").val()) >= 18)
-                {
-                    $(this).steps("next");
-                }
-
-                /*
-                 // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-                 if (currentIndex === 2 && priorIndex === 3)
-                 {
-                 $(this).steps("previous");
-                 }
-                 */
             },
             onFinishing: function (event, currentIndex)
             {
@@ -652,18 +668,31 @@
             }
         });
 
-        //clockpicker
-        var input = $('#clock1').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-            'default': 'now'
-        });
-        $('#clock2').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            //autoclose: true,
-        });
+        var agent = navigator.userAgent;
+
+        if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){ //スマホかタブレット
+            $('input[name="clock1"]').inputmask({
+                mask: '99:99'
+            });
+            $('input[name="clock2"]').inputmask({
+                mask: '99:99'
+            });
+
+        } else { //PC
+            //clockpicker
+            var input = $('#clock1').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+                'default': 'now'
+            });
+            $('#clock2').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+            });
+        }
+
         $('input[name="no-time"]').change(function(){
             if ($(this).is(':checked')) {
                 console.log("aa");
@@ -810,4 +839,3 @@
 </body>
 
 </html>
-

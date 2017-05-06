@@ -96,6 +96,16 @@
 <script>
     $(document).ready(function(e) {
 
+        $('area').click(function() {
+
+            // スクロールの速度
+            var speed = 400; // ミリ秒
+            // 移動先を数値で取得
+            var position = $('#sample02').offset().top;
+            // スムーススクロール
+            $('body').animate({scrollTop:position}, speed, 'swing');
+        });
+
         cvi_map.add(document.getElementById('shape1'),{
             opacity: 25,
             areacolor: '#ffe4b5',

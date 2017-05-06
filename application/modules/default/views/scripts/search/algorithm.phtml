@@ -8,25 +8,14 @@
 
     <title>第90回五月祭 企画展示経路探索</title>
 
-    <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
+    <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/plugin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/plugin/css/animate.css" rel="stylesheet">
+    <link href="/plugin/css/style.css" rel="stylesheet">
 
-    <!-- common2 -->
-    <link href="/css/common2.css" rel="stylesheet">
 
     <!-- common_alg -->
     <link href="/css/common_alg.css" rel="stylesheet">
-
-    <style type="text/css">
-    p,div{font-size: 18px;
-    }
-    div.pull-right,div.pull-left{
-        font-size: 13px;
-    }
-    </style>
-
 
 </head>
 
@@ -47,15 +36,16 @@
                         <div class="ibox-content">
                             <div class="text-center article-title">
                                 <br><br>
-                                    <div id="toptitle" style="">
+                                    <div id="toptitle">
                                         <h1>
-                                        <font size="5">〜このアプリに使われているアルゴリズムについて〜</font>
+                                        <font size="5">このアプリ内で動く<br>
+                                        アルゴリズムの紹介</font>
                                         </h1>
                                     </div>
                             </div>
 
 
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
+                            <td><div class="section"><h2 class="alg">
                                 ざっくりいうと
                             </h2> </div> </td>
                             <br>
@@ -67,16 +57,17 @@
                             <p>
                                 一つ目はすべての二つの展示の組み合わせに対して、最短経路とそのときの所要時間を求めるアルゴリズムです。
                                 <br>今回のアプリではグラフ上での二点間を求めるためによく使われるダイクストラ法を使いました。
-                                <br>ダイクストラ法によってあらかじめ全展示間の最短での移動時間を計算して保存しておきます。ダイクストラ法については後で書くので詳しく知りたい方は下の方を読んでみてください。
+                                <br>ダイクストラ法によってあらかじめ全展示間の最短での移動時間を計算して保存しておきます。ダイクストラ法については下の方で詳しく書いてあります。
                             </p>
-
+                            <br>
                             <p>
                                 二つ目はみなさんが回りたい展示の列と現在地を受け取り、展示を回る順番を全通り列挙して必要な合計時間が一番小さくなるような展示のまわり方を表示するアルゴリズムです。合計時間は一つ目のダイクストラ法で求めておいた二点間の距離を用いて求めます。
-                                <br>その際、展示時間が固定されているような展示(演劇や演奏など上映時間が決められているもの)がある場合、その展示に間に合うような経路だけ返すようにしてあります。
+                                <br><br>その際、展示時間が固定されているような展示(演劇や演奏など上映時間が決められているもの)がある場合、その展示に間に合うような経路だけ返すようにしてあります。
                                 どんなに短い時間でまわれる経路でも現実的に不可能なルートだったら意味がないからですね。
                                 <br>
                                 <br>
                                 まとめると次のようになります。
+                                <br>
                             </p>
                                 <td><div class="rule_outside">
                                     <div class="rule"><strong>~このアプリの仕組み~
@@ -89,24 +80,29 @@
                                     </div>
                                     </div> </td>
                                     <br>
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
-                                二点間の最短経路を求める
+                            <td><div class="section"><h2 class="alg">
+                                最短路を求める
                             </h2> </div> </td>
                             <br>
                             <p>
-                                ダイクストラ法の説明をする前にグラフについて簡単に説明しておきます。
+                                すべての点の間の最短経路とその所要時間を求めておくのが一つ目のやるべきことでした。
+                                この問題を私たちは「ダイクストラ法」というアルゴリズムを用いて解決しました。
+                                <br>
+                                以下、ダイクストラ法の説明をしていきたいと思いますが、その前にグラフについて簡単に説明しておきます。
+                                <br>
                                 <br>
                             グラフと聞いて多くの人が最初に思い浮かべるのは棒グラフや折れ線グラフ、中高生であれば関数のグラフなどではないでしょうか。
                             今回のアルゴリズムでいうグラフとはこれらとは異なるもので、大まかに言うと頂点が辺で繋がれているような地図のようなものです。
+                            <br>
                             <br>
                             単純なグラフには各辺には数字が振られていないのですが、以下のように辺に数字が割り当てられているグラフもあり、これを重み付きグラフといいます。
                             今回のアルゴリズムではこの重み付きグラフを使います。ちなみに重み付きグラフはネットワークといい、割り当てられた数字を重みと言います。
                             今回のアプリケーションでは本郷キャンパスの各展示や交差点を頂点に、道を辺として重み付きグラフを作成しました。
                             重み付きグラフなので先ほども述べた通り各辺には数字が割り当てられますが、ここではその道を移動するのにかかる時間を割り当てました。
                             </p>
-
+                            <br>
                             <p>
-                                ここまできたらやることがなんとなくわかってきたと思います。
+                                ここまできたらやるべきことがなんとなくわかってきたと思います。
                                 二つの頂点をつなぐ道の中で辺に振られている重みの合計が最小になるような道順を見つければいいということですね。
                                 <br>では試しに下のグラフについて、頂点1から頂点5までの最短経路を探してみましょう。
                             </p>
@@ -119,7 +115,7 @@
                                 <br>
                                 見つけられたでしょうか？最短経路は頂点1,2,3,5の順にたどっていくというものですが、大事なのは答えではなくその求め方にあります。
                                 おそらく多くの方はしらみつぶしに片っ端から1から5に行ける道を辿って行って最短経路を求めたと思います。
-                                <br>
+                                <br><br>
                                 このグラフでは規模が小さいので全部しらみつぶしに探して行ってもそこまで負担ではないのですが、想像してみてください。本郷キャンパスにはもっとたくさんの展示と道があります。そのグラフ上で先ほどと同じことをあなたはしたいでしょうか？また人間がやらないとしても、一つ一つ試していくのはコンピュータでも結構な時間がかかってしまいます。
                             </p>
 
@@ -127,37 +123,27 @@
                                 というように、グラフが大きくなってしまう今回のアプリでは残念ながら最短経路を一つ一つ試していって求めるという方法は使うことができません。ここで、ようやくダイクストラ法の出番です。
                             </p>
                             <br>
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
-                                よくあるたとえ話
-                            </h2> </div> </td>
-                            <br>
-                            <p>
-                                ここからいよいよダイクストラ法の中身について説明していきます。
-                                <br>
-                                いきなりダイクストラ法の細かい説明をするよりもまずイメージをつかんでほしいので、次のようなことを想像してみてください。
-                                先ほど述べたグラフの頂点をビー玉に、辺をひもにしてみます。辺の距離と比例するように紐の長さも調整してあります。
-                                <br>
-                                このビー玉のうち、出発したい点を手に持って持ち上げていきます。どんどん他のビー玉も持ち上がっていき、終点にしたいビー玉が持ち上がる寸前に止めます。その時の手に持ってるビー玉の高さが始点と終点を結ぶ最短距離となります。ざっくりいうとこれがダイクストラ法の正体です。
-                            </p>
 
-                            <p>
-                                これでダイクストラ法の全てがわかる人はすごいと思うのでふわっとイメージが湧いてくれたら嬉しいです。
-                                このイメージを実際にプログラムではどうやってるんだという人のために以下にアルゴリズムの細かい部分を説明していきます。
-                            </p>
-                            <br>
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
+                            <td><div class="section"><h2 class="alg">
                                 具体的な手順
                             </h2> </div> </td>
                             <br>
                             <p>
-                                先ほどのイメージになぞらえて話していくと、地面に接していない（持ち上がっている）ビー玉は「最短経路が決まったグループ」、地面にまだ接しているビー玉は「最短経路が決まっていないグループ」ということができます。ダイクストラ法ではこの最短距離が決まっていないグループから決まったグループに一つずつ移していき、終点が決まったグループに移ったら終了です。
-                            </p>
-
+                                ダイクストラ法では、以下の二つのグループを用意します。
+                                「最短経路が決まってないグループ」と「最短経路が決まったグループ」です。
+                                この二つのグループに各頂点を出したり入れたりして最短経路を確定させていく、というのがダイクストラ法の大まかな流れとなっています。
+                                <br>
+                                それでは具体的な手順を見ていきましょう。
                             <p>
+                                ダイクストラ法を行うにあたって、まず最初にやるべきことは、始点 (スタート地点)と終点 (ゴール地点)を決めておくことです。
+                                今回のアプリではすべての点の間の最短経路とその移動時間を求める必要があるので、この始点と終点を入れ替えて実行、入れ替えて実行...を繰り返すことで
+                                すべてのパターンに対して計算を行っておくという仕組みです。このように始点と終点が与えられて、いよいよダイクストラ法が動き始めます。
+                                <br><br>
                                 最初、すべての頂点を「最短経路が決まってないグループ」に入れておきます。
                                 各頂点の始点からの暫定での最短所要時間をすべて無限大に大きくしておき、始点の始点からの到達所要時間は0としておきます。
                                 それから以下のルールに従って点をグループからグループへ移動させていきます。
                             </p>
+                            <br>
                             <td><div class="rule_outside">
                                 <div class="rule" ><strong>~ルール~
                                     <br>
@@ -176,35 +162,35 @@
 
                             </p>
                             <br>
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
-                                実際にやってみよう！
+                            <td><div class="section"><h2 class="alg">
+                                やってみよう！
                             </h2> </div> </td>
                             <br>
-                            <p>まず暫定の最短の所要時間は頂点1だけ0で、それ以外は無限大なので一番小さい頂点1が「最短経路が決まったグループ」に移されます。
+                            <p>まず暫定の最短の所要時間は頂点1だけ0で、それ以外は無限大なので一番所要時間の小さい頂点1が「最短経路が決まったグループ」に移されます。
                             </p>
 
                             <p>次に1から移動できる点2と3について、現在の暫定での最短所要時間（どちらも無限大）よりも頂点1から2や3に行った方が所要時間は小さくなるので暫定の最短所要時間を更新します。頂点2は頂点1からいくと50分、頂点3は頂点1からいくと80分であり、頂点1までの所要時間は0なので頂点2,3の暫定の最短所要時間はそれぞれ50分,80分になります。（これで１ステップ終了）
 
                             </p>
                             <p>
-                                同様に「最短経路が決まっていないグループ」（頂点は2,3,4,5が残ってる）のうち一番暫定最短距離が短いもの（すなわち頂点２）を「最短経路が決まったグループ」に移します。
+                                同様に「最短経路が決まっていないグループ」（頂点は2,3,4,5が残ってる）のうち一番暫定最短距離が短いもの（すなわち頂点2）を「最短経路が決まったグループ」に移します。
                                 頂点2からいける点（頂点3,頂点4）に対して同様に最短での所要時間を更新します。
                                 頂点4については無限なので更新するのは当たり前ですが（更新すると50+15で65分になる）、3は1からもいけているのでそれよりも短い時間でいけるかを考えなければいけません。今回1から3に直接行くのにかかる80分（暫定での最短）よりも1から2に行って3に行くルート（2への最短所要時間である50分と、そこからかかる20分を足して70分）を比べて70分の方が短いので3の暫定の最短所要時間を80分から70分に更新することになります。（2ステップ終了）
                             </p>
                             <p>
                                 同様に「最短経路が決まっていないグループ」（頂点は3,4,5が残ってる）のうち一番暫定最短距離が短いもの（すなわち頂点4）を最短距離が決まったグループに移します。
                                 また4からいける点に対して最短所要時間を更新して.......と続けていき、5が「最短経路決定済みグループ」に移動したら終了です。
-                                各ステップにつき一つずつ頂点の最短経路が決定していく感じです。
+                                各ステップにつき一つずつ頂点の最短経路が決定していくイメージです。
                             </p>
                             <br>
-                            <td><div class="bg-warning p-sm b-r-xl"><h2 class="alg">
-                                なんでダイクストラ法がいいの？
+                            <td><div class="section"><h2 class="alg">
+                                計算時間の話
                             </h2> </div> </td>
                             <br>
                             <p>この方法で最短経路を求めると、最短経路が決まっているかどうかをで分割するグループの実装の仕方にもよりますが、辺の数の二乗ぐらいの計算時間がかかります。
-                                <br>言い換えると、辺の数を10倍にすると計算時間は100倍に、100倍すると10000倍になるということです。
-                                <br>詳しくは計算時間のオーダーという問題に関わってくるのでここでは詳しくは説明できませんが、最初にみなさんがやろうとした(であろう)、経路の候補を一つ一つすべて試していく愚直な方法では辺の数の階乗ぐらいの計算時間がかかります。
-                                <br>少し試してみるとわかるように階乗の方が圧倒的に早く大きくなっていくことがわかります。下に二つの方法の枝の数に対する計算時間の増え方をまとめました。
+                                <br><br>言い換えると、辺の数を10倍にすると計算時間は100倍に、100倍すると10000倍になるということです。
+                                <br><br>詳しくは計算時間のオーダーという問題に関わってくるのでここでは詳しくは説明できませんが、最初にみなさんがやろうとした(であろう)、経路の候補を一つ一つすべて試していく愚直な方法では辺の数の階乗ぐらいの計算時間がかかります。
+                                <br><br>少し試してみるとわかるように階乗の方が圧倒的に早く大きくなっていくことがわかります。下に二つの方法の枝の数に対する計算時間の増え方をまとめました。
                             </p>
                             <br>
                             <div class="table-responsive">
@@ -267,6 +253,7 @@
                                 このように、枝の数が大きくなればなるほどダイクストラ法の方が早く計算が終わることがわかります。
                                 今回のように辺の数が大きい場合にはダイクストラ法が有効、ということですね。
                                 <br>
+                                <br>
                                 一見とっつきにくそうな印象を持たれがちなアルゴリズムですが、このような応用例を通して少しでも身近に感じていただけたら嬉しいです。
                             </p>
 
@@ -301,35 +288,35 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <!-- Mainly scripts -->
-<script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
-<script src="/Static_Full_Version/js/bootstrap.min.js"></script>
-<script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/plugin/js/jquery-3.1.1.min.js"></script>
+<script src="/plugin/js/bootstrap.min.js"></script>
+<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="/assets-admin/js/inspinia.js"></script>
-<script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
+<script src="/plugin/js/plugins/pace/pace.min.js"></script>
 
 <!-- Steps -->
-<script src="/Static_Full_Version/js/plugins/steps/jquery.steps.min.js"></script>
+<script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
 
 <!-- Jquery Validate -->
-<script src="/Static_Full_Version/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/plugin/js/plugins/validate/jquery.validate.min.js"></script>
 
 <!-- iCheck -->
-<script src="/Static_Full_Version/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/plugin/js/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Clock picker -->
-<script src="/Static_Full_Version/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
 
 <!-- Select2 -->
-<script src="/Static_Full_Version/js/plugins/select2/select2.full.min.js"></script>
+<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>
 
 <!-- Chosen -->
-<script src="/Static_Full_Version/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
 
 <!-- Sweet alert -->
-<script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script>
     $('.chosen-select').chosen({width: "15%"});

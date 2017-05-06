@@ -39,6 +39,7 @@ $front->setControllerDirectory(array(
 //$router = $front->getRouter();
 
 
+//echo "aaa";
 
 // ディスパッチする
 //$front->dispatch();

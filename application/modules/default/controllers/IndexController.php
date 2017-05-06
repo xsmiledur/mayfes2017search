@@ -88,6 +88,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->data_all   = $this->_main->getProjectData();
 
 
+
         //$result = $this->_main->searchFree();
 
         //$this->view->result = $result;

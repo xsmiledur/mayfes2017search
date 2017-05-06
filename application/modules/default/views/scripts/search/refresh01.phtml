@@ -10,13 +10,16 @@
                     <?php foreach ($this->data['data'] as $key => $item) : ?>
                         <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
                             <span class="exp-text">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                             </span>
                             <span class="body-text">
                                 <?php echo $item['pd_body']; ?>
                             </span>
                             <span class="place-text">
                                 <?php echo $item['pp_place']; ?>
+                            </span>
+                            <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
                             </span>
                             <span class="time-text">
                                 <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
@@ -25,7 +28,7 @@
                                 <?php echo $item['pp_place']," ",$item['pd_label_kana']," ",$item['pd_place_kana']," ",$item['pd_body_kana']; ?>
                             </span>
                             <div class="check-text i-checks">
-                                <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p" name="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                             </div>
                         </li>
                     <?php endforeach; ?>
@@ -43,9 +46,9 @@
         <div class="full-height-scroll">
             <div class="table-responsive">
 
-                <div class="row">
+                <div class="row push-outside">
                     <?php foreach ($this->data['genre'] as $key => $val) : ?>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-xs-6 col-md-4">
                             <div id="PushGenre<?php echo $val['name']; ?>" class="genre-push contact-box m-b-sm b-r-lg">
                                 <img alt="<?php echo $val['label']; ?>" src="/img/genre/<?php echo $val['name']; ?>.png">
                                 <input type="hidden" name="name" value="<?php echo $val['name']; ?>">
@@ -74,14 +77,17 @@
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                                                 <div class="i-checks">
                                                     <span class="pull-right" style="text-align: right;">
-                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                    </span>
+                                                    <span class="pull-right m-r-xs">
+                                                        <?php echo $item['pt_time']; ?> 分
                                                     </span>
                                             <?php if ($item['pt_start']) : ?>
                                                 <span class="pull-right m-r-xs">
                                                             <?php echo $item['pt_start']; ?>
                                                         </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                                 </div>
                                             </li>
                                         <?php ++$i; endif; ?>
@@ -108,7 +114,7 @@
         <div class="row push-outside">
             <?php foreach ($this->data['area'] as $key => $val) : ?>
                 <div class="col-xs-12 col-sm-6">
-                    <div id="PushArea<?php echo $val['name']; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/logo/<?php echo $val['name']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
+                    <div id="PushArea<?php echo $val['name']; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/area/<?php echo $val['name']; ?>.png);background-size: cover; cursor: pointer; position: relative;">
                         <input type="hidden" name="name" value="<?php echo $val['name']; ?>">
                         <h3><strong><?php echo $val['label']; ?></strong></h3>
                     </div>
@@ -117,7 +123,7 @@
         </div>
 
         <?php foreach ($this->data['area'] as $key => $val) : ?>
-            <div id="BoxArea<?php echo $val['name']; ?>" class="area-box contact-box" style="background-image: url(/img/logo/<?php echo $val['name']; ?>.png); background-size: cover;">
+            <div id="BoxArea<?php echo $val['name']; ?>" class="area-box contact-box" style="background-image: url(/img/area/<?php echo $val['name']; ?>.png); background-size: cover;">
                 <div class="transparent">
                     <div class="title-plain">
                         <button type="button" class="btn btn-link area-link text-muted">戻る</button>
@@ -137,14 +143,17 @@
                                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                                                 <div class="i-checks">
                                                     <span class="pull-right" style="text-align: right;">
-                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>" value="<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                 </span>
+                                                    <span class="pull-right m-r-xs">
+                                                        <?php echo $item['pt_time']; ?> 分
+                                                    </span>
                                                     <?php if ($item['pt_start']) : ?>
                                                     <span class="pull-right m-r-xs">
                                                     <?php echo $item['pt_start']; ?>
                                                 </span>
                                                 <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                                 </div>
                                             </li>
                                             <?php ++$i; endif; ?>
@@ -175,7 +184,7 @@
                     <?php if ($item['pd_rec_flg']) : ?>
                     <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                         <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -183,11 +192,14 @@
                         <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                        <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                         <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                         <div class="check-text i-checks">
-                            <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                            <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                         </div>
                     </li>
                     <?php $i++; endif; ?>
@@ -210,7 +222,7 @@
                         <?php if ($item['pd_pickup_flg']) : ?>
                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                                 <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -218,11 +230,14 @@
                                 <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                                <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                                 <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
@@ -245,7 +260,7 @@
                         <?php if ($item['pd_academic_flg']) : ?>
                             <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
                         <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_ps_pid<?php echo $item['ps_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                 </span>
                                 <span class="body-text">
                                     <?php echo $item['pd_body']; ?>
@@ -253,11 +268,14 @@
                                 <span class="place-text">
                                     <?php echo $item['pp_place']; ?>
                                 </span>
+                                <span class="stay-text">
+                                <?php echo $item['pt_time']; ?> 分
+                            </span>
                                 <span class="time-text">
                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                 </span>
                                 <div class="check-text i-checks">
-                                    <label> <input type="checkbox" value="<?php echo $item['ps_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; ?> </label>
+                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? " <small>".$item['pt_note']."</small>" : ''; ?> </label>
                                 </div>
                             </li>
                         <?php $i++; endif; ?>
@@ -317,12 +335,14 @@
         $(".genre-push").click(function(){
             var key = $(this).find('input[name="name"]').val();
             $(".genre-push").hide();
+            $(this).closest('.push-outside').hide();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#BoxGenre" + key).show();
         });
         $(".genre-link").click(function(e){
             e.stopPropagation();
             $(".genre-push").show();
+            $('#tab-2 .push-outside').show();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $(".genre-box").hide();
         });
@@ -337,6 +357,7 @@
         $(".area-push").click(function(){
             var key = $(this).find('input[name="name"]').val();
             $(".area-push").hide();
+            $(this).closest('.push-outside').hide();
             // 「id="jQueryBox"」の表示、非表示を切り替える
             $("#BoxArea" + key).show();
         });
@@ -344,7 +365,8 @@
         $(".area-link").click(function(e){
             e.stopPropagation();
             $(".area-push").show();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
+            $('#tab-3 .push-outside').show();
+// 「id="jQueryBox"」の表示、非表示を切り替える
             $(".area-box").hide();
         });
     });
@@ -357,12 +379,29 @@
         $(".btn-open").click(function(e){
             e.stopPropagation();
             var key = $(this).find('input[name="btn-val"]').val();
-            //$('.select-box').hide();
             $("div#" + key).slideToggle('fast');
+
+            // スクロールの速度
+            var speed = 400; // ミリ秒
+            // 移動先を数値で取得
+            var th = $(this).offset().top;
+            // スムーススクロール
+            if (key.substr(0,5) == 'genre') {
+                var body = $(this).closest('.contact-box');
+            } else {
+                var body = $(this).closest('.transparent');
+            }
+            var sh = body.scrollTop();
+            var topsize = body.offset().top;
+            var pos = th - topsize + sh - 10;
+
+            body.animate({
+                scrollTop: pos
+            }, speed, "swing");
         });
         $(".btn-modal").click(function(event) {
             event.stopPropagation();
-            $("#Modal_ps_pid" + $(this).val()).modal('show');
+            $("#Modal_pt_pid" + $(this).val()).modal('show');
         });
     });
 

@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ほんっとにはじめてのHTML5">
     <meta name="keywords" content="ほんっとにはじめてのHTML5,CSS3,html5">
-    <title>Result | May Search</title>
+    <title>Result | MaySearch</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- スライダー用CSS -->
     <link href="/css/rangeslider.css" rel="stylesheet">
 
-    <link href="/Static_Full_Version/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Static_Full_Version/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/animate.css" rel="stylesheet">
-    <link href="/Static_Full_Version/css/style.css" rel="stylesheet">
+    <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/plugin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/plugin/css/animate.css" rel="stylesheet">
+    <link href="/plugin/css/style.css" rel="stylesheet">
 
-    <link href="/css/common2.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <link href="/css/map-css.css" rel="stylesheet">
 
     <link href="/css/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="/css/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
 
     <!-- Sweet Alert -->
-    <link href="/Static_Full_Version/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/plugin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <style>
 
@@ -50,6 +50,78 @@
 
 
 <body>
+
+<?php foreach ($this->project  as $item) : ?>
+<div class="modal inmodal fade"
+     id="Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>" tabindex="-1"
+     role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
+                <div class="transparent">
+                    <div class="row">
+                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                                                                                <?php echo $item['info']['pd_genre1_']; ?>
+                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
+                                                                            </span>
+                    </div>
+                    <div>
+                        <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
+                        <h2><small><?php echo $item['info']['pt_note']; ?></small></h2>
+                        <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
+                        <div class="m-t-md" style="margin-left: -4px;">
+                            <div class="rec_pku_acd_icon">
+                                <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
+                                <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                            </div>
+                            <div class="width-over">
+                                <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                            </div>
+                            <div class="width-over">
+                                <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
+                            </div>
+                            <div class="width-over">
+                                <i class="fa fa-clock-o"></i><?php echo $item['info']['pt_time']; ?> 分
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-contents">
+                <div class="row">
+                    <div class="exp">
+
+                        <div class="modal-p">
+                            企画説明
+                        </div>
+                        <div class="modal-web">
+                            <?php echo nl2br($item['info']['pd_web_long']); ?>
+                        </div>
+                    </div>
+
+
+                    <div class="exp">
+                        <div class="modal-p">
+                            団体説明</div>
+                        <div class="modal-web">
+                            <?php echo nl2br($item['info']['pd_web_body']); ?>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                <button type="button" class="btn btn-white"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endforeach; ?>
 
 <div id="wrapper">
 
@@ -84,8 +156,9 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-
-                        <h1 class="top-title">MAY SEARCH</h1>
+                        <div class="p-h-md p-w-sm">
+                            <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
+                        </div>
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2 col-xs-12 sub-title b-r-md text-danger text-center">
                                 <h2>最適経路表示画面</h2>
@@ -100,12 +173,12 @@
                                     <div class="widget lazur-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
                                         <i class="fa fa-codepen fa-second"></i>
-                                        <p>このアプリで使われている<br>アルゴリズムについて</p>
+                                        <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-sm-12">
-                                <a href="http://ap-phys.net/">
+                                <a href="https://ap-phys.net/">
                                     <div class="widget navy-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
                                         <i class="fa fa-codepen fa-second"></i>
@@ -118,8 +191,9 @@
                 </div>
                 <div id="id2" class="row">
                     <div class="col-sm-12">
-
-                        <h1 class="top-title">MAY SEARCH</h1>
+                        <div class="p-h-md p-w-sm">
+                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
+                        </div>
                         <div class="row">
                             <div class="col-md-12 sub-title b-r-md text-danger text-center">
                                 <h2>最適経路表示画面</h2>
@@ -127,16 +201,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <div class="widget yellow-bg widget2 widget-back">
                                     <i class="fa fa-arrow-left fa-first"></i>
                                     <i class="fa fa-arrow-left fa-second"></i>
                                     <p>入力画面に戻る</p>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="https://gogatsusai.jp/90/search/result?id=394">
                                     <div class="widget red-bg widget2 widget-vote">
                                         <p>投票はこちらから！</p>
@@ -147,9 +221,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <div class="row row2">
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="/search/algorithm">
                                     <div class="widget lazur-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
@@ -158,7 +232,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-xs-12">
                                 <a href="http://ap-phys.net/">
                                     <div class="widget navy-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
@@ -179,6 +253,13 @@
 
                                 <div class="row row-cover print-page">
                                     <div class="col-lg-4" id="block1">
+                                        <?php if ($this->view->errMsg) : ?>
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                            <?php echo $this->view->errMsg; ?>
+                                        </div>
+                                        <?php endif; ?>
+
                                         <form id="research-form" action="/search/search" method="post">
                                             <div id="vertical-timeline" class="vertical-container dark-timeline">
 
@@ -199,74 +280,11 @@
 
                                                 </div>
                                                 <?php foreach ($this->project as $key => $item) : ?>
-                                                    <div class="modal inmodal fade"
-                                                         id="Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>" tabindex="-1"
-                                                         role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
-                                                                    <div class="transparent">
-                                                                        <div class="row">
-                                                                            <span class="pull-right m-r-md text-danger font-bold">
-                                                                                <?php echo $item['info']['pd_genre1_']; ?>
-                                                                                / <?php echo $item['info']['pd_genre2_']; ?>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div>
-                                                                            <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
-                                                                            <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
-                                                                            <div class="m-t-md" style="margin-left: -4px;">
-                                                                                <div class="rec_pku_acd_icon">
-                                                                                    <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                                                                    <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
-                                                                                </div>
-                                                                                <div class="width-over">
-                                                                                    <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
-                                                                                </div>
-                                                                                <div class="width-over">
-                                                                                    <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-contents">
-                                                                    <div class="row">
-                                                                        <div class="exp">
 
-                                                                            <div class="modal-p">
-                                                                            企画説明
-                                                                            </div>
-                                                                            <div class="modal-web">
-                                                                                <?php echo nl2br($item['info']['pd_web_long_kikaku']); ?>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                        <div class="exp">
-                                                                            <div class="modal-p">
-                                                                                団体説明</div>
-                                                                            <div class="modal-web">
-                                                                            <?php echo nl2br($item['info']['pd_web_long_org']); ?>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
-                                                                    <button type="button" class="btn btn-white"
-                                                                            data-dismiss="modal">Close
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo (strlen($item['time']) > 0) ? $item['time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -283,16 +301,17 @@
                                                                 <?php echo $item['info']['pd_label']; ?>
                                                                 <a href="#" class="btn btn-xs btn-info pull-right "
                                                                    data-toggle="modal"
-                                                                   data-target="#Modal_ps_pid<?php echo $item['info']['ps_pid']; ?>">
+                                                                   data-target="#Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>">
                                                                     <span class="glyphicon glyphicon-info-sign"></span></a>
                                                             </h2>
+                                                            <small><?php echo $item['info']['pt_note']; ?></small><br>
                                                             <?php echo $item['info']['pp_place']; ?>
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
-                                                                    標準滞在時間：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                    滞在時間目安：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
                                                                 </p>
-                                                                <input type="text" name="re-time<?php echo $item['info']['ps_pid']; ?>" id="ionrange<?php echo $key; ?>">
+                                                                <input type="text" name="re-time<?php echo $item['info']['pt_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>
                                                         </div>
 
@@ -326,68 +345,70 @@
                                     </div>
                                     <div class="col-lg-8">
                                         <div id="sticker">
-                                            <div class="row position-tip">
+                                            <div class="position-tip">
                                                 <div id="map_img">
-                                                    <div class="origin-map">
-                                                        <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
-                                                    </div>
-                                                    <!--
-                                                    <div class="origin-map">
-                                                        <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
-                                                    </div>
-                                                    -->
+                                                    <div class="map-backgd">
+                                                        <div class="origin-map">
+                                                            <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
+                                                        </div>
+                                                        <!--
+                                                        <div class="origin-map">
+                                                            <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                                        </div>
+                                                        -->
 
-                                                    <?php foreach ($this->order as $i => $item) : ?>
-                                                        <?php if ($i == 0) : ?>
-                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
-                                                                &#<?php echo 9312 + $i; ?> 現在地
-                                                                <p class="map-cm-b"></p>
-                                                            </div>
-                                                            <?php else: ?>
-                                                            <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
-                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
-                                                                <p class="map-cm-b"></p>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <?php if ($item['way']) : ?>
-                                                            <div class="over-map print-on well1">
-                                                                <?php foreach ($item['way'] as $key => $order) : ?>
-                                                                    <?php if ($key < count($item['way'])) : ?>
-                                                                    <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            </div>
-                                                        <?php endif; ?>
-
-                                                    <?php endforeach; ?>
-
-                                                    <?php foreach ($this->order as $i => $item) : ?>
-                                                        <?php if ($i == 0) : ?>
-
-                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
-                                                                &#<?php echo 9312 + $i; ?> 現在地
-                                                                <div class="map-cm-b"></div>
-                                                            </div>
-                                                        <?php else : ?>
-                                                            <div class="over-map well well2 map-comment  map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top2']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left2']; ?>px;">
-                                                                &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
-                                                                <div class="map-cm-b"></div>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <?php if ($item['way']) : ?>
-                                                            <div class="over-map  well2">
-                                                                <?php foreach ($item['way'] as $key => $order) : ?>
-                                                                    <?php if ($key < count($item['way'])) : ?>
+                                                        <?php foreach ($this->order as $i => $item) : ?>
+                                                            <?php if ($i == 0) : ?>
+                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                                                                    &#<?php echo 9312 + $i; ?> 現在地
+                                                                    <p class="map-cm-b"></p>
+                                                                </div>
+                                                                <?php else: ?>
+                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top1']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left1']; ?>px;">
+                                                                    &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                    <p class="map-cm-b"></p>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                            <?php if ($item['way']) : ?>
+                                                                <div class="over-map print-on well1">
+                                                                    <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                        <?php if ($key < count($item['way'])) : ?>
                                                                         <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                    <p style="clear: both;"></p>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php endif; ?>
+
+                                                        <?php endforeach; ?>
+
+                                                        <?php foreach ($this->order as $i => $item) : ?>
+                                                            <?php if ($i == 0) : ?>
+
+                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
+                                                                    &#<?php echo 9312 + $i; ?> 現在地
+                                                                    <div class="map-cm-b"></div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->project[$i-1]['info']['pp_bd_pid']; ?>" style="top: <?php echo $this->project[$i-1]['info']['bd_top2']; ?>px; left: <?php echo $this->project[$i-1]['info']['bd_left2']; ?>px;">
+                                                                    &#<?php echo 9312 + $i; ?> <?php echo $this->project[$i-1]['info']['pd_label']; ?>
+                                                                    <div class="map-cm-b"></div>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                            <?php if ($item['way']) : ?>
+                                                                <div class="over-map  well2">
+                                                                    <?php foreach ($item['way'] as $key => $order) : ?>
+                                                                        <?php if ($key < count($item['way'])) : ?>
+                                                                            <img src="/img/maps/route<?php echo $order; ?>-<?php echo $item['way'][$key + 1]; ?>.png" usemap="#shape1" id="shape1">
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                        <p style="clear: both;"></p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row play-stop-row">
+                                            <div class="row no-margins play-stop-row">
                                                 <div class="btn-group pull-right tooltip-demo text-center">
                                                     <button type="button" class="btn btn-default btn-play" data-toggle="tooltip" data-placement="left" title="アニメーションを再生します"><i class="fa fa-play"></i></button>
                                                     <button type="button" class="btn btn-default btn-pause" data-toggle="tooltip" data-placement="bottom" title="アニメーションを一時停止します"><i class="fa fa-pause"></i></button>
@@ -523,32 +544,30 @@
 <script src="/js/rangeslider.min.js"></script>
 
 <!-- Mainly scripts -->
-<script src="/Static_Full_Version/js/jquery-3.1.1.min.js"></script>
-<script src="/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/plugin/js/jquery-3.1.1.min.js"></script>
+<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Peity -->
-<script src="/Static_Full_Version/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="/plugin/js/plugins/peity/jquery.peity.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="/Static_Full_Version/js/inspinia.js"></script>
-<script src="/Static_Full_Version/js/plugins/pace/pace.min.js"></script>
+<script src="/plugin/js/inspinia.js"></script>
+<script src="/plugin/js/plugins/pace/pace.min.js"></script>
 
 <!-- Peity -->
-<script src="/Static_Full_Version/js/demo/peity-demo.js"></script>
+<script src="/plugin/js/demo/peity-demo.js"></script>
 
 <!-- jquery UI -->
-<script src="/Static_Full_Version/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="/Static_Full_Version/js/bootstrap.min.js"></script> <!--この順序でないとtooltipが出ないので注意-->
+<script src="/plugin/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/plugin/js/bootstrap.min.js"></script> <!--この順序でないとtooltipが出ないので注意-->
 
 <!-- IonRangeSlider -->
 <script src="/js/ionRangeSlider/ion.rangeSlider.min.js"></script>
 
-<!--animateTransition-->
-<script src="/js/animateTransition/animateTransition.min.js"></script>
 
 <!-- Sweet alert -->
-<script src="/Static_Full_Version/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <!--mapper-->
 <script src="/js/mapper/cvi_map_lib.js"></script>
@@ -558,11 +577,16 @@
 
 <script>
 
+    //ページ遷移の前に警告
+    /*$(window).on('beforeunload', function(e) {
+        return 'ページを離れると検索結果は保存されない場合があります。このまま移動しますか？';
+    });*/
+
     var timer_;
     var map;
-    function timer(num, map, quick) {
+    function timer(num, map) {
         //最初の画像以外を非表示にする
-        //var map = $('#map_img div:first-child');
+        //var map = $('.map-backgd div:first-child');
         var flg;
 
         //map.after().hide();
@@ -570,16 +594,13 @@
 
         timer_ = setInterval(function () {
             //フェードインとアウトを繰り返す
-            if (map[0] == undefined) {
-                map[0] = $('#map_img .over-map.well' + num + ':first');
-                $('#map_img div').not(':first').hide();
-            } else if (map[0].get(0) == undefined) {
-                map[0] = $('#map_img .over-map.well' + num + ':first');
-                $('#map_img div').not(':first').hide();
+            if (map[0] == undefined || map[0].get(0) == undefined) {
+                map[0] = $('.map-backgd .over-map.well' + num + ':first');
+                $('.map-backgd div').not(':first').hide();
             } else {
                 if (map[0].hasClass('map-comment')) {
-                    if (flg == 1 || quick == 1) {
-                        $('#map_img div').not(':first').hide();
+                    if (flg == 1) {
+                        $('.map-backgd div').not(':first').hide();
                         map[0] = map[0].next('div.over-map.well' + num);
                         console.log(map[0]);
                         flg = 0;
@@ -592,13 +613,12 @@
                     map[0] = map[0].next('div.over-map.well' + num);
                 }
             }
-            quick = 0;
 
         }, 1500);
     }
     function stopAnimate(num, map) {
         clearInterval(timer_);
-        $('#map_img .over-map.well' + num).show();
+        $('.map-backgd .over-map.well' + num).show();
         delete map[0].get(0);
         delete map[0];
         console.log(map[0]);
@@ -609,14 +629,16 @@
     }
     function pauseAnimate(num) {
         clearInterval(timer_);
+        console.log("pause");
+        console.log(map[0]);
         $('.btn-pause').prop('disabled', true);
         $('.btn-stop').prop('disabled', true);
         $('.btn-play').prop('disabled', false);
 
     }
     function playAnimate(num, map) {
-        console.log(map);
-        timer(num, map, 1);
+        console.log(map[0]);
+        timer(num, map);
         $('.btn-play').prop('disabled', true);
         $('.btn-stop').prop('disabled', false);
         $('.btn-pause').prop('disabled', false);
@@ -628,18 +650,14 @@
 
 
         <!-- 地図のルートを点滅画像で表示 -->
-/*
-        $('#map_img div').not(':first').hide();
-        if ($(window).width() > 767) {
-            //map等はスクロールしてもついてくる
-            $("#sticker").sticky({
-                topSpacing: 10,
-                bottomSpacing: 90,
-                center: true
-            });
 
-            map = [$('#map_img .over-map.well1:first')];
-            timer(1, map, 0);
+
+        $('.map-backgd div').not(':first').hide();
+        if ($(window).width() > 767) {
+
+
+            map = [$('.map-backgd .over-map.well1:first')];
+            timer(1, map);
             $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
             $('.btn-stop').click(function() {
@@ -656,10 +674,34 @@
 
         } else {
 
-            var timer2 = timer(2);
+            map = [$('.map-backgd .over-map.well2:first')];
+            timer(2, map);
+            $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
+
+            $('.btn-stop').click(function() {
+                stopAnimate(2, map);
+            });
+            $('.btn-pause').click(function() {
+                pauseAnimate(2);
+            });
+            $('.btn-play').click(function() {
+                playAnimate(2, map);
+            });
             $('.btn-print').hide();
         }
-*/
+
+
+        console.log($(window).width());
+        if ($(window).width() > 1200) {
+            //map等はスクロールしてもついてくる
+            $("#sticker").sticky({
+                topSpacing: 10,
+                bottomSpacing: 90,
+                center: true
+            });
+        }
+
+
 
         /*
         // Tooltips demo
@@ -672,7 +714,7 @@
         $('.widget-back').click(function () {
             swal({
                 title: "Are you OK?",
-                text: "入力画面に戻ると検索結果は保存されません。それでもよろしいですか？",
+                text: "入力画面に戻ると検索結果は保存されない場合があります。それでもよろしいですか？",
                 type: "warning",
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "OK",
