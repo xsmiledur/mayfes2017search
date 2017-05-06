@@ -471,7 +471,7 @@ class MainModel
 
     /**
      * 企画を取ってくる
-     * @param $ps_pid
+     * @param $pt_pid
      * @return array
      */
     public function getProjectInfo($pt_pid)

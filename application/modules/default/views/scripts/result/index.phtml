@@ -67,6 +67,7 @@
                     </div>
                     <div>
                         <h1 class="m-b-md font-bold"><?php echo $item['info']['pd_label']; ?></h1>
+                        <h2><small><?php echo $item['info']['pt_note']; ?></small></h2>
                         <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
                         <div class="m-t-md" style="margin-left: -4px;">
                             <div class="rec_pku_acd_icon">
@@ -303,6 +304,7 @@
                                                                    data-target="#Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>">
                                                                     <span class="glyphicon glyphicon-info-sign"></span></a>
                                                             </h2>
+                                                            <small><?php echo $item['info']['pt_note']; ?></small>
                                                             <?php echo $item['info']['pp_place']; ?>
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
