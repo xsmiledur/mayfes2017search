@@ -281,7 +281,7 @@ class SearchController extends Zend_Controller_Action
         */
 
         //移動時間の修正
-        $num = 3;
+        $num = 2;
         $switch = 0; //0ならかける、1なら足す
         $this->_session->num = $num;
         $this->_session->switch = $switch;
@@ -359,8 +359,8 @@ class SearchController extends Zend_Controller_Action
 
         $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
         $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
-        //var_dump("opencheck");
-        //var_dump(is_resource($proc));
+        var_dump("opencheck");
+        var_dump(is_resource($proc));
         if(is_resource($proc)){
 
 
@@ -375,8 +375,8 @@ class SearchController extends Zend_Controller_Action
             fclose($pipes[1]);
             $return_value = proc_close($proc); //0以外ならエラー
 
-            //var_dump($inputData);
-            //var_dump($result__);
+            var_dump($inputData);
+            var_dump($result__);
             //var_dump($return_value);
 
             $buf = "-1
@@ -394,7 +394,7 @@ class SearchController extends Zend_Controller_Action
                 unset($pt_pid[$N + 1]);
                 $this->_session->pt_pid = $pt_pid;
 
-                //var_dump($pt_pid);
+                var_dump($pt_pid);
                 //var_dump($N);
 
 
@@ -417,6 +417,7 @@ class SearchController extends Zend_Controller_Action
         } else {
             echo 0;
         }
+        exit();
 
     }
 

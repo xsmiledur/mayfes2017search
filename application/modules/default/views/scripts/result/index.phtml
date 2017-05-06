@@ -178,7 +178,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-12">
-                                <a href="http://ap-phys.net/">
+                                <a href="https://ap-phys.net/">
                                     <div class="widget navy-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
                                         <i class="fa fa-codepen fa-second"></i>
@@ -284,7 +284,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo (strlen($item['time']) > 0) ? $item['time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -584,7 +584,7 @@
 
     var timer_;
     var map;
-    function timer(num, map, quick) {
+    function timer(num, map) {
         //最初の画像以外を非表示にする
         //var map = $('.map-backgd div:first-child');
         var flg;
@@ -594,15 +594,12 @@
 
         timer_ = setInterval(function () {
             //フェードインとアウトを繰り返す
-            if (map[0] == undefined) {
-                map[0] = $('.map-backgd .over-map.well' + num + ':first');
-                $('.map-backgd div').not(':first').hide();
-            } else if (map[0].get(0) == undefined) {
+            if (map[0] == undefined || map[0].get(0) == undefined) {
                 map[0] = $('.map-backgd .over-map.well' + num + ':first');
                 $('.map-backgd div').not(':first').hide();
             } else {
                 if (map[0].hasClass('map-comment')) {
-                    if (flg == 1 || quick == 1) {
+                    if (flg == 1) {
                         $('.map-backgd div').not(':first').hide();
                         map[0] = map[0].next('div.over-map.well' + num);
                         console.log(map[0]);
@@ -616,7 +613,6 @@
                     map[0] = map[0].next('div.over-map.well' + num);
                 }
             }
-            quick = 0;
 
         }, 1500);
     }
@@ -633,14 +629,16 @@
     }
     function pauseAnimate(num) {
         clearInterval(timer_);
+        console.log("pause");
+        console.log(map[0]);
         $('.btn-pause').prop('disabled', true);
         $('.btn-stop').prop('disabled', true);
         $('.btn-play').prop('disabled', false);
 
     }
     function playAnimate(num, map) {
-        console.log(map);
-        timer(num, map, 1);
+        console.log(map[0]);
+        timer(num, map);
         $('.btn-play').prop('disabled', true);
         $('.btn-stop').prop('disabled', false);
         $('.btn-pause').prop('disabled', false);
@@ -659,7 +657,7 @@
 
 
             map = [$('.map-backgd .over-map.well1:first')];
-            timer(1, map, 0);
+            timer(1, map);
             $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
             $('.btn-stop').click(function() {
@@ -677,7 +675,7 @@
         } else {
 
             map = [$('.map-backgd .over-map.well2:first')];
-            timer(2, map, 0);
+            timer(2, map);
             $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
             $('.btn-stop').click(function() {
