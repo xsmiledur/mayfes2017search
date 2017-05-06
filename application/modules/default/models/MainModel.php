@@ -178,25 +178,22 @@ class MainModel
             ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long', 'pd_web_body', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
             ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
             ->where('pd_active_flg = ?', 1)
-            ->where('pp_day = ?', $date)
-            ->order('pd_pid');
+            ->where('pp_day = ?', $date);
+        $select->order('pd_pid');
         $stmt = $select->query();
         $_data = $stmt->fetchAll();
 
-        if (!$start && !$end) {
-            $data['data'] = $_data;
-        } else {
-            $i = 0;
-            foreach ($_data as $item) {
-                if ($item['pp_full']) {
-                    $data['data'][$i] = $item;
-                    $i++;
-                } else { //$item['pt_start']は必ずある
-                    if ($item['pt_start_'] >= $start || ($item['pt_open_'] && $item['pt_open_'] >= $start)) {
-                        if ($item['pt_start_'] + $item['pt_time'] <= $end) {
-                            $data['data'][$i] = $item;
-                            $i++;
-                        }
+
+        $i = 0;
+        foreach ($_data as $item) {
+            if ($item['pp_full']) {
+                $data['data'][$i] = $item;
+                $i++;
+            } else { //$item['pt_start']は必ずある
+                if ($item['pt_start_'] >= $start || ($item['pt_open_'] && $item['pt_open_'] >= $start)) {
+                    if ($item['pt_start_'] + $item['pt_time'] <= $end) {
+                        $data['data'][$i] = $item;
+                        $i++;
                     }
                 }
             }
