@@ -572,8 +572,7 @@ fieldset .tabs-container .i-checks {
 }
 
 .body-text,
-.place-text,
-.time-text {
+.place-text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -588,10 +587,16 @@ fieldset .tabs-container .i-checks {
     float: right;
 }
 .place-text {
-    width: 20%;
+    width: 15%;
     margin-right: 2%;
     text-align: right;
     float: right;
+}
+.stay-text {
+     width: 5%;
+     margin-right: 2%;
+     text-align: right;
+     float: right;
 }
 .time-text {
     width: 6%;
@@ -621,6 +626,11 @@ fieldset .tabs-container .i-checks {
 #tab-2 .i-checks > span:nth-child(2),
 #tab-3 .i-checks > span:nth-child(2) {
     margin-right: 29px;
+    margin-left: -27px;
+}
+#tab-2 .i-checks > span:nth-child(3),
+#tab-3 .i-checks > span:nth-child(3) {
+    margin-right: 31px;
     margin-left: -27px;
 }
 .widget {
@@ -763,14 +773,12 @@ fieldset .tabs-container .i-checks {
     display: none;
 }
 .position-tip {
-    overflow-x: scroll;
-    overflow-y: hidden;
     height: 650px;
 }
 #map_img {
+    width: 904px;
     height: 650px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow: hidden;
     border: #dcdcdc solid 2px;
 }
 .origin-map {
@@ -809,6 +817,9 @@ fieldset .tabs-container .i-checks {
 .width-over i.fa-calendar {
     margin-right: 16px;
 }
+.width-over i.fa-clock-o {
+    margin-right: 16px;
+}
 #map_img:after {
     content: ".";
     display: block;
@@ -823,6 +834,11 @@ fieldset .tabs-container .i-checks {
 }
 .mapper {
     cursor: crosshair;
+}
+.contact-box.center-version i.fa.fa-clock-o,
+.contact-box.center-version i.fa.fa-calendar {
+     margin-top: 30px;
+     margin-bottom: 30px;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;
@@ -854,6 +870,7 @@ input.select2-search__field::-webkit-input-placeholder {
 }
 .play-stop-row {
     position: relative;
+    width: 904px;
     background-color: #dcdcdc;
     padding: 5px 20px;
     border-bottom-left-radius: 5px;
@@ -920,6 +937,12 @@ span.select2-selection__choice__remove {
     top: 44px;
     background-color: #a9a9a9;
 }
+.map-backgd {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
 
 @media screen and ( max-width:1199px ) {
     #all-cover > .ibox-content {
@@ -963,6 +986,14 @@ span.select2-selection__choice__remove {
     }
     h2 {
         font-size: 15px;
+    }
+    .position-tip {
+        height: 550px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+    .play-stop-row {
+        width: 100%;
     }
     .ibox-content {
         padding: 10px 5px;
@@ -1015,15 +1046,18 @@ span.select2-selection__choice__remove {
     .vote-comment {
         display: block;
     }
-
+    #map_img {
+        margin-top: 30px;
+        width: 700px;
+    }
     .origin-map img,
     .over-map img {
         width: 700px;
     }
     .origin-map,
     .over-map {
-        overflow-x: scroll;
-        width: 100%;
+        width: 700px;
+        height: 500px;
     }
     div.widget{
         width: 100%;
@@ -1098,6 +1132,9 @@ span.select2-selection__choice__remove {
     .phone-display {
         display: block !important;
     }
+    .area-box.contact-box, .genre-box.contact-box {
+        height: 500px;
+    }
     .search-in {
         height: 450px;
     }
@@ -1111,9 +1148,19 @@ span.select2-selection__choice__remove {
         padding: 10px 8px 10px 13px;
     }
     span.place-text,
-    span.body-text,
-    span.time-text {
+    span.body-text {
         display: none;
+    }
+    span.place-text,
+    span.body-text {
+         display: none;
+    }
+    span.time-text {
+         margin-left: -15%;
+     }
+    span.time-text,
+    span.stay-text {
+         width: 15%;
     }
     .check-text {
         width: 95%;
@@ -1123,6 +1170,17 @@ span.select2-selection__choice__remove {
     }
     .footer div:not(.pull-right) {
         display: none;
+    }
+    .genre-push, .area-push {
+        height: 100px;
+    }
+    .contact-box.center-version {
+        margin-bottom :5px;
+    }
+    .contact-box.center-version i.fa.fa-clock-o,
+    .contact-box.center-version i.fa.fa-calendar {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 @media screen and ( max-width:500px) {
