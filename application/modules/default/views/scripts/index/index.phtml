@@ -468,7 +468,7 @@
                             start : $('input[name="clock1"]').val(),
                         },
                         success: function(arr) {
-                            console.log(arr);
+                            //console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh02',
@@ -610,7 +610,7 @@
                             clock2 : $('input[name="clock2"]').val()
                         },
                         success: function(arr) {
-                            console.log(arr);
+                            //console.log(arr);
                             if (arr == 0) {
                                 $('#page-wrapper').removeClass('sk-loading');
                                 swal({
@@ -698,7 +698,7 @@
 
         $('input[name="no-time"]').change(function(){
             if ($(this).is(':checked')) {
-                console.log("aa");
+                //console.log("aa");
                 $('#input-clock2').val("18:00");
                 $('#input-clock2').prop("disabled", true);
             } else {
@@ -718,7 +718,7 @@
             c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
             d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
 
-            console.log(parseInt(c) >= 1080);
+            //console.log(parseInt(c) >= 1080);
             if (parseInt(c) >= parseInt(d)) {
                 $('#clock-check').addClass('has-error');
                 $('#clock-check-help1').show();
@@ -748,8 +748,8 @@
             b = $('#input-clock2').val();
             c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
             d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-            console.log(c);
-            console.log(d);
+            //console.log(c);
+            //console.log(d);
 
             if (parseInt(c) >= parseInt(d)) {
                 $('#clock-check').addClass('has-error');
