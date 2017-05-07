@@ -190,8 +190,13 @@ class MainModel
                 $data['data'][$i] = $item;
                 $i++;
             } else { //$item['pt_start']は必ずある
-                if ($item['pt_start_'] >= $start || ($item['pt_open_'] && $item['pt_open_'] >= $start)) {
+                if ($item['pt_start_'] >= $start) {
                     if ($item['pt_start_'] + $item['pt_time'] <= $end) {
+                        $data['data'][$i] = $item;
+                        $i++;
+                    }
+                } elseif ($item['pt_open_']) {
+                    if ($item['pt_end_'] >= $start + $item['pt_time']) {
                         $data['data'][$i] = $item;
                         $i++;
                     }
