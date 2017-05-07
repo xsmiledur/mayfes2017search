@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="ほんっとにはじめてのHTML5">
     <meta name="keywords" content="ほんっとにはじめてのHTML5,CSS3,html5">
     <title>Result | MaySearch</title>
@@ -26,6 +26,9 @@
 
     <!-- Sweet Alert -->
     <link href="/plugin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <!--favicon-->
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
 
     <style>
 
@@ -51,6 +54,7 @@
 
 <body>
 
+<input type="hidden" name="err-msg" value="<?php echo $this->errMsg; ?>">
 <?php foreach ($this->project  as $item) : ?>
 <div class="modal inmodal fade"
      id="Modal_pt_pid<?php echo $item['info']['pt_pid']; ?>" tabindex="-1"
@@ -254,12 +258,6 @@
 
                                 <div class="row row-cover print-page">
                                     <div class="col-lg-4" id="block1">
-                                        <?php if ($this->view->errMsg) : ?>
-                                        <div class="alert alert-danger alert-dismissable">
-                                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                            <?php echo $this->view->errMsg; ?>
-                                        </div>
-                                        <?php endif; ?>
 
                                         <form id="research-form" action="/search/search" method="post">
                                             <div id="vertical-timeline" class="vertical-container dark-timeline">
@@ -603,7 +601,7 @@
                     if (flg == 1) {
                         $('.map-backgd div').not(':first').hide();
                         map[0] = map[0].next('div.over-map.well' + num);
-                        console.log(map[0]);
+                        //console.log(map[0]);
                         flg = 0;
                     } else {
                         map[0].show();
@@ -622,7 +620,7 @@
         $('.map-backgd .over-map.well' + num).show();
         delete map[0].get(0);
         delete map[0];
-        console.log(map[0]);
+        //console.log(map[0]);
         $('.btn-stop').prop('disabled', true);
         $('.btn-pause').prop('disabled', true);
         $('.btn-play').prop('disabled', false);
@@ -630,15 +628,15 @@
     }
     function pauseAnimate(num) {
         clearInterval(timer_);
-        console.log("pause");
-        console.log(map[0]);
+        //console.log("pause");
+        //console.log(map[0]);
         $('.btn-pause').prop('disabled', true);
         $('.btn-stop').prop('disabled', true);
         $('.btn-play').prop('disabled', false);
 
     }
     function playAnimate(num, map) {
-        console.log(map[0]);
+        //console.log(map[0]);
         timer(num, map);
         $('.btn-play').prop('disabled', true);
         $('.btn-stop').prop('disabled', false);
@@ -692,13 +690,26 @@
         }
 
 
-        console.log($(window).width());
+
+        //console.log($(window).width());
         if ($(window).width() > 1200) {
             //map等はスクロールしてもついてくる
             $("#sticker").sticky({
                 topSpacing: 10,
                 bottomSpacing: 90,
                 center: true
+            });
+        }
+
+        var err_msg = $('input[name="err-msg"]').val();
+        if (err_msg.length > 0) {
+            swal({
+                title: err_msg,
+                text: "お手数ですが、条件を変更して再度検索してください",
+                type: "warning",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "OK",
+                closeOnConfirm: false
             });
         }
 

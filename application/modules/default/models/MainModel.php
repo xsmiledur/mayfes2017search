@@ -1448,5 +1448,71 @@ class MainModel
         }
     }
 
+    public function bddataFix()
+    {
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+            $select = $this->_read->select();
+            $select->from('building_import');
+            $stmt = $select->query();
+            $data = $stmt->fetchAll();
+
+            $this->_read->commit();
+            $this->_read->query('commit');
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
+        }
+
+        $update = array();
+        foreach ($data as $item) {
+            if ($item['name'] == 'bd_pid') {
+                $update['bd_pid'] = intval($item['field']);
+            } elseif ($item['name'] == 'bd_top2') {
+                if (strlen($update['bd_pid']) > 0) $update['bd_top2'] = intval($item['field']);
+            } elseif ($item['name'] == 'bd_left2') {
+                if (strlen($update['bd_pid']) > 0 && strlen($update['bd_top2']) > 0) $update['bd_left2'] = intval($item['field']);
+            }
+
+            if (strlen($update['bd_pid']) > 0 && strlen($update['bd_top2']) > 0 && strlen($update['bd_left2']) > 0) {
+
+                echo "<pre>";
+                var_dump($update);
+                echo "</pre>";
+                $this->_write->beginTransaction();
+                $this->_write->query('begin');
+
+                try {
+
+                    $where = '';
+                    $where[] = "bd_pid = '{$update['bd_pid']}'";
+                    unset($update['bd_pid']);
+
+                    $this->_write->update('building_data', $update, $where);
+
+                    // 成功した場合はコミットする
+
+                    $update = array();
+
+                    $this->_write->commit();
+                    $this->_write->query('commit');
+                } catch (Exception $e) {
+                    // 失敗した場合はロールバックしてエラーメッセージを返す
+                    $this->_write->rollBack();
+                    $this->_write->query('rollback');
+                    var_dump($e->getMessage());
+                    exit();
+                    return false;
+                }
+            }
+
+        }
+    }
+
+
 
 }

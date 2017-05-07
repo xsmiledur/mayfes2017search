@@ -194,6 +194,7 @@ class SearchController extends Zend_Controller_Action
         //$this->_main->timeFix();
         //$this->_main->MakeNoActiveFlg();
         //$this->_main->timeFix2();
+        //$this->_main->bddataFix();
     }
 
     /**
@@ -379,7 +380,7 @@ class SearchController extends Zend_Controller_Action
                 echo 0;
                 if ($research) {
                     $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
-                    return $this->_redirect('/search/result');
+                    return $this->_redirect('/result');
                 }
             } else {
 
@@ -403,13 +404,13 @@ class SearchController extends Zend_Controller_Action
                 $this->_session->re_clock1    = $clock1;
                 $this->_session->re_clock2    = $clock2;
                 echo 1;
-                if ($research) {
-                    return $this->_redirect('/result');
-                }
             }
 
         } else {
             echo 0;
+        }
+        if ($research) {
+            return $this->_redirect('/result');
         }
         exit();
 
