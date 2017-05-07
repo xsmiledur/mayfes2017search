@@ -259,11 +259,14 @@ class SearchController extends Zend_Controller_Action
 
         $N = count($search);
         if (!$clock1) {
-            $time = time() + 9*3600;  //GMTとの時差9時間を足す
-            $clock1 = date("h:i", $time);
+            $clock1 = date("h:i");
+            if (substr($clock1,0,2) == "06") { //9時台の時のみバグ起こりますので
+                $time = time() + 9*3600;  //GMTとの時差9時間を足す
+                $clock1 = date("h", $time);
+            }
         }
-        $clock1_ = (int)substr($clock1, 0, 2) * 60 + (int)substr($clock1, 3, 2);
-        $clock2_ = (int)substr($clock2, 0, 2) * 60 + (int)substr($clock2, 3, 2);
+        $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
+        $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
 
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
@@ -281,7 +284,7 @@ class SearchController extends Zend_Controller_Action
         */
 
         //移動時間の修正
-        $num = 3;
+        $num = 2;
         $switch = 0; //0ならかける、1なら足す
         $this->_session->num = $num;
         $this->_session->switch = $switch;
@@ -299,27 +302,20 @@ class SearchController extends Zend_Controller_Action
         foreach ($search as $i => $item) { //$itemは$pt_pid
             $_result = $this->_main->getProjectInfo($item);
 
-            //var_dump($_result);
-
             //企画情報
 
             $pt_pid = $item; //企画summaryID
 
             if ($research) {
                 $time = $request->getParam('re-time'.$_result['pt_pid']);
-            } elseif ($_result['pt_time']) {
+            } elseif (strlen($_result['pt_time']) > 0) {
                 $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
             } else {
                 $time = 30;
             }
             $research_t[$item] = $time;
 
-            $__start = $_result['pt_start']; //企画start
-            if (!$__start) {
-                $start = -1;
-            } else {
-                $start = $_result['pt_start_'];
-            }
+            $start = ($_result['pt_start_']) ? $_result['pt_start_'] : -1;
             $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
 
             //for企画の建物間のかかる時間
@@ -376,7 +372,7 @@ class SearchController extends Zend_Controller_Action
             $return_value = proc_close($proc); //0以外ならエラー
 
             //var_dump($inputData);
-            //var_dump($result__);
+            var_dump($result__);
             //var_dump($return_value);
 
             $buf = "-1
@@ -417,6 +413,7 @@ class SearchController extends Zend_Controller_Action
         } else {
             echo 0;
         }
+        exit();
 
     }
 

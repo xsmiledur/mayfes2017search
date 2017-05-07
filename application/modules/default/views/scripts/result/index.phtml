@@ -60,6 +60,7 @@
             <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
                 <div class="transparent">
                     <div class="row">
+                        <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                                             <span class="pull-right m-r-md text-danger font-bold">
                                                                                 <?php echo $item['info']['pd_genre1_']; ?>
                                                                                 / <?php echo $item['info']['pd_genre2_']; ?>
@@ -75,7 +76,7 @@
                                 <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                             </div>
                             <div class="width-over">
-                                <i class="fa fa-calendar"></i><?php echo (!$item['info']['pt_pid']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?><?php echo ($item['info']['pt_open']) ? '<br>（開演：' . $item['info']['pt_open'] . '）' : ''; ?>
+                                <i class="fa fa-calendar"></i><?php echo ($item['info']['pt_open']) ? "開場: ".$item['info']['pt_open']."<br>" : ""; ?><?php echo (!$item['info']['pt_start']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?>
                             </div>
                             <div class="width-over">
                                 <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>
@@ -131,7 +132,7 @@
             <div class="sk-double-bounce2"></div>
         </div>
         <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
-
+        <button type="button" class="sk-spinner-btn btn btn-default btn-outline">検索をやめる</button>
         <div class="row no-padding animated fadeInRight">
             <div class="col-lg-12">
                 <div id="id1" class="row">
@@ -178,7 +179,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-12">
-                                <a href="http://ap-phys.net/">
+                                <a href="https://ap-phys.net/">
                                     <div class="widget navy-bg widget1">
                                         <i class="fa fa-codepen fa-first"></i>
                                         <i class="fa fa-codepen fa-second"></i>
@@ -284,7 +285,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo ($item['time']) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo (strlen($item['time']) > 0) ? $item['time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -309,7 +310,7 @@
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
-                                                                    滞在時間目安：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                    滞在時間目安：<?php echo (strlen($item['info']['pt_time']) > 0) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
                                                                 </p>
                                                                 <input type="text" name="re-time<?php echo $item['info']['pt_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>
@@ -584,7 +585,7 @@
 
     var timer_;
     var map;
-    function timer(num, map, quick) {
+    function timer(num, map) {
         //最初の画像以外を非表示にする
         //var map = $('.map-backgd div:first-child');
         var flg;
@@ -594,15 +595,12 @@
 
         timer_ = setInterval(function () {
             //フェードインとアウトを繰り返す
-            if (map[0] == undefined) {
-                map[0] = $('.map-backgd .over-map.well' + num + ':first');
-                $('.map-backgd div').not(':first').hide();
-            } else if (map[0].get(0) == undefined) {
+            if (map[0] == undefined || map[0].get(0) == undefined) {
                 map[0] = $('.map-backgd .over-map.well' + num + ':first');
                 $('.map-backgd div').not(':first').hide();
             } else {
                 if (map[0].hasClass('map-comment')) {
-                    if (flg == 1 || quick == 1) {
+                    if (flg == 1) {
                         $('.map-backgd div').not(':first').hide();
                         map[0] = map[0].next('div.over-map.well' + num);
                         console.log(map[0]);
@@ -616,7 +614,6 @@
                     map[0] = map[0].next('div.over-map.well' + num);
                 }
             }
-            quick = 0;
 
         }, 1500);
     }
@@ -633,14 +630,16 @@
     }
     function pauseAnimate(num) {
         clearInterval(timer_);
+        console.log("pause");
+        console.log(map[0]);
         $('.btn-pause').prop('disabled', true);
         $('.btn-stop').prop('disabled', true);
         $('.btn-play').prop('disabled', false);
 
     }
     function playAnimate(num, map) {
-        console.log(map);
-        timer(num, map, 1);
+        console.log(map[0]);
+        timer(num, map);
         $('.btn-play').prop('disabled', true);
         $('.btn-stop').prop('disabled', false);
         $('.btn-pause').prop('disabled', false);
@@ -659,7 +658,7 @@
 
 
             map = [$('.map-backgd .over-map.well1:first')];
-            timer(1, map, 0);
+            timer(1, map);
             $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
             $('.btn-stop').click(function() {
@@ -677,7 +676,7 @@
         } else {
 
             map = [$('.map-backgd .over-map.well2:first')];
-            timer(2, map, 0);
+            timer(2, map);
             $('.btn-play').prop('disabled', true); //最初は再生ボタンdisabled
 
             $('.btn-stop').click(function() {
