@@ -63,41 +63,43 @@
                             <button type="button" class="btn btn-link genre-link">戻る</button>
                             <h2><?php echo $val['label']; ?></h2>
                         </div>
-                        <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
-                            <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
-                                    <?php echo $val2['gd_detail_label']; ?>
-                                    <input type="hidden" name="btn-val" value="genre<?php echo $val2['gd_pid']; ?>">
-                                </button>
-                                <div class="select-box m-b-md" id="genre<?php echo $val2['gd_pid']; ?>">
-                                    <ul class="list-group clear-list m-t">
-                                    <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
-                                        <?php if ($item['pd_genre1'] == $val['name'] && $item['pd_genre2'] == $val2['gd_detail']) : ?>
-                                            <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
-                                                <div class="i-checks">
-                                                    <span class="pull-right" style="text-align: right;">
-                                                            <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                    </span>
-                                                    <span class="pull-right m-r-xs">
-                                                        <?php echo $item['pt_time']; ?> 分
-                                                    </span>
-                                            <?php if ($item['pt_start']) : ?>
-                                                <span class="pull-right m-r-xs">
-                                                            <?php echo $item['pt_start']; ?>
+                        <div class="scroll-inbox">
+                            <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
+                                <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
+                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
+                                        <?php echo $val2['gd_detail_label']; ?>
+                                        <input type="hidden" name="btn-val" value="genre<?php echo $val2['gd_pid']; ?>">
+                                    </button>
+                                    <div class="select-box m-b-md" id="genre<?php echo $val2['gd_pid']; ?>">
+                                        <ul class="list-group clear-list m-t">
+                                        <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
+                                            <?php if ($item['pd_genre1'] == $val['name'] && $item['pd_genre2'] == $val2['gd_detail']) : ?>
+                                                <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
+                                                    <div class="i-checks">
+                                                        <span class="pull-right" style="text-align: right;">
+                                                                <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                         </span>
-                                                <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
-                                                </div>
-                                            </li>
-                                        <?php ++$i; endif; ?>
-                                    <?php endforeach; ?>
-                                    </ul>
-                                    <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
+                                                        <span class="pull-right m-r-xs">
+                                                            <?php echo $item['pt_time']; ?> 分
+                                                        </span>
+                                                <?php if ($item['pt_start']) : ?>
+                                                    <span class="pull-right m-r-xs">
+                                                                <?php echo $item['pt_start']; ?>
+                                                            </span>
+                                                    <?php endif; ?>
+                                                        <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <i></i> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
+                                                    </div>
+                                                </li>
+                                            <?php ++$i; endif; ?>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                        <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
-                        <?php endforeach; ?>
+                                <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -129,41 +131,43 @@
                         <button type="button" class="btn btn-link area-link text-muted">戻る</button>
                         <h2><?php echo $val['label']; ?></h2>
                     </div>
-                    <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
-                        <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
-                                <?php echo $val2['bd_p_label2']; ?>
-                                <input type="hidden" name="btn-val" value="area<?php echo $val2['bd_pid']; ?>">
-                            </button>
-                            <div class="select-box m-b-md" id="area<?php echo $val2['bd_pid']; ?>">
-                                <ul class="list-group clear-list m-t">
-                                    <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
-                                        <?php if ($item['pp_name1'] == $val['name'] && $item['pp_name2'] == $val2['bd_p_name2']) : ?>
-                                            <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
-                                                <div class="i-checks">
-                                                    <span class="pull-right" style="text-align: right;">
-                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                </span>
-                                                    <span class="pull-right m-r-xs">
-                                                        <?php echo $item['pt_time']; ?> 分
+                    <div class="scroll-inbox">
+                        <?php foreach ($val['info'] as $key2 => $val2) : ?> <!--$key2は数値-->
+                            <?php echo ($key2%3 == 0) ? '<div class="row">' : ''; ?>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
+                                    <?php echo $val2['bd_p_label2']; ?>
+                                    <input type="hidden" name="btn-val" value="area<?php echo $val2['bd_pid']; ?>">
+                                </button>
+                                <div class="select-box m-b-md" id="area<?php echo $val2['bd_pid']; ?>">
+                                    <ul class="list-group clear-list m-t">
+                                        <?php $i = 0; foreach ($this->data['data'] as $name => $item) : ?>
+                                            <?php if ($item['pp_name1'] == $val['name'] && $item['pp_name2'] == $val2['bd_p_name2']) : ?>
+                                                <li class="list-group-item <?php echo ($i == 0) ? 'fist-item' : ''; ?>">
+                                                    <div class="i-checks">
+                                                        <span class="pull-right" style="text-align: right;">
+                                                        <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                     </span>
-                                                    <?php if ($item['pt_start']) : ?>
-                                                    <span class="pull-right m-r-xs">
-                                                    <?php echo $item['pt_start']; ?>
-                                                </span>
-                                                <?php endif; ?>
-                                                    <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
-                                                </div>
-                                            </li>
-                                            <?php ++$i; endif; ?>
-                                    <?php endforeach; ?>
-                                </ul>
-                                <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
+                                                        <span class="pull-right m-r-xs">
+                                                            <?php echo $item['pt_time']; ?> 分
+                                                        </span>
+                                                        <?php if ($item['pt_start']) : ?>
+                                                        <span class="pull-right m-r-xs">
+                                                        <?php echo $item['pt_start']; ?>
+                                                    </span>
+                                                    <?php endif; ?>
+                                                        <label> <input type="checkbox" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <?php echo $item['pd_label']; echo ($item['pp_full'] && $item['pt_note']) ? $item['pt_note'] : ''; ?> </label>
+                                                    </div>
+                                                </li>
+                                                <?php ++$i; endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    <?php echo ($i == 0) ? '企画はありません。' : ''; ?>
+                                </div>
                             </div>
-                        </div>
-                        <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
-                    <?php endforeach; ?>
+                            <?php echo ($key2%3 == 2 || !$val['info'][$key2+1]) ? '</div>' : ''; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         <?php endforeach; unset($this->info) ?>
@@ -386,14 +390,17 @@
             // 移動先を数値で取得
             var th = $(this).offset().top;
             // スムーススクロール
+            var body = $(this).closest('.scroll-inbox');
+            /*
             if (key.substr(0,5) == 'genre') {
                 var body = $(this).closest('.contact-box');
             } else {
                 var body = $(this).closest('.transparent');
             }
+            */
             var sh = body.scrollTop();
             var topsize = body.offset().top;
-            var pos = th - topsize + sh - 10;
+            var pos = th - topsize + sh ;
 
             body.animate({
                 scrollTop: pos

@@ -556,7 +556,11 @@ fieldset .tabs-container .i-checks {
 }
 .genre-box.contact-box {
     padding: 20px;
-    overflow: scroll;
+    /*overflow: scroll;*/
+}
+.scroll-inbox {
+    height: 100%;
+    overflow-y: scroll;
 }
 .genre-box.contact-box .list-group.clear-list .list-group-item {
     border-color: #fffff0 !important;
@@ -565,7 +569,7 @@ fieldset .tabs-container .i-checks {
     background-color: rgba(255,255,255,0.8);
     padding: 20px;
     height: 100%;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 .check-text {
     width: 30%;
