@@ -559,7 +559,7 @@ fieldset .tabs-container .i-checks {
     /*overflow: scroll;*/
 }
 .scroll-inbox {
-    height: 100%;
+    height: 353px;
     overflow-y: scroll;
 }
 .genre-box.contact-box .list-group.clear-list .list-group-item {
@@ -972,8 +972,9 @@ span.select2-selection__choice__remove {
     fieldset .ibox .ibox-content {
         height: 630px;
     }
-
-
+    .scroll-inbox {
+        height: 445px;
+    }
 }
 @media screen and ( max-width:991px ) {
 
@@ -1185,6 +1186,9 @@ span.select2-selection__choice__remove {
     .contact-box.center-version i.fa.fa-calendar {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+    .scroll-inbox {
+        height: 395px;
     }
 }
 @media screen and ( max-width:500px) {
