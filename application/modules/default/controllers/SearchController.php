@@ -262,8 +262,8 @@ class SearchController extends Zend_Controller_Action
             $time = time() + 9*3600;  //GMTとの時差9時間を足す
             $clock1 = date("h:i", $time);
         }
-        $clock1_ = (int)substr($clock1, 0, 2) * 60 + (int)substr($clock1, 3, 2);
-        $clock2_ = (int)substr($clock2, 0, 2) * 60 + (int)substr($clock2, 3, 2);
+        $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
+        $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
 
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
@@ -299,8 +299,6 @@ class SearchController extends Zend_Controller_Action
         foreach ($search as $i => $item) { //$itemは$pt_pid
             $_result = $this->_main->getProjectInfo($item);
 
-            //var_dump($_result);
-
             //企画情報
 
             $pt_pid = $item; //企画summaryID
@@ -314,12 +312,7 @@ class SearchController extends Zend_Controller_Action
             }
             $research_t[$item] = $time;
 
-            $__start = $_result['pt_start']; //企画start
-            if (!$__start) {
-                $start = -1;
-            } else {
-                $start = $_result['pt_start_'];
-            }
+            $start = ($_result['pt_start_']) ? $_result['pt_start_'] : -1;
             $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
 
             //for企画の建物間のかかる時間

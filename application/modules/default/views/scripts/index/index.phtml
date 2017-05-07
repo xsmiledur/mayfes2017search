@@ -59,7 +59,8 @@
                 <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
                     <div class="transparent">
                         <div class="row">
-                                                                            <span class="pull-right m-r-md text-danger font-bold">
+                            <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <span class="pull-right m-r-md text-danger font-bold">
                                                                                 <?php echo $item['pd_genre1_']; ?>
                                                                                 / <?php echo $item['pd_genre2_']; ?>
                                                                             </span>
@@ -74,7 +75,7 @@
                                     <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-calendar"></i><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?><?php echo ($item['pt_open']) ? '<br>（開演：' . $item['pt_open'] . '）' : ''; ?>
+                                    <i class="fa fa-calendar"></i><?php echo ($item['pt_open']) ? "開場: ".$item['pt_open']."<br>" : ""; ?><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?>
                                 </div>
                                 <div class="width-over">
                                     <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
@@ -323,7 +324,7 @@
                                                         <label id="here" style="font-weight:normal;"></label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-12" style="height: 100%; overflow: scroll;">
                                                     <ul id="search-all" class="list-group clear-list m-t">
                                                         <?php foreach($this->data_all as $key => $item) : ?>
                                                             <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
