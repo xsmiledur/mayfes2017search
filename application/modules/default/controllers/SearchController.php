@@ -260,7 +260,7 @@ class SearchController extends Zend_Controller_Action
         $N = count($search);
         if (!$clock1) {
             $clock1 = date("h:i");
-            if (substr($clock1,0,2) == "06") {
+            if (substr($clock1,0,2) == "06") { //9時台の時のみバグ起こりますので
                 $time = time() + 9*3600;  //GMTとの時差9時間を足す
                 $clock1 = date("h", $time);
             }
