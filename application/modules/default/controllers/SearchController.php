@@ -372,12 +372,10 @@ class SearchController extends Zend_Controller_Action
             $return_value = proc_close($proc); //0以外ならエラー
 
             //var_dump($inputData);
-            var_dump($result__);
+            //var_dump($result__);
             //var_dump($return_value);
 
-            $buf = "-1
-";
-            if ($result__ == $buf) {
+            if (substr($result__,0,2) == "-1") {
                 echo 0;
                 if ($research) {
                     $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
