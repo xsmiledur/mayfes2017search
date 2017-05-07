@@ -181,9 +181,11 @@ class ResultController extends Zend_Controller_Action
         $this->view->start_pos_bd_pid = $start_pos;
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
         $this->view->order = $order;
+        /*
         echo "<pre>";
         var_dump($order);
         echo "</pre>";
+        */
 
 
     }
