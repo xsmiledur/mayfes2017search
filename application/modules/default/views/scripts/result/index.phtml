@@ -310,7 +310,7 @@
                                                             <div class="vertical-timeline-time">
                                                                 <span class="text-danger pull-right" id="range-change<?php echo $key; ?>"></span>
                                                                 <p id="r1d0name">
-                                                                    滞在時間目安：<?php echo ($item['info']['pt_time']) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
+                                                                    滞在時間目安：<?php echo (strlen($item['info']['pt_time']) > 0) ? $item['info']['pt_time'] . " 分" : " なし"; ?>
                                                                 </p>
                                                                 <input type="text" name="re-time<?php echo $item['info']['pt_pid']; ?>" id="ionrange<?php echo $key; ?>">
                                                             </div>

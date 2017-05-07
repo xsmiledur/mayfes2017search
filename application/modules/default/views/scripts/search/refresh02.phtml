@@ -120,10 +120,6 @@
             multiple: true,
             maximumSelectionLength: 1,
             minimumResultsForSearch: Infinity
-        }).on('select2:focus', function(params) {
-            console.log(params);
-            console.log('focus');
-            console.log(e);
         }).on('select2:select', function(e) {
             if (e.target.value.substr(0,3) == 'map') {
                 var re = /(\d+)/;
@@ -145,7 +141,7 @@
         $('area').click(function(e) {
             var re = /(\d+)/;
             var id = re.exec(e.target.id)[0];
-            console.log(id)
+            //console.log(id);
             $('input[name="start-pos"]').val(id);
             $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');

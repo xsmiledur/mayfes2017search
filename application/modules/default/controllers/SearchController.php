@@ -259,8 +259,11 @@ class SearchController extends Zend_Controller_Action
 
         $N = count($search);
         if (!$clock1) {
-            $time = time() + 9*3600;  //GMTとの時差9時間を足す
-            $clock1 = date("h:i", $time);
+            $clock1 = date("h:i");
+            if (substr($clock1,0,2) == "06") {
+                $time = time() + 9*3600;  //GMTとの時差9時間を足す
+                $clock1 = date("h", $time);
+            }
         }
         $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
         $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
@@ -305,7 +308,7 @@ class SearchController extends Zend_Controller_Action
 
             if ($research) {
                 $time = $request->getParam('re-time'.$_result['pt_pid']);
-            } elseif ($_result['pt_time']) {
+            } elseif (strlen($_result['pt_time']) > 0) {
                 $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
             } else {
                 $time = 30;
@@ -369,7 +372,7 @@ class SearchController extends Zend_Controller_Action
             $return_value = proc_close($proc); //0以外ならエラー
 
             //var_dump($inputData);
-            //var_dump($result__);
+            var_dump($result__);
             //var_dump($return_value);
 
             $buf = "-1

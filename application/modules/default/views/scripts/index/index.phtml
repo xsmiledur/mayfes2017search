@@ -708,8 +708,10 @@
         $('#input-clock1').change(function() {
             if ($('#input-clock1').val()) {
                 $("#clockText1").text($('#input-clock1').val());
+                a = $('#input-clock1').val();
+            } else {
+                a = "09:00";
             }
-            a = $('#input-clock1').val();
             b = $('#input-clock2').val();
             c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
             d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
@@ -736,7 +738,11 @@
             if ($('#input-clock1').val() > $('#input-clock2').val()) {
                 $('#clock-check').addClass('has-error');
             }
-            a = $('#input-clock1').val();
+            if ($('#input-clock1').val()) {
+                a = $('#input-clock1').val();
+            } else {
+                a = "09:00";
+            }
             b = $('#input-clock2').val();
             c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
             d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));

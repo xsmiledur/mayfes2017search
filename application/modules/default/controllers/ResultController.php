@@ -143,13 +143,13 @@ class ResultController extends Zend_Controller_Action
         foreach ($pt_pid as $key => $item) { //$key=0は企画の個数
             if ($key != 0) {
                 $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
-                if (!$project[$key-1]['info']['pt_time']) $project[$key-1]['info']['pt_time'] = 30;
+                //if (strlen($project[$key-1]['info']['pt_time']) == 0) $project[$key-1]['info']['pt_time'] = 30; //あり得ない場合です
                 $project[$key-1]['time'] = $order[$key-1]['time']; //移動にかかる時間
                 //$project[$key-1]['pre']  = $_start;
                 if ($project[$key-1]['info']['pt_start']) { //もしこの企画に開始時刻が存在すれば
                     $project[$key-1]['start'] = $project[$key-1]['info']['pt_start']; //開始時刻はそのまま
                     $_start = $project[$key-1]['info']['pt_start_'];
-                    if ($project[$key-1]['info']['pt_time']) {
+                    if (strlen($project[$key-1]['info']['pt_time']) > 0) {
                         $_start += $project[$key-1]['info']['pt_time'];
                     } else {
                         $_start = $project[$key-1]['info']['pt_end_']; //次の開始時刻の式に今回の終了時刻を分で代入
@@ -181,6 +181,9 @@ class ResultController extends Zend_Controller_Action
         $this->view->start_pos_bd_pid = $start_pos;
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
         $this->view->order = $order;
+        echo "<pre>";
+        var_dump($order);
+        echo "</pre>";
 
 
     }
