@@ -60,9 +60,6 @@ class SearchController extends Zend_Controller_Action
 
         // テキストデータを取得
 
-        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
-        //$this->view->contents = $this->_main->getContentsData();
-
         /**
          * Viewに必要データを渡す
          */
@@ -84,21 +81,7 @@ class SearchController extends Zend_Controller_Action
     public function indexAction()
     {
         //転送
-        //return $this->_redirect('/');
-    }
-
-    public function formAction()
-    {
-
-        $request = $this->getRequest();
-        $search = $request->getParam('search');
-        $this->view->data_all   = $this->_main->getProjectData();
-
-
-        //$result = $this->_main->searchFree();
-
-        //$this->view->result = $result;
-
+        return $this->_redirect('/');
     }
 
     public function refresh01Action()

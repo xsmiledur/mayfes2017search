@@ -56,11 +56,7 @@ class IndexController extends Zend_Controller_Action
         }
         $this->_lang = $this->_session->lang;
 
-        // テキストデータを取得
-
-        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
-        //$this->view->contents = $this->_main->getContentsData();
-
+gi
         /**
          * Viewに必要データを渡す
          */
