@@ -19,7 +19,7 @@
 
 <br>
 <div class="pos-cover">
-    <img src="/img/map.png" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+    <img src="/img/map.png" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1" onload="map_load()">
 </div>
 <map name="shape1">
     <area id="map12" shape="poly" href="#" alt="農学部3号館" class="icolor00ff00" coords="61,321, 117,322, 117,326, 133,327, 134,330, 137,330, 137,332, 140,333, 140,376, 137,376, 137,379, 134,379, 134,382, 44,382, 44,378, 41,378, 41,376, 38,376, 37,333, 41,333, 41,329, 44,329, 44,326, 61,326">
@@ -95,7 +95,12 @@
 <!--mapper-->
 <script src="/js/mapper/cvi_map_lib.js"></script>
 <script>
-    $(function(e) {
+    map_load = function(){
+        cvi_map.add(document.getElementById('shape1'),{
+            opacity: 25,
+            areacolor: '#ffe4b5',
+            bordercolor: '#ff6600'
+        });
 
         $('area').click(function() {
 
@@ -106,13 +111,6 @@
             // スムーススクロール
             $('body').animate({scrollTop:position}, speed, 'swing');
         });
-
-        cvi_map.add(document.getElementById('shape1'),{
-            opacity: 25,
-            areacolor: '#ffe4b5',
-            bordercolor: '#ff6600'
-        });
-
 
         //select2
         $(".select2_demo_2").select2({
@@ -146,6 +144,9 @@
             $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');
         });
+    }
+
+    //$(function(e) {
 
 /*
         function extAreaOver(image,area){
@@ -195,6 +196,6 @@
 
 
 
-    });
+    //});
 
 </script>
