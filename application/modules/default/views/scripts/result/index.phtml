@@ -80,7 +80,9 @@
                                 <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                             </div>
                             <div class="width-over">
-                                <i class="fa fa-calendar"></i><?php echo ($item['info']['pt_open']) ? "開場: ".$item['info']['pt_open']."<br>" : ""; ?><?php echo (!$item['info']['pt_start']) ? '終日' : $item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small>"; ?>
+                                <i class="fa fa-calendar"></i><?php echo ($item['info']['pp_full']) ? '終日<br>' : ''; ?>
+                                <?php echo ($item['info']['pt_start'] || $item['info']['pt_end']) ? $item['info']['pp_day'].'日 '.$item['info']['pt_start'] . " <small> 〜 " . $item['info']['pt_end'] . "</small><br>" : ''; ?>
+                                <?php echo ($item['info']['pt_open']) ? " (開場: ".$item['info']['pt_open'].")<br>" : ""; ?>
                             </div>
                             <div class="width-over">
                                 <i class="fa fa-map-marker"></i><?php echo $item['info']['pp_place']; ?>

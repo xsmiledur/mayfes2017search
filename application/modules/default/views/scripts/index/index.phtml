@@ -77,7 +77,9 @@
                                     <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-calendar"></i><?php echo ($item['pt_open']) ? "開場: ".$item['pt_open']."<br>" : ""; ?><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?>
+                                    <i class="fa fa-calendar"></i><?php echo ($item['pp_full']) ? '終日<br>' : ''; ?>
+                                    <?php echo ($item['pt_start'] || $item['pt_end']) ? $item['pp_day'].'日 '.$item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small><br>" : ''; ?>
+                                    <?php echo ($item['pt_open']) ? " (開場: ".$item['pt_open'].")" : ""; ?>
                                 </div>
                                 <div class="width-over">
                                     <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
@@ -437,7 +439,14 @@
 <script>
     $('.chosen-select').chosen({width: "15%"});
 
+    //ページを離れるなら警告
+    $(window).on('beforeunload', function(e) {
+        return 'ページを離れると検索結果は保存されません。このまま移動しますか？';
+    });
+
     $(document).ready(function(){
+
+
         $("#wizard").steps();
         $("#form").steps({
             bodyTag: "fieldset",
