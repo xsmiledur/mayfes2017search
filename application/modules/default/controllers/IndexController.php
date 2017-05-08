@@ -56,7 +56,6 @@ class IndexController extends Zend_Controller_Action
         }
         $this->_lang = $this->_session->lang;
 
-gi
         /**
          * Viewに必要データを渡す
          */
