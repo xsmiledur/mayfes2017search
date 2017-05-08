@@ -229,11 +229,13 @@ fieldset .ibox .ibox-content {
 }
 .search-in {
     height: 430px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .search-in2 {
     height: 470px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .modal-head {
     padding: 30px;
@@ -561,6 +563,7 @@ fieldset .tabs-container .i-checks {
 .scroll-inbox {
     height: 353px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .genre-box.contact-box .list-group.clear-list .list-group-item {
     border-color: #fffff0 !important;
@@ -912,7 +915,7 @@ span.select2-selection__choice__remove {
     text-align: right;
 }
 .title-plain {
-    width: 270px;
+    max-width: 270px;
     margin-left: -30px;
     margin-bottom: 20px;
     padding: 10px 20px 10px 10px;
@@ -935,7 +938,7 @@ span.select2-selection__choice__remove {
 .title-plain::before {
     content: '';
     height: 10px;
-    width: 270px;
+    width: 100%;
     position: absolute;
     left: 0;
     top: 44px;
