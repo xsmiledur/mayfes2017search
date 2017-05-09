@@ -1,10 +1,11 @@
 <div class="row">
     <div class="col-md-12">
+        <p>建物や企画の名称で検索する、あるいはマップ上の建物や門や駅等をクリックすると、現在地が選択されます。</p>
         <input type="hidden" name="start-pos" value="">
         <?php foreach ($this->freewds as $item) : if ($item['bd_flg']) : ?>
             <input type="hidden" name="name-map<?php echo $item['bd_pid']; ?>" value="<?php echo $item['name']; ?>">
         <?php endif; endforeach; ?>
-        <select data-placeholder="近くに見える建物の名称たった今見てきた企画名を記入" class="select2_demo_2 form-control" multiple="multiple">
+        <select data-placeholder="近くに見える建物の名称や企画名で検索できます" class="select2_demo_2 form-control" multiple="multiple">
             <?php foreach ($this->freewds as $item) : ?>
                 <?php if ($item['bd_flg']) : ?>
                     <option value="map<?php echo $item['bd_pid']; ?>"><?php echo $item['name']; ?></option>

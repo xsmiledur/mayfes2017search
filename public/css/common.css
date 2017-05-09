@@ -836,7 +836,7 @@ fieldset .tabs-container .i-checks {
 }
 .pos-cover {
     width: 100% !important;
-    height: 100% !important;
+    height: 534px !important;
     overflow: scroll;
 }
 .mapper {
@@ -1189,9 +1189,20 @@ span.select2-selection__choice__remove {
         height: 395px;
     }
 }
+@media screen and ( max-width:660px ) {
+    .pos-cover {
+        height: 514px !important;
+    }
+}
+
 @media screen and ( max-width:500px) {
     .footer {
         font-size: 11px;
         height: 39px;
+    }
+}
+@media screen and ( max-width:346px ) {
+    .pos-cover {
+        height: 494px !important;
     }
 }

@@ -252,6 +252,19 @@ class SearchController extends Zend_Controller_Action
         }
 
         $N = count($search);
+
+        $_result = array();
+        foreach ($search as $i => $item) { //$itemはpt_pid
+            $_result[$i] = $this->_main->getProjectInfo($item);
+            //！　もし企画startが09:00のものがあれば、現在時刻を変更
+            //必要か？　実験
+            if (!$clock1_flg && $_result[$i]['pt_start_'] == 540) {
+                $start_pos = $_result[$i]['pp_bd_pid'];
+                $clock1 = "08:40"; //これでいいかなぁ〜
+                $this->_session->errMsg = "最適化のため、開始時刻を変更しました。";
+            }
+        }
+
         if (!$clock1) {
             $clock1 = date("h:i");
             if (substr($clock1,0,2) == "06") { //9時台の時のみバグ起こりますので
@@ -262,18 +275,6 @@ class SearchController extends Zend_Controller_Action
         $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
         $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
 
-        $pos_flg = false;
-        $_result = array();
-        foreach ($search as $i => $item) { //$itemはpt_pid
-            $_result[$i] = $this->_main->getProjectInfo($item);
-            //！　もし企画startが09:00のものがあれば、現在地をそこに変更
-            //必要か？　実験
-            if (!$pos_flg && $_result[$i]['pt_start_'] == 540) {
-                $start_pos = $_result[$i]['pp_bd_pid'];
-                $pos_flg = true;
-                $this->_session->errMsg = "最適化のため、現在地を変更しました。";
-            }
-        }
 
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
