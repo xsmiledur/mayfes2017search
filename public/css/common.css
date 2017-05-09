@@ -1112,14 +1112,37 @@ span.select2-selection__choice__remove {
     .vote-comment {
         width: 140px;
     }
-    #page-wrapper.sk-loading > p.sk-spinner-text {
+    #sample01 {
+        position: relative;
+    }
+    #page-wrapper.sk-loading > p.sk-spinner-text,
+    #sample01.sk-loading > p.sk-spinner-text {
         display: block;
         position: fixed;
-        top:40%;
-        left:7%;
         text-align: center;
         z-index: 2000;
     }
+    #page-wrapper.sk-loading > p.sk-spinner-text {
+        width: 93%;
+        left: 7%;
+        top:40%;
+    }
+    #sample01.sk-loading > p.sk-spinner-text {
+        width: 96%;
+        left:4%;
+        top:41%;
+    }
+    #sample01.sk-loading > .sk-spinner-double-bounce {
+        display: block;
+        position: fixed;
+        top: 35%;
+        left:0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        z-index: 2000;
+    }
+
     #page-wrapper.sk-loading > .sk-spinner-btn {
         display: block;
         position: fixed;

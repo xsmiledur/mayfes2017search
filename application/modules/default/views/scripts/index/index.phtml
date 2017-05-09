@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="ほんっとにはじめてのHTML5">
 
     <title>MaySearch</title>
 
@@ -12,12 +13,10 @@
     <link href="/plugin/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/plugin/css/animate.css" rel="stylesheet">
 
-    <!--chosen select-->
-    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-
     <!--select2-->
     <link href="/plugin/css/plugins/select2/select2.min.css" rel="stylesheet">
 
+    <!--style.css-->
     <link href="/plugin/css/style.css" rel="stylesheet">
 
     <!--checkbox-->
@@ -28,9 +27,6 @@
 
     <!--checkbox-->
     <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-
-    <!-- chosen -->
-    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
     <!-- iCheck -->
     <link href="/plugin/css/plugins/iCheck/custom.css" rel="stylesheet">
@@ -295,8 +291,11 @@
                                             </ul>
 
                                             <div class="tab-content" id="sample01">
-
-
+                                                <div class="sk-spinner sk-spinner-double-bounce">
+                                                    <div class="sk-double-bounce1"></div>
+                                                    <div class="sk-double-bounce2"></div>
+                                                </div>
+                                                <p class="sk-spinner-text text-muted">Wait a minute...</p>
 
 
                                             </div>
@@ -399,10 +398,6 @@
 <script src="/plugin/js/inspinia.js"></script>
 <script src="/plugin/js/plugins/pace/pace.min.js"></script>
 
-
-<!-- Chosen -->
-<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
-
 <!-- Steps -->
 <script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
 
@@ -424,9 +419,6 @@
 <!--select2 その２-->
 <script src="/js/select2/select2.full.min.js"></script>
 
-<!-- Chosen -->
-<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
-
 <!-- Sweet alert -->
 <script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
 
@@ -438,12 +430,9 @@
 <!--<script src="/js/mapper/mapper.js"></script>-->
 
 <!--mapper-->
-<script src="/js/mapper/cvi_map_lib.js"></script>
+<!--<script src="/js/mapper/cvi_map_lib.js"></script>-->
 
 <script>
-    $('.chosen-select').chosen({width: "15%"});
-
-
     $(document).ready(function(){
 
 
@@ -476,12 +465,14 @@
                             date : $('input[name="date"]').val(),
                             start : $('input[name="clock1"]').val(),
                         },
+                        timeout: 10000,
                         success: function(arr) {
                             //console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh02',
                                 dataType: 'html',
+                                timeout: 10000,
                                 success: function(data) {
                                     $('#sample02').empty();
                                     $('#sample02').append(data);
@@ -518,6 +509,8 @@
                         return false;
                     }
 
+                    $('#sample01').addClass('sk-loading');
+
                     $.ajax({
                         url: "/search/time-post",
                         type: "POST",
@@ -527,20 +520,26 @@
                             clock1 : $('input[name="clock1"]').val(),
                             clock2 : $('input[name="clock2"]').val(),
                         },
+                        timeout: 10000,
                         success: function(arr) {
                             //console.log(arr);
                             $.ajax({
                                 type: 'GET',
                                 url: '/search/refresh01',
                                 dataType: 'html',
+                                timeout: 10000,
                                 success: function(data) {
+                                    console.log(data);
                                     $('#sample01').empty();
                                     $('#sample01').append(data);
-                                    //window.scrollTo(0,document.body.scrollHeight);
 
                                 },
                                 error:function() {
                                     alert('問題がありました。');
+                                    $('#sample01').removeClass('sk-loading');
+                                },
+                                complete:function() {
+                                    $('#sample01').removeClass('sk-loading');
                                 }
                             });
                         },
@@ -548,6 +547,7 @@
                             alert('問題がありました。');
                         }
                     });
+
                 }
 
 
@@ -618,6 +618,7 @@
                             clock1 : $('input[name="clock1"]').val(),
                             clock2 : $('input[name="clock2"]').val()
                         },
+                        timeout: 10000,
                         success: function(arr) {
                             //console.log(arr);
                             if (arr == 0) {
@@ -663,10 +664,8 @@
             }
         });
 
-        //chosen select
-        $('.chosen-select').chosen({width: "100%"});
 
-
+        /*日付変更関連*/
         //iCheck
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-orange',
@@ -679,6 +678,8 @@
                 $("#jQueryTime").text('２日目（２１日）');
             }
         });
+
+        /*clock1,clock2変更関連*/
 
         var agent = navigator.userAgent;
 
@@ -714,7 +715,6 @@
                 $('#input-clock2').prop("disabled", false);
             }
         });
-
 
         $('#input-clock1').change(function() {
             if ($('#input-clock1').val()) {
@@ -778,80 +778,7 @@
 
         });
 
-        /*
-         //select2
-         $(".select2_demo_1").select2();
-         $(".select2_demo_2").select2();
-         $(".select2_demo_3").select2({
-         placeholder: "Select a state",
-         allowClear: true
-         });
-         */
     });
-
-    $(function() {
-        $("a.pid-btn").click(function () {
-            var id = $(this).parent().parent().find('input[name="pid-val"]').val();
-            var name1 = '#form_pid' + id;
-            $(name1).toggle();
-            $(this).toggleClass("highlight", 1000);
-            var name2 = '[name="input' + id + '"]';
-            var now_val = $(name2).val();
-            if (now_val) {
-                $(name2).val("");
-            } else {
-                $(name2).val(id);
-            }
-            var name3  = "a#pickup" + id;
-            $(name3).toggleClass("highlight", 1000);
-        });
-    });
-
-    $(document).ready(function () {
-
-        $('#ap').click(function (e) {
-            e.stopPropagation();
-            swal({
-                title: "工学部応用物理系ってなあに？",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "詳細が知りたい！",
-                closeOnConfirm: false,
-                allowOutsideClick: true,
-            }, function () {
-                window.location.href = "";
-            });
-        });
-    });
-
-    //ページ内ゆっくり遷移
-
-    $(function(){
-        $('a[href="#id"]').click(function(){
-            var speed = 500;
-            var href= $(this).attr("href");
-            var target = $('#id');
-            var position = target.offset().top;
-            $("html, body").animate({scrollTop:position}, speed, "swing");
-            return false;
-        });
-    });
-
-    //めいちゃんhover
-
-    $(function(){
-        $('div#may-chan').hover(
-            function() {
-                $('div#comment').show("normal");
-            }, function() {
-                $('div#comment').hide("normal");
-            }
-        );
-    });
-
-
 </script>
 
 </body>
