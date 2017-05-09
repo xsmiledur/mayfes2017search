@@ -168,8 +168,13 @@ class SearchController extends Zend_Controller_Action
 
     }
 
+    /**
+     * DBFix用アクション
+     * 決してコメントアウトを外さないこと
+     */
     public function testAction()
     {
+        /*
         //$data = $this->_main->getProjectData();
         //$this->_main->modifyProjectData();
         //$this->_main->modifyDataPlace();
@@ -178,6 +183,11 @@ class SearchController extends Zend_Controller_Action
         //$this->_main->MakeNoActiveFlg();
         //$this->_main->timeFix2();
         //$this->_main->bddataFix();
+        //$this->_main->bdDataUpdate();
+        //$this->_main->insertFix();
+        //$this->_main->insertStayTime();
+        //$this->_main->fixTimeBug();
+        */
     }
 
     /**
@@ -252,6 +262,19 @@ class SearchController extends Zend_Controller_Action
         $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
         $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
 
+        $pos_flg = false;
+        $_result = array();
+        foreach ($search as $i => $item) { //$itemはpt_pid
+            $_result[$i] = $this->_main->getProjectInfo($item);
+            //！　もし企画startが09:00のものがあれば、現在地をそこに変更
+            //必要か？　実験
+            if (!$pos_flg && $_result[$i]['pt_start_'] == 540) {
+                $start_pos = $_result[$i]['pp_bd_pid'];
+                $pos_flg = true;
+                $this->_session->errMsg = "最適化のため、現在地を変更しました。";
+            }
+        }
+
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
@@ -280,31 +303,33 @@ class SearchController extends Zend_Controller_Action
         $this->_session->start_pos = $start_pos;
 
         $result = null;
+        $pos_bd_pid = false;
         $pp_search = array();
         $research_t = array(); //再検索後の時間
         $pp_search[0]['bd_pid'] = $start_pos;
         foreach ($search as $i => $item) { //$itemは$pt_pid
-            $_result = $this->_main->getProjectInfo($item);
-
             //企画情報
 
             $pt_pid = $item; //企画summaryID
 
             if ($research) {
-                $time = $request->getParam('re-time'.$_result['pt_pid']);
-            } elseif (strlen($_result['pt_time']) > 0) {
-                $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
-            } else {
+                $time = $request->getParam('re-time'.$_result[$i]['pt_pid']);
+            } elseif (strlen($_result[$i]['pt_time']) > 0) {
+                $time = $_result[$i]['pt_time']; //企画を回るのにかかるデフォの時間
+            } else { //pt_timeは必ずあるはずなので、この条件文に入ることはないはずだが、一応
                 $time = 30;
             }
             $research_t[$item] = $time;
 
-            $start = ($_result['pt_start_']) ? $_result['pt_start_'] : -1;
+            $start = ($_result[$i]['pt_start_']) ? $_result[$i]['pt_start_'] : -1;
             $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
 
+            //企画startが09:00(start_ == 540)のものがあれば
+            if ($_result[$i]['pt_start_'] == 540) $pos_bd_pid = $_result[$i]['pp_bd_pid'];
+
             //for企画の建物間のかかる時間
-            //$pp_search[$i]['ps_pid'] = $_result['ps_pid']; //企画のsummaryID 保険のため？
-            $pp_search[$i + 1]['bd_pid'] = $_result['pp_bd_pid']; //建物のid
+            //$pp_search[$i]['ps_pid'] = $_result[$i]['ps_pid']; //企画のsummaryID 保険のため？
+            $pp_search[$i + 1]['bd_pid'] = $_result[$i]['pp_bd_pid']; //建物のid
         }
 
         //企画の建物間のかかる時間
