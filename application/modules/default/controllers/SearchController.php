@@ -258,8 +258,7 @@ class SearchController extends Zend_Controller_Action
             $_result[$i] = $this->_main->getProjectInfo($item);
             //！　もし企画startが09:00のものがあれば、現在時刻を変更
             //必要か？　実験
-            if (!$clock1_flg && $_result[$i]['pt_start_'] == 540) {
-                $start_pos = $_result[$i]['pp_bd_pid'];
+            if ($_result[$i]['pt_start_'] == 540) {
                 $clock1 = "08:40"; //これでいいかなぁ〜
                 $this->_session->errMsg = "最適化のため、開始時刻を変更しました。";
             }
