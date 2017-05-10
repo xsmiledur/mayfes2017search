@@ -146,10 +146,6 @@ class MainModel
                 ->join('90_project_place', 'pt_pp_pid = pp_pid')
                 ->where('pd_active_flg = ?', 1)
                 ->order('pd_pid');
-            /*$select->from('project_data_89')
-                ->join('project_place_89', 'pd_pid = pp_pd_pid')
-                ->joinLeft('project_time_89', 'pp_pid = pt_pp_pid')
-                ->where('pd_active_flg = ?', 1);*/
             $stmt = $select->query();
             $data = $stmt->fetchAll();
 
@@ -171,41 +167,41 @@ class MainModel
 
     public function getProjectInfoRefresh($date, $start, $end)
     {
-        $data = array();
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
 
-        $select = $this->_read->select();
-        $select->from('90_project_time', array('pt_pid', 'pt_start','pt_start_','pt_end','pt_end_','pt_open','pt_open_', 'pt_note', 'pt_time'))
-            ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_label', 'pd_body', 'pd_web_simple', 'pd_web_long', 'pd_web_body', 'pd_genre1', 'pd_genre2', 'pd_rec_flg', 'pd_pickup_flg', 'pd_academic_flg'))
-            ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_name1', 'pp_name2', 'pp_full', 'pp_day'))
-            ->where('pd_active_flg = ?', 1)
-            ->where('pp_day = ?', $date);
-        $select->order('pd_pid');
-        $stmt = $select->query();
-        $_data = $stmt->fetchAll();
+            $data = array();
 
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+            $sql .= "AND pp_day = '{$date}' ";
+            $sql .= "AND (pt_full = 1 ";
+            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+            $data['data'] = $this->_read->fetchAll($sql);
 
-        $i = 0;
-        foreach ($_data as $item) {
-            if ($item['pp_full']) {
-                $data['data'][$i] = $item;
-                $i++;
-            } else { //$item['pt_start']は必ずある
-                if ($item['pt_start_'] >= $start) { //開始時間がある場合
-                    if ($item['pt_start_'] + $item['pt_time'] <= $end) {
-                        $data['data'][$i] = $item;
-                        $i++;
-                    }
-                } elseif (!$item['pt_start']) { //開始時間がない場合
-                    //もしその企画に行ったとして、標準滞在時間分まで見ていられるか
-                    if ($end >= $start + $item['pt_time']) {
-                        $data['data'][$i] = $item;
-                        $i++;
-                    }
-                }
-            }
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
         }
 
-        $data['area'] = array(
+
+        /**エリア別**/
+
+
+        $area = array(
             0 => array(
                 'name' => 'no_dept',
                 'label' => '農学部エリア',
@@ -224,18 +220,55 @@ class MainModel
             ),
         );
 
-        foreach ($data['area'] as $key => $item) {
+        foreach ($area as $key => $item) {
             $select = $this->_read->select();
             $select->from('building_data', array('bd_pid', 'bd_p_name1', 'bd_p_label1', 'bd_p_name2', 'bd_p_label2' ));
             $select->where('bd_active_flg = ?', 1)
                 ->where('bd_p_name1 = ?', $item['name'])
                 ->order('bd_order');
             $stmt = $select->query();
-            $data['area'][$key]['info'] = $stmt->fetchAll();
+            $data['area'][$item['name']] = $stmt->fetchAll();
+
+            foreach ($data['area'][$item['name']] as $key2 => $item2) {
+
+                $this->_read->beginTransaction();
+                $this->_read->query('begin');
+                try {
+
+                    $sql = "";
+                    $sql .= "SELECT * FROM 90_project_time ";
+                    $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+                    $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+                    $sql .= "INNER JOIN building_data ON pp_bd_pid = bd_pid ";
+                    $sql .= "WHERE pd_active_flg = '1' ";
+                    $sql .= "AND pp_day = '{$date}' ";
+                    $sql .= "AND pp_name1 = '{$item2['bd_p_name1']}' ";
+                    $sql .= "AND pp_name2 = '{$item2['bd_p_name2']}' ";
+                    $sql .= "AND (pt_full = 1 ";
+                    $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+                    $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+                    $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+                    $data['area'][$item['name']][$key2]['data'] = $this->_read->fetchAll($sql);
+
+                    // 成功した場合はコミットする
+                    $this->_read->commit();
+                    $this->_read->query('commit');
+
+                } catch (Exception $e) {
+                    // 失敗した場合はロールバックしてエラーメッセージを返す
+                    $this->_read->rollBack();
+                    $this->_read->query('rollback');
+                    var_dump($e->getMessage());exit();
+                    return false;
+                }
+
+            }
         }
 
 
-        $data['genre'] = array(
+        /**ジャンル別**/
+
+        $genre = array(
             0 => array(
                 'name' => 'exhibition',
                 'label' => '展示・実演',
@@ -262,14 +295,170 @@ class MainModel
             )
         );
 
-        foreach ($data['genre'] as $key => $item) {
+        foreach ($genre as $key => $item) {
             $select = $this->_read->select();
-            $select->from('genre_data', array('gd_pid', 'gd_detail', 'gd_detail_label'));
+            $select->from('genre_data', array('gd_pid', 'gd_index', 'gd_index_label', 'gd_detail', 'gd_detail_label'));
             $select->where('gd_active_flg = ?', 1)
                 ->where('gd_index = ?', $item['name']);
             $stmt = $select->query();
-            $data['genre'][$key]['info'] = $stmt->fetchAll();
+            $data['genre'][$item['name']] = $stmt->fetchAll();
+
+            foreach ($data['genre'][$item['name']] as $key2 => $item2) {
+
+                $this->_read->beginTransaction();
+                $this->_read->query('begin');
+                try {
+
+                    $sql = "";
+                    $sql .= "SELECT * FROM 90_project_time ";
+                    $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+                    $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+                    $sql .= "WHERE pd_active_flg = '1' ";
+                    $sql .= "AND pp_day = '{$date}' ";
+                    $sql .= "AND pd_genre1 = '{$item2['gd_index']}' ";
+                    $sql .= "AND pd_genre2 = '{$item2['gd_detail']}' ";
+                    $sql .= "AND (pt_full = 1 ";
+                    $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+                    $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+                    $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+                    /*
+                    echo "<pre>";
+                    var_dump($sql);
+                    var_dump($this->_read->fetchAll($sql));
+                    echo "</pre>";
+                    */
+                    $data['genre'][$item['name']][$key2]['data'] = $this->_read->fetchAll($sql);
+
+                    // 成功した場合はコミットする
+                    $this->_read->commit();
+                    $this->_read->query('commit');
+
+                } catch (Exception $e) {
+                    // 失敗した場合はロールバックしてエラーメッセージを返す
+                    $this->_read->rollBack();
+                    $this->_read->query('rollback');
+                    //var_dump($e->getMessage());exit();
+                    return false;
+                }
+
+
+            }
+
         }
+
+
+        /**おすすめ企画**/
+
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+            $sql .= "AND pd_rec_flg = '1' ";
+            $sql .= "AND pp_day = '{$date}' ";
+            $sql .= "AND (pt_full = 1 ";
+            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+            /*
+            echo "<pre>";
+            var_dump($sql);
+            var_dump($this->_read->fetchAll($sql));
+            echo "</pre>";
+            */
+            $data['rec'] = $this->_read->fetchAll($sql);
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            //var_dump($e->getMessage());exit();
+            return false;
+        }
+
+        /**ピックアップ企画**/
+
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+            $sql .= "AND pd_pickup_flg = '1' ";
+            $sql .= "AND pp_day = '{$date}' ";
+            $sql .= "AND (pt_full = 1 ";
+            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+            /*
+            echo "<pre>";
+            var_dump($sql);
+            var_dump($this->_read->fetchAll($sql));
+            echo "</pre>";
+            */
+            $data['pickup'] = $this->_read->fetchAll($sql);
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            //var_dump($e->getMessage());exit();
+            return false;
+        }
+
+        /**学術企画**/
+
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+            $sql .= "AND pd_academic_flg = '1' ";
+            $sql .= "AND pp_day = '{$date}' ";
+            $sql .= "AND (pt_full = 1 ";
+            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
+            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
+            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+            /*
+            echo "<pre>";
+            var_dump($sql);
+            var_dump($this->_read->fetchAll($sql));
+            echo "</pre>";
+            */
+            $data['academic'] = $this->_read->fetchAll($sql);
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
+        }
+
+
 
         return $data;
         unset ($data);
@@ -622,105 +811,6 @@ class MainModel
     }
 
 
-    /**
-     * step2用　フリーワード
-     * @param $date
-     * @param $start
-     * @return bool
-     */
-    public function getFreeWords($date, $start)
-    {
-        // トランザクション開始
-        $this->_read->beginTransaction();
-        $this->_read->query('begin');
-        try {
-
-            //建物名から検索
-            $select = $this->_read->select();
-            $select->from('building_data', array('bd_p_label2', 'bd_pid'));
-            $select->where('bd_pos_flg = ?', 1);
-            $stmt = $select->query();
-            $_data = $stmt->fetchAll();
-
-            foreach ($_data as $key => $item) {
-                $data[$key]['bd_pid'] = $item['bd_pid'];
-                $data[$key]['name'] = $item['bd_p_label2'];
-                $data[$key]['bd_flg'] = 1;
-            }
-
-            //その他の建物名から検索
-            $select = $this->_read->select();
-            $select->from('building_other', array('bo_label', 'bo_bd_pid'))
-                ->join('building_data', 'bo_bd_pid = bd_pid', 'bd_p_label2');
-            $select->where('bo_active_flg = ?', 1);
-            $stmt = $select->query();
-            $_data = $stmt->fetchAll();
-
-            foreach ($_data as $key => $item) {
-                $arr = array();
-                $arr['bd_pid'] = $item['bo_bd_pid'];
-                $arr['name'] = $item['bd_p_label2'];
-                $arr['data'] = $item['bo_label'];
-                array_push($data, $arr);
-            }
-
-
-            //企画名から検索
-            $select = $this->_read->select();
-            $select->from('90_project_time',  array('pt_pid', 'pt_start_', 'pt_end_', 'pt_open_'))
-                ->join('90_project_data', 'pt_pd_pid = pd_pid', array('pd_pid', 'pd_body', 'pd_label'))
-                ->join('90_project_place', 'pt_pp_pid = pp_pid', array('pp_place', 'pp_bd_pid'))
-                ->join('building_data', 'pp_bd_pid = bd_pid', array('bd_pos_flg'))
-                ->where('pd_active_flg = ?', 1)
-                ->where('bd_pos_flg = ?', 1)
-                ->where('pp_day = ?', $date)
-                ->order('pd_pid');
-            $stmt = $select->query();
-            $_data = $stmt->fetchAll();
-
-            foreach ($_data as $item) {
-                if ($item['pp_full']) {
-                    $arr['bd_pid'] = $item['pp_bd_pid'];
-                    $arr['name'] = $item['pd_label'];
-                    $arr['data'] = $item['pd_body'];
-                    array_push($data, $arr);
-                } else {
-                    if ($item['pt_start_']) {
-                        if ($item['pt_end_']) {
-                            if ($start < $item['pt_end_'] + 60 || $start > $item['pt_start_'] - 60 ) {
-                                $arr['bd_pid'] = $item['pp_bd_pid'];
-                                $arr['name'] = $item['pd_label'];
-                                $arr['body'] = $item['pd_body'];
-                                array_push($data, $arr);
-                            }
-                        } else {
-                            if ($start > $item['pt_start'] - 60) {
-                                $arr['bd_pid'] = $item['pp_bd_pid'];
-                                $arr['name'] = $item['pd_label'];
-                                $arr['body'] = $item['pd_body'];
-                                array_push($data, $arr);
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            // 成功した場合はコミットする
-            $this->_read->commit();
-            $this->_read->query('commit');
-            return $data;
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_read->rollBack();
-            $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
-            return false;
-        }
-    }
-
-
-
     /* public function getProjectDataForArea()
      {
          $select = $this->_read->select();
@@ -823,6 +913,71 @@ class MainModel
 
          return $data;
      }*/
+
+
+
+    /**
+     * step2用　フリーワード
+     * @param $date
+     * @return bool
+     */
+    public function getFreeWords($date)
+    {
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            //建物名から検索
+            $select = $this->_read->select();
+            $select->from('building_data', array('bd_p_label2', 'bd_pid'));
+            $select->where('bd_pos_flg = ?', 1);
+            $stmt = $select->query();
+            $data['blding'] = $stmt->fetchAll();
+
+            //その他の建物名から検索
+            $select = $this->_read->select();
+            $select->from('building_other', array('bo_label', 'bo_bd_pid'))
+                ->join('building_data', 'bo_bd_pid = bd_pid', 'bd_p_label2');
+            $select->where('bo_active_flg = ?', 1);
+            $stmt = $select->query();
+            $data['bld-other'] = $stmt->fetchAll();
+
+            /*
+            foreach ($_data as $key => $item) {
+                $arr = array();
+                $arr['bd_pid'] = $item['bo_bd_pid'];
+                $arr['name'] = $item['bd_p_label2'];
+                $arr['data'] = $item['bo_label'];
+                array_push($data, $arr);
+            }
+            */
+
+
+            //企画名から検索
+
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "INNER JOIN building_data ON pp_bd_pid = bd_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+            $sql .= "AND bd_pos_flg = '1' ";
+            $sql .= "AND pp_day = '{$date}';";
+            $data['data'] = $this->_read->fetchAll($sql);
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+            return $data;
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
+        }
+    }
 
     /*
     /**

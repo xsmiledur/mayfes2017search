@@ -227,16 +227,6 @@ fieldset .ibox .ibox-content {
     border-bottom-left-radius: 6px !important;
     border-bottom-right-radius: 6px !important;
 }
-.search-in {
-    height: 430px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.search-in2 {
-    height: 470px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
 .modal-head {
     padding: 30px;
     border-bottom: 1px solid #e5e5e5;
@@ -616,29 +606,6 @@ fieldset .tabs-container .i-checks {
     margin-right: 20px;
     text-align: right;
     float: right;
-}
-.i-checks,
-.i-checks {
-    margin-left: 27px;
-}
-.i-checks label {
-    display: inline !important;
-    text-indent: 27px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:first-child,
-#tab-3 .i-checks > span:first-child {
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(2),
-#tab-3 .i-checks > span:nth-child(2) {
-    margin-right: 29px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(3),
-#tab-3 .i-checks > span:nth-child(3) {
-    margin-right: 31px;
-    margin-left: -27px;
 }
 .widget {
     position: relative;
