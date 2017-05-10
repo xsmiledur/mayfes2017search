@@ -334,7 +334,8 @@
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     var start_pos = $('input[name="start-pos"]').val();
-                    NoStep2(start_pos);
+                    var res = NoStep2(start_pos);
+                    if (!res) return false;
                     TimePost2(start_pos, $('#input-clock1').val(), $('#input-clock2').val(), $('input[name="no-time"]:checked').val());
                 }
                 var form = $(this);
@@ -539,12 +540,6 @@
     }
 
     function TimePost2(start_pos, clock1, clock2, no_time) {
-        if (start_pos == "") {
-            $('#select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
-            return false;
-        } else {
-            $('#select-start-pos-error').removeClass('text-danger').addClass('text-muted');
-        }
         $('#sample01').addClass('sk-loading');
 
         $.ajax({
@@ -634,7 +629,7 @@
     }
     function NoStep2(start_pos) {
         if (!start_pos) {
-            $('#select-start-pos-error').show();
+            $('#select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
             return false;
         } else {
             //$('#select-start-pos-error').hide();
