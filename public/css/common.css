@@ -1214,3 +1214,8 @@ span.select2-selection__choice__remove {
     left: 36%;
     padding-top: 1%;
 }
+a.line{
+    position: absolute;
+    top: 40%;
+    left: 36%;
+}
