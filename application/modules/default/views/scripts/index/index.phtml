@@ -4,50 +4,706 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content='計数工学科アルゴリズム班によって制作されたアプリケーション、"MaySearch"が、あなたの五月祭ライフをより楽しく快適にします'>
 
     <title>MaySearch</title>
 
     <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/plugin/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/plugin/css/animate.css" rel="stylesheet">
+    <link href="/plugin/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
 
-    <!--chosen select-->
-    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-
-    <!--select2-->
-    <link href="/plugin/css/plugins/select2/select2.min.css" rel="stylesheet">
-
+    <!--style.css-->
     <link href="/plugin/css/style.css" rel="stylesheet">
 
     <!--checkbox-->
     <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-
-    <!--Clockpicker-->
-    <link href="/plugin/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-
-    <!--checkbox-->
-    <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-
-    <!-- chosen -->
-    <link href="/plugin/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-
-    <!-- iCheck -->
-    <link href="/plugin/css/plugins/iCheck/custom.css" rel="stylesheet">
-
     <!-- steps-->
     <link href="/plugin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
-
-    <!-- Sweet Alert -->
-    <link href="/plugin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <!-- common -->
     <link href="/css/common.css" rel="stylesheet">
 
+    <!--favicon-->
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
+
+    <style>
+
+        .rec_pku_acd_icon {
+            width: 180px;
+            float: right;
+            text-align: right;
+        }
+        .width-over {
+            width: 100%;
+            padding: 3px 0 3px 34px;
+            text-indent: -15px;
+        }
+        .width-over i {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .width-over i.pe-7s-map-marker {
+            margin-right: 15px;
+        }
+        .width-over i.pe-7s-date {
+            margin-right: 16px;
+        }
+        .width-over i.pe-7s-clock {
+            margin-right: 16px;
+        }
+        .modal-head {
+            padding: 30px;
+            border-bottom: 1px solid #e5e5e5;
+            position: relative;
+        }
+        .modal-contents {
+            width: 100%;
+            padding: 30px 30px 15px;
+        }
+        .modal-exp {
+            padding: 0 15px;
+        }
+        .exp {
+            width: 100%;
+            padding: 0 15px;
+        }
+        .modal-contents .modal-p {
+            background-color: #a9a9a9;
+            width: 250px;
+            margin-left: -30px;
+            padding: 10px;
+            color: #ffffff;
+            font-size: 17px;
+            text-align: right;
+            position: relative;
+        }
+        .modal-contents .modal-p::before {
+            content: '';
+            height: 10px;
+            width: 250px;
+            position: absolute;
+            left: 0;
+            top: 44px;
+            margin-left: 10px;
+            background-color: #dcdcdc;
+        }
+        .modal-contents .modal-p::after {
+            content: '';
+            height: 44px;
+            width: 10px;
+            position: absolute;
+            padding: 5px;
+            margin-left: 10px;
+            background-color: #dcdcdc;
+        }
+        .modal-web {
+            margin: 25px;
+        }
+        .modal-footer {
+            background-color: #e5e5e5;
+        }
+    </style>
 
 </head>
-
 <body>
+<p style="display:none;">
+    (English below.)
+
+    計数工学科アルゴリズム班によって制作されたアプリケーション、"MaySearch"が
+    あなたの五月祭ライフをより楽しく快適にします。
+</p>
+
+<div id="wrapper">
+
+    <div id="page-wrapper" class="gray-bg">
+        <div id="page-next-wrapper">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
+                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
+
+                    </div>
+                    <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
+                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
+                    </div>
+                    <div class="col-xs-12 sub-title b-r-md text-primary text-center">
+                        MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
+                        五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
+                        MaySearchを活用して、充実した五月祭を過ごしましょう！
+                    </div>
+                    <div id="row1" class="row">
+                        <div class="col-sm-8 col-sm-offset-4 col-xs-6">
+                            <a href="/search/algorithm">
+                                <div class="widget lazur-bg widget1">
+                                    <i class="pe-7s-stopwatch fa-first"></i>
+                                    <i class="pe-7s-stopwatch fa-second"></i>
+                                    <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-8 col-xs-6">
+                            <a href="https://ap-phys.net/">
+                                <div class="widget navy-bg widget2">
+                                    <i class="pe-7s-plugin fa-first"></i>
+                                    <i class="pe-7s-plugin fa-second"></i>
+                                    <p>工学部応用物理系<br>工學博覧会について</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="ibox" id="all-cover">
+
+                        <div class="ibox-content">
+
+                            <form id="form" action="#" class="wizard-big">
+                                <h1>滞在日時</h1>
+                                <fieldset>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><span class="pe-7s-clock"> 滞在日時</span></h2>
+                                        <p class="text-muted" style="padding-left: 20px;">      滞在日と時間を入力してください。</p>
+                                    </div>
+                                    <div class="ibox">
+                                        <div class="ibox-content b-r-md">
+                                            <div class="col-sm-6">
+                                                <div class="contact-box center-version no-borders" style="color: #676a6c;">
+
+                                                    <a style="cursor: default;">
+
+                                                        <i class="pe-7s-date"></i>
+
+
+                                                        <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
+
+                                                        <address class="m-t-md">
+                                                            <div class="radio radio-inline radio-primary">
+                                                                <input type="radio" id="1day" checked="checked" value="20" name="date" style="display: initial;"> <label for="1day"> １日目（２０日） </label>
+                                                            </div>
+                                                            <div class="radio radio-inline radio-primary">
+                                                                <input type="radio" id="2day" value="21" name="date" style="display: initial;"> <label for="2day"> ２日目（２１日） </label>
+                                                            </div>
+                                                        </address>
+
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="contact-box center-version no-borders" style="color: #676a6c;">
+
+                                                    <a style="cursor: default;">
+
+                                                        <i class="pe-7s-clock"></i>
+
+
+                                                        <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
+                                                        <div id="clock-check">
+                                                            <div class="input-group clockpicker" id="clock1">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" placeholder="Now">
+                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="" placeholder="Now">
+                                                                <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="input-group clockpicker" id="clock2">
+                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" >
+                                                                <input class="form-control" type="time" name="clock2" id="time-clock2" value="18:00" >
+                                                                <span class="input-group-addon">
+                                                                <span class="fa fa-clock-o"></span>
+                                                            </span>
+                                                            </div>
+                                                            <div class="checkbox checkbox-primary">
+                                                                <input type="checkbox" id="no-time" value="1" name="no-time">
+                                                                <label for="no-time"> 終了時間を特に指定しない </label>
+                                                            </div>
+                                                            <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
+
+                                                        </div>
+
+                                                    </a>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </fieldset>
+                                <h1>現在地</h1>
+                                <fieldset>
+                                    <!--<div>
+                                        <img src="/img/map.png" class="mapper showcoords noborder iopacity50 icolorff0000" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+                                    </div>
+                                    <map name="shape1">
+                                      <area shape="default" href="#" alt="全体" region="all">
+                                    </map>-->
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="pe-7s-map-marker"> 現在地</i></h2>
+                                        <p id="select-start-pos-error" class="text-muted " style="padding-left: 20px;">現在地を選択してください。</p>
+                                    </div>
+                                    <div class="ibox">
+                                        <div id="sample02" class="ibox-content b-r-md">
+
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+
+                                <h1>企画選択</h1>
+                                <fieldset>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="pe-7s-look"> 企画の選択</i></h2>
+                                        <p class="text-muted" style="padding-left: 20px;">行きたい企画を選択してください。</p>
+                                    </div>
+                                    <div class="ibox">
+
+
+                                        <div class="tabs-container">
+                                            <ul class="nav nav-tabs">
+                                                <!--<span class="pull-right small text-muted">1406 Elements</span>-->
+                                                <li class="active"><a data-toggle="tab" href="#tab-1"><i class="pe-7s-users" style="font-weight: bold;"></i> <span>キーワード</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-2"><i class="pe-7s-joy" style="font-weight: bold;"></i> <span>ジャンル</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-3"><i class="pe-7s-map-marker" style="font-weight: bold;"></i> <span>エリア</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-4"><i class="pe-7s-flag" style="font-weight: bold;"></i> <span>おすすめ</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-5"><i class="pe-7s-light" style="font-weight: bold;"></i> <span>ピックアップ</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-6"><i class="pe-7s-study" style="font-weight: bold;"></i> <span>学術企画</span></a></li>
+                                                <!--<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i> これから開演予定の企画検索</a></li>-->
+                                            </ul>
+
+                                            <div class="tab-content" id="sample01">
+                                                <div class="sk-spinner sk-spinner-double-bounce">
+                                                    <div class="sk-double-bounce1"></div>
+                                                    <div class="sk-double-bounce2"></div>
+                                                </div>
+                                                <p class="sk-spinner-text text-muted">Wait a minute...</p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <h1>確認</h1>
+                                <fieldset>
+                                    <div class="p-sm b-r-md background-muted">
+                                        <h2><i class="pe-7s-check"> 確認</i></h2>
+                                        <p class="text-muted" style="padding-left: 20px;">      検索前のチェックを行ってください。</p>
+                                    </div>
+                                    <div class="ibox">
+                                        <div class="ibox-content b-r-md">
+                                            <div class="row" style="padding: 15px;">
+                                                <div class="col-sm-4">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                        <a href="#" class="check-link"><i class="pe-7s-date"></i> </a>
+                                                        <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                        <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
+                                                        <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
+                                                        <label id="clockText2" style="font-weight:normal;">18:00</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                        <a href="#" class="check-link"><i class="pe-7s-map-marker"></i> </a>
+                                                        <label id="here" style="font-weight:normal;"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" style="height: 100%; overflow: scroll;">
+                                                    <ul id="search-all" class="list-group clear-list m-t">
+                                                        <?php foreach($this->data_all as $key => $item) : ?>
+                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
+                                                                <span class="pull-right body-text no-margins" style="width: 30%;">
+                                                                    <?php echo $item['pd_body']; ?>
+                                                                </span>
+                                                                <span class="pull-right m-r-lg place-text">
+                                                                    <?php echo $item['pp_place']; ?>
+                                                                </span>
+                                                                <span class="pull-right stay-text">
+                                                                    <?php echo $item['pt_time']; ?> 分
+                                                                </span>
+                                                                <span class="pull-right m-r-lg time-text" style="width:14%;">
+                                                                    <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
+                                                                </span>
+                                                                <label> <?php echo $item['pd_label']; ?> </label>
+                                                            </li>
+
+
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <div class="pull-right">
+                東京大学工学部応用物理系（物理工学科・計数工学科）
+            </div>
+            <div>
+                <strong>Applied Physics, University of Tokyo</strong> for May Festival 2017
+            </div>
+        </div>
+
+        <div class="sk-spinner sk-spinner-double-bounce">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
+        </div>
+        <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
+        <button type="button" id="search-stop" class="sk-spinner-btn btn btn-default btn-outline">検索をやめる</button>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/plugin/js/jquery-3.1.1.min.js"></script>
+<script src="/plugin/js/bootstrap.min.js"></script>
+<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/plugin/js/inspinia.js"></script>
+<script src="/plugin/js/plugins/pace/pace.min.js"></script>
+
+<!-- Steps -->
+<script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#form").steps({
+            bodyTag: "fieldset",
+            labels: {
+                finish: "探索開始",
+                next: "次へ",
+                previous: "戻る"
+            },
+            onStepChanging: function (event, currentIndex, newIndex) {
+                // スムーススクロール
+                $('body,html').animate({scrollTop: $('#all-cover').offset().top}, 400, 'swing');
+
+                //if (currentIndex > newIndex) return true;
+
+                if (newIndex == 1 && currentIndex < newIndex) {
+                    var res = NoStep1($('input[name="clock1"]').val(), $('input[name="clock2"]').val());
+                    if (!res) return false;
+                    TimePost1($('input[name="date"]').val());
+                }
+
+                if (newIndex == 2 && currentIndex < newIndex) {
+                    var start_pos = $('input[name="start-pos"]').val();
+                    res = NoStep2(start_pos);
+                    if (!res) return false;
+                    TimePost2(start_pos, $('#input-clock1').val(), $('#input-clock2').val(), $('input[name="no-time"]:checked').val());
+                }
+                var form = $(this);
+
+                if (currentIndex < newIndex) {
+                    // To remove error styles
+                    $(".body:eq(" + newIndex + ") label.error", form).remove();
+                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                }
+                return true;
+
+            },
+            onFinishing: function (event, currentIndex) {
+                var search = FinishCheck();
+                console.log(search);
+                console.log(search.length);
+
+                if (search.length == 0) {
+                    ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
+
+                } else {
+                    $('#page-wrapper').addClass('sk-loading');
+                    $('#search-stop').click(function () {
+                        $('#page-wrapper').removeClass('sk-loading');
+                        return false;
+                    });
+                    FinishPost(search, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val())
+                    return true;
+                }
+            }
+        });
+    });
+</script>
+
+<!-- Clock picker -->
+<script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
+
+<!-- SetNow -->
+<script src="/js/setnow.js"></script>
+
+<!-- Select2 -->
+<!--<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>-->
+
+<!--select2 その２-->
+<script src="/js/select2/select2.full.min.js"></script>
+
+<!-- Sweet alert -->
+<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
+        RemoveClock(navigator.userAgent);
+        SetNow();
+        /*日付変更関連*/
+        $('input[name="date"]').change(function() {ChangeDate()});
+
+        $('input[name="no-time"]').change(function() {NoTimeCheck()});
+
+        $('input[name="clock1"]').change(function() {TimeChange(1, $(this).val())});
+        $('input[name="clock2"]').change(function() {TimeChange(2, $(this).val())});
+        //select2
+        var style = '<link rel="stylesheet" href="/plugin/css/plugins/select2/select2.min.css">';
+        $('head link:last').after(style);
+        //SweerAlert
+        style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
+        $('head link:last').after(style);
+
+        $('.last-conf').hide();
+
+    });
+
+    function RemoveClock(agent) {
+        if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
+            $('#input-clock1').remove();
+            $('#input-clock2').remove();
+        } else { //PC,タブレット
+            $('#time-clock1').remove();
+            $('#time-clock2').remove();
+            //clockpicker
+            $('#clock1').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+                'default': '現在時刻'
+            });
+            $('#clock2').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+            });
+        }
+    }
+    function SetNow() {
+        var now = new Date();
+        var val;
+        var ph;
+        var h = now.getHours();
+        if(h < 9 || h >= 18){//9時前あるいは18時以降
+            ph = "09:00";
+            val = "09:00";
+        } else {
+            ph = "Now";
+            var m = now.getMinutes();
+            h = String(h); m = String(m);
+            if (h.length == 1) h = "0".h;
+            if (m.length == 1) m = "0".m;
+            val =  h + ":" + m;
+        }
+        $('input[name="clock1"]').attr("value", val).attr("placeholder", ph);
+    }
+    function ChangeDate() {
+        if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
+        else $("#jQueryTime").text('２日目（２１日）');
+    }
+    function NoTimeCheck() {
+        if ($('input[name="no-time"]').is(':checked')) $('#input-clock2').val("18:00").prop("disabled", true);
+        else $('#input-clock2').prop("disabled", false);
+    }
+    function TimeChange(num, time) {
+        if (time) $('#clockText' + num).text(time);
+        else {
+            $('#clock-check').addClass('has-error');
+            $('#clock-check-help').show();
+        }
+        var time_ = $('input[name="clock' + String(3 - parseInt(num)) + '"]').val();
+
+        var arr = new Array();
+        arr[parseInt(num) - 1] = parseInt(time.substr(0, 2) * 60) + parseInt(time.substr(3, 2));
+        arr[2 - parseInt(num)] = parseInt(time_.substr(0, 2) * 60) + parseInt(time_.substr(3, 2));
+        console.log(arr[0]);
+        if (parseInt(arr[0]) >= parseInt(arr[1]) || parseInt(arr[0]) >= 1080 || parseInt(arr[0]) < 540 || parseInt(arr[1]) <= 540 || parseInt(arr[1]) > 1080) {
+            $('#clock-check').addClass('has-error');
+            $('#clock-check-help').show();
+        } else {
+            $('#clock-check').removeClass('has-error');
+            $('#clock-check-help').hide();
+        }
+    }
+
+    function TimePost1(date) {
+        $.ajax({
+            url: "/search/time-post2",
+            type: "POST",
+            data: {
+                date : date
+            },
+            timeout: 10000,
+            success: function(arr) {
+                //console.log(arr);
+                $.ajax({
+                    type: 'GET',
+                    url: '/search/refresh02',
+                    dataType: 'html',
+                    timeout: 10000,
+                    success: function(data) {
+                        $('#sample02').empty();
+                        $('#sample02').append(data);
+                        //window.scrollTo(0,document.body.scrollHeight);
+
+                    },
+                    error:function() {
+                        alert('問題がありました。');
+                    }
+                });
+            },
+            error:function(arr) {
+                alert('問題がありました。');
+            }
+        });
+    }
+
+    function TimePost2(start_pos, clock1, clock2, no_time) {
+        $('#sample01').addClass('sk-loading');
+
+        $.ajax({
+            url: "/search/time-post",
+            type: "POST",
+            data: {
+                radio  : $('input[name="date"]:checked').val(),
+                no_time: no_time,
+                clock1 : $('input[name="clock1"]').val(),
+                clock2 : $('input[name="clock2"]').val(),
+            },
+            timeout: 10000,
+            success: function(arr) {
+                console.log(arr);
+                $.ajax({
+                    type: 'GET',
+                    url: '/search/refresh01',
+                    dataType: 'html',
+                    timeout: 10000,
+                    success: function(data) {
+                        //console.log(data);
+                        $('#sample01').empty();
+                        $('#sample01').append(data);
+
+                    },
+                    error:function() {
+                        alert('問題がありました。');
+                        $('#sample01').removeClass('sk-loading');
+                    },
+                    complete:function() {
+                        $('#sample01').removeClass('sk-loading');
+                    }
+                });
+
+            },
+            error:function(arr) {
+                console.log(arr);
+                alert('問題がありました。');
+            }
+        });
+    }
+
+    function FinishPost(search, start_pos, date, clock1, clock2) {
+        $.ajax({
+            url: "/search/search",
+            type: "POST",
+            data: {
+                search : search,
+                start_pos : start_pos,
+                date   : date,
+                clock1 : clock1,
+                clock2 : clock2
+            },
+            timeout: 10000,
+            success: function(arr) {
+                //console.log(arr);
+                if (arr == 0) {
+                    $('#page-wrapper').removeClass('sk-loading');
+                    swal({
+                        title: "あなたが選択した条件では最適経路が見つかりませんでした",
+                        text: "お手数ですが、条件を変更して再度検索してください",
+                        type: "warning",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    });
+                    return false;
+                }
+                window.location.href = "/result";
+
+            },
+            error:function() {
+                alert('問題がありました。');
+            }
+        });
+    }
+
+    function NoStep1(clock1, clock2) {
+        var c = parseInt(clock1.substr(0,2)*60) + parseInt(clock1.substr(3,2));
+        var d = parseInt(clock2.substr(0,2)*60 )+ parseInt(clock2.substr(3,2));
+        console.log(d);
+        if (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(c) < 540 || parseInt(d) <= 540 || parseInt(d) > 1080) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function NoStep2(start_pos) {
+        if (!start_pos) {
+            $('#select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
+            return false;
+        } else {
+            //$('#select-start-pos-error').hide();
+            return true;
+        }
+    }
+    function FinishCheck() {
+        var j = 0;
+        var search = new Array();
+        $('input[name="select-p"]:checked').map(function() {
+            search[j] = $(this).val();
+            j++;
+        });
+        return search;
+    }
+    function ErrorMsg(title, text) {
+        swal({
+            title: title,
+            text: text,
+            type: "warning",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "OK",
+            closeOnConfirm: false
+        });
+    }
+</script>
 
 
 <?php foreach ($this->data_all as $item) : ?>
@@ -56,13 +712,13 @@
          role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
+                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.jpg');">
                     <div class="transparent">
                         <div class="row">
                             <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <span class="pull-right m-r-md text-danger font-bold">
                                                                                 <?php echo $item['pd_genre1_']; ?>
-                                                                                / <?php echo $item['pd_genre2_']; ?>
+                                / <?php echo $item['pd_genre2_']; ?>
                                                                             </span>
                         </div>
                         <div>
@@ -71,17 +727,19 @@
                             <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
                             <div class="m-t-md" style="margin-left: -4px;">
                                 <div class="rec_pku_acd_icon">
-                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.jpg">' : ''; ?>
+                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.jpg">' : ''; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-calendar"></i><?php echo ($item['pt_open']) ? "開場: ".$item['pt_open']."<br>" : ""; ?><?php echo (!$item['pt_start']) ? '終日' : $item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small>"; ?>
+                                    <i class="pe-7s-date"></i><?php echo ($item['pp_full']) ? '終日<br>' : ''; ?>
+                                    <?php echo ($item['pt_start'] || $item['pt_end']) ? $item['pp_day'].'日 '.$item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small><br>" : ''; ?>
+                                    <?php echo ($item['pt_open']) ? " (開場: ".$item['pt_open'].")" : ""; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                    <i class="pe-7s-map-marker"></i><?php echo $item['pp_place']; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-clock-o"></i><?php echo $item['pt_time']; ?> 分
+                                    <i class="pe-7s-clock"></i><?php echo $item['pt_time']; ?> 分
                                 </div>
                             </div>
                         </div>
@@ -121,728 +779,6 @@
         </div>
     </div>
 <?php endforeach; ?>
-<div id="wrapper">
-
-    <div id="page-wrapper" class="gray-bg">
-        <div class="sk-spinner sk-spinner-double-bounce">
-            <div class="sk-double-bounce1"></div>
-            <div class="sk-double-bounce2"></div>
-        </div>
-        <p class="sk-spinner-text text-muted">経路の最適化を行なっています…</p>
-        <button type="button" class="sk-spinner-btn btn btn-default btn-outline">検索をやめる</button>
-        <div id="page-next-wrapper" class="animated fadeInRight">
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div id="id1" class="m-t-md m-b-md">
-                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
-
-                    </div>
-                    <div id="id2" class="p-h-md p-w-sm">
-                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
-                    </div>
-                    <div class="col-xs-12 sub-title b-r-md text-primary text-center">
-                        MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
-                        五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
-                        MaySearchを活用して、充実した五月祭を過ごしましょう！
-                    </div>
-                    <div id="row1" class="row">
-                        <div class="col-sm-8 col-sm-offset-4 col-xs-6">
-                            <a href="/search/algorithm">
-                                <div class="widget lazur-bg widget1">
-                                    <i class="fa fa-codepen fa-first"></i>
-                                    <i class="fa fa-codepen fa-second"></i>
-                                    <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-8 col-xs-6">
-                            <a href="https://ap-phys.net/">
-                                <div class="widget navy-bg widget2">
-                                    <i class="fa fa-codepen fa-first"></i>
-                                    <i class="fa fa-codepen fa-second"></i>
-                                    <p>工学部応用物理系<br>工學博覧会について</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-8">
-                    <div class="ibox" id="all-cover">
-
-                        <div class="ibox-content">
-
-                            <form id="form" action="#" class="wizard-big">
-                                <h1>Date & Time</h1>
-                                <fieldset>
-                                    <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-clock-o"> 滞在時間</i></h2>
-                                        <p class="text-muted" style="padding-left: 20px;">      滞在日と時間を入力してください。</p>
-                                    </div>
-                                    <div class="ibox">
-                                        <div class="ibox-content b-r-md">
-                                            <div class="col-sm-6">
-                                                <div class="contact-box center-version no-borders" style="color: #676a6c;">
-
-                                                    <a style="cursor: default;">
-
-                                                        <i class="fa fa-calendar fa-5x"></i>
-
-
-                                                        <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
-
-                                                        <address class="m-t-md">
-                                                            <label class="i-checks" for="1day"><input type="radio" id="1day" checked="checked" value="20" name="date"> <i></i> １日目（２０日） </label>
-                                                            <label class="i-checks" for="2day"><input type="radio" id="2day" value="21" name="date"> <i></i> ２日目（２１日） </label>
-                                                        </address>
-
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="contact-box center-version no-borders" style="color: #676a6c;">
-
-                                                    <a style="cursor: default;">
-
-                                                        <i class="fa fa-clock-o fa-5x"></i>
-
-
-                                                        <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在時間</strong></h3>
-                                                        <div id="clock-check">
-                                                            <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
-                                                                <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
-                                                                </span>
-                                                            </div>
-                                                            <div class="input-group clockpicker" id="clock2">
-                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" >
-                                                                <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
-                                                            </span>
-                                                            </div>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input type="checkbox" id="no-time" value="1" name="no-time">
-                                                                <label class="i-checks" for="no-time"> 終了時間を特に指定しない </label>
-                                                            </div>
-                                                            <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none; text-align: left;">滞在終了時刻が開始時刻より早くなっています。</span>
-                                                            <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
-                                                            <span id="clock-check-help3" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の開始時刻より滞在終了時刻が早くなっています。</span>
-
-                                                        </div>
-
-                                                    </a>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </fieldset>
-                                <h1>You are here</h1>
-                                <fieldset>
-                                    <!--<div>
-                                        <img src="/img/map.png" class="mapper showcoords noborder iopacity50 icolorff0000" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
-                                    </div>
-                                    <map name="shape1">
-                                      <area shape="default" href="#" alt="全体" region="all">
-                                    </map>-->
-                                    <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-map-marker"> 現在地</i></h2>
-                                        <p class="text-muted select-start-pos-error" style="padding-left: 20px;">現在地を選択してください。</p>
-                                    </div>
-                                    <div class="ibox">
-                                        <div id="sample02" class="ibox-content b-r-md">
-
-
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-
-                                <h1>Select Projects</h1>
-                                <fieldset>
-                                    <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-eye"> 企画の選択</i></h2>
-                                        <p class="text-muted" style="padding-left: 20px;">行きたい企画を選択してください。</p>
-                                    </div>
-                                    <div class="ibox">
-
-
-                                        <div class="tabs-container">
-                                            <ul class="nav nav-tabs">
-                                                <!--<span class="pull-right small text-muted">1406 Elements</span>-->
-                                                <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> <span>キーワード</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-trophy"></i> <span>ジャンル</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-map-marker"></i> <span>エリア</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-flag"></i> <span>おすすめ</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-star"></i> <span>ピックアップ</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-6"><i class="fa fa-mortar-board"></i> <span>学術企画</span></a></li>
-                                                <!--<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i> これから開演予定の企画検索</a></li>-->
-                                            </ul>
-
-                                            <div class="tab-content" id="sample01">
-
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <h1>Finish</h1>
-                                <fieldset>
-                                    <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-rocket"> 確認</i></h2>
-                                        <p class="text-muted" style="padding-left: 20px;">      検索前のチェックを行ってください。</p>
-                                    </div>
-                                    <div class="ibox">
-                                        <div class="ibox-content b-r-md">
-                                            <div class="row" style="padding: 15px;">
-                                                <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-calendar"></i> </a>
-                                                        <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-clock-o"></i> </a>
-                                                        <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
-                                                        <label id="clockText2" style="font-weight:normal;">18:00</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-map-marker"></i> </a>
-                                                        <label id="here" style="font-weight:normal;"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12" style="height: 100%; overflow: scroll;">
-                                                    <ul id="search-all" class="list-group clear-list m-t">
-                                                        <?php foreach($this->data_all as $key => $item) : ?>
-                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
-                                                                <span class="pull-right body-text no-margins" style="width: 30%;">
-                                                                    <?php echo $item['pd_body']; ?>
-                                                                </span>
-                                                                <span class="pull-right m-r-lg place-text">
-                                                                    <?php echo $item['pp_place']; ?>
-                                                                </span>
-                                                                <span class="pull-right stay-text">
-                                                                    <?php echo $item['pt_time']; ?> 分
-                                                                </span>
-                                                                <span class="pull-right m-r-lg time-text" style="width:14%;">
-                                                                    <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                                                                </span>
-                                                                <label> <?php echo $item['pd_label']; ?> </label>
-                                                            </li>
-
-
-                                                        <?php endforeach; ?>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="footer">
-            <div class="pull-right">
-                東京大学工学部応用物理系（物理工学科・計数工学科）
-            </div>
-            <div>
-                <strong>Applied Physics, University of Tokyo</strong> for May Festival 2017
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
-
-<!-- Mainly scripts -->
-<script src="/plugin/js/jquery-3.1.1.min.js"></script>
-<script src="/plugin/js/bootstrap.min.js"></script>
-<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="/plugin/js/inspinia.js"></script>
-<script src="/plugin/js/plugins/pace/pace.min.js"></script>
-
-
-<!-- Chosen -->
-<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
-
-<!-- Steps -->
-<script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
-
-<!-- Jquery Validate -->
-<script src="/plugin/js/plugins/validate/jquery.validate.min.js"></script>
-
-<!-- iCheck -->
-<script src="/plugin/js/plugins/iCheck/icheck.min.js"></script>
-
-<!-- Clock picker -->
-<script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
-
-<!-- SetNow -->
-<script src="/js/setnow.js"></script>
-
-<!-- Select2 -->
-<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>
-
-<!--select2 その２-->
-<script src="/js/select2/select2.full.min.js"></script>
-
-<!-- Chosen -->
-<script src="/plugin/js/plugins/chosen/chosen.jquery.js"></script>
-
-<!-- Sweet alert -->
-<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
-
-<!-- Input Mask-->
-<script src="/plugin/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-
-
-<!--mapper-->
-<!--<script src="/js/mapper/mapper.js"></script>-->
-
-<!--mapper-->
-<script src="/js/mapper/cvi_map_lib.js"></script>
-
-<script>
-    $('.chosen-select').chosen({width: "15%"});
-
-    $(document).ready(function(){
-        $("#wizard").steps();
-        $("#form").steps({
-            bodyTag: "fieldset",
-            onStepChanging: function (event, currentIndex, newIndex)
-            {
-                // スクロールの速度
-                var speed = 400; // ミリ秒
-                // 移動先を数値で取得
-                var position = $('#all-cover').offset().top;
-                // スムーススクロール
-                $('body,html').animate({scrollTop:position}, speed, 'swing');
-
-                // Always allow going backward even if the current step contains invalid fields!
-                if (currentIndex > newIndex)
-                {
-                    return true;
-                }
-
-                // Forbid suppressing "Warning" step if the user is to young
-
-                if (newIndex == 1 && currentIndex < newIndex)
-                {
-                    $.ajax({
-                        url: "/search/time-post2",
-                        type: "POST",
-                        data: {
-                            date : $('input[name="date"]').val(),
-                            start : $('input[name="clock1"]').val(),
-                        },
-                        success: function(arr) {
-                            console.log(arr);
-                            $.ajax({
-                                type: 'GET',
-                                url: '/search/refresh02',
-                                dataType: 'html',
-                                success: function(data) {
-                                    $('#sample02').empty();
-                                    $('#sample02').append(data);
-                                    //window.scrollTo(0,document.body.scrollHeight);
-
-                                },
-                                error:function() {
-                                    alert('問題がありました。');
-                                }
-                            });
-                        },
-                        error:function(arr) {
-                            alert('問題がありました。');
-                        }
-                    });
-                }
-
-                if (newIndex == 2 && currentIndex < newIndex) {
-                    if ($('input[name="start-pos"]').val() == "") {
-                        $('.select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
-                        return false;
-                    } else {
-                        $('.select-start-pos-error').removeClass('text-danger').addClass('text-muted');
-                    }
-
-                    a = $('#input-clock1').val();
-                    b = $('#input-clock2').val();
-                    c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
-                    d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-
-                    var no_time = $('input[name="no-time"]:checked').val();
-
-                    if (no_time != 1 && (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(d) <= 540 )) {
-                        return false;
-                    }
-
-                    $.ajax({
-                        url: "/search/time-post",
-                        type: "POST",
-                        data: {
-                            radio  : $('input[name="date"]:checked').val(),
-                            no_time: no_time,
-                            clock1 : $('input[name="clock1"]').val(),
-                            clock2 : $('input[name="clock2"]').val(),
-                        },
-                        success: function(arr) {
-                            //console.log(arr);
-                            $.ajax({
-                                type: 'GET',
-                                url: '/search/refresh01',
-                                dataType: 'html',
-                                success: function(data) {
-                                    $('#sample01').empty();
-                                    $('#sample01').append(data);
-                                    //window.scrollTo(0,document.body.scrollHeight);
-
-                                },
-                                error:function() {
-                                    alert('問題がありました。');
-                                }
-                            });
-                        },
-                        error:function(arr) {
-                            alert('問題がありました。');
-                        }
-                    });
-                }
-
-
-                    var form = $(this);
-
-                // Clean up if user went backward before
-                if (currentIndex < newIndex)
-                {
-                    // To remove error styles
-                    $(".body:eq(" + newIndex + ") label.error", form).remove();
-                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
-                }
-
-                // Disable validation on fields that are disabled or hidden.
-                form.validate().settings.ignore = ":disabled,:hidden";
-
-                // Start validation; Prevent going forward if false
-                return form.valid();
-            },
-            onFinishing: function (event, currentIndex)
-            {
-                var form = $(this);
-
-                var j = 0;
-                var search = new Array;
-                $('input[name="select-p"]:checked').map(function() {
-                    search[j] = $(this).val();
-                    j++;
-                });
-
-                // Disable validation on fields that are disabled.
-                // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
-                form.validate().settings.ignore = ":disabled";
-
-                // Start validation; Prevent form submission if false
-
-                if (j  == 0) {
-                    swal({
-                        title: "企画が選択されてません",
-                        text: "検索するには、企画を１つ以上選択してください",
-                        type: "warning",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    });
-                /*} else if (j > 10) {
-                    swal({
-                        title: "選択された企画が多すぎます",
-                        text: "選択する企画は１０個以下にしてください",
-                        type: "warning",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    });*/
-                } else {
-                    $('#page-wrapper').addClass('sk-loading');
-                    $('.sk-spinner-btn').click(function() {
-                        $('#page-wrapper').removeClass('sk-loading');
-                        return false;
-                    });
-                    $.ajax({
-                        url: "/search/search",
-                        type: "POST",
-                        data: {
-                            search : search,
-                            start_pos : $('input[name="start-pos"]').val(),
-                            date   : $('input[name="date"]:checked').val(),
-                            clock1 : $('input[name="clock1"]').val(),
-                            clock2 : $('input[name="clock2"]').val()
-                        },
-                        success: function(arr) {
-                            console.log(arr);
-                            if (arr == 0) {
-                                $('#page-wrapper').removeClass('sk-loading');
-                                swal({
-                                    title: "あなたが選択した条件では最適経路が見つかりませんでした",
-                                    text: "お手数ですが、条件を変更して再度検索してください",
-                                    type: "warning",
-                                    confirmButtonColor: "#DD6B55",
-                                    confirmButtonText: "OK",
-                                    closeOnConfirm: false
-                                });
-                                return false;
-                            }
-                            window.location.href = "/result";
-
-
-                        },
-                        error:function() {
-                            alert('問題がありました。');
-                        }
-                    });
-                }
-
-            },
-            onFinished: function (event, currentIndex)
-            {
-                //window.location.href = '/result';
-                var form = $(this);
-
-                // Submit form input
-                form.submit();
-            }
-        }).validate({
-            errorPlacement: function (error, element)
-            {
-                element.before(error);
-            },
-            rules: {
-                confirm: {
-                    equalTo: "#password"
-                }
-            }
-        });
-
-        //chosen select
-        $('.chosen-select').chosen({width: "100%"});
-
-
-        //iCheck
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-orange',
-            radioClass: 'iradio_square-green',
-        });
-        $('input[name="date"]').on('ifChecked', function(event){
-            if (event.target.value == "20") {
-                $("#jQueryTime").text('１日目（２０日）');
-            } else {
-                $("#jQueryTime").text('２日目（２１日）');
-            }
-        });
-
-        var agent = navigator.userAgent;
-
-        if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){ //スマホかタブレット
-            $('input[name="clock1"]').inputmask({
-                mask: '99:99'
-            });
-            $('input[name="clock2"]').inputmask({
-                mask: '99:99'
-            });
-
-        } else { //PC
-            //clockpicker
-            var input = $('#clock1').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                //autoclose: true,
-                'default': 'now'
-            });
-            $('#clock2').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                //autoclose: true,
-            });
-        }
-
-        $('input[name="no-time"]').change(function(){
-            if ($(this).is(':checked')) {
-                console.log("aa");
-                $('#input-clock2').val("18:00");
-                $('#input-clock2').prop("disabled", true);
-            } else {
-                $('#input-clock2').prop("disabled", false);
-            }
-        });
-
-
-        $('#input-clock1').change(function() {
-            if ($('#input-clock1').val()) {
-                $("#clockText1").text($('#input-clock1').val());
-                a = $('#input-clock1').val();
-            } else {
-                a = "09:00";
-            }
-            b = $('#input-clock2').val();
-            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
-            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-
-            console.log(parseInt(c) >= 1080);
-            if (parseInt(c) >= parseInt(d)) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help1').show();
-            } else {
-                $('#clock-check-help1').hide();
-            }
-            if (parseInt(c) >= 1080) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help2').show();
-            } else {
-                $('#clock-check-help2').hide();
-            }
-            if (parseInt(c) < parseInt(d) && parseInt(c) < 1080 && parseInt(d) > 540) {
-                $('#clock-check').removeClass('has-error');
-            }
-        });
-        $('#input-clock2').change(function() {
-            $("#clockText2").text($('#input-clock2').val());
-            if ($('#input-clock1').val() > $('#input-clock2').val()) {
-                $('#clock-check').addClass('has-error');
-            }
-            if ($('#input-clock1').val()) {
-                a = $('#input-clock1').val();
-            } else {
-                a = "09:00";
-            }
-            b = $('#input-clock2').val();
-            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
-            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-            console.log(c);
-            console.log(d);
-
-            if (parseInt(c) >= parseInt(d)) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help1').show();
-            } else {
-                $('#clock-check-help1').hide();
-            }
-            if (parseInt(d) <= 540) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help3').show();
-            } else {
-                $('#clock-check-help3').hide();
-            }
-            if (parseInt(c) < parseInt(d) && parseInt(d) > 540 && parseInt(c) < 1080) {
-                $('#clock-check').removeClass('has-error');
-            }
-
-        });
-
-        /*
-         //select2
-         $(".select2_demo_1").select2();
-         $(".select2_demo_2").select2();
-         $(".select2_demo_3").select2({
-         placeholder: "Select a state",
-         allowClear: true
-         });
-         */
-    });
-
-    $(function() {
-        $("a.pid-btn").click(function () {
-            var id = $(this).parent().parent().find('input[name="pid-val"]').val();
-            var name1 = '#form_pid' + id;
-            $(name1).toggle();
-            $(this).toggleClass("highlight", 1000);
-            var name2 = '[name="input' + id + '"]';
-            var now_val = $(name2).val();
-            if (now_val) {
-                $(name2).val("");
-            } else {
-                $(name2).val(id);
-            }
-            var name3  = "a#pickup" + id;
-            $(name3).toggleClass("highlight", 1000);
-        });
-    });
-
-    $(document).ready(function () {
-
-        $('#ap').click(function (e) {
-            e.stopPropagation();
-            swal({
-                title: "工学部応用物理系ってなあに？",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "詳細が知りたい！",
-                closeOnConfirm: false,
-                allowOutsideClick: true,
-            }, function () {
-                window.location.href = "";
-            });
-        });
-    });
-
-    //ページ内ゆっくり遷移
-
-    $(function(){
-        $('a[href="#id"]').click(function(){
-            var speed = 500;
-            var href= $(this).attr("href");
-            var target = $('#id');
-            var position = target.offset().top;
-            $("html, body").animate({scrollTop:position}, speed, "swing");
-            return false;
-        });
-    });
-
-    //めいちゃんhover
-
-    $(function(){
-        $('div#may-chan').hover(
-            function() {
-                $('div#comment').show("normal");
-            }, function() {
-                $('div#comment').hide("normal");
-            }
-        );
-    });
-
-
-</script>
-
 </body>
 
 </html>

@@ -1,17 +1,18 @@
 <div class="row">
     <div class="col-md-12">
+        <p>建物や企画の名称で検索する、あるいはマップ上の建物や門や駅等をクリックすると、現在地が選択されます。</p>
         <input type="hidden" name="start-pos" value="">
-        <?php foreach ($this->freewds as $item) : if ($item['bd_flg']) : ?>
-            <input type="hidden" name="name-map<?php echo $item['bd_pid']; ?>" value="<?php echo $item['name']; ?>">
-        <?php endif; endforeach; ?>
-        <select data-placeholder="近くに見える建物の名称たった今見てきた企画名を記入" class="select2_demo_2 form-control" multiple="multiple">
-            <?php foreach ($this->freewds as $item) : ?>
-                <?php if ($item['bd_flg']) : ?>
-                    <option value="map<?php echo $item['bd_pid']; ?>"><?php echo $item['name']; ?></option>
-                <?php endif; ?>
-                <?php if ($item['data']) : ?>
-                    <option href="#" value="<?php echo $item['bd_pid']; ?>"><?php echo $item['data']." （".$item['name']."）"; ?></option>
-                <?php endif; ?>
+        <?php foreach ($this->freewds['blding'] as $item) : ?>
+            <input type="hidden" name="name-map<?php echo $item['bd_pid']; ?>" value="<?php echo $item['bd_p_label2']; ?>">
+        <?php endforeach; ?>
+        <select data-placeholder="近くに見える建物の名称や企画名で検索できます" class="select2_demo_2 form-control" multiple="multiple">
+            <?php foreach ($this->arr as $name => $val) : ?>
+                <?php foreach ($this->freewds[$name] as $item) : ?>
+                    <option href="#" value="<?php echo $val['map'].$item['bd_pid']; ?>"><?php echo $item[$val['name']]; echo ($item[$val['sub']]) ? " (".$item[$val['sub']].")" : ''; ?></option>
+                    <!--<?php if ($item['data']) : ?>
+                        <option href="#" value="<?php echo $item['bd_pid']; ?>"><?php echo $item['data']." （".$item['name']."）"; ?></option>
+                    <?php endif; ?>-->
+                <?php endforeach; ?>
             <?php endforeach; ?>
         </select>
     </div>
@@ -19,7 +20,7 @@
 
 <br>
 <div class="pos-cover">
-    <img src="/img/map.png" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
+    <img src="/img/map.png" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1" onload="map_load()">
 </div>
 <map name="shape1">
     <area id="map12" shape="poly" href="#" alt="農学部3号館" class="icolor00ff00" coords="61,321, 117,322, 117,326, 133,327, 134,330, 137,330, 137,332, 140,333, 140,376, 137,376, 137,379, 134,379, 134,382, 44,382, 44,378, 41,378, 41,376, 38,376, 37,333, 41,333, 41,329, 44,329, 44,326, 61,326">
@@ -95,7 +96,12 @@
 <!--mapper-->
 <script src="/js/mapper/cvi_map_lib.js"></script>
 <script>
-    $(function(e) {
+    map_load = function(){
+        cvi_map.add(document.getElementById('shape1'),{
+            opacity: 25,
+            areacolor: '#ffe4b5',
+            bordercolor: '#ff6600'
+        });
 
         $('area').click(function() {
 
@@ -107,13 +113,6 @@
             $('body').animate({scrollTop:position}, speed, 'swing');
         });
 
-        cvi_map.add(document.getElementById('shape1'),{
-            opacity: 25,
-            areacolor: '#ffe4b5',
-            bordercolor: '#ff6600'
-        });
-
-
         //select2
         $(".select2_demo_2").select2({
             width: '100%',
@@ -122,13 +121,13 @@
             minimumResultsForSearch: Infinity
         }).on('select2:select', function(e) {
             if (e.target.value.substr(0,3) == 'map') {
-                var re = /(\d+)/;
-                var id = re.exec(e.target.value)[0];
-                $('input[name="start-pos"]').val(id);
+                var id = e.target.value;
+                $('input[name="start-pos"]').val(e.target.value.substr(3));
             } else {
                 var id = "map" + e.target.value;
                 $('input[name="start-pos"]').val(e.target.value);
             }
+            $('#select-start-pos-error').hide();
             $('#here').text($('input[name="name-' + id + '"]').val());
             extAreaOver('shape1', id);
         }).on('select2:unselect', function() {
@@ -141,60 +140,11 @@
         $('area').click(function(e) {
             var re = /(\d+)/;
             var id = re.exec(e.target.id)[0];
-            //console.log(id);
+            $('#select-start-pos-error').hide();
             $('input[name="start-pos"]').val(id);
             $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');
         });
-
-/*
-        function extAreaOver(image,area){
-            var img=document.getElementById(image);
-            console.log(img);
-            console.log(img.options);
-            var obj=document.getElementById(area);
-            var cav=document.getElementById(img.canvasid);
-            var bc=performRGBColor(img.options['bordercolor'],'#0000ff');
-            var ac=performRGBColor(img.options['areacolor'],'#000000');
-            var op=img.options['opacity']/100;
-
-            if (img&&obj&&cav) setAreaOver(obj,img.canvasid,bc,ac,op,img.options['noborder'],img.options['nofade'],img.jg)
-        }
-
-        function extAreaOut(image,area) {
-            var img=document.getElementById(image);
-            var obj=document.getElementById(area);
-            var cav=document.getElementById(img.canvasid);
-            if (img&&obj&&cav) setAreaOut(obj,img.canvasid,img.options['nofade'],img.jg)
-        }
-
-
-
-        var cvi_map = {
-            defaultRadius:0,
-            defaultOpacity:33,
-            defaultBordercolor:'#0000ff',
-            defaultAreacolor:'#000000',
-            defaultNoborder:false,
-            defaultNofade:false,
-            defaultShowcoords:false,
-            defaultImgsrc:'',
-            defaultMapid:'',
-            defaultDelayed:false,
-            add:function(image,options) {
-                var map, mapname=image.useMap.split("#");
-                if(mapname[1]!=''&&mapname[1].length>=1){map=document.getElementsByName(mapname[1])[0]}if(image.tagName.toUpperCase()=="IMG"&&map){var defopts={"radius":cvi_map.defaultRadius,"opacity":cvi_map.defaultOpacity,"bordercolor":cvi_map.defaultBordercolor,"areacolor":cvi_map.defaultAreacolor,"noborder":cvi_map.defaultNoborder,"nofade":cvi_map.defaultNofade,"showcoords":cvi_map.defaultShowcoords,"imgsrc":cvi_map.defaultImgsrc,"mapid":cvi_map.defaultMapid,"delayed":cvi_map.defaultDelayed};if(options){for(var i in defopts){if(!options[i]){options[i]=defopts[i]}}}else{options=defopts}var imageWidth=('iwidth'in options)?parseInt(options.iwidth):image.width;var imageHeight=('iheight'in options)?parseInt(options.iheight):image.height;if(imageWidth>0&&imageHeight>0){try{var object=image.parentNode;object.style.position=(object.style.position=='static'||object.style.position==''?'relative':object.style.position);object.style.height=imageHeight+'px';object.style.width=imageWidth+'px';object.style.padding=0+'px';object.style.MozUserSelect="none";object.style.KhtmlUserSelect="none";object.unselectable="on";var blind,bgrnd,canvas;image.jg=0;if(isVM){if(document.namespaces['v']==null){var e=["shape","shapetype","group","background","path","formulas","handles","fill","stroke","shadow","textbox","textpath","imagedata","line","polyline","curve","roundrect","oval","rect","arc","image"],s=document.createStyleSheet();for(var i=0;i<e.length;i++){s.addRule("v\\:"+e[i],"behavior: url(#default#VML);")}document.namespaces.add("v","urn:schemas-microsoft-com:vml")}canvas=document.createElement(['<var style="zoom:1;overflow:hidden;display:block;width:'+imageWidth+'px;height:'+imageHeight+'px;padding:0;">'].join(''));bgrnd=document.createElement(['<var style="zoom:1;overflow:hidden;display:block;width:'+imageWidth+'px;height:'+imageHeight+'px;padding:0;">'].join(''));dummy=document.createElement(['<var style="zoom:1;overflow:hidden;display:block;width:'+imageWidth+'px;height:'+imageHeight+'px;padding:0;">'].join(''))}else if(isCV){canvas=document.createElement('canvas');bgrnd=document.createElement('canvas')}else{canvas=document.createElement('div');bgrnd=document.createElement('img');bgrnd.src=image.src;if(typeof(window['jsGraphics'])!=='undefined'){image.jg=parseInt(jg.length);jg[image.jg]=new jsGraphics(canvas);isJG=1}}canvas.id=image.id+'_canvas';canvas.style.height=imageHeight+'px';canvas.style.width=imageWidth+'px';canvas.height=imageHeight;canvas.width=imageWidth;canvas.left=0;canvas.top=0;canvas.style.position='absolute';canvas.style.left=0+'px';canvas.style.top=0+'px';canvas.fading=0;image.className='';image.style.cssText='';image.left=0;image.top=0;image.style.position='absolute';image.style.height=imageHeight+'px';image.style.width=imageWidth+'px';image.style.left=0+'px';image.style.top=0+'px';image.style.MozUserSelect="none";image.style.KhtmlUserSelect="none";image.unselectable="on";image.options=options;image.canvasid=image.id+'_canvas';image.dummyid=image.id+'_dummy';image.bgrndid=image.id+'_image';image.blindid=map.name+'_blind';image.mapname=map.name;image.areas=map.innerHTML;image.active=false;if(isIE){image.style.filter="Alpha(opacity=0)"}else{image.style.opacity=0;image.style.MozOpacity=0;image.style.KhtmlOpacity=0}bgrnd.id=image.bgrndid;bgrnd.left=0;bgrnd.top=0;bgrnd.style.position='absolute';bgrnd.style.height=imageHeight+'px';bgrnd.style.width=imageWidth+'px';bgrnd.style.left=0+'px';bgrnd.style.top=0+'px';bgrnd.height=imageHeight;bgrnd.width=imageWidth;blind=document.createElement('div');blind.id=image.blindid;blind.className="blind_area";blind.left=0;blind.top=0;blind.style.position='absolute';blind.style.height=imageHeight+'px';blind.style.width=imageWidth+'px';blind.style.left=0+'px';blind.style.top=0+'px';blind.innerHTML=" ";object.insertBefore(canvas,image);object.insertBefore(bgrnd,canvas);object.insertBefore(blind,image);cvi_map.modify(image,options)}catch(e){}}}},modify:function(image,options){try{var radius=(typeof options['radius']=='number'?options['radius']:image.options['radius']);image.options['radius']=radius;var opacity=(typeof options['opacity']=='number'?options['opacity']:image.options['opacity']);image.options['opacity']=opacity;var bcolor=(typeof options['bordercolor']=='string'?options['bordercolor']:image.options['bordercolor']);image.options['bordercolor']=bcolor;var acolor=(typeof options['areacolor']=='string'?options['areacolor']:image.options['areacolor']);image.options['areacolor']=acolor;var noborder=(typeof options['noborder']=='boolean'?options['noborder']:image.options['noborder']);image.options['noborder']=noborder;var nofade=(typeof options['nofade']=='boolean'?options['nofade']:image.options['nofade']);image.options['nofade']=nofade;var showcoords=(typeof options['showcoords']=='boolean'?options['showcoords']:image.options['showcoords']);image.options['showcoords']=showcoords;var delayed=(typeof options['delayed']=='boolean'?options['delayed']:image.options['delayed']);image.options['delayed']=delayed;var imgsrc=(typeof options['imgsrc']=='string'?options['imgsrc']:image.options['imgsrc']);image.options['imgsrc']=imgsrc;var mapid=(typeof options['mapid']=='string'?options['mapid']:image.options['mapid']);image.options['mapid']=mapid;var context,func,ih=image.height,iw=image.width;var radius=parseInt(Math.min(Math.min(iw/4,ih/4),radius));var opacity=opacity==0?0.33:opacity/100;var bcolor=performRGBColor(bcolor,'#0000ff');var acolor=performRGBColor(acolor,'#000000');var canvas=document.getElementById(image.canvasid);var dummy=document.getElementById(image.dummyid);var bgrnd=document.getElementById(image.bgrndid);var map=document.getElementsByName(image.mapname)[0];var opac=100;function replace(){if(mapid!=''){var tmp=document.getElementById(mapid);if(tmp){map.innerHTML=tmp.innerHTML}}else{map.innerHTML=image.areas}}function prepare(){if(!delayed){replace()}for(var j=0;j<map.areas.length;j++){if(map.areas[j].shape.match(/(rect|poly|circle)/i)){if(window.opera||map.areas[j].coords!=''){if(map.areas[j].id==''){map.areas[j].id=image.mapname+'_'+j}if(isVM||isIE){func=map.areas[j].onmouseover;if(func!=null){tmp=String(func);func=(tmp.indexOf('function')>=0?tmp.match(/\{([^}]+)\}/):tmp);func=(typeof(func)=='object'?func[1]:func)}map.areas[j].onmouseover=new Function('setAreaOver(this,"'+canvas.id+'","'+bcolor+'","'+acolor+'",'+opacity+','+noborder+','+nofade+','+image.jg+');'+func);func=map.areas[j].onmouseout;if(func!=null){tmp=String(func);func=(tmp.indexOf('function')>=0?tmp.match(/\{([^}]+)\}/):tmp);func=(typeof(func)=='object'?func[1]:func)}map.areas[j].onmouseout=new Function('setAreaOut(this,"'+canvas.id+'",'+nofade+','+image.jg+');'+func)}else{func=map.areas[j].getAttribute("onmouseover");map.areas[j].setAttribute("onmouseover","setAreaOver(this,'"+canvas.id+"','"+bcolor+"','"+acolor+"',"+opacity+","+noborder+","+nofade+","+image.jg+");"+func);func=map.areas[j].getAttribute("onmouseout");map.areas[j].setAttribute("onmouseout","setAreaOut(this,'"+canvas.id+"',"+nofade+","+image.jg+");"+func)}}}}if(showcoords){var atr,t=findPosXY(image),ph=document.body.scrollHeight,pw=document.body.scrollWidth;if(isVM||isIE){image.onmousemove=new Function('getCoords(event,"'+image.mapname+'",0,"'+image.id+'",'+t.x+','+t.y+','+iw+','+ih+','+pw+','+ph+');'+image.movefunc)}else{image.setAttribute("onmousemove","getCoords(event,'"+image.mapname+"',0,'"+image.id+"',"+t.x+","+t.y+","+iw+","+ih+","+pw+","+ph+");"+image.movefunc)}if(map.length>0){for(var j=0;j<map.areas.length;j++){if(map.areas[j].shape.match(/(rect|poly|circle)/i)){if(window.opera||map.areas[j].coords!=''){atr=map.areas[j].id;if(isVM||isIE){func=map.areas[j].onmousemove;if(func!=null){tmp=String(func);func=(tmp.indexOf('function')>=0?tmp.match(/\{([^}]+)\}/):tmp);func=(typeof(func)=='object'?func[1]:func)}map.areas[j].onmousemove=new Function('getCoords(event,"'+image.mapname+'","'+atr+'","'+image.id+'",'+t.x+','+t.y+','+iw+','+ih+','+pw+','+ph+');'+func)}else{func=map.areas[j].getAttribute("onmousemove");map.areas[j].setAttribute("onmousemove","getCoords(event,'"+image.mapname+"','"+atr+"','"+image.id+"',"+t.x+","+t.y+","+iw+","+ih+","+pw+","+ph+");"+func)}}}}}}}if(canvas&&bgrnd&&map){if(isCV){context=canvas.getContext("2d");context.clearRect(0,0,canvas.width,canvas.height)}else if(isVM){canvas.innerHTML=''}else{if(isIE){canvas.style.filter="Alpha(opacity="+(opacity*100)+")"}else{canvas.style.opacity=opacity;canvas.style.MozOpacity=opacity;canvas.style.KhtmlOpacity=opacity}if(isJG){jg[image.jg].clear()}}if(delayed){replace()}if(isCV){if(imgsrc!=''){var img=new Image();img.onload=function(){context=bgrnd.getContext("2d");context.clearRect(0,0,bgrnd.width,bgrnd.height);context.save();if(radius>0){roundedRect(context,0,0,bgrnd.width,bgrnd.height,radius);context.clip()}context.fillStyle='rgba(0,0,0,0)';context.fillRect(0,0,bgrnd.width,bgrnd.height);context.drawImage(img,0,0,bgrnd.width,bgrnd.height);context.restore();prepare()};img.src=imgsrc}else{context=bgrnd.getContext("2d");context.clearRect(0,0,bgrnd.width,bgrnd.height);context.save();if(radius>0){roundedRect(context,0,0,bgrnd.width,bgrnd.height,radius);context.clip()}context.fillStyle='rgba(0,0,0,0)';context.fillRect(0,0,bgrnd.width,bgrnd.height);context.drawImage(image,0,0,bgrnd.width,bgrnd.height);context.restore();prepare()}}else if(isVM){if(radius>0){radius=getRadius(radius,bgrnd.width,bgrnd.height)}bgrnd.innerHTML='<v:roundrect arcsize="'+radius+'" strokeweight="0" filled="t" stroked="f" fillcolor="#ffffff" style="zoom:1;margin:0;padding:0;display:block;position:absolute;left:0px;top:0px;width:'+bgrnd.width+'px;height:'+bgrnd.height+'px;"><v:fill src="'+(imgsrc!=''?imgsrc:image.src)+'" type="frame" /></v:roundrect>';prepare()}else{bgrnd.src=imgsrc!=''?imgsrc:image.src;prepare()}image.active=true;if(isVM||isIE){func=image.onmousemove;if(func!=null){tmp=String(func);func=(tmp.indexOf('function')>=0?tmp.match(/\{([^}]+)\}/):tmp);func=(typeof(func)=='object'?func[1]:func)}image.movefunc=func}else{image.movefunc=image.getAttribute("onmousemove")}}}catch(e){}},remove:function(image){var ele,object=image.parentNode;if(image.active){if(isIE){image.style.filter="Alpha(opacity=100)"}else{image.style.opacity=100;image.style.MozOpacity=100;image.style.KhtmlOpacity=100}ele=document.getElementsByName(image.mapname)[0];ele.innerHTML=image.areas;image.active=false;image.areas='';if(isVM||isIE){image.onmousemove=image.movefunc}else{image.setAttribute("onmousemove",image.movefunc)}ele=document.getElementById(image.canvasid);if(ele){object.removeChild(ele)}ele=document.getElementById(image.blindid);if(ele){object.removeChild(ele)}ele=document.getElementById(image.bgrndid);if(ele){object.removeChild(ele)}}}}
-
-*/
-
-
-
-
-
-
-
-
-
-    });
+    };
 
 </script>

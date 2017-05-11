@@ -58,8 +58,6 @@ class ResultController extends Zend_Controller_Action
 
         // テキストデータを取得
 
-        $this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
-
         /**
          * Viewに必要データを渡す
          */
@@ -190,44 +188,5 @@ class ResultController extends Zend_Controller_Action
 
     }
 
-    /*
-    public function result2Action()
-    {
-
-        $request = $this->getRequest();
-        $this->view->data1 = $request->getPost('data1');
-        $this->view->data2 = $request->getPost('data2');
-        $this->view->data3 = $request->getPost('data3');
-    }
-
-    public function exampleAction() {
-
-    }
-    public function resultAction()
-    {
-        $request = $this->getRequest();
-        $clock1 = $request->getPost('clock1');
-        $clock2 = $request->getPost('clock2');
-
-        var_dump($clock1);
-        var_dump($clock2);exit();
-        exit();
-
-
-    }
-
-    public function prac1Action()
-    {
-        $this->view->data = $this->_main->getProjectData();
-
-        $request = $this->getRequest();
-        $search = $request->getParam('search');
-
-        $result = $this->_main->searchFree();
-
-        $this->view->result = $result;
-
-    }
-    */
 
 }

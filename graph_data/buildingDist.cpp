@@ -117,8 +117,8 @@ vector<int> buildingList(int id){
 }
 
 void setBuildingDist(int n){
-  char str[108000];
-  char tmp[108000];
+  char str[1080000];
+  char tmp[1080000];
   int B = getBuildingNumber();
   sprintf(str, "INSERT INTO checkpos_data_89 (%s, %s, %s, %s, %s) VALUES(%d, %d, %d, %d, %d)",
 	 "cd_bd_pid1", "cd_bd_pid2", "cd_node1", "cd_node2", "cd_time",
@@ -130,6 +130,7 @@ void setBuildingDist(int n){
   for(int i = 1;i <= B;i++){
     for(int j = 1;j <= B;j++){
       if(i == 1 && j == 1)continue;
+      if(distB[i][j] > 1080000)cerr << "INF dist!!" << " " << i << " " << j <<endl;
       sprintf(tmp, "%s", str);
       sprintf(str, "%s ,(%d, %d, %d, %d, %d)", tmp
 	      ,i, j, usedExit[i][j].first, usedExit[i][j].second, distB[i][j]);
@@ -173,7 +174,6 @@ int main(){
   for(int i = 1;i <= N;i++){
     vector<int> buildI = buildingList(i);
     for(int j = 1;j <= N;j++){
-      if(i == j)continue;
       vector<int> buildJ = buildingList(j);
       for(int k = 0;k < buildI.size();k++){
 	for(int l = 0;l < buildJ.size();l++){

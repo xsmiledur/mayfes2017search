@@ -227,14 +227,6 @@ fieldset .ibox .ibox-content {
     border-bottom-left-radius: 6px !important;
     border-bottom-right-radius: 6px !important;
 }
-.search-in {
-    height: 430px;
-    overflow: scroll;
-}
-.search-in2 {
-    height: 470px;
-    overflow: scroll;
-}
 .modal-head {
     padding: 30px;
     border-bottom: 1px solid #e5e5e5;
@@ -556,7 +548,12 @@ fieldset .tabs-container .i-checks {
 }
 .genre-box.contact-box {
     padding: 20px;
-    overflow: scroll;
+    /*overflow: scroll;*/
+}
+.scroll-inbox {
+    height: 353px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .genre-box.contact-box .list-group.clear-list .list-group-item {
     border-color: #fffff0 !important;
@@ -565,7 +562,7 @@ fieldset .tabs-container .i-checks {
     background-color: rgba(255,255,255,0.8);
     padding: 20px;
     height: 100%;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 .check-text {
     width: 30%;
@@ -610,29 +607,6 @@ fieldset .tabs-container .i-checks {
     text-align: right;
     float: right;
 }
-.i-checks,
-.i-checks {
-    margin-left: 27px;
-}
-.i-checks label {
-    display: inline !important;
-    text-indent: 27px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:first-child,
-#tab-3 .i-checks > span:first-child {
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(2),
-#tab-3 .i-checks > span:nth-child(2) {
-    margin-right: 29px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(3),
-#tab-3 .i-checks > span:nth-child(3) {
-    margin-right: 31px;
-    margin-left: -27px;
-}
 .widget {
     position: relative;
 }
@@ -640,19 +614,19 @@ fieldset .tabs-container .i-checks {
     filter: brightness(1.1);
 }
 #row1 .widget {
-    height: 150px;
+    height: 130px;
 }
 .row2 .widget {
-    height: 150px;
+    height: 190px;
 }
 .widget-back {
-    height: 100px;
+    height: 130px;
 }
 .widget-back:hover {
     cursor: pointer;
 }
 .widget-vote {
-    height: 200px;
+    height: 250px;
 }
 .widget.navy-bg {
     background-color: rgba(26, 179, 148, 0.8);
@@ -810,14 +784,15 @@ fieldset .tabs-container .i-checks {
 .width-over i {
     font-size: 15px;
     text-align: center;
+    font-weight: bold;
 }
-.width-over i.fa-map-marker {
+.width-over i.pe-7s-map-marker {
     margin-right: 15px;
 }
-.width-over i.fa-calendar {
+.width-over i.pe-7s-date {
     margin-right: 16px;
 }
-.width-over i.fa-clock-o {
+.width-over i.pe-7s-clock {
     margin-right: 16px;
 }
 #map_img:after {
@@ -829,14 +804,15 @@ fieldset .tabs-container .i-checks {
 }
 .pos-cover {
     width: 100% !important;
-    height: 100% !important;
+    height: 424px;
     overflow: scroll;
 }
 .mapper {
     cursor: crosshair;
 }
-.contact-box.center-version i.fa.fa-clock-o,
-.contact-box.center-version i.fa.fa-calendar {
+.contact-box.center-version .pe-7s-date,
+.contact-box.center-version .pe-7s-clock {
+    font-size: 60px;
      margin-top: 30px;
      margin-bottom: 30px;
 }
@@ -908,7 +884,7 @@ span.select2-selection__choice__remove {
     text-align: right;
 }
 .title-plain {
-    width: 270px;
+    max-width: 270px;
     margin-left: -30px;
     margin-bottom: 20px;
     padding: 10px 20px 10px 10px;
@@ -931,7 +907,7 @@ span.select2-selection__choice__remove {
 .title-plain::before {
     content: '';
     height: 10px;
-    width: 270px;
+    width: 100%;
     position: absolute;
     left: 0;
     top: 44px;
@@ -945,6 +921,9 @@ span.select2-selection__choice__remove {
 }
 
 @media screen and ( max-width:1199px ) {
+    .pos-cover {
+        height: 514px;
+    }
     #all-cover > .ibox-content {
         min-height: 850px;
         height: 100%;
@@ -968,8 +947,9 @@ span.select2-selection__choice__remove {
     fieldset .ibox .ibox-content {
         height: 630px;
     }
-
-
+    .scroll-inbox {
+        height: 445px;
+    }
 }
 @media screen and ( max-width:991px ) {
 
@@ -1034,11 +1014,6 @@ span.select2-selection__choice__remove {
         position: absolute;
         margin-left: 3px;
         top: 50px;
-    }
-    .vertical-timeline-content {
-        margin-right: -30px;
-
-
     }
     .vote-maychan {
         height: 70%;
@@ -1109,14 +1084,37 @@ span.select2-selection__choice__remove {
     .vote-comment {
         width: 140px;
     }
-    #page-wrapper.sk-loading > p.sk-spinner-text {
+    #sample01 {
+        position: relative;
+    }
+    #page-wrapper.sk-loading > p.sk-spinner-text,
+    #sample01.sk-loading > p.sk-spinner-text {
         display: block;
         position: fixed;
-        top:40%;
-        left:7%;
         text-align: center;
         z-index: 2000;
     }
+    #page-wrapper.sk-loading > p.sk-spinner-text {
+        width: 93%;
+        left: 7%;
+        top:40%;
+    }
+    #sample01.sk-loading > p.sk-spinner-text {
+        width: 96%;
+        left:4%;
+        top:41%;
+    }
+    #sample01.sk-loading > .sk-spinner-double-bounce {
+        display: block;
+        position: fixed;
+        top: 35%;
+        left:0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        z-index: 2000;
+    }
+
     #page-wrapper.sk-loading > .sk-spinner-btn {
         display: block;
         position: fixed;
@@ -1177,15 +1175,29 @@ span.select2-selection__choice__remove {
     .contact-box.center-version {
         margin-bottom :5px;
     }
-    .contact-box.center-version i.fa.fa-clock-o,
-    .contact-box.center-version i.fa.fa-calendar {
+    .contact-box.center-version .pe-7s-date,
+    .contact-box.center-version .pe-7s-clock {
         margin-top: 10px;
         margin-bottom: 10px;
     }
+    .scroll-inbox {
+        height: 395px;
+    }
 }
+@media screen and ( max-width:660px ) {
+    .pos-cover {
+        height: 514px !important;
+    }
+}
+
 @media screen and ( max-width:500px) {
     .footer {
         font-size: 11px;
         height: 39px;
+    }
+}
+@media screen and ( max-width:346px ) {
+    .pos-cover {
+        height: 494px !important;
     }
 }

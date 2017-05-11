@@ -56,11 +56,6 @@ class IndexController extends Zend_Controller_Action
         }
         $this->_lang = $this->_session->lang;
 
-        // テキストデータを取得
-
-        //$this->_contents = $this->_main->getContentsData($this->_session->lang,$this->getRequest()->getPathInfo());
-        //$this->view->contents = $this->_main->getContentsData();
-
         /**
          * Viewに必要データを渡す
          */
@@ -86,7 +81,6 @@ class IndexController extends Zend_Controller_Action
         $request = $this->getRequest();
         $search = $request->getParam('search');
         $this->view->data_all   = $this->_main->getProjectData();
-
 
 
         //$result = $this->_main->searchFree();
