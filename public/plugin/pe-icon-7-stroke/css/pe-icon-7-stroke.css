@@ -1,0 +1,70 @@
+@font-face {
+	font-family: 'Pe-icon-7-stroke';
+	src:url('../fonts/Pe-icon-7-stroke.eot?d7yf1v');
+	src:url('../fonts/Pe-icon-7-stroke.eot?#iefixd7yf1v') format('embedded-opentype'),
+		url('../fonts/Pe-icon-7-stroke.woff?d7yf1v') format('woff'),
+		url('../fonts/Pe-icon-7-stroke.ttf?d7yf1v') format('truetype'),
+		url('../fonts/Pe-icon-7-stroke.svg?d7yf1v#Pe-icon-7-stroke') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="pe-7s-"], [class*=" pe-7s-"] {
+	display: inline-block;
+	font-family: 'Pe-icon-7-stroke';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.pe-7s-plugin:before {
+	content: "\e6c1";
+}
+.pe-7s-users:before {
+	content: "\e693";
+}
+.pe-7s-timer:before {
+	content: "\e60b";
+}
+.pe-7s-study:before {
+	content: "\e60f";
+}
+.pe-7s-stopwatch:before {
+	content: "\e610";
+}
+.pe-7s-joy:before {
+	content: "\e6a4";
+}
+.pe-7s-map-marker:before {
+	content: "\e638";
+}
+.pe-7s-look:before {
+	content: "\e63e";
+}
+.pe-7s-light:before {
+	content: "\e643";
+}
+.pe-7s-flag:before {
+	content: "\e654";
+}
+.pe-7s-date:before {
+	content: "\e660";
+}
+.pe-7s-clock:before {
+	content: "\e66b";
+}
+.pe-7s-back:before {
+	content: "\e67a";
+}
+.pe-7s-check:before {
+	content: "\e66c";
+}
+.pe-7s-home:before {
+	content: "\e648";
+}

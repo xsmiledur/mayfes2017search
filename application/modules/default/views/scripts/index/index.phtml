@@ -10,8 +10,7 @@
     <title>MaySearch</title>
 
     <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="/plugin/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
-    <!--<link href="/plugin/css/animate.css" rel="stylesheet">-->
+    <link href="/plugin/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
 
     <!--style.css-->
     <link href="/plugin/css/style.css" rel="stylesheet">
@@ -26,6 +25,85 @@
 
     <!--favicon-->
     <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
+
+    <style>
+
+        .rec_pku_acd_icon {
+            width: 180px;
+            float: right;
+            text-align: right;
+        }
+        .width-over {
+            width: 100%;
+            padding: 3px 0 3px 34px;
+            text-indent: -15px;
+        }
+        .width-over i {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .width-over i.pe-7s-map-marker {
+            margin-right: 15px;
+        }
+        .width-over i.pe-7s-date {
+            margin-right: 16px;
+        }
+        .width-over i.pe-7s-clock {
+            margin-right: 16px;
+        }
+        .modal-head {
+            padding: 30px;
+            border-bottom: 1px solid #e5e5e5;
+            position: relative;
+        }
+        .modal-contents {
+            width: 100%;
+            padding: 30px 30px 15px;
+        }
+        .modal-exp {
+            padding: 0 15px;
+        }
+        .exp {
+            width: 100%;
+            padding: 0 15px;
+        }
+        .modal-contents .modal-p {
+            background-color: #a9a9a9;
+            width: 250px;
+            margin-left: -30px;
+            padding: 10px;
+            color: #ffffff;
+            font-size: 17px;
+            text-align: right;
+            position: relative;
+        }
+        .modal-contents .modal-p::before {
+            content: '';
+            height: 10px;
+            width: 250px;
+            position: absolute;
+            left: 0;
+            top: 44px;
+            margin-left: 10px;
+            background-color: #dcdcdc;
+        }
+        .modal-contents .modal-p::after {
+            content: '';
+            height: 44px;
+            width: 10px;
+            position: absolute;
+            padding: 5px;
+            margin-left: 10px;
+            background-color: #dcdcdc;
+        }
+        .modal-web {
+            margin: 25px;
+        }
+        .modal-footer {
+            background-color: #e5e5e5;
+        }
+    </style>
 
 </head>
 <body>
@@ -43,11 +121,11 @@
 
             <div class="row">
                 <div class="col-lg-4">
-                    <div id="id1" class="m-t-md m-b-md">
+                    <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
                         <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
 
                     </div>
-                    <div id="id2" class="p-h-md p-w-sm">
+                    <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
                         <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
                     </div>
                     <div class="col-xs-12 sub-title b-r-md text-primary text-center">
@@ -59,8 +137,8 @@
                         <div class="col-sm-8 col-sm-offset-4 col-xs-6">
                             <a href="/search/algorithm">
                                 <div class="widget lazur-bg widget1">
-                                    <i class="fa fa-codepen fa-first"></i>
-                                    <i class="fa fa-codepen fa-second"></i>
+                                    <i class="pe-7s-stopwatch fa-first"></i>
+                                    <i class="pe-7s-stopwatch fa-second"></i>
                                     <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                 </div>
                             </a>
@@ -68,8 +146,8 @@
                         <div class="col-sm-8 col-xs-6">
                             <a href="https://ap-phys.net/">
                                 <div class="widget navy-bg widget2">
-                                    <i class="fa fa-codepen fa-first"></i>
-                                    <i class="fa fa-codepen fa-second"></i>
+                                    <i class="pe-7s-plugin fa-first"></i>
+                                    <i class="pe-7s-plugin fa-second"></i>
                                     <p>工学部応用物理系<br>工學博覧会について</p>
                                 </div>
                             </a>
@@ -86,7 +164,7 @@
                                 <h1>滞在日時</h1>
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-clock-o"> 滞在日時</i></h2>
+                                        <h2><span class="pe-7s-clock"> 滞在日時</span></h2>
                                         <p class="text-muted" style="padding-left: 20px;">      滞在日と時間を入力してください。</p>
                                     </div>
                                     <div class="ibox">
@@ -96,7 +174,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-calendar fa-5x"></i>
+                                                        <i class="pe-7s-date"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在日</strong></h3>
@@ -119,7 +197,7 @@
 
                                                     <a style="cursor: default;">
 
-                                                        <i class="fa fa-clock-o fa-5x"></i>
+                                                        <i class="pe-7s-clock"></i>
 
 
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
@@ -166,7 +244,7 @@
                                       <area shape="default" href="#" alt="全体" region="all">
                                     </map>-->
                                     <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-map-marker"> 現在地</i></h2>
+                                        <h2><i class="pe-7s-map-marker"> 現在地</i></h2>
                                         <p id="select-start-pos-error" class="text-muted " style="padding-left: 20px;">現在地を選択してください。</p>
                                     </div>
                                     <div class="ibox">
@@ -181,7 +259,7 @@
                                 <h1>企画選択</h1>
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-eye"> 企画の選択</i></h2>
+                                        <h2><i class="pe-7s-look"> 企画の選択</i></h2>
                                         <p class="text-muted" style="padding-left: 20px;">行きたい企画を選択してください。</p>
                                     </div>
                                     <div class="ibox">
@@ -190,12 +268,12 @@
                                         <div class="tabs-container">
                                             <ul class="nav nav-tabs">
                                                 <!--<span class="pull-right small text-muted">1406 Elements</span>-->
-                                                <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> <span>キーワード</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-trophy"></i> <span>ジャンル</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-map-marker"></i> <span>エリア</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-flag"></i> <span>おすすめ</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-star"></i> <span>ピックアップ</span></a></li>
-                                                <li class=""><a data-toggle="tab" href="#tab-6"><i class="fa fa-mortar-board"></i> <span>学術企画</span></a></li>
+                                                <li class="active"><a data-toggle="tab" href="#tab-1"><i class="pe-7s-users" style="font-weight: bold;"></i> <span>キーワード</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-2"><i class="pe-7s-joy" style="font-weight: bold;"></i> <span>ジャンル</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-3"><i class="pe-7s-map-marker" style="font-weight: bold;"></i> <span>エリア</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-4"><i class="pe-7s-flag" style="font-weight: bold;"></i> <span>おすすめ</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-5"><i class="pe-7s-light" style="font-weight: bold;"></i> <span>ピックアップ</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-6"><i class="pe-7s-study" style="font-weight: bold;"></i> <span>学術企画</span></a></li>
                                                 <!--<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i> これから開演予定の企画検索</a></li>-->
                                             </ul>
 
@@ -215,7 +293,7 @@
                                 <h1>確認</h1>
                                 <fieldset>
                                     <div class="p-sm b-r-md background-muted">
-                                        <h2><i class="fa fa-rocket"> 確認</i></h2>
+                                        <h2><i class="pe-7s-check"> 確認</i></h2>
                                         <p class="text-muted" style="padding-left: 20px;">      検索前のチェックを行ってください。</p>
                                     </div>
                                     <div class="ibox">
@@ -223,20 +301,20 @@
                                             <div class="row" style="padding: 15px;">
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-calendar"></i> </a>
+                                                        <a href="#" class="check-link"><i class="pe-7s-date"></i> </a>
                                                         <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-clock-o"></i> </a>
+                                                        <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
                                                         <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
-                                                        <a href="#" class="check-link"><i class="fa fa-map-marker"></i> </a>
+                                                        <a href="#" class="check-link"><i class="pe-7s-map-marker"></i> </a>
                                                         <label id="here" style="font-weight:normal;"></label>
                                                     </div>
                                                 </div>
@@ -653,15 +731,15 @@
                                     <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.jpg">' : ''; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-calendar"></i><?php echo ($item['pp_full']) ? '終日<br>' : ''; ?>
+                                    <i class="pe-7s-date"></i><?php echo ($item['pp_full']) ? '終日<br>' : ''; ?>
                                     <?php echo ($item['pt_start'] || $item['pt_end']) ? $item['pp_day'].'日 '.$item['pt_start'] . " <small> 〜 " . $item['pt_end'] . "</small><br>" : ''; ?>
                                     <?php echo ($item['pt_open']) ? " (開場: ".$item['pt_open'].")" : ""; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-map-marker"></i><?php echo $item['pp_place']; ?>
+                                    <i class="pe-7s-map-marker"></i><?php echo $item['pp_place']; ?>
                                 </div>
                                 <div class="width-over">
-                                    <i class="fa fa-clock-o"></i><?php echo $item['pt_time']; ?> 分
+                                    <i class="pe-7s-clock"></i><?php echo $item['pt_time']; ?> 分
                                 </div>
                             </div>
                         </div>
