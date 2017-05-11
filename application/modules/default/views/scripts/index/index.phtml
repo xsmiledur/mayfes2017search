@@ -103,6 +103,19 @@
         .modal-footer {
             background-color: #e5e5e5;
         }
+
+        .SNS-link{
+            position: absolute;
+            width: 40px;
+            top: 18px;
+            left: 20px;
+            z-index: 1000;
+        }
+        a.line{
+            position: absolute;
+            top: 33px;
+            left: 0px;
+        }
     </style>
 
 </head>
@@ -120,6 +133,13 @@
         <div id="page-next-wrapper">
 
             <div class="row">
+                <div class="SNS-link">
+                    <a data-size="large" data-text="東京大学五月祭経路探索アプリ「MaySearch」がスゴすぎる！" data-hashtags="五月祭" class="twitter-share-button" href="https://twitter.com/share" data-dnt="true"></a>
+                    <!--<a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
+                        <img src="img/share-a.png" width="90" height="25" alt="" />
+                    </a>-->
+                </div>
+
                 <div class="col-lg-4">
                     <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
                         <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
@@ -183,7 +203,7 @@
                                                             <div class="radio radio-inline radio-primary">
                                                                 <input type="radio" id="1day" checked="checked" value="20" name="date" style="display: initial;"> <label for="1day"> １日目（２０日） </label>
                                                             </div>
-                                                            <div class="radio radio-inline radio-primary">
+                                                            <div class="radio radio-inline radio-primary no-margins">
                                                                 <input type="radio" id="2day" value="21" name="date" style="display: initial;"> <label for="2day"> ２日目（２１日） </label>
                                                             </div>
                                                         </address>
@@ -378,12 +398,6 @@
     </div>
 </div>
 
-<div class="SNS-link">
-    <a data-size="large" data-text="東京大学五月祭経路探索アプリ「MaySearch」" data-hashtags="五月祭" class="twitter-share-button" href="https://twitter.com/share" data-dnt="true">Tweet</a>
-    <a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
-	<img src="img/share-a.png" width="90" height="25" alt="LINEで送る" />
-</a>
-</div>
 
 
 <!-- Mainly scripts -->
@@ -451,7 +465,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
                         $('#page-wrapper').removeClass('sk-loading');
                         return false;
                     });
-                    FinishPost(search, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val())
+                    FinishPost(search, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     return true;
                 }
             }
@@ -526,6 +540,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         if(h < 9 || h >= 18){//9時前あるいは18時以降
             ph = "09:00";
             val = "09:00";
+
         } else {
             ph = "Now";
             var m = now.getMinutes();
@@ -534,6 +549,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             if (m.length == 1) m = "0".m;
             val =  h + ":" + m;
         }
+        $('#clockText1').text(ph);
         $('input[name="clock1"]').attr("value", val).attr("placeholder", ph);
     }
     function ChangeDate() {
@@ -600,6 +616,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
     function TimePost2(start_pos, clock1, clock2, no_time) {
         $('#sample01').addClass('sk-loading');
 
+
         $.ajax({
             url: "/search/time-post",
             type: "POST",
@@ -638,6 +655,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
                 alert('問題がありました。');
             }
         });
+
     }
 
     function FinishPost(search, start_pos, date, clock1, clock2) {

@@ -96,7 +96,12 @@
     .check-text label {
         margin-left: 20px;
     }
-    .check-text input {
+    .check-text2 label {
+        margin-left: 20px;
+        width: 60%;
+    }
+    .check-text input,
+    .check-text2 input {
         position: absolute;
         top: 9px;
         left: 1px;
@@ -345,7 +350,7 @@
                                             <ul class="list-group clear-list m-t">
                                             <?php foreach ($val2['data'] as $key => $item) : ?>
                                                 <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                                                    <div class=" ">
+                                                    <div class=" check-text2">
                                                         <span class="pull-right" style="text-align: right;">
                                                                 <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                         </span>
@@ -412,7 +417,7 @@
                                     <ul class="list-group clear-list m-t">
                                         <?php foreach ($val2['data'] as $key => $item) : ?>
                                             <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                                                <div class=" ">
+                                                <div class=" check-text2">
                                                     <span class="pull-right" style="text-align: right;">
                                                     <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
                                                 </span>
