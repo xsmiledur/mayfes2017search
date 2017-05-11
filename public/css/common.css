@@ -37,6 +37,16 @@
     z-index: 2000;
 }
 
+#sample01.sk-loading > p.sk-spinner-text {
+    display: block;
+    position: fixed;
+    text-align: center;
+    z-index: 2000;
+    width: 96%;
+    left: 19%;
+    top: 30%;
+}
+
 #page-wrapper.sk-loading > .sk-spinner-btn {
     display: block;
     position: fixed;
