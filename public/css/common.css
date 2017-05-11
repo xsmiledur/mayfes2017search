@@ -803,7 +803,7 @@ fieldset .tabs-container .i-checks {
 }
 .pos-cover {
     width: 100% !important;
-    height: 534px !important;
+    height: 424px !important;
     overflow: scroll;
 }
 .mapper {
@@ -919,6 +919,9 @@ span.select2-selection__choice__remove {
 }
 
 @media screen and ( max-width:1199px ) {
+    .pos-cover {
+        height: 514px;
+    }
     #all-cover > .ibox-content {
         min-height: 850px;
         height: 100%;

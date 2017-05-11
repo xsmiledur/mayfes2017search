@@ -58,7 +58,7 @@
      role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.png');">
+            <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['info']['pd_genre1']; ?>/<?php echo $item['info']['pd_genre2']; ?>.jpg');">
                 <div class="transparent">
                     <div class="row">
                         <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -73,8 +73,8 @@
                         <p class="m-b-xxs"><?php echo $item['info']['pd_body']; ?></p>
                         <div class="m-t-md" style="margin-left: -4px;">
                             <div class="rec_pku_acd_icon">
-                                <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                <?php echo ($item['info']['pd_rec_flg'] || $item['info']['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.jpg">' : ''; ?>
+                                <?php echo ($item['info']['pd_academic_flg']) ? '<img src="/img/icon/academic.jpg">' : ''; ?>
                             </div>
                             <div class="width-over">
                                 <i class="fa fa-calendar"></i><?php echo ($item['info']['pp_full']) ? '終日<br>' : ''; ?>
@@ -291,7 +291,7 @@
                                                         </div>
 
                                                         <div class="vertical-timeline-icon">
-                                                            <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
+                                                            <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.jpg">
                                                         </div>
 
                                                         <div class="vertical-timeline-content">
@@ -347,13 +347,8 @@
                                                 <div id="map_img">
                                                     <div class="map-backgd">
                                                         <div class="origin-map">
-                                                            <img src="/img/maps/origin.png" usemap="#shape1" id="shape1">
+                                                            <img src="/img/maps/origin.jpg" usemap="#shape1" id="shape1">
                                                         </div>
-                                                        <!--
-                                                        <div class="origin-map">
-                                                            <img src="/img/map.png" class="mapper noborder showcoords iopacity50" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1">
-                                                        </div>
-                                                        -->
 
                                                         <?php foreach ($this->order as $i => $item) : ?>
                                                             <?php if ($i == 0) : ?>
@@ -443,7 +438,7 @@
 <div id="print-page" class="print-off">
     <div id="map_print" style="width: 100%;">
         <div class="origin-map">
-            <img src="/img/maps/big_origin3.png" usemap="#shape1" id="shape1">
+            <img src="/img/maps/origin.jpg" usemap="#shape1" id="shape1">
         </div>
         <?php foreach ($this->order as $i => $item) : ?>
             <?php if ($i == 0) : ?>
@@ -497,7 +492,7 @@
             <tr>
                 <td><?php echo $item['start']; ?></td>
                 <td>
-                        <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.png">
+                        <img class="img-sm img-circle" src="/img/icon/<?php echo $item['info']['pp_name1']; ?>-bg.jpg">
                 </td>
                 <td>
                     <?php echo $item['info']['pp_place']; ?>
@@ -520,20 +515,6 @@
         </table>
     </div>
 </div>
-<script>
-    //$(document).ready(function ()
-    // {
-    //  $('#shape1').mapster({
-    //    singleSelect : true,
-    //clickNavigate : true,
-    // render_highlight : { fillColor: '2aff00' },
-    //  render_highlight : { altImage : '/img/map2.jpg' },
-    //mapKey: 'region',
-    //fillOpacity : 0.5
-    //   });
-    //});
-</script>
-
 </body>
 
 <!--<script src="/js/jquery.imagemapster.js"></script>-->

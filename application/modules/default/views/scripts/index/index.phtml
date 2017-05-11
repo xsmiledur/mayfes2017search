@@ -18,7 +18,6 @@
 
     <!--checkbox-->
     <link href="/plugin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-
     <!-- steps-->
     <link href="/plugin/css/plugins/steps/jquery.steps.css" rel="stylesheet">
 
@@ -126,13 +125,15 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
                                                         <div id="clock-check">
                                                             <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" id="input-clock1" value="" placeholder="Now">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" placeholder="Now">
+                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="" placeholder="Now">
                                                                 <span class="input-group-addon">
                                                                 <span class="fa fa-clock-o"></span>
                                                                 </span>
                                                             </div>
                                                             <div class="input-group clockpicker" id="clock2">
                                                                 <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" >
+                                                                <input class="form-control" type="time" name="clock2" id="time-clock2" value="18:00" >
                                                                 <span class="input-group-addon">
                                                                 <span class="fa fa-clock-o"></span>
                                                             </span>
@@ -141,9 +142,7 @@
                                                                 <input type="checkbox" id="no-time" value="1" name="no-time">
                                                                 <label for="no-time"> 終了時間を特に指定しない </label>
                                                             </div>
-                                                            <span id="clock-check-help1" class="help-block m-b-none text-danger" style="display: none; text-align: left;">滞在終了時刻が開始時刻より早くなっています。</span>
-                                                            <span id="clock-check-help2" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の終了時刻より滞在開始時刻が遅くなっています。</span>
-                                                            <span id="clock-check-help3" class="help-block m-b-none text-danger" style="display: none; text-align: left;">五月祭の開始時刻より滞在終了時刻が早くなっています。</span>
+                                                            <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
 
                                                         </div>
 
@@ -329,12 +328,14 @@
                 //if (currentIndex > newIndex) return true;
 
                 if (newIndex == 1 && currentIndex < newIndex) {
-                    TimePost1($('input[name="date"]').val(), $('input[name="clock1"]').val());
+                    var res = NoStep1($('input[name="clock1"]').val(), $('input[name="clock2"]').val());
+                    if (!res) return false;
+                    TimePost1($('input[name="date"]').val());
                 }
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     var start_pos = $('input[name="start-pos"]').val();
-                    var res = NoStep2(start_pos);
+                    res = NoStep2(start_pos);
                     if (!res) return false;
                     TimePost2(start_pos, $('#input-clock1').val(), $('#input-clock2').val(), $('input[name="no-time"]:checked').val());
                 }
@@ -387,118 +388,18 @@
 
 <script>
     $(document).ready(function() {
+        $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
+        RemoveClock(navigator.userAgent);
+        SetNow();
         /*日付変更関連*/
-        $('input[name="date"]').change(function() {
-            if ($('input[name="date"]:checked').val() == "20") {
-                $("#jQueryTime").text('１日目（２０日）');
-            } else {
-                $("#jQueryTime").text('２日目（２１日）');
-            }
-        });
+        $('input[name="date"]').change(function() {ChangeDate()});
 
-        /*clock1,clock2変更関連*/
-        //clockpicker
-        var style = '<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">';
-        $('head link:last').after(style);
+        $('input[name="no-time"]').change(function() {NoTimeCheck()});
 
-        var agent = navigator.userAgent;
-
-        if(agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){ //スマホ
-            $('input[name="clock1"]').inputmask({
-                mask: '99:99'
-            });
-            $('input[name="clock2"]').inputmask({
-                mask: '99:99'
-            });
-
-        } else { //PC
-            //clockpicker
-            var input = $('#clock1').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                //autoclose: true,
-                'default': 'now'
-            });
-            $('#clock2').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                //autoclose: true,
-            });
-        }
-
-        $('input[name="no-time"]').change(function(){
-            if ($(this).is(':checked')) {
-                //console.log("aa");
-                $('#input-clock2').val("18:00");
-                $('#input-clock2').prop("disabled", true);
-            } else {
-                $('#input-clock2').prop("disabled", false);
-            }
-        });
-
-        $('#input-clock1').change(function() {
-            if ($('#input-clock1').val()) {
-                $("#clockText1").text($('#input-clock1').val());
-                a = $('#input-clock1').val();
-            } else {
-                a = "09:00";
-            }
-            b = $('#input-clock2').val();
-            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
-            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-
-            //console.log(parseInt(c) >= 1080);
-            if (parseInt(c) >= parseInt(d)) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help1').show();
-            } else {
-                $('#clock-check-help1').hide();
-            }
-            if (parseInt(c) >= 1080) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help2').show();
-            } else {
-                $('#clock-check-help2').hide();
-            }
-            if (parseInt(c) < parseInt(d) && parseInt(c) < 1080 && parseInt(d) > 540) {
-                $('#clock-check').removeClass('has-error');
-            }
-        });
-        $('#input-clock2').change(function() {
-            $("#clockText2").text($('#input-clock2').val());
-            if ($('#input-clock1').val() > $('#input-clock2').val()) {
-                $('#clock-check').addClass('has-error');
-            }
-            if ($('#input-clock1').val()) {
-                a = $('#input-clock1').val();
-            } else {
-                a = "09:00";
-            }
-            b = $('#input-clock2').val();
-            c = parseInt(a.substr(0,2)*60) + parseInt(a.substr(3,2));
-            d = parseInt(b.substr(0,2)*60 )+ parseInt(b.substr(3,2));
-
-            if (parseInt(c) >= parseInt(d)) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help1').show();
-            } else {
-                $('#clock-check-help1').hide();
-            }
-            if (parseInt(d) <= 540) {
-                $('#clock-check').addClass('has-error');
-                $('#clock-check-help3').show();
-            } else {
-                $('#clock-check-help3').hide();
-            }
-            if (parseInt(c) < parseInt(d) && parseInt(d) > 540 && parseInt(c) < 1080) {
-                $('#clock-check').removeClass('has-error');
-            }
-
-        });
-
-
+        $('input[name="clock1"]').change(function() {TimeChange(1, $(this).val())});
+        $('input[name="clock2"]').change(function() {TimeChange(2, $(this).val())});
         //select2
-        style = '<link rel="stylesheet" href="/plugin/css/plugins/select2/select2.min.css">';
+        var style = '<link rel="stylesheet" href="/plugin/css/plugins/select2/select2.min.css">';
         $('head link:last').after(style);
         //SweerAlert
         style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
@@ -507,6 +408,75 @@
         $('.last-conf').hide();
 
     });
+
+    function RemoveClock(agent) {
+        if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
+            $('#input-clock1').remove();
+            $('#input-clock2').remove();
+        } else { //PC,タブレット
+            $('#time-clock1').remove();
+            $('#time-clock2').remove();
+            //clockpicker
+            $('#clock1').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+                'default': '現在時刻'
+            });
+            $('#clock2').clockpicker({
+                placement: 'bottom',
+                align: 'left',
+                //autoclose: true,
+            });
+        }
+    }
+    function SetNow() {
+        var now = new Date();
+        var val;
+        var ph;
+        var h = now.getHours();
+        if(h < 9 || h >= 18){//9時前あるいは18時以降
+            ph = "09:00";
+            val = "09:00";
+        } else {
+            ph = "Now";
+            var m = now.getMinutes();
+            h = String(h); m = String(m);
+            if (h.length == 1) h = "0".h;
+            if (m.length == 1) m = "0".m;
+            val =  h + ":" + m;
+        }
+        $('input[name="clock1"]').attr("value", val).attr("placeholder", ph);
+    }
+    function ChangeDate() {
+        if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
+        else $("#jQueryTime").text('２日目（２１日）');
+    }
+    function NoTimeCheck() {
+        if ($('input[name="no-time"]').is(':checked')) $('#input-clock2').val("18:00").prop("disabled", true);
+        else $('#input-clock2').prop("disabled", false);
+    }
+    function TimeChange(num, time) {
+        if (time) $('#clockText' + num).text(time);
+        else {
+            $('#clock-check').addClass('has-error');
+            $('#clock-check-help').show();
+        }
+        var time_ = $('input[name="clock' + String(3 - parseInt(num)) + '"]').val();
+
+        var arr = new Array();
+        arr[parseInt(num) - 1] = parseInt(time.substr(0, 2) * 60) + parseInt(time.substr(3, 2));
+        arr[2 - parseInt(num)] = parseInt(time_.substr(0, 2) * 60) + parseInt(time_.substr(3, 2));
+        console.log(arr[0]);
+        if (parseInt(arr[0]) >= parseInt(arr[1]) || parseInt(arr[0]) >= 1080 || parseInt(arr[0]) < 540 || parseInt(arr[1]) <= 540 || parseInt(arr[1]) > 1080) {
+            $('#clock-check').addClass('has-error');
+            $('#clock-check-help').show();
+        } else {
+            $('#clock-check').removeClass('has-error');
+            $('#clock-check-help').hide();
+        }
+    }
+
     function TimePost1(date) {
         $.ajax({
             url: "/search/time-post2",
@@ -617,14 +587,14 @@
         });
     }
 
-    function NoStep1(clock1, clock2, no_time) {
-        c = parseInt(clock1.substr(0,2)*60) + parseInt(clock1.substr(3,2));
-        d = parseInt(clock2.substr(0,2)*60 )+ parseInt(clock2.substr(3,2));
-
-        if (no_time != 1 && (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(d) <= 540 )) {
-            $('a[href="next"]').prop('disabled', true);
+    function NoStep1(clock1, clock2) {
+        var c = parseInt(clock1.substr(0,2)*60) + parseInt(clock1.substr(3,2));
+        var d = parseInt(clock2.substr(0,2)*60 )+ parseInt(clock2.substr(3,2));
+        console.log(d);
+        if (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(c) < 540 || parseInt(d) <= 540 || parseInt(d) > 1080) {
+            return false;
         } else {
-            $('a[href="next"]').prop('disabled', false);
+            return true;
         }
     }
     function NoStep2(start_pos) {
@@ -664,7 +634,7 @@
          role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.png');">
+                <div class="modal-head border-bottom" style="background-image: url('/img/genre/<?php echo $item['pd_genre1']; ?>/<?php echo $item['pd_genre2']; ?>.jpg');">
                     <div class="transparent">
                         <div class="row">
                             <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -679,8 +649,8 @@
                             <p class="m-b-xxs"><?php echo $item['pd_body']; ?></p>
                             <div class="m-t-md" style="margin-left: -4px;">
                                 <div class="rec_pku_acd_icon">
-                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.png">' : ''; ?>
-                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.png">' : ''; ?>
+                                    <?php echo ($item['pd_rec_flg'] || $item['pd_pickup_flg']) ? '<img src="/img/icon/rec_pickup.jpg">' : ''; ?>
+                                    <?php echo ($item['pd_academic_flg']) ? '<img src="/img/icon/academic.jpg">' : ''; ?>
                                 </div>
                                 <div class="width-over">
                                     <i class="fa fa-calendar"></i><?php echo ($item['pp_full']) ? '終日<br>' : ''; ?>
