@@ -1206,3 +1206,11 @@ span.select2-selection__choice__remove {
         height: 494px !important;
     }
 }
+.SNS-link{
+    position: absolute;
+    width: 20%;
+    height: 5%;
+    top: 87%;
+    left: 36%;
+    padding-top: 1%;
+}
