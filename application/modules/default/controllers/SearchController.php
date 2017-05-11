@@ -72,7 +72,7 @@ class SearchController extends Zend_Controller_Action
 
         // pathとユーザー情報をviewに渡す
         $this->view->path       = $this->getRequest()->getPathInfo();
-        $this->view->lang       = $this->_session->lang;
+        $this->view->lang       = $this->_session->langx;
 
         //$this->_helper->layout->setLayout('index');
 
@@ -110,24 +110,28 @@ class SearchController extends Zend_Controller_Action
 
     public function refresh02Action()
     {
-        $this->view->freewds = $this->_main->getFreeWords($this->_session->date, $this->_session->start);
+        $this->view->freewds = $this->_main->getFreeWords($this->_session->date);
+        $this->view->arr = array(
+            'blding' => array(
+                'name' => 'bd_p_label2',
+                'map'  => 'map'
+            ),
+            'bld-other' => array(
+                'name' => 'bo_label',
+                'sub'  => 'bd_p_label2',
+            ),
+            'data' => array(
+                'name' => 'pd_label',
+                'sub'  => 'bd_p_label2',
+            )
+        );
 
     }
 
     public function timePost2Action()
     {
-        // viewレンダリング停止
-        //$this->_helper->layout->disableLayout();
-        //$this->_helper->viewRenderer->setNoRender();
-
         $request = $this->getRequest();
         $this->_session->date = $request->getPost('date');
-        $start = $request->getPost('start');
-        if (strlen($start) == 0) {
-            $time = time() + 9*3600;  //GMTとの時差9時間を足す
-            $start = date("h:i", $time);
-        }
-        $this->_session->start = intval(substr($start, 0, 2)) * 60 + intval(substr($start, 3, 2));
     }
 
     public function timePostAction()
@@ -142,21 +146,23 @@ class SearchController extends Zend_Controller_Action
         $clock2 = $request->getPost('clock2');
         $no_time = $request->getPost('no_time');
 
+        /*ここちょっとやばいかも*/
+        /*
         if (strlen($clock1) == 0) {
             $time = time() + 9*3600;  //GMTとの時差9時間を足す
             $clock1 = date("h:i", $time);
         }
+        */
         if ($no_time) {
             $clock2 = "18:00";
         }
-
 
         $this->_session->date = $radio;
         $this->_session->no_time = $no_time;
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 
-
+exit();
     }
 
 
@@ -168,8 +174,13 @@ class SearchController extends Zend_Controller_Action
 
     }
 
+    /**
+     * DBFix用アクション
+     * 決してコメントアウトを外さないこと
+     */
     public function testAction()
     {
+        /*
         //$data = $this->_main->getProjectData();
         //$this->_main->modifyProjectData();
         //$this->_main->modifyDataPlace();
@@ -178,6 +189,11 @@ class SearchController extends Zend_Controller_Action
         //$this->_main->MakeNoActiveFlg();
         //$this->_main->timeFix2();
         //$this->_main->bddataFix();
+        //$this->_main->bdDataUpdate();
+        //$this->_main->insertFix();
+        //$this->_main->insertStayTime();
+        //$this->_main->fixTimeBug();
+        */
     }
 
     /**
@@ -242,6 +258,18 @@ class SearchController extends Zend_Controller_Action
         }
 
         $N = count($search);
+
+        $_result = array();
+        foreach ($search as $i => $item) { //$itemはpt_pid
+            $_result[$i] = $this->_main->getProjectInfo($item);
+            //！　もし企画startが09:00のものがあれば、現在時刻を変更
+            //必要か？　実験
+            if ($_result[$i]['pt_start_'] == 540) {
+                $clock1 = "08:40"; //これでいいかなぁ〜
+                $this->_session->errMsg = "最適化のため、開始時刻を変更しました。";
+            }
+        }
+
         if (!$clock1) {
             $clock1 = date("h:i");
             if (substr($clock1,0,2) == "06") { //9時台の時のみバグ起こりますので
@@ -251,6 +279,7 @@ class SearchController extends Zend_Controller_Action
         }
         $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
         $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
+
 
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
@@ -280,31 +309,35 @@ class SearchController extends Zend_Controller_Action
         $this->_session->start_pos = $start_pos;
 
         $result = null;
+        $pos_bd_pid = false;
         $pp_search = array();
         $research_t = array(); //再検索後の時間
         $pp_search[0]['bd_pid'] = $start_pos;
         foreach ($search as $i => $item) { //$itemは$pt_pid
-            $_result = $this->_main->getProjectInfo($item);
-
             //企画情報
 
             $pt_pid = $item; //企画summaryID
 
             if ($research) {
-                $time = $request->getParam('re-time'.$_result['pt_pid']);
-            } elseif (strlen($_result['pt_time']) > 0) {
-                $time = $_result['pt_time']; //企画を回るのにかかるデフォの時間
-            } else {
+                $time = $request->getParam('re-time'.$_result[$i]['pt_pid']);
+            } elseif (strlen($_result[$i]['pt_time']) > 0) {
+                $time = $_result[$i]['pt_time']; //企画を回るのにかかるデフォの時間
+            } else { //pt_timeは必ずあるはずなので、この条件文に入ることはないはずだが、一応
                 $time = 30;
             }
             $research_t[$item] = $time;
 
-            $start = ($_result['pt_start_']) ? $_result['pt_start_'] : -1;
+            $start = ($_result[$i]['pt_start_']) ? $_result[$i]['pt_start_'] : -1;
+            //$end   = ($_result[$i]['pt_end_'])   ? $_result[$i]['pt_end_']   : -1;
             $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
+            //$inputData .= sprintf("%d %d %d %d\n", $pt_pid, $start, $end, $time);
+
+            //企画startが09:00(start_ == 540)のものがあれば
+            if ($_result[$i]['pt_start_'] == 540) $pos_bd_pid = $_result[$i]['pp_bd_pid'];
 
             //for企画の建物間のかかる時間
-            //$pp_search[$i]['ps_pid'] = $_result['ps_pid']; //企画のsummaryID 保険のため？
-            $pp_search[$i + 1]['bd_pid'] = $_result['pp_bd_pid']; //建物のid
+            //$pp_search[$i]['ps_pid'] = $_result[$i]['ps_pid']; //企画のsummaryID 保険のため？
+            $pp_search[$i + 1]['bd_pid'] = $_result[$i]['pp_bd_pid']; //建物のid
         }
 
         //企画の建物間のかかる時間

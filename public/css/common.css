@@ -227,16 +227,6 @@ fieldset .ibox .ibox-content {
     border-bottom-left-radius: 6px !important;
     border-bottom-right-radius: 6px !important;
 }
-.search-in {
-    height: 430px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.search-in2 {
-    height: 470px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
 .modal-head {
     padding: 30px;
     border-bottom: 1px solid #e5e5e5;
@@ -617,29 +607,6 @@ fieldset .tabs-container .i-checks {
     text-align: right;
     float: right;
 }
-.i-checks,
-.i-checks {
-    margin-left: 27px;
-}
-.i-checks label {
-    display: inline !important;
-    text-indent: 27px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:first-child,
-#tab-3 .i-checks > span:first-child {
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(2),
-#tab-3 .i-checks > span:nth-child(2) {
-    margin-right: 29px;
-    margin-left: -27px;
-}
-#tab-2 .i-checks > span:nth-child(3),
-#tab-3 .i-checks > span:nth-child(3) {
-    margin-right: 31px;
-    margin-left: -27px;
-}
 .widget {
     position: relative;
 }
@@ -836,7 +803,7 @@ fieldset .tabs-container .i-checks {
 }
 .pos-cover {
     width: 100% !important;
-    height: 100% !important;
+    height: 534px !important;
     overflow: scroll;
 }
 .mapper {
@@ -1112,14 +1079,37 @@ span.select2-selection__choice__remove {
     .vote-comment {
         width: 140px;
     }
-    #page-wrapper.sk-loading > p.sk-spinner-text {
+    #sample01 {
+        position: relative;
+    }
+    #page-wrapper.sk-loading > p.sk-spinner-text,
+    #sample01.sk-loading > p.sk-spinner-text {
         display: block;
         position: fixed;
-        top:40%;
-        left:7%;
         text-align: center;
         z-index: 2000;
     }
+    #page-wrapper.sk-loading > p.sk-spinner-text {
+        width: 93%;
+        left: 7%;
+        top:40%;
+    }
+    #sample01.sk-loading > p.sk-spinner-text {
+        width: 96%;
+        left:4%;
+        top:41%;
+    }
+    #sample01.sk-loading > .sk-spinner-double-bounce {
+        display: block;
+        position: fixed;
+        top: 35%;
+        left:0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        z-index: 2000;
+    }
+
     #page-wrapper.sk-loading > .sk-spinner-btn {
         display: block;
         position: fixed;
@@ -1189,9 +1179,20 @@ span.select2-selection__choice__remove {
         height: 395px;
     }
 }
+@media screen and ( max-width:660px ) {
+    .pos-cover {
+        height: 514px !important;
+    }
+}
+
 @media screen and ( max-width:500px) {
     .footer {
         font-size: 11px;
         height: 39px;
+    }
+}
+@media screen and ( max-width:346px ) {
+    .pos-cover {
+        height: 494px !important;
     }
 }
