@@ -287,6 +287,7 @@
 
                                             </div>
                                         </div>
+
                                     </div>
                                 </fieldset>
 
@@ -377,6 +378,14 @@
     </div>
 </div>
 
+<div class="SNS-link">
+    <a data-size="large" data-text="東京大学五月祭経路探索アプリ「MaySearch」" data-hashtags="五月祭" class="twitter-share-button" href="https://twitter.com/share" data-dnt="true">Tweet</a>
+    <a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
+	<img src="img/share-a.png" width="90" height="25" alt="LINEで送る" />
+</a>
+</div>
+
+
 <!-- Mainly scripts -->
 <script src="/plugin/js/jquery-3.1.1.min.js"></script>
 <script src="/plugin/js/bootstrap.min.js"></script>
@@ -391,6 +400,7 @@
 <script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
 
 <script>
+window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
     $(document).ready(function() {
         $("#form").steps({
             bodyTag: "fieldset",
