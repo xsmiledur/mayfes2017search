@@ -971,23 +971,46 @@ span.select2-selection__choice__remove {
 .width-change {
     padding-left: 50px;
 }
-#eeic img {
+#eeic img,
+#twitter img {
     position: absolute;
     top: 10px;
     left: 5px;
     height: 70px;
 }
+#twitter p {
+    text-align: right;
+    color: #ffffff;
+
+}
+.show1 {
+    display: block;
+}
+.show2 {
+    display: none;
+}
 
 @media screen and ( max-width:1199px ) {
-    #eeic {
+    .show1 {
+        display: none;
+    }
+    .show2 {
+        display: block;
+    }
+    #twitter, #eeic {
         height: 40px !important;
     }
-    #eeic img {
+    #eeic img,
+    #twitter img {
         top: 5px;
         height: 30px;
     }
-    #eeic p {
+    #eeic p,
+    #twitter p {
         text-align: right;
+    }
+    #twitter p {
+        top: 6px;
     }
     .width-change {
         padding-left: 15px;

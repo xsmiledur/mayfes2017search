@@ -90,6 +90,14 @@ class IndexController extends Zend_Controller_Action
         */
 
 
+
+        /*
+        $text = "工学部応用物理系";
+        $encoded = rawurlencode( $text ) ;
+        echo $encoded;
+        */
+
+
     }
 
 
