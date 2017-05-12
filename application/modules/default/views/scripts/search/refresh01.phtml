@@ -641,13 +641,10 @@
 
         $('input.select-p').change(function() {
             var val = $(this).val();
-            console.log(val);
             if ($(this).is(':checked')) {
-                console.log("checked");
                 $('.select-p[value="' + val + '"]').prop('checked', true);
                 $('li#' + val).show();
             } else {
-                console.log("unchecked");
                 $('.select-p[value="' + val + '"]').prop('checked', false);
                 $('li#' + val).hide();
             }

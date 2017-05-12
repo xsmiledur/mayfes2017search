@@ -539,10 +539,8 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
     function SetNow() {
         var now = new Date();
         var val;
-        var ph;
         var h = now.getHours();
         if(h < 9 || h >= 18){//9時前あるいは18時以降
-            ph  = "09:00";
             val = "09:00";
         } else {
             var m = now.getMinutes();
@@ -550,10 +548,9 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             if (h.length == 1) h = "0" + h;
             if (m.length == 1) m = "0" + m;
             val = h + ":" + m;
-            ph  = h + ":" + m;
         }
         $('#clockText1').text(ph);
-        $('input[name="clock1"]').attr("value", val).attr("placeholder", ph);
+        $('input[name="clock1"]').attr("value", val);
     }
     function ChangeDate() {
         if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
