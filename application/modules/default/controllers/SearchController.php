@@ -281,6 +281,9 @@ exit();
         $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
 
 
+        //$inputData .= sprintf("%d\n", $N);
+        //$inputData .= sprintf("%d %d %d -1\n", $start_pos, $clock1_, $clock2_);
+
         $inputData .= sprintf("%d %d\n", $N, $start_pos);
         $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
 
@@ -328,7 +331,7 @@ exit();
             $research_t[$item] = $time;
 
             $start = ($_result[$i]['pt_start_']) ? $_result[$i]['pt_start_'] : -1;
-            //$end   = ($_result[$i]['pt_end_'])   ? $_result[$i]['pt_end_']   : -1;
+            $end   = ($_result[$i]['pt_end_'])   ? $_result[$i]['pt_end_']   : -1;
             $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
             //$inputData .= sprintf("%d %d %d %d\n", $pt_pid, $start, $end, $time);
 

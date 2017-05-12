@@ -832,11 +832,19 @@ fieldset .tabs-container .i-checks {
 .mapper {
     cursor: crosshair;
 }
-.contact-box.center-version .pe-7s-date,
-.contact-box.center-version .pe-7s-clock {
+.contact-box.center-version i.pe-7s-date,
+.contact-box.center-version i.pe-7s-clock {
     font-size: 60px;
      margin-top: 30px;
      margin-bottom: 30px;
+}
+.contact-box.center-version span.pe-7s-date,
+.contact-box.center-version span.pe-7s-clock {
+    height: 100%;
+}
+#input-clock1:disabled,
+#input-clock2:disabled {
+
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;

@@ -223,17 +223,17 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
                                                         <div id="clock-check">
                                                             <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" placeholder="Now">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" placeholder="Now" data-mask="99:99">
                                                                 <input class="form-control" name="clock1" type="time" id="time-clock1" value="" placeholder="Now">
                                                                 <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
+                                                                <span class="pe-7s-clock"></span>
                                                                 </span>
                                                             </div>
                                                             <div class="input-group clockpicker" id="clock2">
-                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" >
+                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" data-mask="99:99">
                                                                 <input class="form-control" type="time" name="clock2" id="time-clock2" value="18:00" >
                                                                 <span class="input-group-addon">
-                                                                <span class="fa fa-clock-o"></span>
+                                                                <span class="pe-7s-clock"></span>
                                                             </span>
                                                             </div>
                                                             <div class="checkbox checkbox-primary">
@@ -522,13 +522,16 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             $('#clock1').clockpicker({
                 placement: 'bottom',
                 align: 'left',
-                //autoclose: true,
+                autoclose: true,
                 'default': '現在時刻'
             });
             $('#clock2').clockpicker({
                 placement: 'bottom',
                 align: 'left',
-                //autoclose: true,
+                autoclose: true,
+            });
+            $('#clock1').on('keydown', function(){
+                return false;
             });
         }
     }
@@ -540,13 +543,12 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         if(h < 9 || h >= 18){//9時前あるいは18時以降
             ph = "09:00";
             val = "09:00";
-
         } else {
-            ph = "Now";
+            ph = "現在時刻";
             var m = now.getMinutes();
             h = String(h); m = String(m);
-            if (h.length == 1) h = "0".h;
-            if (m.length == 1) m = "0".m;
+            if (h.length == 1) h = "0" + h;
+            if (m.length == 1) m = "0" + m;
             val =  h + ":" + m;
         }
         $('#clockText1').text(ph);
@@ -561,21 +563,30 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         else $('#input-clock2').prop("disabled", false);
     }
     function TimeChange(num, time) {
-        if (time) $('#clockText' + num).text(time);
-        else {
+        if (!time) {
             $('#clock-check').addClass('has-error');
             $('#clock-check-help').show();
+            return false;
         }
         var time_ = $('input[name="clock' + String(3 - parseInt(num)) + '"]').val();
 
         var arr = new Array();
-        arr[parseInt(num) - 1] = parseInt(time.substr(0, 2) * 60) + parseInt(time.substr(3, 2));
-        arr[2 - parseInt(num)] = parseInt(time_.substr(0, 2) * 60) + parseInt(time_.substr(3, 2));
-        console.log(arr[0]);
-        if (parseInt(arr[0]) >= parseInt(arr[1]) || parseInt(arr[0]) >= 1080 || parseInt(arr[0]) < 540 || parseInt(arr[1]) <= 540 || parseInt(arr[1]) > 1080) {
+        var h, m;
+        var flg = 1;
+        h = time.substr(0, 2); m = time.substr(3, 2);
+        if ($.isNumeric(h) && $.isNumeric(m)) {
+            arr[parseInt(num) - 1] = parseInt(h * 60) + parseInt(m);
+        } else flg = 0;
+        h = time_.substr(0, 2); m = time_.substr(3, 2);
+        if ($.isNumeric(h) && $.isNumeric(m)) {
+            arr[2 - parseInt(num)] = parseInt(h * 60) + parseInt(m);
+        } else flg = 0;
+        if ((parseInt(arr[0]) >= parseInt(arr[1]) || parseInt(arr[0]) >= 1080 || parseInt(arr[0]) < 540 || parseInt(arr[1]) <= 540 || parseInt(arr[1]) > 1080)
+        && flg == 1) {
             $('#clock-check').addClass('has-error');
             $('#clock-check-help').show();
         } else {
+            $('#clockText' + num).text(time);
             $('#clock-check').removeClass('has-error');
             $('#clock-check-help').hide();
         }
