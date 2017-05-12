@@ -68,3 +68,15 @@
 .pe-7s-home:before {
 	content: "\e648";
 }
+.pe-7s-close-circle:before {
+	content: "\e681";
+}
+.pe-7s-close:before {
+	content: "\e680";
+}
+.pe-7s-play:before {
+	content: "\e624";
+}
+.pe-7s-print:before {
+	content: "\e61f";
+}
