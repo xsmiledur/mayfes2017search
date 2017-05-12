@@ -223,15 +223,15 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
                                                         <div id="clock-check">
                                                             <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" placeholder="Now" data-mask="99:99">
-                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="" placeholder="Now">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" disabled="">
+                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="">
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"></span>
                                                                 </span>
                                                             </div>
                                                             <div class="input-group clockpicker" id="clock2">
-                                                                <input type="text" class="form-control" name="clock2" id="input-clock2" value="18:00" data-mask="99:99">
-                                                                <input class="form-control" type="time" name="clock2" id="time-clock2" value="18:00" >
+                                                                <input class="form-control" name="clock2" type="text" id="input-clock2" value="18:00" disabled="">
+                                                                <input class="form-control" name="clock2" type="time" id="time-clock2" value="18:00" >
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"></span>
                                                             </span>
@@ -317,22 +317,25 @@
                                         <div class="ibox-content b-r-md">
                                             <div class="row" style="padding: 15px;">
                                                 <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-date"></i> </a>
                                                         <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
+                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
                                                         <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
+                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md">
+                                                    <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-map-marker"></i> </a>
                                                         <label id="here" style="font-weight:normal;"></label>
+                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-1" class="btn btn-default btn-xs">変更</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12" style="height: 100%; overflow: scroll;">
@@ -527,12 +530,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
                 placement: 'bottom',
                 align: 'left',
                 autoclose: true,
-            });
-            $('#input-clock1').on('keydown', function(){
-                return false;
-            });
-            $('#input-clock2').on('keydown', function(){
-                return false;
             });
         }
     }

@@ -858,7 +858,8 @@ fieldset .tabs-container .i-checks {
 }
 #input-clock1:disabled,
 #input-clock2:disabled {
-
+    cursor: default !important;
+    background-color: #FFFFFF !important;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;
