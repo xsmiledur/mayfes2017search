@@ -530,7 +530,10 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
                 align: 'left',
                 autoclose: true,
             });
-            $('#clock1').on('keydown', function(){
+            $('#input-clock1').on('keydown', function(){
+                return false;
+            });
+            $('#input-clock2').on('keydown', function(){
                 return false;
             });
         }
