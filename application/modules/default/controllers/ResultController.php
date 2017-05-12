@@ -93,6 +93,10 @@ class ResultController extends Zend_Controller_Action
 
         /*建物情報*/
         $bd_pid = $this->setBuildingInfo($start_pos, $pt_pid);
+        echo "<pre>";
+        var_dump($pt_pid);
+        var_dump($bd_pid);
+        echo "</pre>";
 
         /*順路*/
         $order = $this->setOrderInfo($bd_pid);
@@ -106,6 +110,10 @@ class ResultController extends Zend_Controller_Action
          * $data['end_']に終了時刻分単位表示が格納されている
          */
         $data = $this->fixProject($pt_pid, $order, $research_t, $start_);
+
+        echo "<pre>";
+        var_dump($order);
+        echo "</pre>";
 
         $this->view->project = $data['project'];
         $this->view->start   = $start;
@@ -125,10 +133,12 @@ class ResultController extends Zend_Controller_Action
     private function setBuildingInfo($start_pos, $pt_pid) {
         $bd_pid = array();
         foreach ($pt_pid as $i => $item) { //$itemの中身はpt_pid
-            if ($i == 0) $bd_pid = $start_pos;
+            if ($i == 0) $bd_pid[$i] = $start_pos;
             else {
                 $info = $this->_main->getProjectInfo($item);
                 $bd_pid[$i] = $info['pp_bd_pid'];
+                var_dump($i);
+                var_dump($bd_pid);
             }
         }
         return $bd_pid;
@@ -186,6 +196,9 @@ class ResultController extends Zend_Controller_Action
             $project[$i]['start'] = $this->fixTime($start_); //時刻表示にする
             $start_ = $this->setNextOrderTimeStart($start_, $time, $re_t, $end);
         }
+        //移動時間も書く
+        $project[$i]['time'] = $order[$i]['time'];
+
         $result['start_'] = $start_;
         $result['project'] = $project;
         return $result;
