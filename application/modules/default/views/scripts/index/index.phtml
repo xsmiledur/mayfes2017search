@@ -453,9 +453,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             },
             onFinishing: function (event, currentIndex) {
                 var search = FinishCheck();
-                console.log(search);
-                console.log(search.length);
-
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
 
@@ -604,7 +601,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             },
             timeout: 10000,
             success: function(arr) {
-                //console.log(arr);
                 $.ajax({
                     type: 'GET',
                     url: '/search/refresh02',
@@ -642,7 +638,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             },
             timeout: 10000,
             success: function(arr) {
-                console.log(arr);
                 $.ajax({
                     type: 'GET',
                     url: '/search/refresh01',
@@ -665,7 +660,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
 
             },
             error:function(arr) {
-                console.log(arr);
                 alert('問題がありました。');
             }
         });
@@ -710,7 +704,6 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
     function NoStep1(clock1, clock2) {
         var c = parseInt(clock1.substr(0,2)*60) + parseInt(clock1.substr(3,2));
         var d = parseInt(clock2.substr(0,2)*60 )+ parseInt(clock2.substr(3,2));
-        console.log(d);
         if (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(c) < 540 || parseInt(d) <= 540 || parseInt(d) > 1080) {
             return false;
         } else {
