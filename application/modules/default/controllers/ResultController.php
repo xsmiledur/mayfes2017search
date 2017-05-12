@@ -93,10 +93,6 @@ class ResultController extends Zend_Controller_Action
 
         /*建物情報*/
         $bd_pid = $this->setBuildingInfo($start_pos, $pt_pid);
-        echo "<pre>";
-        var_dump($pt_pid);
-        var_dump($bd_pid);
-        echo "</pre>";
 
         /*順路*/
         $order = $this->setOrderInfo($bd_pid);
@@ -110,10 +106,6 @@ class ResultController extends Zend_Controller_Action
          * $data['end_']に終了時刻分単位表示が格納されている
          */
         $data = $this->fixProject($pt_pid, $order, $research_t, $start_);
-
-        echo "<pre>";
-        var_dump($order);
-        echo "</pre>";
 
         $this->view->project = $data['project'];
         $this->view->start   = $start;
@@ -137,8 +129,6 @@ class ResultController extends Zend_Controller_Action
             else {
                 $info = $this->_main->getProjectInfo($item);
                 $bd_pid[$i] = $info['pp_bd_pid'];
-                var_dump($i);
-                var_dump($bd_pid);
             }
         }
         return $bd_pid;
