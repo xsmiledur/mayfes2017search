@@ -968,8 +968,14 @@ span.select2-selection__choice__remove {
     height: 100%;
     overflow-x: hidden;
 }
+.width-change {
+    padding-left: 50px;
+}
 
 @media screen and ( max-width:1199px ) {
+    .width-change {
+        padding-left: 15px;
+    }
     .pos-cover {
         height: 514px !important;
     }
