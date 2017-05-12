@@ -80,51 +80,63 @@ class ResultController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $errMsg = $this->_session->errMsg;
-        if (strlen($errMsg) > 0) {
-            echo $errMsg;
-            //exit();
-        }
-        $pt_pid = $this->_session->pt_pid;  //企画pt_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
-        $order = $this->_session->order;    //企画の回る順路を配列で。キーk(1≦i≦N-1)には企画i→企画i+1に回る経路の情報が与えられている。
-        $research_t = $this->_session->research_t; //再検索の場合の、個別に設定した企画ごとの時間が格納されている配列
+        $pt_pid     = $this->_session->pt_pid;      //企画pt_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
+        $research_t = $this->_session->research_t;  //再検索の場合の、個別に設定した企画ごとの時間が格納されている配列
+        $start      = $this->_session->start;       //開始時刻
+        $start_pos  = $this->_session->start_pos;   //現在地の建物番号 bd_pid
 
-
-        //キーiに対してキー"time"には経路にかかる時間、
-        //"way"にはキーj（j≧1）が与えられており、キーjにはj番目に回るノード番号が与えられている。
-        $start = $this->_session->start;
-        $start_pos = $this->_session->start_pos; //現在地の建物番号 bd_pid
-
+        /*エラーメッセージ*/
         if ($this->_session->errMsg) {
             $this->view->errMsg = $this->_session->errMsg;
             unset($this->_session->errMsg);
         }
-        /*
-        echo "<pre>";
-        var_dump($pt_pid);
-        var_dump($order);
-        var_dump($start);
-        var_dump($start_pos);
-        echo "</pre>";
-        */
-        //exit();
 
-        //建物情報
+        /*建物情報*/
+        $bd_pid = $this->setBuildingInfo($start_pos, $pt_pid);
+
+        /*順路*/
+        $order = $this->setOrderInfo($bd_pid);
+
+        /*開始時刻を分単位に直す*/
+        $start_ = $this->convertTime($start);
+
+        /*
+         * 企画データの到着時刻、終了時刻、移動時間を格納
+         * $data['project']に企画データ、
+         * $data['end_']に終了時刻分単位表示が格納されている
+         */
+        $data = $this->fixProject($pt_pid, $order, $research_t, $start_);
+
+        $this->view->project = $data['project'];
+        $this->view->start   = $start;
+        $this->view->end     = $this->fixTime($data['end_']); //時刻表示にする
+
+        $this->view->start_pos_bd_pid = $start_pos;
+        $this->view->start_pos = $this->_main->getBuildingData($start_pos);
+        $this->view->order = $order;
+
+    }
+
+    /**
+     * @param $start_pos
+     * @param $pt_pid
+     * @return array
+     */
+    private function setBuildingInfo($start_pos, $pt_pid) {
         $bd_pid = array();
         foreach ($pt_pid as $i => $item) { //$itemの中身はpt_pid
-            if ($i == 0) {
-                $bd_pid[$i] = $start_pos;
-            } else {
+            if ($i == 0) $bd_pid = $start_pos;
+            else {
                 $info = $this->_main->getProjectInfo($item);
-                //var_dump($info['pp_bd_pid']);
                 $bd_pid[$i] = $info['pp_bd_pid'];
             }
         }
+        return $bd_pid;
 
-        //順路
+    }
+
+    private function setOrderInfo($bd_pid) {
         $order = array();
-        $num = $this->_session->num;
-        $switch = $this->_session->switch;
         foreach ($bd_pid as $i => $item) { //bd_pidのキーは$i=1から
             if ($item != $bd_pid[$i + 1]) {
                 $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
@@ -132,51 +144,8 @@ class ResultController extends Zend_Controller_Action
                 $order[$i]['time'] = false;
             }
             $order[$i]['way'] = $this->_main->getOrderWay($item, $bd_pid[$i + 1]);  //ある企画の場所から次の企画の場所への道順
-            //$order[$i]['way'][count($order[$i]['way']) + 1] = $bd_copid[$i + 1];
         }
-
-
-        $start_ = intval(substr($start,0,2)) * 60 + intval(substr($start,3,2)); //分単位の開始時刻
-        $project = array();
-        echo "<pre>";
-        var_dump($pt_pid);
-        echo "</pre>";
-        echo "<pre>";
-        var_dump($order);
-        echo "</pre>";
-
-        foreach ($pt_pid as $key => $item) { //$key=0は企画の個数Nのこと
-
-            if ($key != 0) {
-                $project = $this->setProjectInfo($project, $key-1, $item, $order);
-                $project = $this->setResearchTime($project, $research_t, $key-1, $item);
-                $result = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $research_t[$item], $key-1, $start_, $order);
-                $project = $result['project'];
-                $start_  = $result['start_'];
-            }
-        }
-
-        $this->view->project = $project;
-        $this->view->start   = $start;
-
-        /*
-        $h = floor($_start/60); //時間
-        if (strlen($h) < 2 ) $h = "0".$h;
-        $m = $_start%60; //分
-        if (strlen($m) < 2 ) $m = "0".$m;
-        */
-        $this->view->end     = $this->fixTime($start_); //時刻表示にする
-
-        $this->view->start_pos_bd_pid = $start_pos;
-        $this->view->start_pos = $this->_main->getBuildingData($start_pos);
-        $this->view->order = $order;
-        /*
-        echo "<pre>";
-        var_dump($order);
-        echo "</pre>";
-        */
-
-
+        return $order;
     }
 
     private function setProjectInfo($project, $i, $pt_pid, $order) {
@@ -204,9 +173,6 @@ class ResultController extends Zend_Controller_Action
      * @return mixed
      */
     private function setStartEnd($project, $start, $end, $time, $re_t, $i, $start_, $order) {
-        echo "<pre>";
-        var_dump($i);
-        var_dump($start_);
 
         if ($start) { //もしこの企画に開始時刻が存在すれば
             $project[$i]['start'] = $this->fixTime($start); //開始時刻はそのまま入れる
@@ -220,8 +186,6 @@ class ResultController extends Zend_Controller_Action
             $project[$i]['start'] = $this->fixTime($start_); //時刻表示にする
             $start_ = $this->setNextOrderTimeStart($start_, $time, $re_t, $end);
         }
-        var_dump($start_);
-        echo "</pre>";
         $result['start_'] = $start_;
         $result['project'] = $project;
         return $result;
@@ -241,6 +205,40 @@ class ResultController extends Zend_Controller_Action
         return $h.":".$m;
     }
 
+    /**
+     * 99:99の時間表示を分単位に直す
+     * @param $time
+     * @return mixed
+     */
+    private function convertTime($time) {
+        return intval(substr($time,0,2)) * 60 + intval(substr($time,3,2)); //分単位の時刻
+    }
+
+    private function fixProject($pt_pid, $order, $research_t, $start_) {
+        $project = array();
+        foreach ($pt_pid as $key => $item) { //$key=0は企画の個数Nのこと
+
+            if ($key != 0) {
+                $project = $this->setProjectInfo($project, $key-1, $item, $order);
+                $project = $this->setResearchTime($project, $research_t, $key-1, $item);
+                $result  = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $research_t[$item], $key-1, $start_, $order);
+                $project = $result['project'];
+                $start_  = $result['start_'];
+            }
+        }
+        $data['project'] = $project;
+        $data['end_'] = $start_;
+        return $data;
+    }
+
+    /**
+     * 次の企画へ向かう移動開始時刻を算出
+     * @param $start
+     * @param $time
+     * @param $re_t
+     * @param $end
+     * @return int
+     */
     private function setNextOrderTimeStart($start, $time, $re_t, $end) {
         if (strlen($re_t) > 0)  $start += $re_t; //変更した滞在時間
         elseif (strlen($time) > 0) $start += $time; //標準の滞在時間があれば、これを足す

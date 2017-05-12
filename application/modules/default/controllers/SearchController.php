@@ -375,7 +375,7 @@ exit();
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
 
         $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
-        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
+        //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
         //var_dump("opencheck");
         //var_dump(is_resource($proc));
         if(is_resource($proc)){
@@ -409,13 +409,7 @@ exit();
                 unset($pt_pid[$N + 1]);
                 $this->_session->pt_pid = $pt_pid;
 
-                //var_dump($pt_pid);
-                //var_dump($N);
-
-
-                //$this->_session->ps_pid = $ps_pid;
                 $this->_session->research_t = $research_t;
-
 
                 //再検索のためのsession保存
                 $this->_session->re_search    = $search;
