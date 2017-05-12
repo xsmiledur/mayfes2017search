@@ -723,9 +723,11 @@ class MainModel
      * @param $switch //足すかかけるか 1なら足す 0ならかける
      * @return bool
      */
-    public function getTimeInfo($bd_pid1, $bd_pid2, $time, $switch)
+    public function getTimeInfo($bd_pid1, $bd_pid2)
     {
 
+        $time = 1;
+        $switch = 0;
         // トランザクション開始
         $this->_read->beginTransaction();
         $this->_read->query('begin');

@@ -316,6 +316,7 @@ exit();
         $pp_search = array();
         $research_t = array(); //再検索後の時間
         $pp_search[0]['bd_pid'] = $start_pos;
+
         foreach ($search as $i => $item) { //$itemは$pt_pid
             //企画情報
 
@@ -350,7 +351,7 @@ exit();
                 if ($item['bd_pid'] == $item2['bd_pid']) {
                     $time[$j] = 0;
                 } else {
-                    $time[$j] = $this->_main->getTimeInfo($item['bd_pid'], $item2['bd_pid'], $num, $switch);
+                    $time[$j] = $this->_main->getTimeInfo($item['bd_pid'], $item2['bd_pid']);
                 }
             }
             foreach ($time as $key => $val) {
@@ -374,7 +375,7 @@ exit();
         //var_dump(proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd));
 
         $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
-        //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
+        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
         //var_dump("opencheck");
         //var_dump(is_resource($proc));
         if(is_resource($proc)){

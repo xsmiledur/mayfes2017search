@@ -127,7 +127,7 @@ class ResultController extends Zend_Controller_Action
         $switch = $this->_session->switch;
         foreach ($bd_pid as $i => $item) { //bd_pidのキーは$i=1から
             if ($item != $bd_pid[$i + 1]) {
-                $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1], $num, $switch); //ある企画の場所から次の企画の場所へ行くのに必要な時間
+                $order[$i]['time'] = $this->_main->getTimeInfo($item, $bd_pid[$i + 1]); //ある企画の場所から次の企画の場所へ行くのに必要な時間
             } else {
                 $order[$i]['time'] = false;
             }
@@ -136,45 +136,36 @@ class ResultController extends Zend_Controller_Action
         }
 
 
-        $_start = intval(substr($start,0,2)) * 60 + intval(substr($start,3,2)); //分単位の開始時刻
+        $start_ = intval(substr($start,0,2)) * 60 + intval(substr($start,3,2)); //分単位の開始時刻
         $project = array();
-        foreach ($pt_pid as $key => $item) { //$key=0は企画の個数
+        echo "<pre>";
+        var_dump($pt_pid);
+        echo "</pre>";
+        echo "<pre>";
+        var_dump($order);
+        echo "</pre>";
+
+        foreach ($pt_pid as $key => $item) { //$key=0は企画の個数Nのこと
+
             if ($key != 0) {
-                $project[$key-1]['info'] = $this->_main->getProjectInfo($item); //これでproject情報が手に入る
-                //if (strlen($project[$key-1]['info']['pt_time']) == 0) $project[$key-1]['info']['pt_time'] = 30; //あり得ない場合です
-                $project[$key-1]['time'] = $order[$key-1]['time']; //移動にかかる時間
-                //$project[$key-1]['pre']  = $_start;
-                if ($project[$key-1]['info']['pt_start']) { //もしこの企画に開始時刻が存在すれば
-                    $project[$key-1]['start'] = $project[$key-1]['info']['pt_start']; //開始時刻はそのまま
-                    $_start = $project[$key-1]['info']['pt_start_'];
-                    if (strlen($project[$key-1]['info']['pt_time']) > 0) {
-                        $_start += $project[$key-1]['info']['pt_time'];
-                    } else {
-                        $_start = $project[$key-1]['info']['pt_end_']; //次の開始時刻の式に今回の終了時刻を分で代入
-                    }
-                } else { //なければ、前の開始時刻に
-                    $_start = $_start + $order[$key-1]['time']; //移動時間を足して
-                    $h = floor($_start/60); //時間
-                    if (strlen($h) < 2 ) $h = "0".$h;
-                    $m = $_start%60; //分
-                    if (strlen($m) < 2 ) $m = "0".$m;
-                    $project[$key-1]['start'] = $h . ":" . $m; //時刻表示にする
-                    $_start = $_start + $project[$key-1]['info']['pt_time']; //今回の企画の滞在時間を足しておく
-                }
-                if ($research_t[$item]) { //再検索した時の個別に設定した企画毎の時間データがあるなら
-                    $project[$key-1]['research_t'] = $research_t[$item]; //再検索時に変更した時間のデータがあれば格納
-                }
+                $project = $this->setProjectInfo($project, $key-1, $item, $order);
+                $project = $this->setResearchTime($project, $research_t, $key-1, $item);
+                $result = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $research_t[$item], $key-1, $start_, $order);
+                $project = $result['project'];
+                $start_  = $result['start_'];
             }
         }
 
         $this->view->project = $project;
         $this->view->start   = $start;
 
+        /*
         $h = floor($_start/60); //時間
         if (strlen($h) < 2 ) $h = "0".$h;
         $m = $_start%60; //分
         if (strlen($m) < 2 ) $m = "0".$m;
-        $this->view->end     = $h . ":" . $m; //時刻表示にする
+        */
+        $this->view->end     = $this->fixTime($start_); //時刻表示にする
 
         $this->view->start_pos_bd_pid = $start_pos;
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
@@ -187,6 +178,77 @@ class ResultController extends Zend_Controller_Action
 
 
     }
+
+    private function setProjectInfo($project, $i, $pt_pid, $order) {
+        $project[$i]['info'] = $this->_main->getProjectInfo($pt_pid); //これでproject情報が手に入る
+        //if (strlen($project[$key-1]['info']['pt_time']) == 0) $project[$key-1]['info']['pt_time'] = 30; //あり得ない場合です
+        $project[$i]['time'] = $order[$i]['time']; //移動にかかる時間
+        return $project;
+    }
+
+    private function setResearchTime($project, $re_t, $i, $pt_pid) {
+        if ($re_t[$pt_pid]) { //再検索した時の個別に設定した企画毎の時間データがあるなら
+            $project[$i]['research_t'] = $re_t[$pt_pid]; //再検索時に変更した滞在時間のデータがあれば格納
+        }
+        return $project;
+    }
+
+    /**
+     * @param $project //企画全データ
+     * @param $start //対象の企画の開始時刻
+     * @param $end　//対象の企画の終了時刻
+     * @param $time //対象の企画の滞在時間目安
+     * @param $re_t //対象の企画の変更後の滞在時間
+     * @param $i //対象の企画のindex
+     * @param $start_ //次の開始時刻
+     * @return mixed
+     */
+    private function setStartEnd($project, $start, $end, $time, $re_t, $i, $start_, $order) {
+        echo "<pre>";
+        var_dump($i);
+        var_dump($start_);
+
+        if ($start) { //もしこの企画に開始時刻が存在すれば
+            $project[$i]['start'] = $this->fixTime($start); //開始時刻はそのまま入れる
+            //次回の移動開始時刻を考える
+            $start_ = $this->setNextOrderTimeStart($start, $time, $re_t, $end);
+
+        } else { //なければ、前の開始時刻に
+            if ($order[$i]['time']) {
+                $start_ += $order[$i]['time']; //前回算出した今回の移動開始時刻に、移動時間を足して、企画を見て回る開始時刻にする
+            }
+            $project[$i]['start'] = $this->fixTime($start_); //時刻表示にする
+            $start_ = $this->setNextOrderTimeStart($start_, $time, $re_t, $end);
+        }
+        var_dump($start_);
+        echo "</pre>";
+        $result['start_'] = $start_;
+        $result['project'] = $project;
+        return $result;
+    }
+
+    /**
+     * 時間表示を99:99に直す
+     * @param $_time
+     * @return string
+     */
+    private function fixTime($_time)
+    {
+        $h = floor($_time/60); //時間
+        if (strlen($h) < 2 ) $h = "0".$h;
+        $m = $_time%60; //分
+        if (strlen($m) < 2 ) $m = "0".$m;
+        return $h.":".$m;
+    }
+
+    private function setNextOrderTimeStart($start, $time, $re_t, $end) {
+        if (strlen($re_t) > 0)  $start += $re_t; //変更した滞在時間
+        elseif (strlen($time) > 0) $start += $time; //標準の滞在時間があれば、これを足す
+        elseif (strlen($end) > 0) $start = $end; //次の開始時刻の式に今回の終了時刻を分で代入
+        else $start += 30;
+        return $start;
+    }
+
 
 
 }
