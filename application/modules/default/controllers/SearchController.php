@@ -87,12 +87,6 @@ class SearchController extends Zend_Controller_Action
     public function refresh01Action()
     {
         $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
-        //unset ($this->view->data);
-        //unset ($this->view->info);
-
-        //$this->view->data_area  = $this->_main->getProjectDataArea($start, $end);
-        //$this->view->data_genre = $this->_main->getProjectDataGenre($start, $end);
-        //$this->view->data_rec   = $this->_main->getProjectDataRec($start, $end);
 
         $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
         $this->view->icon = array(
@@ -141,24 +135,11 @@ class SearchController extends Zend_Controller_Action
         //$this->_helper->viewRenderer->setNoRender();
 
         $request = $this->getRequest();
-        $radio  = $request->getPost('radio');
+        $date  = $request->getPost('date');
         $clock1 = $request->getPost('clock1');
         $clock2 = $request->getPost('clock2');
-        $no_time = $request->getPost('no_time');
 
-        /*ここちょっとやばいかも*/
-        /*
-        if (strlen($clock1) == 0) {
-            $time = time() + 9*3600;  //GMTとの時差9時間を足す
-            $clock1 = date("h:i", $time);
-        }
-        */
-        if ($no_time) {
-            $clock2 = "18:00";
-        }
-
-        $this->_session->date = $radio;
-        $this->_session->no_time = $no_time;
+        $this->_session->date = $date;
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 

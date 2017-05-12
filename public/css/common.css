@@ -510,6 +510,19 @@ a#jump div:active {
 .last-conf {
     padding: 5px 0 !important;
 }
+.last-conf label {
+    width: 27%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.last-conf .pe-7s-close {
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
 h1.top-title {
     color: #ffffe0;
     font-size: 12em;
@@ -1197,6 +1210,9 @@ span.select2-selection__choice__remove {
     span.stay-text {
          width: 15%;
     }
+    .last-conf label {
+        width: 60%;
+    }
     .check-text {
         width: 95%;
     }
@@ -1212,8 +1228,8 @@ span.select2-selection__choice__remove {
     .contact-box.center-version {
         margin-bottom :5px;
     }
-    .contact-box.center-version .pe-7s-date,
-    .contact-box.center-version .pe-7s-clock {
+    .contact-box.center-version i.pe-7s-date,
+    .contact-box.center-version i.pe-7s-clock {
         margin-top: 10px;
         margin-bottom: 10px;
     }

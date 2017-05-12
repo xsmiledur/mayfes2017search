@@ -178,11 +178,11 @@ class MainModel
             $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
             $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
             $sql .= "WHERE pd_active_flg = '1' ";
-            $sql .= "AND pp_day = '{$date}' ";
-            $sql .= "AND (pt_full = 1 ";
-            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+
+            $sql .= $this->ConnectSql($date, $start, $end);
+
+            $sql .= ";";
+
             $data['data'] = $this->_read->fetchAll($sql);
 
             // 成功した場合はコミットする
@@ -241,13 +241,13 @@ class MainModel
                     $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
                     $sql .= "INNER JOIN building_data ON pp_bd_pid = bd_pid ";
                     $sql .= "WHERE pd_active_flg = '1' ";
-                    $sql .= "AND pp_day = '{$date}' ";
+
+                    $sql .= $this->ConnectSql($date, $start, $end);
+
                     $sql .= "AND pp_name1 = '{$item2['bd_p_name1']}' ";
                     $sql .= "AND pp_name2 = '{$item2['bd_p_name2']}' ";
-                    $sql .= "AND (pt_full = 1 ";
-                    $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-                    $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-                    $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
+                    $sql .= ";";
+
                     $data['area'][$item['name']][$key2]['data'] = $this->_read->fetchAll($sql);
 
                     // 成功した場合はコミットする
@@ -314,19 +314,13 @@ class MainModel
                     $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
                     $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
                     $sql .= "WHERE pd_active_flg = '1' ";
-                    $sql .= "AND pp_day = '{$date}' ";
+
+                    $sql .= $this->ConnectSql($date, $start, $end);
+
                     $sql .= "AND pd_genre1 = '{$item2['gd_index']}' ";
                     $sql .= "AND pd_genre2 = '{$item2['gd_detail']}' ";
-                    $sql .= "AND (pt_full = 1 ";
-                    $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-                    $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-                    $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
-                    /*
-                    echo "<pre>";
-                    var_dump($sql);
-                    var_dump($this->_read->fetchAll($sql));
-                    echo "</pre>";
-                    */
+                    $sql .= ";";
+
                     $data['genre'][$item['name']][$key2]['data'] = $this->_read->fetchAll($sql);
 
                     // 成功した場合はコミットする
@@ -358,18 +352,11 @@ class MainModel
             $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
             $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
             $sql .= "WHERE pd_active_flg = '1' ";
+
+            $sql .= $this->ConnectSql($date, $start, $end);
             $sql .= "AND pd_rec_flg = '1' ";
-            $sql .= "AND pp_day = '{$date}' ";
-            $sql .= "AND (pt_full = 1 ";
-            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
-            /*
-            echo "<pre>";
-            var_dump($sql);
-            var_dump($this->_read->fetchAll($sql));
-            echo "</pre>";
-            */
+            $sql .= ";";
+
             $data['rec'] = $this->_read->fetchAll($sql);
 
             // 成功した場合はコミットする
@@ -395,18 +382,11 @@ class MainModel
             $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
             $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
             $sql .= "WHERE pd_active_flg = '1' ";
+
+            $sql .= $this->ConnectSql($date, $start, $end);
             $sql .= "AND pd_pickup_flg = '1' ";
-            $sql .= "AND pp_day = '{$date}' ";
-            $sql .= "AND (pt_full = 1 ";
-            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
-            /*
-            echo "<pre>";
-            var_dump($sql);
-            var_dump($this->_read->fetchAll($sql));
-            echo "</pre>";
-            */
+            $sql .= ";";
+
             $data['pickup'] = $this->_read->fetchAll($sql);
 
             // 成功した場合はコミットする
@@ -432,18 +412,11 @@ class MainModel
             $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
             $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
             $sql .= "WHERE pd_active_flg = '1' ";
+
+            $sql .= $this->ConnectSql($date, $start, $end);
             $sql .= "AND pd_academic_flg = '1' ";
-            $sql .= "AND pp_day = '{$date}' ";
-            $sql .= "AND (pt_full = 1 ";
-            $sql .= "OR pt_full = 0 AND (pt_start_ IS NOT NULL AND pt_start_ > '{$start}' ";
-            $sql .= "OR pt_start_ + pt_time <= '{$end}' ";
-            $sql .= "OR pt_end_ IS NOT NULL AND pt_end_ > '{$start}'));";
-            /*
-            echo "<pre>";
-            var_dump($sql);
-            var_dump($this->_read->fetchAll($sql));
-            echo "</pre>";
-            */
+            $sql .= ";";
+
             $data['academic'] = $this->_read->fetchAll($sql);
 
             // 成功した場合はコミットする
@@ -462,6 +435,56 @@ class MainModel
 
         return $data;
         unset ($data);
+    }
+
+    private function ConnectSql($date, $start, $end) {
+        /*
+         * 日付
+         */
+        $sql = "AND pp_day = '{$date}' ";
+        $sql .= "AND (pt_full = 1 ";
+
+        /*
+         * fullでない企画について
+         */
+        $sql .= "OR pt_full = 0 AND (";
+
+        /*
+         * 企画開始時間がある場合
+         * ①企画開始時刻が滞在開始時刻よりも遅い
+         * ②企画終了時刻が滞在終了時刻よりも早い
+         * ③企画開始時刻＋企画標準滞在時刻が滞在終了時刻よりも早い
+        */
+        $sql .= "pt_start_ IS NOT NULL AND ";
+        $sql .= "pt_start_ >= '{$start}' AND ";
+        $sql .= "pt_end_ <= '{$end}' AND ";
+        $sql .= "pt_start_ + pt_time <= '{$end}' ";
+
+        $sql .= "OR ";
+
+        /*
+         * 企画開始時刻は無いが企画開場時刻と企画終了時刻がある場合
+         * ①企画開場時刻が滞在終了時刻より早い
+         * ②滞在開始時刻＋企画標準滞在時刻が企画終了時刻より早い
+         * ＝企画終了時刻ー企画標準滞在時刻が滞在開始時刻より遅い
+         */
+        $sql .= "pt_start_ IS NULL AND pt_open_ IS NOT NULL AND pt_end_ IS NOT NULL AND ";
+        $sql .= "pt_open_ <= '{$end}' AND ";
+        $sql .= "pt_end_ - pt_time > '{$start}' ";
+
+        $sql .= "OR ";
+
+        /*
+         * 企画開始時刻も企画開場時刻も無いが企画終了時刻がある場合
+         * ①滞在開始時刻＋企画標準滞在時刻が企画終了時刻より早い
+         * ＝企画終了時刻ー企画標準滞在時刻が滞在開始時刻より遅い
+         */
+        $sql .= "pt_start_ IS NULL AND pt_open_ IS NULL AND pt_end_ IS NOT NULL AND ";
+        $sql .= "pt_end_ - pt_time > '{$start}' ";
+
+        $sql .= "))";
+
+        return $sql;
     }
 
 

@@ -127,7 +127,7 @@
                 var id = "map" + e.target.value;
                 $('input[name="start-pos"]').val(e.target.value);
             }
-            $('#select-start-pos-error').hide();
+            $('#select-start-pos-error').removeClass('text-danger').addClass('text-primary phone-display');
             $('#here').text($('input[name="name-' + id + '"]').val());
             extAreaOver('shape1', id);
         }).on('select2:unselect', function() {
@@ -140,7 +140,7 @@
         $('area').click(function(e) {
             var re = /(\d+)/;
             var id = re.exec(e.target.id)[0];
-            $('#select-start-pos-error').hide();
+            $('#select-start-pos-error').removeClass('text-danger').addClass('text-primary phone-display');
             $('input[name="start-pos"]').val(id);
             $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');

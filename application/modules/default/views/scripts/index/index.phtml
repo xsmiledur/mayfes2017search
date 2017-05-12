@@ -142,11 +142,11 @@
 
                 <div class="col-lg-4">
                     <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
-                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png">
+                        <a href="/"><img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png"></a>
 
                     </div>
                     <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
-                        <img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png">
+                        <a href="/"><img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png"></a>
                     </div>
                     <div class="col-xs-12 sub-title b-r-md text-center">
                         MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
@@ -235,10 +235,6 @@
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"></span>
                                                             </span>
-                                                            </div>
-                                                            <div class="checkbox checkbox-primary">
-                                                                <input type="checkbox" id="no-time" value="1" name="no-time">
-                                                                <label for="no-time"> 終了時間を特に指定しない </label>
                                                             </div>
                                                             <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
 
@@ -343,6 +339,7 @@
                                                     <ul id="search-all" class="list-group clear-list m-t">
                                                         <?php foreach($this->data_all as $key => $item) : ?>
                                                             <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
+                                                                <span class="pull-right pe-7s-close delete-btn"></span>
                                                                 <span class="pull-right body-text no-margins" style="width: 30%;">
                                                                     <?php echo $item['pd_body']; ?>
                                                                 </span>
@@ -352,7 +349,7 @@
                                                                 <span class="pull-right stay-text">
                                                                     <?php echo $item['pt_time']; ?> 分
                                                                 </span>
-                                                                <span class="pull-right m-r-lg time-text" style="width:14%;">
+                                                                <span class="pull-right m-r-lg time-text" style="width:40px;">
                                                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
                                                                 </span>
                                                                 <label> <?php echo $item['pd_label']; ?> </label>
@@ -439,8 +436,11 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
-                    TimePost2(start_pos, $('#input-clock1').val(), $('#input-clock2').val(), $('input[name="no-time"]:checked').val());
+                    TimePost2($('input[name="date"]').val(), $('#input-clock1').val(), $('#input-clock2').val());
                 }
+
+                if (newIndex - currentIndex > 1) return false;
+
                 var form = $(this);
 
                 if (currentIndex < newIndex) {
@@ -505,6 +505,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         $('head link:last').after(style);
 
         $('.last-conf').hide();
+        $('.delete-btn').click(function() {DeleteProject($(this).parent())});
 
     });
 
@@ -541,15 +542,15 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         var ph;
         var h = now.getHours();
         if(h < 9 || h >= 18){//9時前あるいは18時以降
-            ph = "09:00";
+            ph  = "09:00";
             val = "09:00";
         } else {
-            ph = "現在時刻";
             var m = now.getMinutes();
             h = String(h); m = String(m);
             if (h.length == 1) h = "0" + h;
             if (m.length == 1) m = "0" + m;
-            val =  h + ":" + m;
+            val = h + ":" + m;
+            ph  = h + ":" + m;
         }
         $('#clockText1').text(ph);
         $('input[name="clock1"]').attr("value", val).attr("placeholder", ph);
@@ -623,7 +624,7 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
         });
     }
 
-    function TimePost2(start_pos, clock1, clock2, no_time) {
+    function TimePost2(date, clock1, clock2) {
         $('#sample01').addClass('sk-loading');
 
 
@@ -631,10 +632,9 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             url: "/search/time-post",
             type: "POST",
             data: {
-                radio  : $('input[name="date"]:checked').val(),
-                no_time: no_time,
-                clock1 : $('input[name="clock1"]').val(),
-                clock2 : $('input[name="clock2"]').val(),
+                date  : date,
+                clock1 : clock1,
+                clock2 : clock2
             },
             timeout: 10000,
             success: function(arr) {
@@ -737,6 +737,13 @@ window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.
             confirmButtonText: "OK",
             closeOnConfirm: false
         });
+    }
+    function DeleteProject(delete_li) {
+        var pt_pid = delete_li.prop('id');
+        delete_li.hide();
+        console.log(delete_li);
+        console.log(pt_pid);
+        $('input[value="' + pt_pid + '"]').prop('checked', false);
     }
 </script>
 
