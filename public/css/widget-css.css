@@ -9,10 +9,10 @@
 }
 
 /* 見せる、見せない */
-.show1 {
+.show1, .show3 {
     display: block;
 }
-.show2 {
+.show2, .show4 {
     display: none;
 }
 
@@ -113,11 +113,6 @@
     top: 10px;
     left: 5px;
     height: 70px;
-}
-#eeic p {
-    bottom: 0;
-    font-size: 13px;
-    left: 0;
 }
 
 /*twitter*/
@@ -249,6 +244,14 @@
         left: initial;
         right: 30px;
 
+    }
+
+    /* 見せる、見せないを反転する */
+    .show3 {
+        display: none;
+    }
+    .show4 {
+        display: block;
     }
 
     /* 戻るボタン */
