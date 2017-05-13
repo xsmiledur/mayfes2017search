@@ -130,7 +130,7 @@ class SearchController extends Zend_Controller_Action
         var_dump($clock1);
         var_dump($clock2);
         var_dump($this->_session->start);
-        var_dump($this->session->end);
+        var_dump($this->_session->end);
         exit();
     }
 
