@@ -400,12 +400,12 @@ class SearchController extends Zend_Controller_Action
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
-            2 => array("file", "/var/www/html/public/script/error-output.txt", "a")
+            2 => array("file", "/var/www/html/public/scripts/error-output.txt", "a")
         );
-        
+
         if ($flg == 1) {
-            //$proc = proc_open('/var/www/html/public/script/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
-            $proc = proc_open('/var/www/html/public/script/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            //$proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            $proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
         } else {
             //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
             $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
