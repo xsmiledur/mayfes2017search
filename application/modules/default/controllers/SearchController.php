@@ -381,6 +381,7 @@ class SearchController extends Zend_Controller_Action
             foreach ($t as $k => $val) $inputData .= sprintf("%d ", $val);
             if ($i < $N) $inputData .= sprintf("\n");
         }
+        //var_dump($inputData);
         return $inputData;
     }
 

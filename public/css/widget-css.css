@@ -162,57 +162,13 @@
 }
 
 @media screen and ( max-width:1199px ) {
-    /* 高さ */
-    .height1 {
-        height: 90px;
-    }
-    .height2 {
-        height: 60px;
-    }
-    .height3 {
-        height: 40px;
-    }
 
-    /* 見せる、見せない */
-    .show2 {
-        display: block;
+    /* hoverアクションはなくす */
+    .widget{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
-    .show1 {
-        display: none;
-    }
-
-    /* eeic */
-    #eeic img,
-    #twitter img {
-        top: 5px;
-        height: 30px;
-    }
-    #eeic p,
-    #twitter p {
-        text-align: right;
-    }
-}
-@media screen and ( max-width:767px ) {
-    /* 高さ */
-    .height1 {
-        height: 90px;
-    }
-    .height2 {
-        height: 60px;
-    }
-    .height3 {
-        height: 40px;
-    }
-
-    /**/
-    .SNS img {
-        height: 30px;
-    }
-    #twitter p {
-        top: 6px;
-    }
-
-
     .widget-right:hover {
         margin-right: 0;
         margin-left: 0px;
@@ -222,36 +178,53 @@
         margin-right: 0px;
     }
 
-    #id2 .widget.widget-right {
-        height: 60px;
+    /* 高さ 切り替える */
+    .height1 {
+        height: 160px;
+    }
+    .height2 {
+        height: 130px;
+    }
+    .height3 {
+        height: 90px;
     }
 
-    #id2 .widget.widget-back {
+    /* 見せる、見せないを反転する */
+    .show2 {
+        display: block;
+    }
+    .show1 {
+        display: none;
+    }
+
+    /* SNSのpは右寄せ */
+    .SNS p {
+        text-align: right;
+    }
+}
+@media screen and ( max-width:767px ) {
+
+
+    /* 高さ */
+    .height1 {
+        height: 90px;
+    }
+    .height2 {
+        height: 60px;
+    }
+    .height3 {
         height: 40px;
     }
 
-    #id2 .widget.widget-vote {
-        height: 130px;
-    }
 
-    #id2 .widget {
-        margin-bottom: 5px;
-        margin-top: 5px;
-    }
-
+    /* widget p */
     .widget p {
         font-size: 9px !important;
         bottom: 0px;
         left: 5px;
     }
-    div.widget{
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #row1 .widget {
-        height: 60px;
-    }
+
+    /* アイコン */
     .fa-first {
         position: absolute;
         font-size: 40px;
@@ -265,6 +238,8 @@
         right: 30px;
 
     }
+
+    /* 戻るボタン */
     .widget-back .fa-first {
         right: 10px;
         top: 0;
@@ -275,6 +250,8 @@
         right: 35px;
         text-align: right;
     }
+
+    /* 投票ボタン */
     .vote-maychan {
         margin: initial !important;
         right: 10px !important;
@@ -286,4 +263,22 @@
     .vote-comment {
         width: 160px;
     }
+    .vote-maychan {
+        height: 70%;
+    }
+    .vote-comment {
+        display: block;
+    }
+
+    /* SNS image */
+    #eeic img,
+    #twitter img {
+        top: 5px;
+        height: 30px;
+    }
+    /* twitter */
+    #twitter p {
+        top: 6px;
+    }
+
 }
