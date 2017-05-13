@@ -310,6 +310,7 @@
                                                 <li class=""><a data-toggle="tab" href="#tab-4"><i class="pe-7s-flag" style="font-weight: bold;"></i> <span>おすすめ</span></a></li>
                                                 <li class=""><a data-toggle="tab" href="#tab-5"><i class="pe-7s-light" style="font-weight: bold;"></i> <span>ピックアップ</span></a></li>
                                                 <li class=""><a data-toggle="tab" href="#tab-6"><i class="pe-7s-study" style="font-weight: bold;"></i> <span>学術企画</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-7"><i class="pe-7s-star" style="font-weight: bold;"></i> <span>委員会企画</span></a></li>
                                                 <!--<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i> これから開演予定の企画検索</a></li>-->
                                             </ul>
 
@@ -667,7 +668,7 @@
                 clock2 : clock2
             },
             success: function(arr) {
-                console.log(arr);
+                //console.log(arr);
 
                 if (arr == 0 || arr == -1) {
                     $('#page-wrapper').removeClass('sk-loading');
@@ -681,7 +682,7 @@
                     });
                     return false;
                 }
-                //window.location.href = "/result";
+                window.location.href = "/result";
 
 
             },

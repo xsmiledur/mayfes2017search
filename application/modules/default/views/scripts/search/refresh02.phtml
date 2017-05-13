@@ -213,6 +213,16 @@
             height: 500px;
         }
     }
+
+    @media screen and ( max-width:887px ) {
+        .nav-tabs > li > a > span {
+            display: none;
+        }
+
+        .nav-tabs > li > a {
+            padding: 10px 8px 10px 13px;
+        }
+    }
     @media screen and ( max-width:752px ) {
         .phone-display {
             display: block !important;
@@ -230,13 +240,6 @@
             height: 500px;
         }
 
-        .nav-tabs > li > a > span {
-            display: none;
-        }
-
-        .nav-tabs > li > a {
-            padding: 10px 8px 10px 13px;
-        }
 
         span.place-text,
         span.body-text {
@@ -526,6 +529,41 @@
             <div class="search-in2">
                 <ul class="list-group clear-list m-t">
                     <?php foreach ($this->data['academic'] as $key => $item) : ?>
+                        <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
+                    <span class="exp-text">
+                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
+                            </span>
+                            <span class="body-text">
+                                <?php echo $item['pd_body']; ?>
+                            </span>
+                            <span class="place-text">
+                                <?php echo $item['pp_place']; ?>
+                            </span>
+                            <span class="stay-text">
+                            <?php echo $item['pt_time']; ?> 分
+                        </span>
+                            <span class="time-text">
+                                <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
+                            </span>
+                            <div class=" check-text">
+                                <input type="checkbox" id="6_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="6_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tab-7" class="tab-pane">
+    <div class="panel-body">
+        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
+            委員会企画
+        </h3>
+        <div class="full-height-scroll">
+            <div class="search-in2">
+                <ul class="list-group clear-list m-t">
+                    <?php foreach ($this->data['com'] as $key => $item) : ?>
                         <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
                     <span class="exp-text">
                         <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>

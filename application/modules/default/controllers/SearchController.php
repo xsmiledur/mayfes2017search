@@ -250,7 +250,6 @@ class SearchController extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
-        var_dump($inputData);
 
         /*C++スクリプトとの結合*/
         $result = $this->procOpen(1); //1=サーバー 0=localhost

@@ -80,3 +80,6 @@
 .pe-7s-print:before {
 	content: "\e61f";
 }
+.pe-7s-star:before {
+	content: "\e611";
+}
