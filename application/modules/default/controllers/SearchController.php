@@ -250,6 +250,7 @@ class SearchController extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
+        var_dump($inputData);
 
         /*C++スクリプトとの結合*/
         $result = $this->procOpen(1); //1=サーバー 0=localhost
@@ -430,7 +431,6 @@ class SearchController extends Zend_Controller_Action
     private function returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
-            var_dump($connect);
             if (substr($connect,0,2) == "-1") {
                 if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
                 return 0;
