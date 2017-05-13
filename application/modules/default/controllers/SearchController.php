@@ -418,9 +418,10 @@ class SearchController extends Zend_Controller_Action
 
         fwrite($pipes[0], $inputData);
         fclose($pipes[0]);
+        var_dump($inputData);
 
         $connect = stream_get_contents($pipes[1]);
-        var_dump($connect);
+
         fclose($pipes[1]);
 
         return $connect;
