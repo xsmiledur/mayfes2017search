@@ -669,7 +669,7 @@
             success: function(arr) {
                 console.log(arr);
 
-                if (arr == 0) {
+                if (arr == 0 || arr == -1) {
                     $('#page-wrapper').removeClass('sk-loading');
                     swal({
                         title: "あなたが選択した条件では最適経路が見つかりませんでした",
