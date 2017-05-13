@@ -140,7 +140,7 @@
         $('area').click(function(e) {
             var re = /(\d+)/;
             var id = re.exec(e.target.id)[0];
-            $('#select-start-pos-error').removeClass('text-danger').addClass('text-primary phone-display');
+            $('#select-start-pos-error').removeClass('text-danger phone-display').addClass('text-primary');
             $('input[name="start-pos"]').val(id);
             $('#here').text($('input[name="name-map' + id + '"]').val());
             $('.select2_demo_2').val("map" + id).trigger('change');
