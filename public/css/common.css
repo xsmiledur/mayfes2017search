@@ -860,7 +860,7 @@ fieldset .tabs-container .i-checks {
 #input-clock2:disabled {
     cursor: default !important;
     background-color: #FFFFFF !important;
-    color: #555;
+    color: #676a6c;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
     border: none !important;
@@ -984,6 +984,9 @@ span.select2-selection__choice__remove {
     color: #ffffff;
 
 }
+.row2 #twitter {
+
+}
 .show1 {
     display: block;
 }
@@ -998,7 +1001,7 @@ span.select2-selection__choice__remove {
     .show2 {
         display: block;
     }
-    #twitter, #eeic {
+    #twitter, #eeic, #LINE {
         height: 40px !important;
     }
     #eeic img,
@@ -1011,7 +1014,7 @@ span.select2-selection__choice__remove {
         text-align: right;
     }
     #twitter p {
-        top: 6px;
+/*        top: 6px;*/
     }
     .width-change {
         padding-left: 15px;
@@ -1096,7 +1099,7 @@ span.select2-selection__choice__remove {
         height: 40px;
     }
     #id2 .widget.widget-vote {
-        height: 80px;
+        height: 130px;
     }
     #id2 .widget {
         margin-bottom: 5px;
