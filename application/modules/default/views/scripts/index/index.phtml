@@ -105,6 +105,16 @@
         .modal-footer {
             background-color: #e5e5e5;
         }
+
+        @media screen and ( max-width:887px ) {
+            .nav-tabs > li > a > span {
+                display: none;
+            }
+
+            .nav-tabs > li > a {
+                padding: 10px 8px 10px 13px;
+            }
+        }
     </style>
 
 </head>
@@ -341,7 +351,7 @@
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-date"></i> </a>
                                                         <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" aria-controls="form-p-0" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
@@ -349,14 +359,14 @@
                                                         <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
                                                         <label id="clockText1" style="font-weight:normal;">09:00</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" aria-controls="form-p-0" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-map-marker"></i> </a>
                                                         <label id="here" style="font-weight:normal;"></label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-1" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-1" aria-controls="form-p-1" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
                                                 <small style="font-size: 9px; margin-left: 15px;">日時を変更すると選択した企画がリセットされますので、注意してください。</small>
@@ -762,7 +772,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <span class="pull-right m-r-md text-danger font-bold">
                                                                                 <?php echo $item['pd_genre1_']; ?>
-                                / <?php echo $item['pd_genre2_']; ?>
+                                 / <?php echo $item['pd_genre2_']; ?>
                                                                             </span>
                         </div>
                         <div>
