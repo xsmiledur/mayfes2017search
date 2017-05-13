@@ -653,13 +653,11 @@
                         pt_pid : val
                     },
                     success: function(arr) {
-                        console.log(arr);
                         $.ajax({
                             type: 'GET',
                             url: '/search/refresh03',
                             dataType: 'html',
                             success: function(data) {
-                                console.log(data);
                                 $('.last-conf-box ul').append(data);
 
                             },

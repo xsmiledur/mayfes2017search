@@ -88,6 +88,7 @@ class ResultController extends Zend_Controller_Action
 
         $this->SendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
 
+        var_dump($pt_pid);
         /*エラーメッセージ*/
         if ($this->_session->errMsg) {
             $this->view->errMsg = $this->_session->errMsg;

@@ -240,7 +240,7 @@ class SearchController extends Zend_Controller_Action
         $this->SendNoSearchError($search);
         $N = $this->GetCount($search);
 
-        $flg = 0; //0だと旧バーション　1だと新バージョンのコード
+        $flg = 1; //0だと旧バーション　1だと新バージョンのコード
 
         $inputData = $this->setInputData1($N, $start_pos, $clock1, $clock2, $flg);
 
@@ -344,7 +344,7 @@ class SearchController extends Zend_Controller_Action
         $inputData = "";
 
         if ($flg == 1) {
-            $inputData .= sprintf("%d\n", $N); //企画の個数
+            $inputData .= sprintf("%d \n", $N); //企画の個数
             $inputData .= sprintf("%d %d %d -1\n", $start_pos, $clock1_, $clock2_);
         } else {
 
@@ -402,8 +402,8 @@ class SearchController extends Zend_Controller_Action
             1 => array('pipe', 'w'),
         );
         if ($flg == 1) {
-            //$proc = proc_open('/var/www/html/public/script/search_.out', $inout, $pipes, "/var/www/scripts/");
-            $proc = proc_open('/var/www/html/public/script/search.out', $inout, $pipes, "/var/www/scripts/");
+            //$proc = proc_open('/var/www/html/public/script/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            $proc = proc_open('/var/www/html/public/script/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
         } else {
             //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
             $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
