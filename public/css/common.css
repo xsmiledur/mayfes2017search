@@ -994,12 +994,12 @@ span.select2-selection__choice__remove {
     display: none;
 }
 .last-conf-box {
-    height: 420px;
+    height: 410px;
     overflow: scroll;
 }
 @media screen and ( max-width:1199px ) {
     .last-conf-box {
-        height: 510px;
+        height: 500px;
     }
     .show1 {
         display: none;
@@ -1093,7 +1093,7 @@ span.select2-selection__choice__remove {
         font-size: 15px;
     }
     .last-conf-box {
-        heigth: 390px;
+        height: 380px;
     }
     .play-stop-row {
         width: 100%;

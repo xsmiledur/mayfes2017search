@@ -241,7 +241,7 @@ class SearchController extends Zend_Controller_Action
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
 
         /*C++スクリプトとの結合*/
-        $result = $this->procOpen(1); //1=サーバー 0=localhost
+        $result = $this->procOpen(0); //1=サーバー 0=localhost
         $proc = $result['proc']; $pipes = $result['pipes'];
 
         $echo = $this->returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
@@ -390,7 +390,7 @@ class SearchController extends Zend_Controller_Action
             1 => array('pipe', 'w'),
         );
         if ($flg == 1) {
-            $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/html/public/scriptあs/search_.out', $inout, $pipes, "/var/www/scripts/");
         } else {
             $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
             //$proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
