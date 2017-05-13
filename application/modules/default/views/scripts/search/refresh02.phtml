@@ -633,6 +633,8 @@
                 scrollTop: pos
             }, speed, "swing");
         });
+
+        /* 企画詳細modal画面 */
         $(".btn-modal").click(function(event) {
             event.stopPropagation();
             $("#Modal_pt_pid" + $(this).val()).modal('show');
@@ -643,10 +645,38 @@
             var val = $(this).val();
             if ($(this).is(':checked')) {
                 $('.select-p[value="' + val + '"]').prop('checked', true);
-                $('li#' + val).show();
+
+                $.ajax({
+                    url: "/search/time-post3",
+                    type: "POST",
+                    data: {
+                        pt_pid : val
+                    },
+                    success: function(arr) {
+                        console.log(arr);
+                        $.ajax({
+                            type: 'GET',
+                            url: '/search/refresh03',
+                            dataType: 'html',
+                            success: function(data) {
+                                console.log(data);
+                                $('.last-conf-box ul').append(data);
+
+                            },
+                            error:function() {
+                                alert('問題がありました。');
+                            }
+                        });
+                    },
+                    error:function(arr) {
+                        alert('問題がありました。');
+                    }
+                });
+
             } else {
                 $('.select-p[value="' + val + '"]').prop('checked', false);
-                $('li#' + val).hide();
+                console.log("aa");
+                $('li#' + val).remove();
             }
         });
     });

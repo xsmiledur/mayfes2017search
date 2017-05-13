@@ -139,6 +139,17 @@ class SearchController extends Zend_Controller_Action
         //$this->_session->research = 1
     }
 
+    public function timePost3Action()
+    {
+        $request = $this->getRequest();
+        $this->_session->pt_pid = $request->getPost('pt_pid');
+    }
+
+    public function refresh03Action()
+    {
+        $this->view->data = $this->_main->getProjectInfo($this->_session->pt_pid);
+    }
+
 
 
     /**
@@ -391,10 +402,11 @@ class SearchController extends Zend_Controller_Action
             1 => array('pipe', 'w'),
         );
         if ($flg == 1) {
-            $proc = proc_open('/var/www/html/public/scriptあs/search_.out', $inout, $pipes, "/var/www/scripts/");
+            //$proc = proc_open('/var/www/html/public/script/search_.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/html/public/script/search.out', $inout, $pipes, "/var/www/scripts/");
         } else {
-            $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
-            //$proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
+            //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
         }
         $result['proc'] = $proc;
         $result['pipes'] = $pipes;

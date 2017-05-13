@@ -159,7 +159,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <a href="https://ap-phys.net/">
                                 <div class="widget navy-bg widget-left height2">
                                     <i class="pe-7s-plugin fa-first"></i>
@@ -168,15 +168,15 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-4  col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-3  col-md-4 col-sm-4 col-xs-4">
                             <a href="">
-                                <div id="eeic"  class="widget yellow-bg widget-left height3 SNS">
+                                <div id="eeic"  class="widget red-bg widget-left height3 SNS">
                                     <img src="/img/logo/eeic.png">
                                     <p>五月祭アプリ</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 show2">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 show2">
                             <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
                                 <div id="twitter" class="widget widget-right height3 SNS">
                                     <img src="/img/SNS/twitter.png">
@@ -184,8 +184,8 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2  col-md-4 col-sm-4 col-xs-4 show2">
-                            <div id="LINE"  class="widget yellow-bg widget-left height3 SNS">
+                        <div class="col-lg-3  col-md-4 col-sm-4 col-xs-4">
+                            <div id="LINE"  class="widget yellow-bg widget-right height3 SNS">
                                 <p>LINE</p>
                             </div>
                         </div>
@@ -361,53 +361,6 @@
                                                 <small style="font-size: 9px; margin-left: 15px;">日時を変更すると選択した企画がリセットされますので、注意してください。</small>
                                                 <div class="col-sm-12 last-conf-box">
                                                     <ul id="search-all" class="list-group clear-list m-t">
-                                                        <?php foreach($this->data_all as $key => $item) : ?>
-                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
-                                                                <span class="pull-right pe-7s-close delete-btn"></span>
-                                                                <span class="pull-right body-text no-margins" style="width: 30%;">
-                                                                    <?php echo $item['pd_body']; ?>
-                                                                </span>
-                                                                <span class="pull-right m-r-lg place-text">
-                                                                    <?php echo $item['pp_place']; ?>
-                                                                </span>
-                                                                <span class="pull-right stay-text">
-                                                                    <select name="time<?php echo $item['pt_pid']; ?>">
-                                                                        <option value="5" <?php echo ($item['pt_time'] == 5) ? 'selected=""' : ''; ?>>5</option>
-                                                                        <option value="10" <?php echo ($item['pt_time'] == 10) ? 'selected=""' : ''; ?>>10</option>
-                                                                        <option value="15" <?php echo ($item['pt_time'] == 15) ? 'selected=""' : ''; ?>>15</option>
-                                                                        <option value="20" <?php echo ($item['pt_time'] == 20) ? 'selected=""' : ''; ?>>20</option>
-                                                                        <option value="25" <?php echo ($item['pt_time'] == 25) ? 'selected=""' : ''; ?>>25</option>
-                                                                        <option value="30" <?php echo ($item['pt_time'] == 30) ? 'selected=""' : ''; ?>>30</option>
-                                                                        <option value="35" <?php echo ($item['pt_time'] == 35) ? 'selected=""' : ''; ?>>35</option>
-                                                                        <option value="40" <?php echo ($item['pt_time'] == 40) ? 'selected=""' : ''; ?>>40</option>
-                                                                        <option value="45" <?php echo ($item['pt_time'] == 45) ? 'selected=""' : ''; ?>>45</option>
-                                                                        <option value="50" <?php echo ($item['pt_time'] == 50) ? 'selected=""' : ''; ?>>50</option>
-                                                                        <option value="55" <?php echo ($item['pt_time'] == 55) ? 'selected=""' : ''; ?>>55</option>
-                                                                        <option value="60" <?php echo ($item['pt_time'] == 60) ? 'selected=""' : ''; ?>>60</option>
-                                                                        <option value="65" <?php echo ($item['pt_time'] == 65) ? 'selected=""' : ''; ?>>65</option>
-                                                                        <option value="70" <?php echo ($item['pt_time'] == 70) ? 'selected=""' : ''; ?>>70</option>
-                                                                        <option value="75" <?php echo ($item['pt_time'] == 75) ? 'selected=""' : ''; ?>>75</option>
-                                                                        <option value="80" <?php echo ($item['pt_time'] == 80) ? 'selected=""' : ''; ?>>80</option>
-                                                                        <option value="85" <?php echo ($item['pt_time'] == 85) ? 'selected=""' : ''; ?>>85</option>
-                                                                        <option value="90" <?php echo ($item['pt_time'] == 90) ? 'selected=""' : ''; ?>>90</option>
-                                                                        <option value="95" <?php echo ($item['pt_time'] == 95) ? 'selected=""' : ''; ?>>95</option>
-                                                                        <option value="100" <?php echo ($item['pt_time'] == 100) ? 'selected=""' : ''; ?>>100</option>
-                                                                        <option value="105" <?php echo ($item['pt_time'] == 105) ? 'selected=""' : ''; ?>>105</option>
-                                                                        <option value="110" <?php echo ($item['pt_time'] == 110) ? 'selected=""' : ''; ?>>110</option>
-                                                                        <option value="115" <?php echo ($item['pt_time'] == 115) ? 'selected=""' : ''; ?>>115</option>
-                                                                        <option value="120" <?php echo ($item['pt_time'] == 120) ? 'selected=""' : ''; ?>>120</option>
-
-                                                                    </select>
-                                                                    分
-                                                                </span>
-                                                                <span class="pull-right m-r-lg time-text" style="width:40px;">
-                                                                    <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                                                                </span>
-                                                                <label> <?php echo $item['pd_label']; ?> </label>
-                                                            </li>
-
-
-                                                        <?php endforeach; ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -486,6 +439,9 @@
                 }
 
                 if (newIndex == 2 && currentIndex < newIndex) {
+                    //時間が更新されたので、予め確認画面の企画を全て消去
+                    console.log("bb");
+                    /*$('.last-conf').remove();*/
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
@@ -554,9 +510,6 @@
         //SweerAlert
         style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
         $('head link:last').after(style);
-
-        $('.last-conf').hide();
-        $('.delete-btn').click(function() {DeleteProject($(this).parent())});
 
     });
 
@@ -786,11 +739,14 @@
             closeOnConfirm: false
         });
     }
+    /*
     function DeleteProject(delete_li) {
+        console.log(delete_li);
         var pt_pid = delete_li.prop('id');
-        delete_li.hide();
+        delete_li.remove();
         $('input[value="' + pt_pid + '"]').prop('checked', false);
     }
+    */
 </script>
 
 
