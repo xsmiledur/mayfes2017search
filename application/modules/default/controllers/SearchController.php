@@ -430,7 +430,7 @@ class SearchController extends Zend_Controller_Action
     private function returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
-            var_dump($connect)
+            var_dump($connect);
             if (substr($connect,0,2) == "-1") {
                 if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
                 return 0;
