@@ -251,7 +251,6 @@ class SearchController extends Zend_Controller_Action
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
 
-        var_dump($inputData);
         /*C++スクリプトとの結合*/
         $result = $this->procOpen(1); //1=サーバー 0=localhost
         $proc = $result['proc']; $pipes = $result['pipes'];
@@ -420,7 +419,6 @@ class SearchController extends Zend_Controller_Action
 
         fwrite($pipes[0], $inputData);
         fclose($pipes[0]);
-        var_dump($inputData);
 
         $connect = stream_get_contents($pipes[1]);
 
@@ -437,7 +435,6 @@ class SearchController extends Zend_Controller_Action
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
-                var_dump($pt_pid);
                 if ($flg == 1) {
                     $pt_pid = $this->refixPT_PID($pt_pid, $N);
                 } else {
