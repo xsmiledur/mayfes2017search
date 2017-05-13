@@ -173,6 +173,14 @@
         height: 40px;
     }
 
+    /* 見せる、見せない */
+    .show2 {
+        display: block;
+    }
+    .show1 {
+        display: none;
+    }
+
     /* eeic */
     #eeic img,
     #twitter img {
@@ -196,19 +204,22 @@
         height: 40px;
     }
 
-    /* 見せる、見せない */
-    .show2 {
-        display: block;
-    }
-    .show1 {
-        display: none;
-    }
     /**/
     .SNS img {
         height: 30px;
     }
     #twitter p {
         top: 6px;
+    }
+
+
+    .widget-right:hover {
+        margin-right: 0;
+        margin-left: 0px;
+    }
+    .widget-left:hover {
+        margin-left: 0;
+        margin-right: 0px;
     }
 
     #id2 .widget.widget-right {
@@ -240,14 +251,6 @@
     }
     #row1 .widget {
         height: 60px;
-    }
-    .widget-right:hover {
-        margin-right: 0;
-        margin-left: 0px;
-    }
-    .widget-left:hover {
-        margin-left: 0;
-        margin-right: 0px;
     }
     .fa-first {
         position: absolute;
