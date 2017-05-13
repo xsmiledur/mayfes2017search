@@ -114,6 +114,11 @@
     left: 5px;
     height: 70px;
 }
+#eeic p {
+    bottom: 0;
+    font-size: 13px;
+    left: 0;
+}
 
 /*twitter*/
 #twitter {
