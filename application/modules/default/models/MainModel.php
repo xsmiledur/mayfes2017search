@@ -1973,5 +1973,28 @@ class MainModel
     }
 
 
+    /**
+     * 99:99の時間表示を分単位に直す
+     * @param $time
+     * @return mixed
+     */
+    public function convertTime($time) {
+        return intval(substr($time,0,2)) * 60 + intval(substr($time,3,2)); //分単位の時刻
+    }
+
+    /**
+     * 時間表示を99:99に直す
+     * @param $_time
+     * @return string
+     */
+    public function fixTime($_time)
+    {
+        $h = floor($_time/60); //時間
+        if (strlen($h) < 2 ) $h = "0".$h;
+        $m = $_time%60; //分
+        if (strlen($m) < 2 ) $m = "0".$m;
+        return $h.":".$m;
+    }
+
 
 }

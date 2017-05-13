@@ -626,7 +626,7 @@ fieldset .tabs-container .i-checks {
     float: right;
 }
 .stay-text {
-     width: 5%;
+     width: 70px;
      margin-right: 2%;
      text-align: right;
      float: right;
@@ -1265,8 +1265,7 @@ span.select2-selection__choice__remove {
     span.time-text {
          margin-left: -15%;
      }
-    span.time-text,
-    span.stay-text {
+    span.time-text {
          width: 15%;
     }
     .last-conf label {

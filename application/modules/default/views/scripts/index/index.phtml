@@ -103,19 +103,6 @@
         .modal-footer {
             background-color: #e5e5e5;
         }
-
-        .SNS-link{
-            position: absolute;
-            width: 40px;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-        }
-        a.line{
-            position: absolute;
-            top: 33px;
-            left: 0px;
-        }
     </style>
 
 </head>
@@ -375,7 +362,12 @@
                                                                     <?php echo $item['pp_place']; ?>
                                                                 </span>
                                                                 <span class="pull-right stay-text">
-                                                                    <?php echo $item['pt_time']; ?> 分
+                                                                    <select name="time<?php echo $item['pt_pid']; ?>">
+                                                                        <?php for ($i=0; $i<=480; $i++) : ?>
+                                                                            <option value="<?php echo $i; ?>" <?php echo ($item['pt_time'] == $i) ? 'selected=""' : ''; ?>><?php echo $i;?></option>
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                    分
                                                                 </span>
                                                                 <span class="pull-right m-r-lg time-text" style="width:40px;">
                                                                     <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
@@ -487,12 +479,13 @@
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
 
                 } else {
+                    var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
                     $('#search-stop').click(function () {
                         $('#page-wrapper').removeClass('sk-loading');
                         return false;
                     });
-                    FinishPost(search, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
+                    FinishPost(search, time, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     return true;
                 }
             }
@@ -678,19 +671,21 @@
 
     }
 
-    function FinishPost(search, start_pos, date, clock1, clock2) {
+    function FinishPost(search, time, start_pos, date, clock1, clock2) {
         $.ajax({
             url: "/search/search",
             type: "POST",
             data: {
                 search : search,
+                time   : time,
                 start_pos : start_pos,
                 date   : date,
                 clock1 : clock1,
                 clock2 : clock2
             },
             success: function(arr) {
-                //console.log(arr);
+                console.log(arr);
+
                 if (arr == 0) {
                     $('#page-wrapper').removeClass('sk-loading');
                     swal({
@@ -704,6 +699,7 @@
                     return false;
                 }
                 window.location.href = "/result";
+
 
             },
             error:function() {
@@ -739,6 +735,16 @@
         });
         return search;
     }
+    function FinishTimeCheck(search) {
+        var i;
+        var N = search.length;
+        var time = new Array();
+        for (i=0; i<N; i++) {
+            time[i] = $('select[name="time' + search[i] + '"]').val();
+        }
+        return time;
+
+    }
     function ErrorMsg(title, text) {
         swal({
             title: title,
@@ -752,8 +758,6 @@
     function DeleteProject(delete_li) {
         var pt_pid = delete_li.prop('id');
         delete_li.hide();
-        console.log(delete_li);
-        console.log(pt_pid);
         $('input[value="' + pt_pid + '"]').prop('checked', false);
     }
 </script>
@@ -823,7 +827,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <a href="https://gogatsusai.jp/90/search/result?id=<?php echo $item['pd_pid']; ?>" type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
                     <button type="button" class="btn btn-white"
                             data-dismiss="modal">Close
                     </button>

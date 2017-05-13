@@ -205,7 +205,7 @@
 
                                                 <div class="vertical-timeline-block draggable-front">
                                                     <div class="vertical-timeline-time-block">
-                                                        <?php echo $this->start; ?>
+                                                        <?php echo $this->clock1; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-icon blue-bg">
@@ -224,7 +224,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo (strlen($item['time']) > 0) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo (strlen($item['order_time']) > 0) ? $item['order_time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -260,7 +260,7 @@
 
                                                 <div class="vertical-timeline-block draggable-front">
                                                     <div class="vertical-timeline-time-block">
-                                                        <?php echo $this->end; ?>
+                                                        <?php echo $this->clock2; ?>
                                                     </div>
                                                     <div class="vertical-timeline-icon navy-bg">
 
@@ -294,7 +294,7 @@
 
                                                         <?php foreach ($this->order as $i => $item) : ?>
                                                             <?php if ($i == 0) : ?>
-                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->sp_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
                                                                     &#<?php echo 9312 + $i; ?> 現在地
                                                                     <p class="map-cm-b"></p>
                                                                 </div>
@@ -319,7 +319,7 @@
                                                         <?php foreach ($this->order as $i => $item) : ?>
                                                             <?php if ($i == 0) : ?>
 
-                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
+                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->sp_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
                                                                     &#<?php echo 9312 + $i; ?> 現在地
                                                                     <div class="map-cm-b"></div>
                                                                 </div>
@@ -521,7 +521,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <a href="https://gogatsusai.jp/90/search/result?id=<?php echo $item['pd_pid']; ?>" type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
                     <button type="button" class="btn btn-white"
                             data-dismiss="modal">Close
                     </button>
@@ -728,7 +728,7 @@
         $("#ionrange<?php echo $key; ?>").ionRangeSlider({
             min: 0,
             max: 120,
-            from: <?php if ($item['research_t']) : echo $item['research_t']; elseif ($item['info']['pt_time']) : echo $item['info']['pt_time']; else : echo 30; endif; ?>,
+            from: <?php echo ($item['time']) ? $item['time'] : $item['info']['pt_time']; ?>,
             postfix: "分",
             grid: true,
             onChange: function(data) {
