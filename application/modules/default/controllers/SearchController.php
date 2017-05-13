@@ -84,25 +84,14 @@ class SearchController extends Zend_Controller_Action
         return $this->_redirect('/');
     }
 
-    public function refresh01Action()
+
+    public function timePost1Action()
     {
-        $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
-
-        $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
-        $this->view->icon = array(
-            'music' => 'music',
-            'exhibition' => 'slideshare',
-            'food' => 'cutlery',
-            'performance' => 'magic',
-            'join' => 'wechat',
-            //'join' => 'handshake-o',
-            'lecture' => 'mortar-board',
-        );
-
-        $this->_session->research = 1;
+        $request = $this->getRequest();
+        $this->_session->date = $request->getPost('date');
     }
 
-    public function refresh02Action()
+    public function refresh01Action()
     {
         $this->view->freewds = $this->_main->getFreeWords($this->_session->date);
         $this->view->arr = array(
@@ -122,13 +111,8 @@ class SearchController extends Zend_Controller_Action
 
     }
 
-    public function timePost2Action()
-    {
-        $request = $this->getRequest();
-        $this->_session->date = $request->getPost('date');
-    }
 
-    public function timePostAction()
+    public function timePost2Action()
     {
         // viewレンダリング停止
         //$this->_helper->layout->disableLayout();
@@ -143,8 +127,18 @@ class SearchController extends Zend_Controller_Action
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 
-exit();
+        exit();
     }
+
+    public function refresh02Action()
+    {
+        $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
+
+        $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
+
+        //$this->_session->research = 1
+    }
+
 
 
     /**

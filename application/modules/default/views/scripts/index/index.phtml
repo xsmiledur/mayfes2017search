@@ -246,22 +246,24 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
                                                         <div id="clock-check">
                                                             <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" disabled="">
-                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="09:00" disabled="">
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"> Click</span>
                                                                 </span>
                                                             </div>
                                                             <div class="input-group clockpicker" id="clock2">
                                                                 <input class="form-control" name="clock2" type="text" id="input-clock2" value="18:00" disabled="">
-                                                                <input class="form-control" name="clock2" type="time" id="time-clock2" value="18:00" >
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"> Click</span>
                                                             </span>
                                                             </div>
-                                                            <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
-
                                                         </div>
+                                                        <div id="time-check">
+                                                            <input name="clock1" type="time" id="time-clock1" style="display: inline;" value="09:00"> 〜
+                                                            <input name="clock2" type="time" id="time-clock2" style="display: inline;" value="18:00" ><br>
+                                                        </div>
+                                                        <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
+
 
                                                     </a>
 
@@ -349,7 +351,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
-                                                        <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
+                                                        <label id="clockText1" style="font-weight:normal;">09:00</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
                                                         <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
                                                     </div>
@@ -501,9 +503,6 @@
 <!-- Clock picker -->
 <script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
 
-<!-- SetNow -->
-<script src="/js/setnow.js"></script>
-
 <!-- Select2 -->
 <!--<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>-->
 
@@ -539,11 +538,9 @@
 
     function RemoveClock(agent) {
         if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
-            $('#input-clock1').remove();
-            $('#input-clock2').remove();
+            $('#clock-check').remove();
         } else { //PC,タブレット
-            $('#time-clock1').remove();
-            $('#time-clock2').remove();
+            $('#time-check').remove();
             //clockpicker
             $('#clock1').clockpicker({
                 placement: 'bottom',
@@ -614,7 +611,7 @@
 
     function TimePost1(date) {
         $.ajax({
-            url: "/search/time-post2",
+            url: "/search/time-post1",
             type: "POST",
             data: {
                 date : date
@@ -622,7 +619,7 @@
             success: function(arr) {
                 $.ajax({
                     type: 'GET',
-                    url: '/search/refresh02',
+                    url: '/search/refresh01',
                     dataType: 'html',
                     success: function(data) {
                         $('#sample02').empty();
@@ -646,7 +643,7 @@
 
 
         $.ajax({
-            url: "/search/time-post",
+            url: "/search/time-post2",
             type: "POST",
             data: {
                 date  : date,
@@ -656,7 +653,7 @@
             success: function(arr) {
                 $.ajax({
                     type: 'GET',
-                    url: '/search/refresh01',
+                    url: '/search/refresh02',
                     dataType: 'html',
                     success: function(data) {
                         //console.log(data);
