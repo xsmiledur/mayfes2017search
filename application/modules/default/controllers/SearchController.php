@@ -420,6 +420,7 @@ class SearchController extends Zend_Controller_Action
         fclose($pipes[0]);
 
         $connect = stream_get_contents($pipes[1]);
+        var_dump($connect);
         fclose($pipes[1]);
 
         return $connect;
