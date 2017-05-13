@@ -400,6 +400,7 @@ class SearchController extends Zend_Controller_Action
         $inout = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),
+            2 => array("file", "/var/www/html/public/script/error-output.txt", "a")
         );
         if ($flg == 1) {
             //$proc = proc_open('/var/www/html/public/script/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
