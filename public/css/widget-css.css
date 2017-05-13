@@ -1,0 +1,291 @@
+/* Widget 関連*/
+
+.widget {
+    position: relative;
+    height: 130px;
+}
+.widget:hover {
+    filter: brightness(1.1);
+}
+
+/* 見せる、見せない */
+.show1 {
+    display: block;
+}
+.show2 {
+    display: none;
+}
+
+/* widgetの色 */
+.widget.navy-bg {
+    background-color: rgba(26, 179, 148, 0.8);
+}
+.widget.lazur-bg {
+    background-color: rgba(35, 198, 200, 0.8);
+}
+.widget.yellow-bg {
+    background-color: rgba(248, 172, 89, 0.8);
+}
+.widget.red-bg {
+    background-color: rgba(237, 85, 101, 0.8);
+}
+
+/*右側に置くwidget*/
+.widget-right {
+    margin-right: -20px;
+}
+.widget-right:hover {
+    margin-right: 0;
+    margin-left: -20px;
+}
+
+/*左側に置くwidget*/
+.widget-left {
+    margin-left: -20px;
+}
+.widget-left:hover {
+    margin-left: 0;
+    margin-right: -20px;
+}
+
+/* widget 中身のp */
+.widget p {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 15px;
+}
+
+/* widget アイコン */
+.fa-first {
+    position: absolute;
+    font-size: 80px;
+}
+.fa-second {
+    position: absolute;
+    font-size: 70px;
+    color: rgba(255,255,255,0.8);
+    left: 50px;
+
+}
+
+/* 戻るボタン*/
+.widget-back {
+    height: 130px;
+}
+.widget-back:hover {
+    cursor: pointer;
+}
+.widget-back .fa-first {
+    right: 10px;
+    text-align: right;
+}
+.widget-back .fa-second {
+    top: 10px;
+    right: 50px;
+    text-align: right;
+}
+.widget-back p {
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    font-size: 15px;
+}
+
+/*投票ボタン*/
+.widget-vote {
+    height: 300px;
+}
+.widget-vote p {
+    position: absolute;
+    right: 10px;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+    margin: auto;
+    font-size: 15px;
+    overflow: hidden;
+}
+
+/* eeic*/
+#eeic img {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    height: 70px;
+}
+
+/*twitter*/
+#twitter {
+    background-color: #55acee;
+}
+#twitter img {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    height: 70px;
+}
+#twitter p {
+    text-align: right;
+    color: #ffffff;
+
+}
+.row2 #twitter {
+
+}
+
+/* LINE */
+
+/* めいちゃん */
+.vote-comment {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: 0;
+    padding: 4px 0;
+    background-color: rgba(255,255,255,0.8);
+    color: #00a67b;
+    text-align: center;
+    z-index: 1000;
+    width: 100%;
+}
+.vote-maychan {
+    position: absolute;
+    top: initial !important;
+    bottom: 0 !important;
+    height: 40%;
+}
+.vote-maychan img {
+    z-index: 500;
+
+}
+
+@media screen and ( max-width:1199px ) {
+
+    /* hoverアクションはなくす */
+    .widget{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .widget-right:hover {
+        margin-right: 0;
+        margin-left: 0px;
+    }
+    .widget-left:hover {
+        margin-left: 0;
+        margin-right: 0px;
+    }
+
+    /* 高さ 切り替える */
+    .height1 {
+        height: 160px;
+    }
+    .height2 {
+        height: 130px;
+    }
+    .height3 {
+        height: 90px;
+    }
+
+    .widget-vote {
+        height: 280px;
+    }
+
+    /* 見せる、見せないを反転する */
+    .show2 {
+        display: block;
+    }
+    .show1 {
+        display: none;
+    }
+
+    /* SNSのpは右寄せ */
+    .SNS p {
+        text-align: right;
+    }
+}
+@media screen and ( max-width:767px ) {
+
+
+    /* 高さ */
+    .height1 {
+        height: 90px;
+    }
+    .height2 {
+        height: 60px;
+    }
+    .height3 {
+        height: 40px;
+    }
+
+    .widget-vote {
+        height: 140px;
+    }
+
+    /* widget p */
+    .widget p {
+        font-size: 9px !important;
+        bottom: 0px;
+        left: 5px;
+    }
+
+    /* アイコン */
+    .fa-first {
+        position: absolute;
+        font-size: 40px;
+        right: 10px;
+    }
+    .fa-second {
+        position: absolute;
+        font-size: 30px;
+        color: rgba(255,255,255,0.8);
+        left: initial;
+        right: 30px;
+
+    }
+
+    /* 戻るボタン */
+    .widget-back .fa-first {
+        right: 10px;
+        top: 0;
+        text-align: right;
+    }
+    .widget-back .fa-second {
+        top: 0;
+        right: 35px;
+        text-align: right;
+    }
+
+    /* 投票ボタン */
+    .vote-maychan {
+        margin: initial !important;
+        right: 10px !important;
+        left: initial !important;
+    }
+    .vote-maychan img {
+        height: 140px;
+    }
+    .vote-comment {
+        width: 160px;
+    }
+    .vote-maychan {
+        height: 70%;
+    }
+    .vote-comment {
+        display: block;
+    }
+
+    /* SNS image */
+    #eeic img,
+    #twitter img {
+        top: 5px;
+        height: 30px;
+    }
+    /* twitter */
+    #twitter p {
+        top: 6px;
+    }
+
+}

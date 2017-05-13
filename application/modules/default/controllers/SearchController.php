@@ -84,25 +84,14 @@ class SearchController extends Zend_Controller_Action
         return $this->_redirect('/');
     }
 
-    public function refresh01Action()
+
+    public function timePost1Action()
     {
-        $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
-
-        $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
-        $this->view->icon = array(
-            'music' => 'music',
-            'exhibition' => 'slideshare',
-            'food' => 'cutlery',
-            'performance' => 'magic',
-            'join' => 'wechat',
-            //'join' => 'handshake-o',
-            'lecture' => 'mortar-board',
-        );
-
-        $this->_session->research = 1;
+        $request = $this->getRequest();
+        $this->_session->date = $request->getPost('date');
     }
 
-    public function refresh02Action()
+    public function refresh01Action()
     {
         $this->view->freewds = $this->_main->getFreeWords($this->_session->date);
         $this->view->arr = array(
@@ -122,13 +111,8 @@ class SearchController extends Zend_Controller_Action
 
     }
 
-    public function timePost2Action()
-    {
-        $request = $this->getRequest();
-        $this->_session->date = $request->getPost('date');
-    }
 
-    public function timePostAction()
+    public function timePost2Action()
     {
         // viewレンダリング停止
         //$this->_helper->layout->disableLayout();
@@ -143,8 +127,29 @@ class SearchController extends Zend_Controller_Action
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 
-exit();
+        exit();
     }
+
+    public function refresh02Action()
+    {
+        $this->view->data = $this->_main->getProjectInfoRefresh($this->_session->date ,$this->_session->start, $this->_session->end);
+
+        $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
+
+        //$this->_session->research = 1
+    }
+
+    public function timePost3Action()
+    {
+        $request = $this->getRequest();
+        $this->_session->pt_pid = $request->getPost('pt_pid');
+    }
+
+    public function refresh03Action()
+    {
+        $this->view->data = $this->_main->getProjectInfo($this->_session->pt_pid);
+    }
+
 
 
     /**
@@ -183,10 +188,6 @@ exit();
      */
     public function searchAction()
     {
-        // viewレンダリング停止
-        //$this->_helper->layout->disableLayout();
-        //$this->_helper->viewRenderer->setNoRender();
-
         /*
             最短オイラー路問題
 
@@ -217,200 +218,247 @@ exit();
             入力はすべて整数
         */
 
-        $inputData = "";
         $request    = $this->getRequest();
         $research = $request->getPost('research');
+
         if (!$research) {
-            $search    = $request->getParam('search');
-            $start_pos = $request->getParam('start_pos');
-            $date      = $request->getParam('date');
-            $clock1    = $request->getParam('clock1');
-            $clock2    = $request->getParam('clock2');
+            $search = $this->getDataParam('search', $research);
+            $time = $this->getDataParam('time', $research);
+            $data = $this->SetInfo($search);
+            $time = $this->SetTime($search, $time, $research);
         } else {
-            $search    = $this->_session->re_search;
-            $start_pos = $this->_session->re_start_pos;
-            $date      = $this->_session->re_date;
-            $clock1    = $this->_session->re_clock1;
-            $clock2    = $this->_session->re_clock2;
-            if (!$search) {
-                $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                //return $this->_redirect('/');
-            }
+            $search = $this->getDataParam('search', $research);
+            $data = $this->SetInfo($search);
+            $time = $this->SetTime($search, NULL, $research);
         }
 
-        $N = count($search);
+        $start_pos  = $this->getDataParam('start_pos', $research);
+        $date       = $this->getDataParam('date', $research);
+        $clock1     = $this->getDataParam('clock1', $research);
+        $clock2     = $this->getDataParam('clock2', $research);
 
-        $_result = array();
-        foreach ($search as $i => $item) { //$itemはpt_pid
-            $_result[$i] = $this->_main->getProjectInfo($item);
-            //！　もし企画startが09:00のものがあれば、現在時刻を変更
-            //必要か？　実験
-            if ($_result[$i]['pt_start_'] == 540) {
-                $clock1 = "08:40"; //これでいいかなぁ〜
-                $this->_session->errMsg = "最適化のため、開始時刻を変更しました。";
-            }
-        }
+        $this->SendNoSearchError($search);
+        $N = $this->GetCount($search);
 
-        if (!$clock1) {
-            $clock1 = date("h:i");
-            if (substr($clock1,0,2) == "06") { //9時台の時のみバグ起こりますので
-                $time = time() + 9*3600;  //GMTとの時差9時間を足す
-                $clock1 = date("h", $time);
-            }
-        }
-        $clock1_ = intval(substr($clock1, 0, 2)) * 60 + intval(substr($clock1, 3, 2));
-        $clock2_ = intval(substr($clock2, 0, 2)) * 60 + intval(substr($clock2, 3, 2));
+        $flg = 1; //0だと旧バーション　1だと新バージョンのコード
 
+        $inputData = $this->setInputData1($N, $start_pos, $clock1, $clock2, $flg);
 
-        //$inputData .= sprintf("%d\n", $N);
-        //$inputData .= sprintf("%d %d %d -1\n", $start_pos, $clock1_, $clock2_);
-
-        $inputData .= sprintf("%d %d\n", $N, $start_pos);
-        $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
-
-
-        /*
-        var_dump($search);
-        var_dump($N);
-        var_dump($start_pos);
-        var_dump($date);
-        var_dump($clock1);
-        var_dump($clock1_);
-        var_dump($clock2);
-        var_dump($clock2_);
-        */
-
-        //移動時間の修正
-        $num = 2;
-        $switch = 0; //0ならかける、1なら足す
-        $this->_session->num = $num;
-        $this->_session->switch = $switch;
-
-
-        //$research = $this->_session->research;
-
-        $this->_session->start = $clock1;
-        $this->_session->start_pos = $start_pos;
-
-        $result = null;
-        $pos_bd_pid = false;
-        $pp_search = array();
-        $research_t = array(); //再検索後の時間
-        $pp_search[0]['bd_pid'] = $start_pos;
-
-        foreach ($search as $i => $item) { //$itemは$pt_pid
-            //企画情報
-
-            $pt_pid = $item; //企画summaryID
-
-            if ($research) {
-                $time = $request->getParam('re-time'.$_result[$i]['pt_pid']);
-            } elseif (strlen($_result[$i]['pt_time']) > 0) {
-                $time = $_result[$i]['pt_time']; //企画を回るのにかかるデフォの時間
-            } else { //pt_timeは必ずあるはずなので、この条件文に入ることはないはずだが、一応
-                $time = 30;
-            }
-            $research_t[$item] = $time;
-
-            $start = ($_result[$i]['pt_start_']) ? $_result[$i]['pt_start_'] : -1;
-            $end   = ($_result[$i]['pt_end_'])   ? $_result[$i]['pt_end_']   : -1;
-            $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
-            //$inputData .= sprintf("%d %d %d %d\n", $pt_pid, $start, $end, $time);
-
-            //企画startが09:00(start_ == 540)のものがあれば
-            if ($_result[$i]['pt_start_'] == 540) $pos_bd_pid = $_result[$i]['pp_bd_pid'];
-
-            //for企画の建物間のかかる時間
-            //$pp_search[$i]['ps_pid'] = $_result[$i]['ps_pid']; //企画のsummaryID 保険のため？
-            $pp_search[$i + 1]['bd_pid'] = $_result[$i]['pp_bd_pid']; //建物のid
-        }
+        $result = $this->setInputData2_BldingData($inputData, $start_pos, $data, $time, $flg);
+        $inputData = $result['inputData'];
+        $pp_search = $result['pp_search']; //中身はbd_pid
 
         //企画の建物間のかかる時間
-        foreach ($pp_search as $i => $item) {
-            $time = array();
-            foreach ($pp_search as $j => $item2) {
-                if ($item['bd_pid'] == $item2['bd_pid']) {
-                    $time[$j] = 0;
-                } else {
-                    $time[$j] = $this->_main->getTimeInfo($item['bd_pid'], $item2['bd_pid']);
-                }
-            }
-            foreach ($time as $key => $val) {
-                $inputData .= sprintf("%d ", $val);
-            }
-            if ($i < $N) $inputData .= sprintf("\n");
-        }
+        $inputData = $this->setInputData3($inputData, $pp_search, $N);
 
-        $inout = array(
-            0 => array('pipe', 'r'),
-            1 => array('pipe', 'w'),
-            //2 => array('file', '/var/www/public/scripts/error-output.txt', 'a'),
-            //2 => array("file", "/var/www/c_file/error-output", "a")
-        );
+        /*C++スクリプトとの結合*/
+        $result = $this->procOpen(1); //1=サーバー 0=localhost
+        $proc = $result['proc']; $pipes = $result['pipes'];
 
-        $cwd = "/var/www/scripts/";
-        //ここまでは多分完成
-        //search.outとの接続
-        //var_dump($inputData);
+        $echo = $this->returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
 
+        echo $echo;
 
-        $proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, $cwd);
-        $proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, $cwd);
-        //var_dump("opencheck");
-        //var_dump(is_resource($proc));
-        if(is_resource($proc)){
-
-
-            fwrite($pipes[0], $inputData);
-            fclose($pipes[0]);
-
-            //resultのpd_pidを返す
-
-            //sleep(2);
-
-            $result__ =  stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            $return_value = proc_close($proc); //0以外ならエラー
-
-            //var_dump($inputData);
-            //var_dump($result__);
-            //var_dump($return_value);
-
-            if (substr($result__,0,2) == "-1") {
-                echo 0;
-                if ($research) {
-                    $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
-                    return $this->_redirect('/result');
-                }
-            } else {
-
-                //var_dump($result__);
-                $pt_pid = array_map('intval', explode("\n", $result__)); //explodeは文字列を文字列で分解する関数
-                unset($pt_pid[$N + 1]);
-                $this->_session->pt_pid = $pt_pid;
-
-                $this->_session->research_t = $research_t;
-
-                //再検索のためのsession保存
-                $this->_session->re_search    = $search;
-                $this->_session->re_start_pos = $start_pos;
-                $this->_session->re_date      = $date;
-                $this->_session->re_clock1    = $clock1;
-                $this->_session->re_clock2    = $clock2;
-                echo 1;
-            }
-
-        } else {
-            echo 0;
-        }
         if ($research) {
             return $this->_redirect('/result');
+            unset($research);
         }
         exit();
 
     }
 
+    /**
+     * @param $key
+     * @param $researchFlg
+     * @return mixed
+     */
+    private function getDataParam($key, $researchFlg) {
+        $request    = $this->getRequest();
+        $arr = array(
+            'clock1'    => $this->_session->clock1,
+            'clock2'    => $this->_session->clock2,
+            'date'      => $this->_session->date,
+            'start_pos' => $this->_session->start_pos,
+            'search'    => $this->_session->search,
+            'time'      => $this->_session->time,
+        );
+        if (!$researchFlg) {
+            return $request->getPost($key);
+        }
+        else {
+            return $arr[$key];
+        }
+    }
 
 
+    private function SendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time) {
+        $this->_session->clock1     = $clock1;
+        $this->_session->clock2     = $clock2;
+        $this->_session->date       = $date;
+        $this->_session->start_pos  = $start_pos;
+        $this->_session->pt_pid     = $pt_pid;
+        $this->_session->time       = $time;
+    }
+
+    private function SendNoSearchError($search) {
+        if (!$search) {
+            $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
+            return $this->_redirect('/');
+        }
+    }
+
+    private function GetCount($search) {
+        return count($search);
+    }
+
+    private function SetInfo($search) {
+        $data = array();
+        foreach ($search as $i => $item) { //$itemの中身
+            /* 企画情報を格納 */
+            $data[$i] = $this->_main->getProjectInfo($item);
+        }
+        return $data;
+
+    }
+
+    private function SetTime($search, $timeData, $research) {
+        $time   = array();
+        $request = $this->getRequest();
+        foreach ($search as $i => $item) { //$itemの中身
+            if (!$research) { //１回目の検索なら
+                /* 時間を格納 */
+                $time[$item] = $timeData[$i];
+            } else { //２回目以降の検索なら
+                $time[$item] = $request->getPost('re-time'.$item);
+            }
+        }
+        return $time;
+    }
+
+    private function setInputData1($N, $start_pos, $clock1, $clock2, $flg) {
+
+        /* $clock1, $clock2から分単位の時間に変換 */
+        $clock1_ = $this->_main->convertTime($clock1);
+        $clock2_ = $this->_main->convertTime($clock2);
+
+        $inputData = "";
+
+        if ($flg == 1) {
+            $inputData .= sprintf("%d \n", $N); //企画の個数
+            $inputData .= sprintf("%d %d %d -1\n", $start_pos, $clock1_, $clock2_);
+        } else {
+
+            $inputData .= sprintf("%d %d\n", $N, $start_pos);
+            $inputData .= sprintf("%d %d\n", $clock1_, $clock2_);
+        }
+
+        return $inputData;
+    }
+
+    private function setInputData2_BldingData($inputData, $start_pos, $data, $time, $flg) {
+        //$pp_searchは建物のデータのこと
+        $pp_search = array();
+        $pp_search[0] = $start_pos;
+
+        //$dataは、indexは0から増加する整数、中身はgetProjectInfoで獲得した、その企画に関する全てのデータ
+        foreach ($data as $i => $item) {
+            $pt_pid = $item['pt_pid']; //企画pt_pid
+            $start = ($item['pt_start_']) ? $item['pt_start_'] : -1; //企画開始時刻
+            $end   = ($item['pt_end_']  ) ? $item['pt_end_']   : -1; //企画終了時刻
+            if ($flg == 1) {
+                $inputData .= sprintf("%d %d %d %d\n", $pt_pid, $start, $end, $time[$pt_pid]);
+            } else {
+                $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);
+            }
+/*
+            //企画startが09:00(start_ == 540)のものがあれば
+            if ($_result[$i]['pt_start_'] == 540) $pos_bd_pid = $_result[$i]['pp_bd_pid'];
+*/
+            $pp_search[$i + 1] = $item['pp_bd_pid']; //建物のid
+        }
+
+        $result['pp_search'] = $pp_search;
+        $result['inputData'] = $inputData;
+        return $result;
+    }
+
+    private function setInputData3($inputData, $pp_search, $N) {
+        foreach ($pp_search as $i => $item) {
+            $t = array();
+            foreach ($pp_search as $j => $item2) {
+                if ($item == $item2) $t[$j] = 0;
+                else $t[$j] = $this->_main->getTimeInfo($item, $item2);
+            }
+            foreach ($t as $k => $val) $inputData .= sprintf("%d ", $val);
+            if ($i < $N) $inputData .= sprintf("\n");
+        }
+        return $inputData;
+    }
+
+    private function procOpen($flg) { //flg == 1ならサーバー, ==0ならlocalhost
+        $inout = array(
+            0 => array('pipe', 'r'),
+            1 => array('pipe', 'w'),
+            2 => array("file", "/var/www/html/public/scripts/error-output.txt", "a")
+        );
+
+        if ($flg == 1) {
+            //$proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            $proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
+        } else {
+            //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
+        }
+        $result['proc'] = $proc;
+        $result['pipes'] = $pipes;
+
+        return $result;
+    }
+
+    private function connectCproject($pipes, $inputData) {
+
+        fwrite($pipes[0], $inputData);
+        fclose($pipes[0]);
+
+        $connect = stream_get_contents($pipes[1]);
+
+        fclose($pipes[1]);
+
+        return $connect;
+    }
+
+    private function returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
+        if(is_resource($proc)){
+            $connect = $this->connectCproject($pipes, $inputData);
+            if (substr($connect,0,2) == "-1") {
+                if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
+                return 0;
+            } else {
+                $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
+                if ($flg == 1) {
+                    $pt_pid = $this->refixPT_PID($pt_pid, $N);
+                } else {
+                    unset($pt_pid[$N + 1]);
+                }
+
+                $this->sendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
+
+                return 1;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    private function refixPT_PID($pt_pid, $N) {
+        unset($pt_pid[1]); //現在地
+        unset($pt_pid[$N + 2]); //一番最後は消す
+        $i = 0;
+        $arr = array();
+        foreach ($pt_pid as $item) {
+            $arr[$i] = $item; ++$i;
+        }
+        return $arr;
+    }
 
 }

@@ -431,7 +431,35 @@ class MainModel
             return false;
         }
 
+        /**委員会**/
 
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $sql = "";
+            $sql .= "SELECT * FROM 90_project_time ";
+            $sql .= "INNER JOIN 90_project_data ON pt_pd_pid = pd_pid ";
+            $sql .= "INNER JOIN 90_project_place ON pt_pp_pid = pp_pid ";
+            $sql .= "WHERE pd_active_flg = '1' ";
+
+            $sql .= $this->ConnectSql($date, $start, $end);
+            $sql .= "AND pd_com_flg = '1' ";
+            $sql .= ";";
+
+            $data['com'] = $this->_read->fetchAll($sql);
+
+            // 成功した場合はコミットする
+            $this->_read->commit();
+            $this->_read->query('commit');
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());exit();
+            return false;
+        }
 
         return $data;
         unset ($data);
@@ -963,21 +991,10 @@ class MainModel
             //その他の建物名から検索
             $select = $this->_read->select();
             $select->from('building_other', array('bo_label', 'bo_bd_pid'))
-                ->join('building_data', 'bo_bd_pid = bd_pid', 'bd_p_label2');
+                ->join('building_data', 'bo_bd_pid = bd_pid', array('bd_pid', 'bd_p_label2'));
             $select->where('bo_active_flg = ?', 1);
             $stmt = $select->query();
             $data['bld-other'] = $stmt->fetchAll();
-
-            /*
-            foreach ($_data as $key => $item) {
-                $arr = array();
-                $arr['bd_pid'] = $item['bo_bd_pid'];
-                $arr['name'] = $item['bd_p_label2'];
-                $arr['data'] = $item['bo_label'];
-                array_push($data, $arr);
-            }
-            */
-
 
             //企画名から検索
 
@@ -1972,6 +1989,29 @@ class MainModel
         }
     }
 
+
+    /**
+     * 99:99の時間表示を分単位に直す
+     * @param $time
+     * @return mixed
+     */
+    public function convertTime($time) {
+        return intval(substr($time,0,2)) * 60 + intval(substr($time,3,2)); //分単位の時刻
+    }
+
+    /**
+     * 時間表示を99:99に直す
+     * @param $_time
+     * @return string
+     */
+    public function fixTime($_time)
+    {
+        $h = floor($_time/60); //時間
+        if (strlen($h) < 2 ) $h = "0".$h;
+        $m = $_time%60; //分
+        if (strlen($m) < 2 ) $m = "0".$m;
+        return $h.":".$m;
+    }
 
 
 }

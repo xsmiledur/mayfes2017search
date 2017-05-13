@@ -22,6 +22,8 @@
 
     <!-- common -->
     <link href="/css/common.css" rel="stylesheet">
+    <!--widget-->
+    <link href="/css/widget-css.css" rel="stylesheet">
 
     <!--favicon-->
     <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
@@ -104,17 +106,14 @@
             background-color: #e5e5e5;
         }
 
-        .SNS-link{
-            position: absolute;
-            width: 40px;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-        }
-        a.line{
-            position: absolute;
-            top: 33px;
-            left: 0px;
+        @media screen and ( max-width:887px ) {
+            .nav-tabs > li > a > span {
+                display: none;
+            }
+
+            .nav-tabs > li > a {
+                padding: 10px 8px 10px 13px;
+            }
         }
     </style>
 
@@ -152,49 +151,55 @@
                         五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
                         MaySearchを活用して、充実した五月祭を過ごしましょう！
                     </div>
-                    <div id="row1" class="row">
-                        <div class="col-sm-4 col-xs-4 show1" >
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 show1" >
                             <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
-                                <div id="twitter" class="widget widget2" style="background-color: #55acee">
+                                <div id="twitter" class="widget widget-left" style="background-color: #55acee">
                                     <img src="/img/SNS/twitter.png">
                                     <p>Twitterでシェア</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-8 col-xs-6">
+                        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
                             <a href="/search/algorithm">
-                                <div class="widget lazur-bg widget1">
+                                <div class="widget lazur-bg widget-right height2">
                                     <i class="pe-7s-stopwatch fa-first"></i>
                                     <i class="pe-7s-stopwatch fa-second"></i>
                                     <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-8 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <a href="https://ap-phys.net/">
-                                <div class="widget navy-bg widget2">
+                                <div class="widget navy-bg widget-left height2">
                                     <i class="pe-7s-plugin fa-first"></i>
                                     <i class="pe-7s-plugin fa-second"></i>
                                     <p>工学部応用物理系<br>工學博覧会について</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-xs-4">
+                        <div class="col-lg-3  col-md-4 col-sm-4 col-xs-4">
                             <a href="">
-                                <div id="eeic"  class="widget yellow-bg widget1">
+                                <div id="eeic"  class="widget red-bg widget-left height3 SNS">
                                     <img src="/img/logo/eeic.png">
                                     <p>五月祭アプリ</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-xs-4 show2">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 show2">
                             <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
-                                <div id="twitter" class="widget widget2" style="background-color: #55acee">
+                                <div id="twitter" class="widget widget-right height3 SNS">
                                     <img src="/img/SNS/twitter.png">
                                     <p>Twitterで<br>シェア</p>
                                 </div>
                             </a>
                         </div>
+                        <div class="col-lg-3  col-md-4 col-sm-4 col-xs-4">
+                            <div id="LINE"  class="widget yellow-bg widget-right height3 SNS">
+                                <p>LINE</p>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -246,22 +251,24 @@
                                                         <h3 class="m-b-xs" style="margin-bottom: 30px;"><strong>滞在開始・終了時刻</strong></h3>
                                                         <div id="clock-check">
                                                             <div class="input-group clockpicker" id="clock1">
-                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="" disabled="">
-                                                                <input class="form-control" name="clock1" type="time" id="time-clock1" value="">
+                                                                <input class="form-control" name="clock1" type="text" id="input-clock1" value="09:00" disabled="">
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"> Click</span>
                                                                 </span>
                                                             </div>
                                                             <div class="input-group clockpicker" id="clock2">
                                                                 <input class="form-control" name="clock2" type="text" id="input-clock2" value="18:00" disabled="">
-                                                                <input class="form-control" name="clock2" type="time" id="time-clock2" value="18:00" >
                                                                 <span class="input-group-addon">
                                                                 <span class="pe-7s-clock"> Click</span>
                                                             </span>
                                                             </div>
-                                                            <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
-
                                                         </div>
+                                                        <div id="time-check">
+                                                            <input name="clock1" type="time" id="time-clock1" style="display: inline;" value="09:00"> 〜
+                                                            <input name="clock2" type="time" id="time-clock2" style="display: inline;" value="18:00" ><br>
+                                                        </div>
+                                                        <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
+
 
                                                     </a>
 
@@ -313,6 +320,7 @@
                                                 <li class=""><a data-toggle="tab" href="#tab-4"><i class="pe-7s-flag" style="font-weight: bold;"></i> <span>おすすめ</span></a></li>
                                                 <li class=""><a data-toggle="tab" href="#tab-5"><i class="pe-7s-light" style="font-weight: bold;"></i> <span>ピックアップ</span></a></li>
                                                 <li class=""><a data-toggle="tab" href="#tab-6"><i class="pe-7s-study" style="font-weight: bold;"></i> <span>学術企画</span></a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-7"><i class="pe-7s-star" style="font-weight: bold;"></i> <span>委員会企画</span></a></li>
                                                 <!--<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i> これから開演予定の企画検索</a></li>-->
                                             </ul>
 
@@ -343,46 +351,27 @@
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-date"></i> </a>
                                                         <label id="jQueryTime" style="font-weight:normal;">１日目（２０日）</label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" aria-controls="form-p-0" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-clock"></i> </a>
-                                                        <label id="clockText1" style="font-weight:normal;">現在時刻</label><label style="font-weight:normal;">〜</label>
+                                                        <label id="clockText1" style="font-weight:normal;">09:00</label><label style="font-weight:normal;">〜</label>
                                                         <label id="clockText2" style="font-weight:normal;">18:00</label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-0" aria-controls="form-p-0" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="b-r-md bg-muted p-h-xs text-center m-b-md" style="position: relative;">
                                                         <a href="#" class="check-link"><i class="pe-7s-map-marker"></i> </a>
                                                         <label id="here" style="font-weight:normal;"></label>
-                                                        <a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-1" class="btn btn-default btn-xs">変更</a>
+                                                        <!--<a style="position: absolute; right: 10px; bottom: 10px;" href="#form-h-1" aria-controls="form-p-1" class="btn btn-default btn-xs">変更</a>-->
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12" style="height: 100%; overflow: scroll;">
+                                                <small style="font-size: 9px; margin-left: 15px;">日時を変更すると選択した企画がリセットされますので、注意してください。</small>
+                                                <div class="col-sm-12 last-conf-box">
                                                     <ul id="search-all" class="list-group clear-list m-t">
-                                                        <?php foreach($this->data_all as $key => $item) : ?>
-                                                            <li class="list-group-item last-conf <?php echo ($key == 0) ? 'fist-item' : ''; ?>" id="<?php echo $item['pt_pid']; ?>">
-                                                                <span class="pull-right pe-7s-close delete-btn"></span>
-                                                                <span class="pull-right body-text no-margins" style="width: 30%;">
-                                                                    <?php echo $item['pd_body']; ?>
-                                                                </span>
-                                                                <span class="pull-right m-r-lg place-text">
-                                                                    <?php echo $item['pp_place']; ?>
-                                                                </span>
-                                                                <span class="pull-right stay-text">
-                                                                    <?php echo $item['pt_time']; ?> 分
-                                                                </span>
-                                                                <span class="pull-right m-r-lg time-text" style="width:40px;">
-                                                                    <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                                                                </span>
-                                                                <label> <?php echo $item['pd_label']; ?> </label>
-                                                            </li>
-
-
-                                                        <?php endforeach; ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -464,6 +453,8 @@
                 }
 
                 if (newIndex == 2 && currentIndex < newIndex) {
+                    //時間が更新されたので、予め確認画面の企画を全て消去
+                    $('.last-conf').remove();
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
@@ -488,12 +479,13 @@
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
 
                 } else {
+                    var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
                     $('#search-stop').click(function () {
                         $('#page-wrapper').removeClass('sk-loading');
                         return false;
                     });
-                    FinishPost(search, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
+                    FinishPost(search, time, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     return true;
                 }
             }
@@ -503,9 +495,6 @@
 
 <!-- Clock picker -->
 <script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
-
-<!-- SetNow -->
-<script src="/js/setnow.js"></script>
 
 <!-- Select2 -->
 <!--<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>-->
@@ -535,18 +524,13 @@
         style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
         $('head link:last').after(style);
 
-        $('.last-conf').hide();
-        $('.delete-btn').click(function() {DeleteProject($(this).parent())});
-
     });
 
     function RemoveClock(agent) {
         if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
-            $('#input-clock1').remove();
-            $('#input-clock2').remove();
+            $('#clock-check').remove();
         } else { //PC,タブレット
-            $('#time-clock1').remove();
-            $('#time-clock2').remove();
+            $('#time-check').remove();
             //clockpicker
             $('#clock1').clockpicker({
                 placement: 'bottom',
@@ -617,7 +601,7 @@
 
     function TimePost1(date) {
         $.ajax({
-            url: "/search/time-post2",
+            url: "/search/time-post1",
             type: "POST",
             data: {
                 date : date
@@ -625,7 +609,7 @@
             success: function(arr) {
                 $.ajax({
                     type: 'GET',
-                    url: '/search/refresh02',
+                    url: '/search/refresh01',
                     dataType: 'html',
                     success: function(data) {
                         $('#sample02').empty();
@@ -649,7 +633,7 @@
 
 
         $.ajax({
-            url: "/search/time-post",
+            url: "/search/time-post2",
             type: "POST",
             data: {
                 date  : date,
@@ -659,7 +643,7 @@
             success: function(arr) {
                 $.ajax({
                     type: 'GET',
-                    url: '/search/refresh01',
+                    url: '/search/refresh02',
                     dataType: 'html',
                     success: function(data) {
                         //console.log(data);
@@ -684,12 +668,13 @@
 
     }
 
-    function FinishPost(search, start_pos, date, clock1, clock2) {
+    function FinishPost(search, time, start_pos, date, clock1, clock2) {
         $.ajax({
             url: "/search/search",
             type: "POST",
             data: {
                 search : search,
+                time   : time,
                 start_pos : start_pos,
                 date   : date,
                 clock1 : clock1,
@@ -697,7 +682,8 @@
             },
             success: function(arr) {
                 //console.log(arr);
-                if (arr == 0) {
+
+                if (arr == 0 || arr == -1) {
                     $('#page-wrapper').removeClass('sk-loading');
                     swal({
                         title: "あなたが選択した条件では最適経路が見つかりませんでした",
@@ -710,6 +696,7 @@
                     return false;
                 }
                 window.location.href = "/result";
+
 
             },
             error:function() {
@@ -745,6 +732,16 @@
         });
         return search;
     }
+    function FinishTimeCheck(search) {
+        var i;
+        var N = search.length;
+        var time = new Array();
+        for (i=0; i<N; i++) {
+            time[i] = $('select[name="time' + search[i] + '"]').val();
+        }
+        return time;
+
+    }
     function ErrorMsg(title, text) {
         swal({
             title: title,
@@ -755,13 +752,14 @@
             closeOnConfirm: false
         });
     }
+    /*
     function DeleteProject(delete_li) {
-        var pt_pid = delete_li.prop('id');
-        delete_li.hide();
         console.log(delete_li);
-        console.log(pt_pid);
+        var pt_pid = delete_li.prop('id');
+        delete_li.remove();
         $('input[value="' + pt_pid + '"]').prop('checked', false);
     }
+    */
 </script>
 
 
@@ -777,7 +775,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span class="m-r-sm" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <span class="pull-right m-r-md text-danger font-bold">
                                                                                 <?php echo $item['pd_genre1_']; ?>
-                                / <?php echo $item['pd_genre2_']; ?>
+                                 / <?php echo $item['pd_genre2_']; ?>
                                                                             </span>
                         </div>
                         <div>
@@ -829,7 +827,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <a href="https://gogatsusai.jp/90/search/result?id=<?php echo $item['pd_pid']; ?>" type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
                     <button type="button" class="btn btn-white"
                             data-dismiss="modal">Close
                     </button>

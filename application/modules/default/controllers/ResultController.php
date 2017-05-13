@@ -70,7 +70,6 @@ class ResultController extends Zend_Controller_Action
 
         // pathとユーザー情報をviewに渡す
         $this->view->path       = $this->getRequest()->getPathInfo();
-        $this->view->contents   = $this->_contents;
         $this->view->lang       = $this->_session->lang;
 
         //$this->_helper->layout->setLayout('index');
@@ -80,10 +79,14 @@ class ResultController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $pt_pid     = $this->_session->pt_pid;      //企画pt_pidの回る順番を配列で。キー0には企画数N、キー1〜Nには回る順に企画のpd_pid
-        $research_t = $this->_session->research_t;  //再検索の場合の、個別に設定した企画ごとの時間が格納されている配列
-        $start      = $this->_session->start;       //開始時刻
-        $start_pos  = $this->_session->start_pos;   //現在地の建物番号 bd_pid
+        $clock1     = $this->_session->clock1;
+        $clock2     = $this->_session->clock2;
+        $date       = $this->_session->date;
+        $start_pos  = $this->_session->start_pos;
+        $pt_pid     = $this->_session->pt_pid;
+        $time       = $this->_session->time;
+
+        $this->SendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
 
         /*エラーメッセージ*/
         if ($this->_session->errMsg) {
@@ -98,22 +101,51 @@ class ResultController extends Zend_Controller_Action
         $order = $this->setOrderInfo($bd_pid);
 
         /*開始時刻を分単位に直す*/
-        $start_ = $this->convertTime($start);
+        $clock1_ = $this->_main->convertTime($clock1);
 
         /*
          * 企画データの到着時刻、終了時刻、移動時間を格納
          * $data['project']に企画データ、
          * $data['end_']に終了時刻分単位表示が格納されている
          */
-        $data = $this->fixProject($pt_pid, $order, $research_t, $start_);
+        $data = $this->fixProject($pt_pid, $order, $time, $clock1_);
 
-        $this->view->project = $data['project'];
-        $this->view->start   = $start;
-        $this->view->end     = $this->fixTime($data['end_']); //時刻表示にする
-
-        $this->view->start_pos_bd_pid = $start_pos;
+        $this->view->project   = $data['project'];
+        $this->view->clock1    = $clock1;
+        $this->view->clock2    = $this->_main->fixTime($data['end_']); //時刻表示にする
+        $this->view->sp_bd_pid = $start_pos;
         $this->view->start_pos = $this->_main->getBuildingData($start_pos);
-        $this->view->order = $order;
+        $this->view->order     = $order;
+
+    }
+
+    /**
+     * @param $clock1
+     * @param $clock2
+     * @param $date
+     * @param $start_pos
+     * @param $pt_pid
+     * @param $time
+     */
+    private function SendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time) {
+        $this->_session->clock1     = $clock1;
+        $this->_session->clock2     = $clock2;
+        $this->_session->date       = $date;
+        $this->_session->start_pos  = $start_pos;
+        $search = $this->unsetPT_PID($pt_pid);
+        $this->_session->search     = $search;
+        $this->_session->time       = $time;
+
+        $this->_session->research   = 1;
+    }
+
+    private function unsetPT_PID($pt_pid) {
+        unset($pt_pid[0]);
+        $result = array();
+        foreach ($pt_pid as $i => $item) {
+            $result[$i-1] = $item;
+        }
+        return $result;
 
     }
 
@@ -155,10 +187,8 @@ class ResultController extends Zend_Controller_Action
         return $project;
     }
 
-    private function setResearchTime($project, $re_t, $i, $pt_pid) {
-        if ($re_t[$pt_pid]) { //再検索した時の個別に設定した企画毎の時間データがあるなら
-            $project[$i]['research_t'] = $re_t[$pt_pid]; //再検索時に変更した滞在時間のデータがあれば格納
-        }
+    private function setResearchTime($project, $time, $i, $pt_pid) {
+        $project[$i]['time'] = $time[$pt_pid]; //再検索時に変更した滞在時間のデータがあれば格納
         return $project;
     }
 
@@ -175,7 +205,7 @@ class ResultController extends Zend_Controller_Action
     private function setStartEnd($project, $start, $end, $time, $re_t, $i, $start_, $order) {
 
         if ($start) { //もしこの企画に開始時刻が存在すれば
-            $project[$i]['start'] = $this->fixTime($start); //開始時刻はそのまま入れる
+            $project[$i]['start'] = $this->_main->fixTime($start); //開始時刻はそのまま入れる
             //次回の移動開始時刻を考える
             $start_ = $this->setNextOrderTimeStart($start, $time, $re_t, $end);
 
@@ -183,48 +213,25 @@ class ResultController extends Zend_Controller_Action
             if ($order[$i]['time']) {
                 $start_ += $order[$i]['time']; //前回算出した今回の移動開始時刻に、移動時間を足して、企画を見て回る開始時刻にする
             }
-            $project[$i]['start'] = $this->fixTime($start_); //時刻表示にする
+            $project[$i]['start'] = $this->_main->fixTime($start_); //時刻表示にする
             $start_ = $this->setNextOrderTimeStart($start_, $time, $re_t, $end);
         }
         //移動時間も書く
-        $project[$i]['time'] = $order[$i]['time'];
+        $project[$i]['order_time'] = $order[$i]['time'];
 
         $result['start_'] = $start_;
         $result['project'] = $project;
         return $result;
     }
 
-    /**
-     * 時間表示を99:99に直す
-     * @param $_time
-     * @return string
-     */
-    private function fixTime($_time)
-    {
-        $h = floor($_time/60); //時間
-        if (strlen($h) < 2 ) $h = "0".$h;
-        $m = $_time%60; //分
-        if (strlen($m) < 2 ) $m = "0".$m;
-        return $h.":".$m;
-    }
 
-    /**
-     * 99:99の時間表示を分単位に直す
-     * @param $time
-     * @return mixed
-     */
-    private function convertTime($time) {
-        return intval(substr($time,0,2)) * 60 + intval(substr($time,3,2)); //分単位の時刻
-    }
-
-    private function fixProject($pt_pid, $order, $research_t, $start_) {
+    private function fixProject($pt_pid, $order, $time, $start_) {
         $project = array();
         foreach ($pt_pid as $key => $item) { //$key=0は企画の個数Nのこと
-
             if ($key != 0) {
                 $project = $this->setProjectInfo($project, $key-1, $item, $order);
-                $project = $this->setResearchTime($project, $research_t, $key-1, $item);
-                $result  = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $research_t[$item], $key-1, $start_, $order);
+                $project = $this->setResearchTime($project, $time, $key-1, $item);
+                $result  = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $time[$item], $key-1, $start_, $order);
                 $project = $result['project'];
                 $start_  = $result['start_'];
             }

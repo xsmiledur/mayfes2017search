@@ -1,672 +1,150 @@
-<style>
-
-    .genre-push,
-    .area-push {
-        height: 200px;
-        /*color: #ffffe0;*/
-        font-weight: normal;
-        transition: .2s;
-        cursor: pointer;
-        position: relative;
-    }
-    #BoxGenreexhibition {
-        background-color: rgba(112, 194, 163, 0.25);
-    }
-    #PushGenreexhibition {
-        background-color: #70c2a3;
-    }
-    #BoxGenremusic {
-        background-color: rgba(234, 209, 82, 0.25);
-    }
-    #PushGenremusic {
-        background-color: #ead152;
-    }
-    #BoxGenreshop {
-        background-color: rgba(161, 203, 237, 0.25);
-    }
-    #PushGenreshop {
-        background-color: #a1cbed;
-    }
-    #BoxGenreperformance {
-        background-color: rgba(243, 162, 159, 0.25);
-    }
-    #PushGenreperformance {
-        background-color: #f3a29f;
-    }
-    #BoxGenrejoin {
-        background-color: rgba(191, 154, 198, 0.25);
-    }
-    #PushGenrejoin {
-        background-color: #bf9ac6;
-    }
-    #BoxGenrelecture {
-        background-color: rgba(238, 189, 128, 0.25);
-    }
-    #PushGenrelecture {
-        background-color: #eebd80;
-    }
-    .genre-push:hover,
-    .area-push:hover {
-        filter:brightness(1.1);
-    }
-    .genre-push img {
-        height: 100%;
-        position: absolute;
-        right: 0;
-        left: 0;
-        top: 10px;
-        bottom: 10px;
-        margin: auto;
-        opacity: 0.9;
-    }
-    #jQueryPush2 {
-        z-index:3;
-    }
-    #jQueryBox2 {
-        z-index:1;
-    }
-    .area-box.contact-box,
-    .genre-box.contact-box {
-        height:458px;
-        margin: 0;
-        padding: 0;
-        border-radius: 10px;
-    }
-    .genre-box.contact-box {
-        padding: 20px;
-        /*overflow: scroll;*/
-    }
-    .scroll-inbox {
-        height: 353px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-    .genre-box.contact-box .list-group.clear-list .list-group-item {
-        border-color: #fffff0 !important;
-    }
-    .transparent {
-        background-color: rgba(255,255,255,0.8);
-        padding: 20px;
-        height: 100%;
-        /*overflow: scroll;*/
-    }
-    .check-text {
-        width: 30%;
-    }
-    .check-text label {
-        margin-left: 20px;
-    }
-    .check-text2 label {
-        margin-left: 20px;
-        width: 60%;
-    }
-    .check-text input,
-    .check-text2 input {
-        position: absolute;
-        top: 9px;
-        left: 1px;
-    }
-
-    .body-text,
-    .place-text {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-text-overflow: ellipsis;
-        -o-text-overflow: ellipsis;
-    }
-
-    .body-text {
-        width: 25%;
-        margin-right: 2%;
-        text-align: right;
-        float: right;
-    }
-    .place-text {
-        width: 15%;
-        margin-right: 2%;
-        text-align: right;
-        float: right;
-    }
-    .stay-text {
-        width: 5%;
-        margin-right: 2%;
-        text-align: right;
-        float: right;
-    }
-    .time-text {
-        width: 6%;
-        margin-right: 2%;
-        text-align: right;
-        float: right;
-    }
-    .exp-text {
-        width: 3%;
-        margin-right: 20px;
-        text-align: right;
-        float: right;
-    }
-    .search-in {
-        height: 430px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-    .search-in2 {
-        height: 470px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-
-    .push-outside {
-        overflow: scroll;
-    }
-    .title-plain {
-        max-width: 270px;
-        margin-left: -30px;
-        margin-bottom: 20px;
-        padding: 10px 20px 10px 10px;
-        font-size: 17px;
-        position: relative;
-        background-color: rgba(245,245,245,0.5);
-        color: #2f4f4f;
-    }
-    .title-plain h2 {
-        display: inline;
-        float: right;
-    }
-    .title-plain .btn-link {
-        margin-top: -10px;
-        color: #888888 !important;
-    }
-    .title-plain .btn-link:hover {
-        color: #1ab394 !important;
-    }
-    .title-plain::before {
-        content: '';
-        height: 10px;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 44px;
-        background-color: #a9a9a9;
-    }
-    @media screen and ( max-width:1199px ) {
-        .search-in {
-            height: 510px;
-        }
-        .search-in2 {
-            height: 560px;
-        }
-        .area-box.contact-box,
-        .genre-box.contact-box {
-            height: 550px;
-        }
-        .scroll-inbox {
-            height: 445px;
-        }
-    }
-    @media screen and ( max-width:767px ) {
-        .table-responsive {
-            border: none;
-        }
-        .push-outside {
-            height: 500px;
-        }
-    }
-    @media screen and ( max-width:752px ) {
-        .phone-display {
-            display: block !important;
-        }
-
-        .area-box.contact-box, .genre-box.contact-box {
-            height: 500px;
-        }
-
-        .search-in {
-            height: 450px;
-        }
-
-        .search-in2 {
-            height: 500px;
-        }
-
-        .nav-tabs > li > a > span {
-            display: none;
-        }
-
-        .nav-tabs > li > a {
-            padding: 10px 8px 10px 13px;
-        }
-
-        span.place-text,
-        span.body-text {
-            display: none;
-        }
-
-        span.place-text,
-        span.body-text {
-            display: none;
-        }
-
-        span.time-text {
-            margin-left: -15%;
-        }
-
-        span.time-text,
-        span.stay-text {
-            width: 15%;
-        }
-
-        .check-text {
-            width: 95%;
-        }
-
-        fieldset > div.background-muted > p {
-            display: none;
-        }
-        .genre-push, .area-push {
-            height: 100px;
-        }
-        .scroll-inbox {
-            height: 395px;
-        }
-    }
-</style>
-
-<div id="tab-1" class="tab-pane active">
-    <div class="panel-body">
-        <div class="full-height-scroll">
-            <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-                キーワード検索
-            </h3>
-            <input id="search1" type="text" class="form-control" value="" placeholder="企画名・建物名・団体名で検索できます。"/>
-            <div class="m-t-sm search-in">
-                <ul id="search-all" class="list-group clear-list m-t">
-                    <?php foreach ($this->data['data'] as $key => $item) : ?>
-                        <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                            <span class="exp-text">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                            </span>
-                            <span class="body-text">
-                                <?php echo $item['pd_body']; ?>
-                            </span>
-                            <span class="place-text">
-                                <?php echo $item['pp_place']; ?>
-                            </span>
-                            <span class="stay-text">
-                                <?php echo $item['pt_time']; ?> 分
-                            </span>
-                            <span class="time-text">
-                                <?php if ($item['pt_start']) : echo $item['pt_start']; elseif ($item['pt_open']) : echo $item['pt_open']; endif; ?>
-                            </span>
-                            <span style="display: none;">
-                                <?php echo $item['pp_place']," ",$item['pd_label_kana']," ",$item['pd_place_kana']," ",$item['pd_body_kana']; ?>
-                            </span>
-                            <div class=" check-text">
-                                <input type="checkbox" id="1_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p" name="select-p"> <label for="1_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="tab-2" class="tab-pane">
-    <div class="panel-body">
-        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-            ジャンル検索
-        </h3>
-        <div class="full-height-scroll">
-            <div class="table-responsive">
-
-                <div class="row push-outside">
-                    <?php foreach ($this->data['genre'] as $name => $val) : ?>
-                        <div class="col-xs-6 col-md-4">
-                            <div id="PushGenre<?php echo $name; ?>" class="genre-push contact-box m-b-sm b-r-lg">
-                                <img alt="<?php echo $val[0]['gd_genre_index']; ?>" src="/img/genre/<?php echo $name; ?>.jpg">
-                                <input type="hidden" name="name" value="<?php echo $name; ?>">
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <?php foreach ($this->data['genre'] as $name => $val) : ?>
-                    <div id="BoxGenre<?php echo $name; ?>" class="genre-box contact-box">
-                        <div class="title-plain">
-                            <button type="button" class="btn btn-link genre-link">戻る</button>
-                            <h2><?php echo $val[0]['gd_index_label']; ?></h2>
-                        </div>
-                        <div class="scroll-inbox">
-                            <?php foreach ($val as $key2 => $val2) : ?>
-                                <div class="col-xs-12 col-sm-6 col-md-4">
-                                    <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
-                                        <?php echo $val2['gd_detail_label']; ?>
-                                        <input type="hidden" name="btn-val" value="genre<?php echo $val2['gd_pid']; ?>">
-                                    </button>
-                                    <div class="select-box m-b-md" id="genre<?php echo $val2['gd_pid']; ?>">
-                                        <?php if ($val2['data']) : ?>
-                                            <ul class="list-group clear-list m-t">
-                                            <?php foreach ($val2['data'] as $key => $item) : ?>
-                                                <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                                                    <div class=" check-text2">
-                                                        <span class="pull-right" style="text-align: right;">
-                                                                <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                        </span>
-                                                        <span class="pull-right m-r-xs">
-                                                            <?php echo $item['pt_time']; ?> 分
-                                                        </span>
-                                                <?php if ($item['pt_start']) : ?>
-                                                    <span class="pull-right m-r-xs">
-                                                                <?php echo $item['pt_start']; ?>
-                                                            </span>
-                                                    <?php endif; ?>
-                                                        <input type="checkbox" id="2_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="2_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                                                    </div>
-                                                </li>
-                                            <?php endforeach; ?>
-                                            </ul>
-                                        <?php else: ?>
-                                            <?php echo '企画はありません。'; ?>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <p>建物や企画の名称で検索する、あるいはマップ上の建物や門や駅等をクリックすると、現在地が選択されます。</p>
+        <input type="hidden" name="start-pos" value="">
+        <?php foreach ($this->freewds['blding'] as $item) : ?>
+            <input type="hidden" name="name-map<?php echo $item['bd_pid']; ?>" value="<?php echo $item['bd_p_label2']; ?>">
+        <?php endforeach; ?>
+        <select data-placeholder="近くに見える建物の名称や企画名で検索できます" class="select2_demo_2 form-control" multiple="multiple">
+            <?php foreach ($this->arr as $name => $val) : ?>
+                <?php foreach ($this->freewds[$name] as $item) : ?>
+                    <option href="#" value="<?php echo $val['map'].$item['bd_pid']; ?>"><?php echo $item[$val['name']]; echo ($item[$val['sub']]) ? " (".$item[$val['sub']].")" : ''; ?></option>
+                    <!--<?php if ($item['data']) : ?>
+                        <option href="#" value="<?php echo $item['bd_pid']; ?>"><?php echo $item['data']." （".$item['name']."）"; ?></option>
+                    <?php endif; ?>-->
                 <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div id="tab-3" class="tab-pane">
-    <div class="panel-body">
-        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-            エリア検索
-        </h3>
-        <div class="row push-outside">
-            <?php foreach ($this->data['area'] as $name => $val) : ?>
-                <div class="col-xs-12 col-sm-6">
-                    <div id="PushArea<?php echo $name; ?>" class="area-push contact-box m-b-sm b-r-md" style="background-image: url(/img/area/<?php echo $name; ?>.jpg);background-size: cover; cursor: pointer; position: relative;">
-                        <input type="hidden" name="name" value="<?php echo $name; ?>">
-                        <h3><strong><?php echo $val[0]['bd_p_label1']; ?></strong></h3>
-                    </div>
-                </div>
             <?php endforeach; ?>
-        </div>
-
-        <?php foreach ($this->data['area'] as $name => $val) : ?>
-            <div id="BoxArea<?php echo $name; ?>" class="area-box contact-box" style="background-image: url(/img/area/<?php echo $name; ?>.jpg); background-size: cover;">
-                <div class="transparent">
-                    <div class="title-plain">
-                        <button type="button" class="btn btn-link area-link text-muted">戻る</button>
-                        <h2><?php echo $val[0]['bd_p_label1']; ?></h2>
-                    </div>
-                    <div class="scroll-inbox">
-                        <?php foreach ($val as $key2 => $val2) : ?> <!--$key2は数値-->
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <button type="button" class="btn btn-open btn-<?php echo $this->color[$key2%5]; ?> btn-lg btn-outline m-b-md btn-block">
-                                    <?php echo $val2['bd_p_label2']; ?>
-                                    <input type="hidden" name="btn-val" value="area<?php echo $val2['bd_pid']; ?>">
-                                </button>
-                                <div class="select-box m-b-md" id="area<?php echo $val2['bd_pid']; ?>">
-                                    <?php if ($val2['data']) : ?>
-                                    <ul class="list-group clear-list m-t">
-                                        <?php foreach ($val2['data'] as $key => $item) : ?>
-                                            <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                                                <div class=" check-text2">
-                                                    <span class="pull-right" style="text-align: right;">
-                                                    <button type="button" class="btn btn-info btn-xs btn-modal" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                                </span>
-                                                    <span class="pull-right m-r-xs">
-                                                        <?php echo $item['pt_time']; ?> 分
-                                                    </span>
-                                                    <?php if ($item['pt_start']) : ?>
-                                                    <span class="pull-right m-r-xs">
-                                                    <?php echo $item['pt_start']; ?>
-                                                </span>
-                                                <?php endif; ?>
-                                                    <input type="checkbox" id="3_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="3_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                                                </div>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                    <?php else : ?>
-                                        <?php echo '企画はありません。' ; ?>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; unset($this->info) ?>
-
-
-</div>
-</div>
-<div id="tab-4" class="tab-pane">
-    <div class="panel-body">
-        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-            おすすめ企画
-        </h3>
-        <div class="full-height-scroll">
-            <div class="search-in2">
-                <ul class="list-group clear-list m-t">
-                <?php foreach ($this->data['rec'] as $key => $item) : ?>
-                    <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                        <span class="exp-text">
-                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                                </span>
-                        <span class="body-text">
-                                    <?php echo $item['pd_body']; ?>
-                                </span>
-                        <span class="place-text">
-                                    <?php echo $item['pp_place']; ?>
-                                </span>
-                        <span class="stay-text">
-                                <?php echo $item['pt_time']; ?> 分
-                            </span>
-                        <span class="time-text">
-                                    <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                                </span>
-                        <div class=" check-text">
-                            <input type="checkbox" id="4_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="4_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="tab-5" class="tab-pane">
-    <div class="panel-body">
-        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-            ピックアップ企画
-        </h3>
-        <div class="full-height-scroll">
-            <div class="search-in2">
-                <ul class="list-group clear-list m-t">
-                    <?php foreach ($this->data['pickup'] as $key => $item) : ?>
-                        <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                    <span class="exp-text">
-                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                            </span>
-                            <span class="body-text">
-                                <?php echo $item['pd_body']; ?>
-                            </span>
-                            <span class="place-text">
-                                <?php echo $item['pp_place']; ?>
-                            </span>
-                            <span class="stay-text">
-                            <?php echo $item['pt_time']; ?> 分
-                        </span>
-                            <span class="time-text">
-                                <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                            </span>
-                            <div class=" check-text">
-                                <input type="checkbox" id="5_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="5_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="tab-6" class="tab-pane">
-    <div class="panel-body">
-        <h3 class="phone-display p-sm b-r-md bg-muted text-center">
-            学術企画
-        </h3>
-        <div class="full-height-scroll">
-            <div class="search-in2">
-                <ul class="list-group clear-list m-t">
-                    <?php foreach ($this->data['academic'] as $key => $item) : ?>
-                        <li class="list-group-item <?php echo ($key == 0) ? 'fist-item' : ''; ?>">
-                    <span class="exp-text">
-                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#Modal_pt_pid<?php echo $item['pt_pid']; ?>"><span class="glyphicon glyphicon-info-sign"></span></button>
-                            </span>
-                            <span class="body-text">
-                                <?php echo $item['pd_body']; ?>
-                            </span>
-                            <span class="place-text">
-                                <?php echo $item['pp_place']; ?>
-                            </span>
-                            <span class="stay-text">
-                            <?php echo $item['pt_time']; ?> 分
-                        </span>
-                            <span class="time-text">
-                                <?php echo ($item['pt_start']) ? $item['pt_start'] : '終日'; ?>
-                            </span>
-                            <div class=" check-text">
-                                <input type="checkbox" id="6_<?php echo $item['pt_pid']; ?>" value="<?php echo $item['pt_pid']; ?>" class="select-p"> <label for="6_<?php echo $item['pt_pid']; ?>"> <?php echo $item['pd_label']; echo ($item['pt_note']) ? ' <small>'.$item['pt_note'].'</small>' : ''; ?> </label>
-                            </div>
-                        </li>
-                    <?php endforeach; unset($this->data); ?>
-                </ul>
-            </div>
-        </div>
+        </select>
     </div>
 </div>
 
+<br>
+<div class="pos-cover">
+    <img src="/img/map.png" alt="本郷キャンパスマップ" usemap="#shape1" id="shape1" onload="map_load()">
+</div>
+<map name="shape1">
+    <area id="map12" shape="poly" href="#" alt="農学部3号館" class="icolor00ff00" coords="61,321, 117,322, 117,326, 133,327, 134,330, 137,330, 137,332, 140,333, 140,376, 137,376, 137,379, 134,379, 134,382, 44,382, 44,378, 41,378, 41,376, 38,376, 37,333, 41,333, 41,329, 44,329, 44,326, 61,326">
+    <area id="map11" shape="poly" href="#" alt="農学部2号館" class="icolor00ff00" coords="14,424, 36,424, 36,421, 44,421, 44,424, 58,424, 59,427, 66,428, 66,448, 72,448, 72,464, 66,464, 66,485, 59,485, 59,488, 39,488, 39,491, 29,491, 29,488, 13,488, 12,472, 24,472, 24,438, 14,438">
+    <area id="map10" shape="poly" href="#" alt="農学部1号館" class="icolor00ff00" coords="114,424, 136,424, 136,421, 142,421, 142,424, 146,424, 146,421, 152,421, 152,424, 171,424, 171,438, 151,438, 151,477, 171,477, 171,491, 114,491, 114,485, 107,485, 107,464, 99,464, 99,448, 107,448, 107,430, 114,430">
+    <area id="map43" shape="poly" href="#" alt="弥生講堂アネックス" class="icolor00ff00" coords="21,513, 44,512, 44,522, 65,523, 65,531, 21,531, 20,522, 16,522, 17,515, 21,515">
+    <area id="map47" shape="poly" href="#" alt="弥生講堂一条ホール" class="icolor00ff00" coords="103,508, 167,508, 167,516, 154,517, 154,521, 147,521, 146,517, 134,517, 134,529, 107,529, 107,516, 102,516">
+
+    <area id="map5" shape="poly" href="#" alt="工学部13号館" class="icolor0000ff" coords="275,223, 287,211, 289,213, 291,210, 305,222, 305,261, 278,261, 278,256, 273,256, 274,261, 258,261, 258,245, 254,242, 267,230, 280,243, 289,235">
+    <area id="map6" shape="poly" href="#" alt="工学部4号館" class="icolor0000ff" coords="236,272, 267,272, 267,271, 275,271, 275,273, 305,272, 305,277, 307,277, 307,290, 314,290, 314,305, 307,304, 307,320, 305,320, 305,324, 267,324, 267,326, 261,326, 261,324, 231,324, 231,319, 228,319, 228,290, 236,277">
+    <area id="map4" shape="poly" href="#" alt="工学部3号館" class="icolor0000ff" coords="367,206, 397,206, 397,212, 404,212, 404,226, 409,226, 409,229, 406,229, 406,230, 409,230, 409,232, 407,232, 407,235, 409,235, 409,238, 406,238, 407,240, 409,240, 409,243, 404,242, 404,257, 397,257, 397,263, 394,263, 394,264, 388,264, 388,262, 384,262, 384,261, 349,261, 349,263, 345,263, 345,264, 339,264, 339,263, 336,263, 336,235, 346,226, 344,223, 355,212, 357,215">
+    <area id="map39" shape="poly" href="#" alt="工学部2号館" class="iborder000000 icolor0000ff" coords="330,272, 357,272, 356,285, 367,285, 368,272, 396,272, 396,274, 403,274, 403,294, 405,296, 405,303, 403,303, 403,324, 396,324, 396,326, 369,327, 368,315, 357,315, 357,326, 329,326">
+    <area id="map44" shape="poly" href="#" alt="工学部6号館" class="iborder000000 icolor0000ff" coords="343,345, 402,346, 402,351, 405,351, 405,384, 401,384, 401,389, 378,389, 378,392, 366,392, 366,389, 343,389, 343,384, 340,384, 340,350, 343,350">
+    <area id="map9" shape="poly" href="#" alt="工学部1号館" class="iborder000000 icolor0000ff" coords="287,418, 301,418, 300,424, 305,424, 305,419, 348,418, 348,420, 351,420, 351,424, 356,424, 356,444, 358,444, 358,448, 356,448, 355,460, 358,460, 358,466, 356,466, 356,481, 352,481, 353,485, 349,485, 349,488, 305,488, 305,482, 300,482, 300,488, 287,488, 287,462, 285,461, 284,446, 287,446">
+    <area id="map3" shape="poly" rel="map3_1,map3_2" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="287,343, 309,343, 309,394, 287,394, 287,391, 263,391, 263,347, 287,347">
+    <area id="map3_1" shape="poly" rel="map3,map3_2" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="290,328, 301,327, 301,330, 310,330, 311,334, 286,334, 286,330, 290,330">
+    <area id="map3_2" shape="poly" rel="map3,map3_1" href="#" alt="工学部8号館" class="iborder000000 icolor0000ff" coords="287,411, 306,411, 306,413, 310,413, 310,416, 287,416">
+    <area id="map8" shape="poly" rel="map8_1,map8_2" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="228,344, 246,344, 247,355, 245,355, 245,401, 232,401, 232,355, 228,355">
+    <area id="map8_1" shape="poly" rel="map8,map8_2" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="227,330, 247,330, 247,334, 227,333">
+    <area id="map8_2" shape="poly" rel="map8,map8_1" href="#" alt="工学部7号館" class="iborder000000 icolor0000ff" coords="232,408, 245,408, 245,419, 232,418">
+    <area id="map7" shape="poly" rel="map7_1" href="#" alt="工学部5号館" class="iborder000000 icolor0000ff" coords="256,414, 266,414, 266,416, 272,416, 272,496, 249,496, 249,416, 256,417">
+    <area id="map7_1" shape="poly" rel="map7" href="#" alt="工学部5号館" class="iborder000000 icolor0000ff" coords="249,507, 271,506, 271,508, 272,508, 272,523, 266,522, 266,525, 256,525, 256,522, 249,522">
+    <area id="map46" shape="poly" href="#" alt="工学部14号館" class="iborder000000 icolor0000ff" coords="282.794989,507.924249, 348.549249,508.081556, 348.549249,513.115375, 354.054988,513.115375, 354.526909,527.744911, 282.323068,527.902218">
+    <area id="map2" shape="poly" href="#" alt="工学部11号館" class="iborder000000 icolor0000ff" coords="368.973530,508.963206, 374.351229,509.219287, 374.607310,508.066922, 383.826223,508.066922, 383.826223,509.603408, 385.746829,509.603408, 386.002910,513.956783, 409.946475,514.340905, 410.330596,527.913193, 356.681647,527.529071, 356.297525,513.316581, 357.577930,513.188541, 357.321849,508.963206, 358.730294,508.963206, 358.858334,517.157795, 368.845490,517.157795">
+
+    <area id="map28" shape="poly" href="#" alt="第二食堂" class="iborder000000 icolorff6600" coords="500.646673,46.554561, 511.212450,46.960937, 511.009262,51.837450, 517.104902,52.243826, 516.901714,54.885270, 518.730406,54.885270, 516.495338,90.036794, 513.853894,89.630418, 514.260270,94.710118, 510.399698,102.837639, 506.945502,102.431263, 505.116809,100.805759, 499.833921,100.602571, 495.566973,101.618511, 491.706401,102.837639, 487.845829,104.666331, 485.407573,105.885459, 483.985257,103.040827, 480.531061,103.853579, 476.670489,103.244015, 473.825857,100.602571, 472.606729,97.757939, 472.606729,94.710118, 474.029045,93.287802, 473.825857,89.020854, 461.837765,88.411290, 461.634577,83.331590, 475.248173,70.937122, 476.060925,73.375378, 483.172505,73.578566, 482.156565,85.363470, 487.845829,86.379410, 487.642641,90.443170, 490.080897,88.411290, 493.331905,50.211946, 500.240297,51.227886">
+    <area id="map25" shape="poly" href="#" alt="理学部1号館" class="iborder000000 icolorff6200" coords="436.925970,170.201550, 471.798702,170.201550, 471.798702,168.075164, 479.241053,168.075164, 479.453692,170.626827, 486.470766,170.414189, 486.896043,193.166520, 483.068548,193.591797, 483.068548,195.505544, 476.902029,195.080267, 477.539945,203.798450, 484.344380,203.798450, 484.557019,230.165638, 465.206905,230.590915, 465.419544,203.585811, 471.586064,203.373173, 471.586064,194.442351, 436.713332,193.591797, 436.500693,203.160534, 444.580960,203.373173, 445.006237,229.952999, 439.690272,230.165638, 439.690272,228.251890, 431.184728,228.464529, 430.972089,230.378276, 424.805570,230.378276, 424.380292,203.585811, 430.972089,203.373173, 430.972089,194.654990, 426.931956,194.654990, 426.931956,192.741242, 423.104461,192.741242, 423.317099,170.414189, 428.633065,170.414189, 429.058342,167.862525, 436.713332,167.862525">
+    <area id="map26" shape="poly" href="#" alt="理学部4・7号館" class="iborder000000 icolorff6200" coords="511.873992,138.234879, 489.145287,227.613974, 547.195628,241.435484, 567.160030,165.877898, 556.409967,148.370653">
+    <area id="map19" shape="poly" href="#" alt="安田講堂" class="iborder000000 icolorff6200" coords="499.129851,280.164063, 505.211316,280.716923, 505.027029,293.985572, 494.891255,293.985572, 494.891255,298.224168, 481.806893,297.487021, 481.806893,301.909904, 470.381111,302.094191, 470.381111,297.302734, 456.743889,297.118448, 456.743889,293.616998, 446.608115,293.801285, 446.608115,279.979776, 452.136719,279.795489, 452.136719,279.795489, 452.689579,275.556893, 453.795300,272.055444, 455.453881,269.844002, 458.033896,266.711127, 454.716734,262.103957, 458.955330,258.602508, 462.456779,261.551096, 465.221081,260.629662, 468.538243,259.339655, 472.223979,258.971081, 475.909715,258.786794, 479.779738,259.339655, 483.281187,260.445376, 486.598349,261.551096, 490.468372,257.865360, 497.102697,263.025391, 493.416961,265.973979, 495.444115,268.553994, 497.839844,271.134010, 498.945565,273.714025, 499.314138,276.662613">
+    <area id="map16" shape="poly" href="#" alt="法文1号館" class="iborder000000 icolorff6200" coords="443.475239,343.743007, 449.188130,343.005859, 449.188130,344.480154, 452.505292,344.848727, 452.505292,347.428742, 459.508191,353.878780, 462.456779,354.247354, 462.088206,365.304561, 464.115360,365.304561, 464.115360,373.966041, 466.326802,373.966041, 466.511089,380.416079, 464.115360,380.416079, 464.299647,391.473286, 466.142515,393.500441, 466.142515,395.527596, 464.115360,395.711883, 462.272492,396.817603, 461.351058,397.923324, 460.798198,394.790449, 450.293851,394.790449, 450.293851,397.923324, 427.995149,397.186177, 426.336568,396.080456, 426.336568,392.210433, 427.810862,390.920426, 428.548009,380.231792, 425.783707,380.231792, 426.152281,373.413180, 428.363722,373.413180, 427.995149,365.673135, 430.022303,365.673135, 429.469443,354.247354, 432.233745,354.247354, 439.789504,346.138735, 439.973790,344.111580">
+    <area id="map41" shape="poly" href="#" alt="法文1号館" class="iborder000000 icolorff6200" coords="428.004599,410.228012, 462.811177,410.228012, 463.085244,414.064957, 466.374055,414.064957, 466.785156,415.983430, 465.551852,417.079700, 464.318548,417.216734, 464.455582,427.083165, 466.374055,429.001638, 466.237021,434.757056, 464.181515,435.031124, 464.181515,442.979083, 457.740927,443.253150, 458.014995,445.171623, 435.404423,445.445691, 435.404423,442.842049, 428.141633,442.842049, 428.415701,435.168158, 426.360194,434.620023, 426.497228,427.357233, 428.415701,426.946132, 428.278667,416.120464, 426.634262,414.750126, 426.497228,411.598349">
+    <area id="map45" shape="poly" href="#" alt="法文2号館" class="iborder000000 icolorff6200" coords="508.103201,343.105091, 513.589277,343.105091, 513.386089,344.730595, 516.840285,344.527407, 516.637097,346.762475, 524.561429,354.686807, 526.999685,354.686807, 526.593309,366.065335, 529.234753,366.065335, 528.625189,373.380103, 531.063445,373.380103, 530.860257,380.288495, 528.422001,380.288495, 527.812437,391.667024, 530.250693,392.886152, 530.250693,396.543536, 529.031565,398.169040, 492.864100,398.575416, 490.629032,395.730784, 490.425844,392.276588, 492.457724,391.260648, 492.660912,379.678931, 490.629032,379.678931, 490.425844,373.583291, 492.254536,373.583291, 492.254536,365.455771, 494.286416,365.455771, 494.286416,354.280431, 496.115108,354.280431, 504.445817,347.372039, 504.649005,344.527407, 507.696825,344.324219">
+    <area id="map17" shape="poly" href="#" alt="グランドフェスティバルステージ" class="iborder000000 icolorff6200" coords="455.587409,304.358221, 497.613944,304.358221, 497.496878,326.366545, 455.587409,326.366545">
+    <area id="map48" shape="poly" href="#" alt="御殿下記念館" class="iborder000000 icolorff6200" coords="597.581527,154.126071, 612.253591,157.712576, 589.430381,241.506363, 562.694619,234.659400, 581.605280,163.581401">
+    <area id="map21" shape="poly" href="#" alt="御殿下グラウンド" class="iborder000000 icolorff6200" coords="618.945077,159.848107, 652.645324,167.413469, 650.925924,171.883910, 736.208182,192.172834, 717.982538,258.541688, 610.691955,233.782323, 607.253154,246.505886, 596.592872,244.098725">
+
+    <area id="map30" shape="poly" href="#" alt="七徳堂" class="iborder000000 icolorff0000" coords="736.798387,229.641129, 766.737903,232.665323, 764.318548,257.161290, 734.681452,254.288306">
+    <area id="map31" shape="poly" href="#" alt="医学部2号館" class="iborder000000 icolorff0000" coords="774.978831,298.365927, 799.021169,301.314516, 797.660282,307.211694, 801.062500,308.345766, 799.701613,312.882056, 802.423387,313.789315, 795.165323,358.471774, 791.082661,357.110887, 791.082661,359.379032, 789.721774,361.193548, 787.907258,362.100806, 785.865927,361.193548, 784.278226,360.059476, 783.597782,358.925403, 783.597782,355.750000, 771.349798,354.389113, 770.442540,361.420363, 767.040323,358.925403, 754.792339,356.657258, 751.843750,358.925403, 752.070565,352.347782, 739.822581,349.172379, 739.368952,353.255040, 737.554435,353.935484, 735.059476,354.389113, 733.244960,353.481855, 731.657258,352.120968, 731.657258,349.852823, 729.162298,348.718750, 730.069556,342.141129, 724.172379,341.460685, 723.265121,339.646169, 725.079637,329.666331, 731.430444,330.800403, 732.110887,326.717742, 743.224798,328.759073, 740.276210,342.367944, 743.451613,342.821573, 745.266129,329.439516, 749.121976,326.944556, 755.699597,327.171371, 758.648185,309.479839, 791.082661,314.469758, 792.443548,305.623992, 780.422379,302.902218, 779.288306,305.623992, 777.246976,305.623992, 775.432460,304.263105, 774.525202,301.768145">
+    <area id="map36" shape="poly" href="#" alt="育徳堂" class="iborder000000 icolorff0000" coords="665.928301,367.440398, 702.171371,367.563256, 702.417087,384.149068, 665.805444,384.149068">
+    <area id="map57" shape="poly" href="#" alt="医学部教育研究棟" class="iborder000000 icolorff0000" coords="834.177419,351.213710, 899.500000,350.686915, 899.324402,375.797477, 833.650624,374.919485">
+    <area id="map37" shape="poly" href="#" alt="薬学部棟" class="iborder000000 icolorff0000" coords="848.173765,233.005544, 892.123803,237.702495, 888.768838,264.206716, 880.045930,264.206716, 879.374937,274.607107, 898.498236,277.291079, 895.143271,306.479272, 871.323022,302.788810, 871.323022,306.814768, 881.723412,307.821258, 881.052419,318.221648, 878.703944,318.221648, 877.697455,327.280053, 839.115360,322.918599, 840.121850,314.195691, 837.773374,313.524698, 841.128339,295.743385, 835.424899,294.065902, 837.102382,285.342994, 841.799332,285.342994">
+    <area id="map40" shape="poly" href="#" alt="赤門総合研究棟" class="iborder000000 icolorff0000" coords="773.187941,415.449471, 778.447203,415.699912, 778.447203,414.197266, 793.223223,414.948589, 793.473664,465.287235, 794.725869,465.287235, 794.725869,477.809287, 818.768208,478.811051, 818.517767,490.331338, 772.687059,489.830456">
+    <area id="map60" shape="poly" href="#" alt="教育学部棟" class="iborder000000 icolorff0000" coords="712.860005,412.850554, 731.742314,412.595388, 731.487147,414.891885, 744.245464,414.636719, 744.245464,443.215348, 747.307460,443.215348, 748.072959,461.076991, 744.245464,461.076991, 743.735131,489.910786, 730.721648,489.655620, 730.721648,491.696951, 710.818674,491.186618, 711.073841,474.855973, 726.128654,474.600806, 726.638987,461.332157, 712.604839,461.076991, 712.604839,441.429183, 726.383821,440.408518, 726.894153,427.395035, 712.860005,427.395035">
+    <area id="map33" shape="rect" href="#" alt="合格通り広場" class="iborder000000 icolorff0000" coords="797.923680,388.038144, 827.552241,407.346644">
+
+    <area id="map22" shape="poly" href="#" alt="正門" class="iborder000000 icolorff0000" coords="507.352335,531.673924, 507.202345,535.723660, 506.752374,539.023446, 505.552452,542.023251, 503.302598,545.922997, 500.302793,549.522763, 497.003008,552.072597, 492.803281,554.622431, 488.003593,556.272324, 484.253837,556.722294, 479.454149,556.872285, 475.104432,556.422314, 470.904705,554.922412, 468.054891,553.122529, 465.505057,551.772616, 462.805232,549.672753, 460.705369,547.272909, 458.605505,544.423094, 456.955613,541.723270, 455.305720,538.423485, 454.705759,532.123894">
+    <area id="map38" shape="poly" href="#" alt="赤門" class="iborder000000 icolorff0000" coords="735.191175,530.803249, 788.408445,530.945922, 788.123098,534.940784, 786.839035,538.792973, 784.984277,542.787835, 782.558825,545.641308, 780.133373,548.637454, 777.137227,551.062906, 773.427712,553.488358, 769.290176,555.343116, 765.009967,556.199158, 760.729757,556.484505, 756.449548,555.913810, 751.455970,554.344400, 747.033087,552.489643, 744.322288,550.206865, 741.896836,547.638739, 739.328710,544.357245, 736.760585,540.077036, 735.333848,536.510194">
+    <area id="map68" shape="rect" href="#" alt="西片門" class="iborder000000 icolorff0000" coords="219.890544,532.884820, 261.039087,548.180167">
+    <area id="map52" shape="poly" href="#" alt="農正門" class="iborder000000 icolorff0000" coords="108.370968,533.718913, 108.078304,537.523543, 107.346644,541.181842, 105.736993,544.840140, 103.542014,548.205775, 101.200702,550.986082, 97.981400,553.181061, 94.176769,555.522373, 90.225806,557.424688, 86.567508,558.156348, 82.909209,558.449011, 78.226587,557.863684, 74.129292,556.400364, 70.617326,554.498049, 66.959027,551.717742, 63.593392,548.791103, 60.959417,545.864464, 58.618106,541.328174, 57.740114,535.035900">
+    <area id="map53" shape="rect" href="#" alt="弥生門" class="iborder000000 icolorff0000" coords="278.039201,169.904770, 319.085312,184.457482">
+    <area id="map54" shape="poly" href="#" alt="竜岡門" class="iborder000000 icolorff0000" coords="838.297883,186.735383, 886.117944,199.021169, 882.337702,212.819052, 835.084677,201.478327">
+    <area id="map69" shape="poly" href="#" alt="池之端門" class="iborder000000 icolorff0000" coords="548.515511,66.654169, 560.807395,72.031868, 577.708734,13.645421, 565.160770,10.316370">
+
+    <area id="map23" shape="rect" href="#" alt="東大前" class="iborder000000 icolorff0000" coords="110.287916,541.072093, 219.605196,564.602270">
+    <area id="map51" shape="rect" href="#" alt="本郷三丁目" class="iborder000000 icolorff0000" coords="576.772210,543.808500, 790.782681,562.465823">
+    <area id="map49" shape="rect" href="#" alt="根津" class="iborder000000 icolorff0000" coords="161.815053,196.383536, 268.472750,212.553216">
+
+    <area id="map64" shape="rect" href="#" alt="東大構内" class="iborder000000 icolorff0000" coords="518.202849,121.809118, 570.443353,135.637487">
+    <area id="map67" shape="rect" href="#" alt="東大病院前" class="iborder000000 icolorff0000" coords="764.973384,171.704653, 827.720522,189.597392">
+
+    <area id="map56" shape="poly" href="#" rel="map56_1" alt="船形試験水槽" class="iborder000000 icolorff0000" coords="211.883443,334.117566, 219.207661,333.824597, 219.500630,383.922253, 222.430318,383.922253, 222.723286,388.609753, 205.145161,388.023816, 205.145161,383.043347, 211.297505,383.629284">
+    <area id="map56_1" shape="poly" href="#" rel="map56" alt="船形試験水槽" class="iborder000000 icolorff0000" coords="208.698589,392.815272, 219.132056,393.250000, 219.132056,495.845766, 230.000252,495.845766, 230.434980,521.929435, 220.001512,521.929435, 220.870968,509.322329, 211.741683,509.322329, 212.176411,398.901462, 208.698589,398.901462">
+
+    <area id="map55" shape="poly" href="#" alt="三四郎池" class="iborder000000 icolorff0000" coords="666.755382,301.446215, 663.561687,305.349620, 662.142267,313.156429, 662.851977,317.059834, 663.561687,320.963238, 667.465092,325.576353, 673.852481,326.995773, 679.885016,328.415193, 683.788420,328.060338, 690.530665,335.157437, 683.788420,338.351132, 677.046176,336.931712, 669.239367,333.738017, 663.916542,331.963742, 659.658282,333.738017, 654.690313,331.963742, 650.077198,331.963742, 644.754374,333.028307, 639.431549,335.512292, 634.463580,338.351132, 629.140755,341.544826, 624.527640,344.738521, 624.527640,349.351636, 624.172786,353.609895, 619.914526,355.029315, 616.365976,354.674460, 613.881991,356.803590, 611.398007,358.932720, 607.139747,358.577865, 602.526632,355.739025, 597.913518,356.448735, 595.074678,359.642430, 581.945044,369.578369, 573.428525,370.288079, 572.009105,367.449239, 573.073670,361.771560, 582.654754,354.319605, 587.622724,343.673956, 591.171273,337.641422, 589.751854,329.124902, 586.558159,322.027803, 581.945044,312.801574, 579.461059,306.769039, 580.170769,300.736505, 583.719319,297.897665, 588.687289,297.542810, 595.074678,299.671940, 599.687793,297.897665, 603.236342,300.026795, 608.914022,300.736505, 614.591701,301.091360, 619.204816,300.026795, 625.237350,301.446215, 629.850465,303.220490, 634.108725,304.994765, 636.947564,308.898169, 643.334954,308.898169, 648.657778,308.898169, 653.625748,306.769039, 658.948572,304.994765, 663.561687,302.865635">
+
+    <area id="map72" shape="poly" href="#" alt="総合図書館" class="iborder000000 icolorff0000" coords="611.596774,416.838710, 627.020161,416.838710, 627.927419,414.419355, 640.326613,415.024194, 640.931452,412.907258, 655.750000,413.209677, 655.750000,415.326613, 694.157258,415.024194, 694.157258,412.302419, 710.487903,412.907258, 710.790323,494.560484, 699.600806,494.862903, 699.600806,493.653226, 662.403226,493.350806, 662.403226,494.862903, 646.979839,494.560484, 646.979839,492.745968, 628.229839,492.745968, 628.229839,490.931452, 611.899194,490.326613, 610.689516,476.112903, 613.108871,474.600806, 613.108871,472.786290, 609.479839,472.786290, 609.177419,436.495968, 612.806452,436.495968, 612.806452,434.379032, 610.991935,432.262097">
+
+    <area id="map1" shape="rect" href="#" alt="工学部前広場" class="iborder000000 icolorff0000" coords="364.222467,443.872165, 380.779927,471.122984">
+    <area id="map20" shape="poly" href="#" alt="工学部列品館" class="iborder000000 icolorff0000" coords="438.749937,465.315587, 457.273122,464.984816, 457.273122,467.134829, 465.046245,467.134829, 465.542402,472.096396, 464.384703,472.261782, 464.384703,473.254095, 463.723160,473.254095, 464.880859,486.154171, 459.919292,485.823400, 459.753906,495.084992, 454.626953,494.919607, 454.626953,497.400391, 438.915323,497.565776, 438.915323,495.084992, 432.299899,494.919607, 432.465285,489.461883, 429.984501,489.461883, 430.315272,473.254095, 432.134514,473.254095, 431.969128,466.638672, 438.749937,466.804057">
+
+</map>
+
+<!--mapper-->
+<script src="/js/mapper/cvi_map_lib.js"></script>
 <script>
-    $('#search-all li').hide();
-    $(document).ready(function(){
-
-        $('input#search1').on('keyup', function(){
-            Search($(this).val());
+    map_load = function(){
+        cvi_map.add(document.getElementById('shape1'),{
+            opacity: 25,
+            areacolor: '#ffe4b5',
+            bordercolor: '#ff6600'
         });
 
-        //genre
-        // 「id="jQueryBox"」を非表示
-        $(".genre-box").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $(".genre-push").click(function(){
-            var key = $(this).find('input[name="name"]').val();
-            $(".genre-push").hide();
-            $(this).closest('.push-outside').hide();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#BoxGenre" + key).show();
-        });
-        $(".genre-link").click(function(e){
-            e.stopPropagation();
-            $(".genre-push").show();
-            $('#tab-2 .push-outside').show();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $(".genre-box").hide();
-        });
-
-        //area
-        // 「id="jQueryBox"」を非表示
-        $(".area-box").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $(".area-push").click(function(){
-            var key = $(this).find('input[name="name"]').val();
-            $(".area-push").hide();
-            $(this).closest('.push-outside').hide();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $("#BoxArea" + key).show();
-        });
-
-        $(".area-link").click(function(e){
-            e.stopPropagation();
-            $(".area-push").show();
-            $('#tab-3 .push-outside').show();
-            // 「id="jQueryBox"」の表示、非表示を切り替える
-            $(".area-box").hide();
-        });
-
-        // 「id="jQueryBox"」を非表示
-        $(".select-box").css("display", "none");
-
-        // 「id="jQueryPush"」がクリックされた場合
-        $(".btn-open").click(function(e){
-            e.stopPropagation();
-            var key = $(this).find('input[name="btn-val"]').val();
-            $("div#" + key).slideToggle('fast');
+        $('area').click(function() {
 
             // スクロールの速度
             var speed = 400; // ミリ秒
             // 移動先を数値で取得
-            var th = $(this).offset().top;
+            var position = $('#sample02').offset().top;
             // スムーススクロール
-            var body = $(this).closest('.scroll-inbox');
-            /*
-            if (key.substr(0,5) == 'genre') {
-                var body = $(this).closest('.contact-box');
+            $('body').animate({scrollTop:position}, speed, 'swing');
+        });
+
+        //select2
+        $(".select2_demo_2").select2({
+            width: '100%',
+            multiple: true,
+            maximumSelectionLength: 1,
+            minimumResultsForSearch: Infinity
+        }).on('select2:select', function(e) {
+            if (e.target.value.substr(0,3) == 'map') {
+                var id = e.target.value;
+                $('input[name="start-pos"]').val(e.target.value.substr(3));
             } else {
-                var body = $(this).closest('.transparent');
+                var id = "map" + e.target.value;
+                $('input[name="start-pos"]').val(e.target.value);
             }
-            */
-            var sh = body.scrollTop();
-            var topsize = body.offset().top;
-            var pos = th - topsize + sh ;
-
-            body.animate({
-                scrollTop: pos
-            }, speed, "swing");
-        });
-        $(".btn-modal").click(function(event) {
-            event.stopPropagation();
-            $("#Modal_pt_pid" + $(this).val()).modal('show');
+            $('#select-start-pos-error').removeClass('text-danger').addClass('text-primary phone-display');
+            $('#here').text($('input[name="name-' + id + '"]').val());
+            extAreaOver('shape1', id);
+        }).on('select2:unselect', function() {
+            var id = "map" + $('input[name="start-pos"]').val();
+            $('#here').text("");
+            $('input[name="start-pos"]').val("");
+            extAreaOut('shape1', id);
         });
 
-
-        $('input.select-p').change(function() {
-            var val = $(this).val();
-            if ($(this).is(':checked')) {
-                $('.select-p[value="' + val + '"]').prop('checked', true);
-                $('li#' + val).show();
-            } else {
-                $('.select-p[value="' + val + '"]').prop('checked', false);
-                $('li#' + val).hide();
-            }
+        $('area').click(function(e) {
+            var re = /(\d+)/;
+            var id = re.exec(e.target.id)[0];
+            $('#select-start-pos-error').removeClass('text-danger phone-display').addClass('text-primary');
+            $('input[name="start-pos"]').val(id);
+            $('#here').text($('input[name="name-map' + id + '"]').val());
+            $('.select2_demo_2').val("map" + id).trigger('change');
         });
-    });
+    };
 
-    function Search(keyword) {
-
-        var regExp = new RegExp(keyword);
-
-        $('#search-all').find('li').hide().each(function(){
-            var li = $(this);
-            $(this).find('label').each(function(){
-                if ($(this).text().match(regExp)) {
-                    li.show();
-                }
-            });
-            $(this).find('span').each(function(){
-                if ($(this).text().match(regExp)) {
-                    li.show();
-                }
-            });
-        });
-    }
 </script>

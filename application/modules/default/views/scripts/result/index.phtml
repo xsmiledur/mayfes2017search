@@ -12,6 +12,9 @@
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/map-css.css" rel="stylesheet">
 
+    <!--widget-->
+    <link href="/css/widget-css.css" rel="stylesheet">
+
     <!--range slider-->
     <link href="/css/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="/css/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
@@ -40,13 +43,6 @@
         .tooltip.left .tooltip-arrow {
             border-left-color: #2F4050;
         }
-        .SNS-link{
-            position: absolute;
-            width: 40px;
-            top: 18px;
-            left: 30px;
-            z-index: 1000;
-        }
     </style>
 </head>
 
@@ -55,9 +51,7 @@
 
 <input type="hidden" name="err-msg" value="<?php echo $this->errMsg; ?>">
 
-
 <div id="wrapper">
-
     <div id="page-wrapper" class="gray-bg">
         <div class="sk-spinner sk-spinner-double-bounce">
             <div class="sk-double-bounce1"></div>
@@ -67,11 +61,11 @@
         <button type="button" class="sk-spinner-btn btn btn-default btn-outline">検索をやめる</button>
         <div class="row no-padding">
             <div class="col-lg-12">
-                <div id="id1" class="row">
+                <div class="show1 row">
                     <div class="col-md-2">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="widget yellow-bg widget2 widget-back">
+                                <div class="widget yellow-bg widget-left widget-back">
                                     <i class="pe-7s-back fa-first"></i>
                                     <i class="pe-7s-back fa-second"></i>
                                     <p>入力画面に戻る</p>
@@ -79,9 +73,9 @@
                             </div>
                             <div class="col-sm-12">
                                 <a href="https://gogatsusai.jp/90/search/result?id=394">
-                                    <div class="widget red-bg widget2 widget-vote">
+                                    <div class="widget red-bg widget-left widget-vote">
                                         <p>投票はこちらから！</p>
-                                        <div class="vote-comment">投票よろしく、めぇ。</div>
+                                        <div class="vote-comment">投票よろしくなのー、めぇ。</div>
                                         <p class="vote-maychan"><img src="/img/vote-maychan.png"></p>
                                     </div>
                                 </a>
@@ -89,17 +83,11 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="SNS-link">
-                            <a data-size="large" data-text="東京大学五月祭経路探索アプリ「MaySearch」がスゴすぎる！" data-hashtags="五月祭" class="twitter-share-button" href="https://twitter.com/share" data-dnt="true"></a>
-                            <!--<a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
-                                <img src="img/share-a.png" width="90" height="25" alt="" />
-                            </a>-->
-                        </div>
                         <div>
                             <a href="/"><img alt="toptitle" style="padding: 50px; width: 100%;" src="/img/logo/maysearch_long.png"></a>
                         </div>
                         <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2 col-xs-12 sub-title b-r-md text-center">
+                            <div class="col-sm-8 col-sm-offset-2 col-xs-12 sub-title b-r-md m-t-md text-center">
                                 <h2>最適経路表示画面</h2>
                                 <p>あなたの選んだ企画を巡る最適経路を表示しています。<br>企画ごとに滞在時間を変更して、再検索を行うこともできます。</p>
                             </div>
@@ -109,7 +97,7 @@
                         <div class="row row2">
                             <div class="col-sm-12">
                                 <a href="/search/algorithm">
-                                    <div class="widget lazur-bg widget1">
+                                    <div class="widget lazur-bg widget-right" style="height: 125px;">
                                         <i class="pe-7s-stopwatch fa-first"></i>
                                         <i class="pe-7s-stopwatch fa-second"></i>
                                         <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
@@ -118,24 +106,31 @@
                             </div>
                             <div class="col-sm-12">
                                 <a href="https://ap-phys.net/">
-                                    <div class="widget navy-bg widget1">
+                                    <div class="widget navy-bg widget-right" style="height: 125px;">
                                         <i class="pe-7s-plugin fa-first"></i>
                                         <i class="pe-7s-plugin fa-second"></i>
                                         <p>工学部応用物理系<br>工學博覧会について</p>
                                     </div>
                                 </a>
                             </div>
+                            <div class="col-sm-12">
+                                <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
+                                    <div id="twitter" class="widget widget-right" style="background-color: #55acee; height: 70px;">
+                                        <img src="/img/SNS/twitter.png" style="height: 50px;">
+                                        <p>Twitterでシェア</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-12">
+                                <div id="LINE" class="widget navy-bg widget-right height3" style="height: 70px;">
+                                    LINE
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="id2" class="row">
+                <div class="show2 row">
                     <div class="col-sm-12">
-                        <div class="SNS-link">
-                            <a data-size="large" data-text="東京大学五月祭経路探索アプリ「MaySearch」がスゴすぎる！" data-hashtags="五月祭" class="twitter-share-button" href="https://twitter.com/share" data-dnt="true"></a>
-                            <!--<a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
-                                <img src="img/share-a.png" width="90" height="25" alt="" />
-                            </a>-->
-                        </div>
                         <div>
                         <a href="/"><img alt="toptitle" style="padding: 50px; width: 100%;" src="/img/logo/maysearch_long.png"></a>
                         </div>
@@ -149,7 +144,7 @@
                     <div class="col-xs-6">
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="widget yellow-bg widget2 widget-back">
+                                <div class="widget yellow-bg widget-left widget-back height3">
                                     <i class="pe-7s-back fa-first"></i>
                                     <i class="pe-7s-back fa-second"></i>
                                     <p>入力画面に戻る</p>
@@ -157,9 +152,9 @@
                             </div>
                             <div class="col-xs-12">
                                 <a href="https://gogatsusai.jp/90/search/result?id=394">
-                                    <div class="widget red-bg widget2 widget-vote">
+                                    <div class="widget red-bg widget-left widget-vote">
                                         <p>投票はこちらから！</p>
-                                        <div class="vote-comment">投票よろしく、めぇ。</div>
+                                        <div class="vote-comment">投票よろしくなのー、めぇ。</div>
                                         <p class="vote-maychan"><img src="/img/vote-maychan.png"></p>
                                     </div>
                                 </a>
@@ -170,7 +165,7 @@
                         <div class="row row2">
                             <div class="col-xs-12">
                                 <a href="/search/algorithm">
-                                    <div class="widget lazur-bg widget1">
+                                    <div class="widget lazur-bg widget-right height2">
                                         <i class="pe-7s-stopwatch fa-first"></i>
                                         <i class="pe-7s-stopwatch fa-second"></i>
                                         <p>このアプリで使われている<br>アルゴリズムについて</p>
@@ -179,12 +174,25 @@
                             </div>
                             <div class="col-xs-12">
                                 <a href="http://ap-phys.net/">
-                                    <div class="widget navy-bg widget1">
+                                    <div class="widget navy-bg widget-right height2">
                                         <i class="pe-7s-plugin fa-first"></i>
                                         <i class="pe-7s-plugin fa-second"></i>
                                         <p>工学部応用物理系<br>工學博覧会について</p>
                                     </div>
                                 </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
+                                    <div id="twitter" class="widget widget-right height3">
+                                        <img src="/img/SNS/twitter.png">
+                                        <p>Let's<br>Share</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <div id="LINE" class="widget navy-bg widget-right height3">
+                                    LINE
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,7 +212,7 @@
 
                                                 <div class="vertical-timeline-block draggable-front">
                                                     <div class="vertical-timeline-time-block">
-                                                        <?php echo $this->start; ?>
+                                                        <?php echo $this->clock1; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-icon blue-bg">
@@ -223,7 +231,7 @@
 
                                                     <div class="fa-timeline">
                                                         <i class="fa fa-male fa-timeline-icon"></i>
-                                                        移動：<?php echo (strlen($item['time']) > 0) ? $item['time']."分" : "なし（同じ建物内）"; ?>
+                                                        移動：<?php echo (strlen($item['order_time']) > 0) ? $item['order_time']."分" : "なし（同じ建物内）"; ?>
                                                     </div>
 
                                                     <div class="vertical-timeline-block draggable-front">
@@ -259,7 +267,7 @@
 
                                                 <div class="vertical-timeline-block draggable-front">
                                                     <div class="vertical-timeline-time-block">
-                                                        <?php echo $this->end; ?>
+                                                        <?php echo $this->clock2; ?>
                                                     </div>
                                                     <div class="vertical-timeline-icon navy-bg">
 
@@ -293,7 +301,7 @@
 
                                                         <?php foreach ($this->order as $i => $item) : ?>
                                                             <?php if ($i == 0) : ?>
-                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
+                                                                <div class="over-map well well1 map-comment print-on map-cm<?php echo $this->sp_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top1']; ?>px; left: <?php echo $this->start_pos['bd_left1']; ?>px;">
                                                                     &#<?php echo 9312 + $i; ?> 現在地
                                                                     <p class="map-cm-b"></p>
                                                                 </div>
@@ -318,7 +326,7 @@
                                                         <?php foreach ($this->order as $i => $item) : ?>
                                                             <?php if ($i == 0) : ?>
 
-                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->start_pos_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
+                                                                <div class="over-map well well2 map-comment  map-cm<?php echo $this->sp_bd_pid; ?>" style="top: <?php echo $this->start_pos['bd_top2']; ?>px; left: <?php echo $this->start_pos['bd_left2']; ?>px;">
                                                                     &#<?php echo 9312 + $i; ?> 現在地
                                                                     <div class="map-cm-b"></div>
                                                                 </div>
@@ -520,7 +528,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
+                    <a href="https://gogatsusai.jp/90/search/result?id=<?php echo $item['pd_pid']; ?>" type="button" class="btn btn-danger pull-left">五月祭公式HPの企画紹介ページへ</a>
                     <button type="button" class="btn btn-white"
                             data-dismiss="modal">Close
                     </button>
@@ -566,6 +574,8 @@
 <script src="/js/jquery.sticky/jquery.sticky.js"></script>
 
 <script>
+    /* twitterシェア*/
+    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
 
     //ページ遷移の前に警告
     /*$(window).on('beforeunload', function(e) {
@@ -731,7 +741,7 @@
         $("#ionrange<?php echo $key; ?>").ionRangeSlider({
             min: 0,
             max: 120,
-            from: <?php if ($item['research_t']) : echo $item['research_t']; elseif ($item['info']['pt_time']) : echo $item['info']['pt_time']; else : echo 30; endif; ?>,
+            from: <?php echo ($item['time']) ? $item['time'] : $item['info']['pt_time']; ?>,
             postfix: "分",
             grid: true,
             onChange: function(data) {
