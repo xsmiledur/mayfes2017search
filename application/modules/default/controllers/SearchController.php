@@ -250,13 +250,11 @@ class SearchController extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
-
-        var_dump($inputData);
         /*C++スクリプトとの結合*/
         $result = $this->procOpen(1); //1=サーバー 0=localhost
         $proc = $result['proc']; $pipes = $result['pipes'];
 
-        $echo = $this->returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
+        $echo = $this->returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
 
         echo $echo;
 
@@ -393,7 +391,6 @@ class SearchController extends Zend_Controller_Action
             foreach ($t as $k => $val) $inputData .= sprintf("%d ", $val);
             if ($i < $N) $inputData .= sprintf("\n");
         }
-        //var_dump($inputData);
         return $inputData;
     }
 
@@ -426,7 +423,7 @@ class SearchController extends Zend_Controller_Action
         return $connect;
     }
 
-    private function returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
+    private function returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
             if (substr($connect,0,2) == "-1") {
@@ -434,7 +431,11 @@ class SearchController extends Zend_Controller_Action
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
-                unset($pt_pid[$N + 1]);
+                if ($flg == 1) {
+                    $pt_pid = $this->refixPT_PID($pt_pid, $N);
+                } else {
+                    unset($pt_pid[$N + 1]);
+                }
 
                 $this->sendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
 
@@ -443,6 +444,17 @@ class SearchController extends Zend_Controller_Action
         } else {
             return 0;
         }
+    }
+
+    private function refixPT_PID($pt_pid, $N) {
+        unset($pt_pid[1]); //現在地
+        unset($pt_pid[$N + 2]); //一番最後は消す
+        $i = 0;
+        $arr = array();
+        foreach ($pt_pid as $item) {
+            $arr[$i] = $item; ++$i;
+        }
+        return $arr;
     }
 
 }

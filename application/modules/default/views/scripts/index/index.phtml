@@ -440,8 +440,7 @@
 
                 if (newIndex == 2 && currentIndex < newIndex) {
                     //時間が更新されたので、予め確認画面の企画を全て消去
-                    console.log("bb");
-                    /*$('.last-conf').remove();*/
+                    $('.last-conf').remove();
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
@@ -682,7 +681,7 @@
                     });
                     return false;
                 }
-                //window.location.href = "/result";
+                window.location.href = "/result";
 
 
             },
