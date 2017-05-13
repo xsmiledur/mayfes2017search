@@ -22,6 +22,8 @@
 
     <!-- common -->
     <link href="/css/common.css" rel="stylesheet">
+    <!--widget-->
+    <link href="/css/widget-css.css" rel="stylesheet">
 
     <!--favicon-->
     <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
@@ -139,10 +141,10 @@
                         五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
                         MaySearchを活用して、充実した五月祭を過ごしましょう！
                     </div>
-                    <div id="row1" class="row">
+                    <div class="row">
                         <div class="col-sm-4 col-xs-4 show1" >
                             <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
-                                <div id="twitter" class="widget widget2" style="background-color: #55acee">
+                                <div id="twitter" class="widget widget-left" style="background-color: #55acee">
                                     <img src="/img/SNS/twitter.png">
                                     <p>Twitterでシェア</p>
                                 </div>
@@ -150,7 +152,7 @@
                         </div>
                         <div class="col-sm-8 col-xs-6">
                             <a href="/search/algorithm">
-                                <div class="widget lazur-bg widget1">
+                                <div class="widget lazur-bg widget-right height2">
                                     <i class="pe-7s-stopwatch fa-first"></i>
                                     <i class="pe-7s-stopwatch fa-second"></i>
                                     <p>このアプリ内で動く<br>アルゴリズムの紹介</p>
@@ -159,7 +161,7 @@
                         </div>
                         <div class="col-sm-8 col-xs-6">
                             <a href="https://ap-phys.net/">
-                                <div class="widget navy-bg widget2">
+                                <div class="widget navy-bg widget-left height2">
                                     <i class="pe-7s-plugin fa-first"></i>
                                     <i class="pe-7s-plugin fa-second"></i>
                                     <p>工学部応用物理系<br>工學博覧会について</p>
@@ -168,20 +170,26 @@
                         </div>
                         <div class="col-sm-4 col-xs-4">
                             <a href="">
-                                <div id="eeic"  class="widget yellow-bg widget1">
+                                <div id="eeic"  class="widget yellow-bg widget-left height3 SNS">
                                     <img src="/img/logo/eeic.png">
                                     <p>五月祭アプリ</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-xs-4 show2">
+                        <div class="col-sm-2 col-xs-4 show2">
                             <a href="https://twitter.com/share?url=https://maysearch.ap-phys.net&text=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%E3%81%8C%E3%82%B9%E3%82%B4%E3%81%99%E3%81%8E%E3%82%8B%EF%BC%81&hashtags=%E4%BA%94%E6%9C%88%E7%A5%AD,MaySearch,%E5%B7%A5%E5%AD%A6%E9%83%A8%E5%BF%9C%E7%94%A8%E7%89%A9%E7%90%86%E7%B3%BB" ><!--data-dnt="true"-->
-                                <div id="twitter" class="widget widget2" style="background-color: #55acee">
+                                <div id="twitter" class="widget widget-right height3 SNS">
                                     <img src="/img/SNS/twitter.png">
                                     <p>Twitterで<br>シェア</p>
                                 </div>
                             </a>
                         </div>
+                        <div class="col-sm-2 col-xs-4 show2">
+                            <div id="LINE"  class="widget yellow-bg widget-left height3 SNS">
+                                <p>LINE</p>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -364,9 +372,31 @@
                                                                 </span>
                                                                 <span class="pull-right stay-text">
                                                                     <select name="time<?php echo $item['pt_pid']; ?>">
-                                                                        <?php for ($i=0; $i<=480; $i++) : ?>
-                                                                            <option value="<?php echo $i; ?>" <?php echo ($item['pt_time'] == $i) ? 'selected=""' : ''; ?>><?php echo $i;?></option>
-                                                                        <?php endfor; ?>
+                                                                        <option value="5" <?php echo ($item['pt_time'] == 5) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="10" <?php echo ($item['pt_time'] == 10) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="15" <?php echo ($item['pt_time'] == 15) ? 'selected=""' : ''; ?>>15</option>
+                                                                        <option value="20" <?php echo ($item['pt_time'] == 20) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="25" <?php echo ($item['pt_time'] == 25) ? 'selected=""' : ''; ?>>25</option>
+                                                                        <option value="30" <?php echo ($item['pt_time'] == 30) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="35" <?php echo ($item['pt_time'] == 35) ? 'selected=""' : ''; ?>>35</option>
+                                                                        <option value="40" <?php echo ($item['pt_time'] == 40) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="45" <?php echo ($item['pt_time'] == 45) ? 'selected=""' : ''; ?>>45</option>
+                                                                        <option value="50" <?php echo ($item['pt_time'] == 50) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="55" <?php echo ($item['pt_time'] == 55) ? 'selected=""' : ''; ?>>55</option>
+                                                                        <option value="60" <?php echo ($item['pt_time'] == 60) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="65" <?php echo ($item['pt_time'] == 65) ? 'selected=""' : ''; ?>>65</option>
+                                                                        <option value="70" <?php echo ($item['pt_time'] == 70) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="75" <?php echo ($item['pt_time'] == 75) ? 'selected=""' : ''; ?>>75</option>
+                                                                        <option value="80" <?php echo ($item['pt_time'] == 80) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="85" <?php echo ($item['pt_time'] == 85) ? 'selected=""' : ''; ?>>85</option>
+                                                                        <option value="90" <?php echo ($item['pt_time'] == 90) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="95" <?php echo ($item['pt_time'] == 95) ? 'selected=""' : ''; ?>>95</option>
+                                                                        <option value="100" <?php echo ($item['pt_time'] == 100) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="105" <?php echo ($item['pt_time'] == 105) ? 'selected=""' : ''; ?>>105</option>
+                                                                        <option value="110" <?php echo ($item['pt_time'] == 110) ? 'selected=""' : ''; ?>>5</option>
+                                                                        <option value="115" <?php echo ($item['pt_time'] == 115) ? 'selected=""' : ''; ?>>115</option>
+                                                                        <option value="120" <?php echo ($item['pt_time'] == 120) ? 'selected=""' : ''; ?>>5</option>
+
                                                                     </select>
                                                                     分
                                                                 </span>
