@@ -16,6 +16,25 @@
     display: none;
 }
 
+/* まだ押せない */
+.widget-disabled {
+    -webkit-filter: grayscale(1); /* Webkit */
+    /*filter: gray; /* IE6-9 */
+    filter: grayscale(0); /* W3C */
+    cursor: default !important;
+
+}
+.widget-disabled:hover {
+    -webkit-filter: grayscale(0); /* Webkit */
+    /*filter: none; /* IE6-9 */
+    filter: grayscale(1); /* W3C */
+    cursor: default !important;
+}
+.widget-disabled.widget-right:hover {
+    margin-right: -20px !important;
+    margin-left: initial !important;
+}
+
 /* widgetの色 */
 .widget.navy-bg {
     background-color: rgba(26, 179, 148, 0.8);

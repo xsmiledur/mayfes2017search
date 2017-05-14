@@ -93,6 +93,10 @@ class ResultController extends Zend_Controller_Action
             $this->view->errMsg = $this->_session->errMsg;
             unset($this->_session->errMsg);
         }
+        if (!$pt_pid) {
+            return $this->_redirect('/');
+
+        }
 
         /*建物情報*/
         $bd_pid = $this->setBuildingInfo($start_pos, $pt_pid);
