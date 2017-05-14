@@ -132,12 +132,6 @@
         <div id="page-next-wrapper">
 
             <div class="row">
-                <div class="SNS-link">
-                    <!--<a class="line" href="http://line.me/R/msg/text/?{%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6%E4%BA%94%E6%9C%88%E7%A5%AD%E7%B5%8C%E8%B7%AF%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%97%E3%83%AA%E3%80%8CMaySearch%E3%80%8D%0Ahttps%3A%2F%2Fmaysearch.ap-phys.net%2F}">
-                        <img src="img/share-a.png" width="90" height="25" alt="" />
-                    </a>-->
-                </div>
-
                 <div class="col-lg-4 width-change">
                     <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
                         <a href="/"><img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png"></a>
@@ -634,8 +628,7 @@
 
     function TimePost2(date, clock1, clock2) {
         $('#sample01').addClass('sk-loading');
-
-
+        
         $.ajax({
             url: "/search/time-post2",
             type: "POST",
@@ -646,6 +639,7 @@
             },
             success: function(arr) {
                 console.log(arr);
+                $('#all-cover').append(arr);
                 $.ajax({
                     type: 'GET',
                     url: '/search/refresh02',
