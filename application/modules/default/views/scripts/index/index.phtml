@@ -456,7 +456,7 @@
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
-                    TimePost2($('input[name="date"]').val(), $('#input-clock1').val(), $('#input-clock2').val());
+                    TimePost2($('input[name="date"]').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                 }
 
                 if (newIndex - currentIndex > 1) return false;
