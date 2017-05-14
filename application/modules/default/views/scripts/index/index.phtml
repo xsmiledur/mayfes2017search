@@ -638,14 +638,11 @@
                 clock2 : clock2
             },
             success: function(arr) {
-                console.log(arr);
-                $('#all-cover').append(arr);
                 $.ajax({
                     type: 'GET',
                     url: '/search/refresh02',
                     dataType: 'html',
                     success: function(data) {
-                        console.log(data);
                         $('#sample01').empty();
                         $('#sample01').append(data);
 

@@ -126,11 +126,7 @@ class SearchController extends Zend_Controller_Action
         $this->_session->date = $date;
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
-        var_dump($date);
-        var_dump($clock1);
-        var_dump($clock2);
-        var_dump($this->_session->start);
-        var_dump($this->_session->end);
+
         exit();
     }
 
