@@ -450,7 +450,7 @@
                 if (newIndex == 1 && currentIndex < newIndex) {
                     var res = NoStep1($('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     if (!res) return false;
-                    TimePost1($('input[name="date"]').val());
+                    TimePost1($('input[name="date"]:checked').val());
                 }
 
                 if (newIndex == 2 && currentIndex < newIndex) {
@@ -459,7 +459,7 @@
                     var start_pos = $('input[name="start-pos"]').val();
                     res = NoStep2(start_pos);
                     if (!res) return false;
-                    TimePost2($('input[name="date"]').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
+                    TimePost2($('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                 }
 
                 if (newIndex - currentIndex > 1) return false;
