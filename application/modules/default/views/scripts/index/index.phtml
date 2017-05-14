@@ -525,9 +525,9 @@
     });
 
     function RemoveClock(agent) {
-        if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
+        //if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
             $('#clock-check').remove();
-        } else { //PC,タブレット
+        /*} else { //PC,タブレット
             $('#time-check').remove();
             //clockpicker
             $('#clock1').clockpicker({
@@ -541,7 +541,7 @@
                 align: 'left',
                 autoclose: true,
             });
-        }
+        }*/
     }
     function SetNow() {
         var now = new Date();
@@ -628,7 +628,7 @@
 
     function TimePost2(date, clock1, clock2) {
         $('#sample01').addClass('sk-loading');
-        
+
         $.ajax({
             url: "/search/time-post2",
             type: "POST",
