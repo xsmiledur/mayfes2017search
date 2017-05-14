@@ -449,11 +449,6 @@ class MainModel
 
             $data['com'] = $this->_read->fetchAll($sql);
 
-            var_dump($sql);
-            echo "<pre>";
-            var_dump($data['com']);
-            echo "</pre>";
-
             // 成功した場合はコミットする
             $this->_read->commit();
             $this->_read->query('commit');
