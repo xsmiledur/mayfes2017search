@@ -140,6 +140,7 @@ class SearchController extends Zend_Controller_Action
 
         $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
 
+        exit();
         //$this->_session->research = 1
     }
 
