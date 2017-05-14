@@ -473,9 +473,10 @@
             },
             onFinishing: function (event, currentIndex) {
                 var search = FinishCheck();
+                console.log(search.length);
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
-                } else if (search.length == 11) {
+                } else if (search.length >= 11) {
                     ErrorMsg("企画の数が多すぎます", "検索するには、企画は10個以下にしてください");
                 } else {
                     var time = FinishTimeCheck(search);
