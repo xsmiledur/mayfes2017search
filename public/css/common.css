@@ -509,7 +509,7 @@ a#jump div:active {
 }
 .last-conf {
     padding: 5px 0 !important;
-    height: 50px;
+    height: 50px; /* この高さでないとiphoneで崩れる*/
 }
 .last-conf label {
     width: 27%;
@@ -1049,7 +1049,7 @@ span.select2-selection__choice__remove {
          width: 15%;
     }
     .last-conf label {
-        width: 30px;
+        width: 55%;
     }
     .check-text {
         width: 95%;
