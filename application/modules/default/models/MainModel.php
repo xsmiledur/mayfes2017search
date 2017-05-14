@@ -446,6 +446,7 @@ class MainModel
             $sql .= $this->ConnectSql($date, $start, $end);
             $sql .= "AND pd_com_flg = '1' ";
             $sql .= ";";
+            var_dump($sql);
 
             $data['com'] = $this->_read->fetchAll($sql);
 
