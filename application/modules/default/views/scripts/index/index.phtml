@@ -558,6 +558,7 @@
         }
         $('#clockText1').text(val);
         $('input[name="clock1"]').attr("value", val);
+        $('#all-cover').attr($('input[name="clock1"]').val());
     }
     function ChangeDate() {
         if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
