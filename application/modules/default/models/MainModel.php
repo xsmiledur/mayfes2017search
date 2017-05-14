@@ -449,6 +449,7 @@ class MainModel
 
             $data['com'] = $this->_read->fetchAll($sql);
 
+            var_dump($sql);
             echo "<pre>";
             var_dump($data['com']);
             echo "</pre>";
