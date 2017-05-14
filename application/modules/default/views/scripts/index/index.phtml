@@ -475,7 +475,8 @@
                 var search = FinishCheck();
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
-
+                } else if (search.length == 12) {
+                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は11個以下にしてください");
                 } else {
                     var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
