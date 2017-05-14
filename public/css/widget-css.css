@@ -117,7 +117,8 @@
 #eeic p {
     bottom: 0;
     font-size: 13px;
-    left: 0;
+    right: 10px;
+    text-align: right;
 }
 
 /*twitter*/
