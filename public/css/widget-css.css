@@ -34,6 +34,10 @@
     margin-right: -20px !important;
     margin-left: initial !important;
 }
+.widget-disabled.widget-right:hover {
+    margin-left: -20px !important;
+    margin-right: initial !important;
+}
 
 /* widgetの色 */
 .widget.navy-bg {
