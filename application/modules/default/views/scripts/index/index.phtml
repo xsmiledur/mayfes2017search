@@ -28,6 +28,8 @@
     <!--favicon-->
     <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
 
+
+
     <style>
 
         .rec_pku_acd_icon {
@@ -119,6 +121,7 @@
 
 </head>
 <body>
+<?php include_once("analyticstracking.php") ?>
 <p style="display:none;">
     (English below.)
 
@@ -505,6 +508,14 @@
 <script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99122786-1', 'auto');
+    ga('send', 'pageview');
+
     $(document).ready(function() {
         $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
         RemoveClock(navigator.userAgent);
