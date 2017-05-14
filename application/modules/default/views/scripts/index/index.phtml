@@ -557,7 +557,7 @@
             val = h + ":" + m;
         }
         $('#clockText1').text(val);
-        $('input[name="clock1"]').attr("value", val);
+        $('input[name="clock1"]').attr("value", val).attr('placeholder', val);
         $('#all-cover').append($('input[name="clock1"]').val());
     }
     function ChangeDate() {
