@@ -127,7 +127,6 @@ class SearchController extends Zend_Controller_Action
         $this->_session->start = intval(substr($clock1,0,2)) * 60 + intval(substr($clock1,3,2));
         $this->_session->end = intval(substr($clock2,0,2)) * 60 + intval(substr($clock2,3,2));
 
-        exit();
     }
 
     public function refresh02Action()
@@ -136,8 +135,6 @@ class SearchController extends Zend_Controller_Action
 
         $this->view->color = array('primary', 'warning', 'info', 'danger', 'success');
 
-        exit();
-        //$this->_session->research = 1
     }
 
     public function timePost3Action()
