@@ -509,6 +509,7 @@ a#jump div:active {
 }
 .last-conf {
     padding: 5px 0 !important;
+    height: 50px;
 }
 .last-conf label {
     width: 27%;
