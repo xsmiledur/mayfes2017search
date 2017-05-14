@@ -268,6 +268,15 @@
                                                         </div>
                                                         <span id="clock-check-help" class="help-block m-b-none text-danger" style="display: none; text-align: center;">時刻が正しく入力されていません。<br>五月祭は09:00~18:00です。</span>
 
+                                                        <script>
+                                                            <script>
+                                                            $(document).ready(function() {
+                                                                $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
+                                                                RemoveClock(navigator.userAgent);
+                                                                SetNow();
+                                                            });
+                                                            </script>
+                                                        </script>
 
                                                     </a>
 
@@ -505,9 +514,7 @@
 
 <script>
     $(document).ready(function() {
-        $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
-        RemoveClock(navigator.userAgent);
-        SetNow();
+
         /*日付変更関連*/
         $('input[name="date"]').change(function() {ChangeDate()});
 
@@ -558,7 +565,6 @@
         }
         $('#clockText1').text(val);
         $('input[name="clock1"]').attr("value", val).attr('placeholder', val);
-        $('#all-cover').append($('input[name="clock1"]').val());
     }
     function ChangeDate() {
         if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
