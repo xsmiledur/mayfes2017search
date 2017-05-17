@@ -410,10 +410,10 @@ class SearchController extends Zend_Controller_Action
 
         if ($flg == 1) {
             //$proc = proc_open('/var/www/html/public/scripts/search_.out', $inout, $pipes, "/var/www/html/public/scripts/");
-            $proc = proc_open('/var/www/html/public/scripts/search_catupper.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            $proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
         } else {
             //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
-            $proc = proc_open('/var/www/scripts/search_catupper.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
         }
         $result['proc'] = $proc;
         $result['pipes'] = $pipes;
