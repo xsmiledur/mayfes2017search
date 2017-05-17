@@ -485,11 +485,12 @@
                 } else {
                     var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
+                    var ajaxpost = FinishPost(search, time, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     $('#search-stop').click(function () {
                         $('#page-wrapper').removeClass('sk-loading');
+                        ajaxpost.abort();
                         return false;
                     });
-                    FinishPost(search, time, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
                     return true;
                 }
             }
@@ -680,7 +681,7 @@
     }
 
     function FinishPost(search, time, start_pos, date, clock1, clock2) {
-        $.ajax({
+        var ajaxpost = $.ajax({
             url: "/search/search",
             type: "POST",
             data: {
@@ -714,6 +715,7 @@
                 alert('問題がありました。');
             }
         });
+        return ajaxpost;
     }
 
     function NoStep1(clock1, clock2) {
