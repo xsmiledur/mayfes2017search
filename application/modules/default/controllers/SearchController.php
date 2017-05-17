@@ -413,7 +413,7 @@ class SearchController extends Zend_Controller_Action
             $proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
         } else {
             //$proc = proc_open('/var/www/scripts/search_.out', $inout, $pipes, "/var/www/scripts/");
-            $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/scripts/search_catupper.out', $inout, $pipes, "/var/www/scripts/");
         }
         $result['proc'] = $proc;
         $result['pipes'] = $pipes;
@@ -436,6 +436,7 @@ class SearchController extends Zend_Controller_Action
     private function returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
+            //var_dump($connect);
             if (substr($connect,0,2) == "-1") {
                 if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
                 return 0;
