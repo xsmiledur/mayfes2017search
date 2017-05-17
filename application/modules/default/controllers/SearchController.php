@@ -442,16 +442,16 @@ class SearchController extends Zend_Controller_Action
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
-                //var_dump($pt_pid);
-                /*if ($flg == 1) {
-                    $pt_pid = $this->refixPT_PID($pt_pid, $N);
-                } else {*/
+
+                if (count($pt_pid) == 1) {
+                    return -2;
+                } else {
                     unset($pt_pid[$N + 1]);
-                //}
 
-                $this->sendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
+                    $this->sendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
 
-                return 1;
+                    return 1;
+                }
             }
         } else {
             return -1;
