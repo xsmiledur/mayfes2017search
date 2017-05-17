@@ -146,7 +146,8 @@
                     <div class="col-xs-12 sub-title b-r-md text-center">
                         MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
                         五月祭の行きたい企画を選択すると、最適な経路を返します。<br>
-                        MaySearchを活用して、充実した五月祭を過ごしましょう！
+                        MaySearchを活用して、充実した五月祭を過ごしましょう！<br>
+                        <span class="label label-danger">NEW</span> <font style="color: #8b4513; font-weight: bold;">企画の選択上限数が15個に増えました！</font>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 show1" >
@@ -478,8 +479,9 @@
                 var search = FinishCheck();
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
-                } else if (search.length >= 11) {
-                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は10個以下にしてください");
+
+                } else if (search.length >= 16) {
+                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は15個以下にしてください");
                 } else {
                     var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
