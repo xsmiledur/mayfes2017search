@@ -91,11 +91,13 @@ class IndexController extends Zend_Controller_Action
 
 
 
+
         /*
-        $text = "工学部応用物理系";
+        $text = "東京大学五月祭企画経路探索アプリ「MaySearch」がスゴすぎる！";
         $encoded = rawurlencode( $text ) ;
         echo $encoded;
         */
+
 
 
     }
