@@ -10,12 +10,13 @@ require_once '../application/modules/default/models/MainModel.php';
 /**
  * PHP-resque
  */
-/*
+
 require '../application/modules/default/functions/vendor/autoload.php';
 
-Resque::setBackend('127.0.0.1:6379');
+Resque::setBackend('localhost:6379');
+//Resque::setBackend('127.0.0.1:6379');
 Resque::enqueue('search', 'SearchController');
-*/
+
 class SearchController extends Zend_Controller_Action
 {
     private $_config;                         // 設定情報
@@ -254,7 +255,6 @@ class SearchController extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
-        var_dump($inputData);
 
         /*C++スクリプトとの結合*/
         $result = $this->procOpen(1); //1=サーバー 0=localhost
@@ -462,13 +462,11 @@ class SearchController extends Zend_Controller_Action
     private function returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
-            var_dump($connect);
             if (substr($connect,0,2) == "-1" || substr($connect,0,1) == "0" ) {
                 if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
-                var_dump($pt_pid);
 
                 if (count($pt_pid) <= 1) {
                     return -2;
