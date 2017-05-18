@@ -222,11 +222,13 @@ class SearchController extends Zend_Controller_Action
 
         if (!$research) {
             $search = $this->getDataParam('search', $research);
+            $this->SendNoSearchError($search);
             $time = $this->getDataParam('time', $research);
             $data = $this->SetInfo($search);
             $time = $this->SetTime($search, $time, $research);
         } else {
             $search = $this->getDataParam('search', $research);
+            $this->SendNoSearchError($search);
             $data = $this->SetInfo($search);
             $time = $this->SetTime($search, NULL, $research);
         }
@@ -236,7 +238,6 @@ class SearchController extends Zend_Controller_Action
         $clock1     = $this->getDataParam('clock1', $research);
         $clock2     = $this->getDataParam('clock2', $research);
 
-        $this->SendNoSearchError($search);
         $N = $this->GetCount($search);
 
         $flg = 1; //0だと旧バーション　1だと新バージョンのコード
@@ -306,10 +307,21 @@ class SearchController extends Zend_Controller_Action
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
             return $this->_redirect('/');
         }
+        foreach ($search as $item) {
+            if (intval($item) <= 0 ) {
+                $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
+                return $this->_redirect('/');
+            }
+        }
     }
 
     private function GetCount($search) {
-        return count($search);
+        $count = count($search);
+        if ($count > 15) {
+            $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
+            return $this->_redirect('/');
+        }
+        else return $count;
     }
 
     private function SetInfo($search) {
@@ -317,9 +329,14 @@ class SearchController extends Zend_Controller_Action
         foreach ($search as $i => $item) { //$itemの中身
             /* 企画情報を格納 */
             $data[$i] = $this->_main->getProjectInfo($item);
+            foreach ($search as $j =>  $val) { //同じpt_pidがあった時対策
+                if ($val == $item && $i != $j) {
+                    $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
+                    return $this->_redirect('/');
+                }
+            }
         }
         return $data;
-
     }
 
     private function SetTime($search, $timeData, $research) {
