@@ -136,7 +136,6 @@ class ResultController extends Zend_Controller_Action
         $this->_session->clock2     = $clock2;
         $this->_session->date       = $date;
         $this->_session->start_pos  = $start_pos;
-        var_dump($pt_pid);exit();
         $search = $this->unsetPT_PID($pt_pid);
         $this->_session->search     = $search;
         $this->_session->time       = $time;
