@@ -164,6 +164,7 @@ class SearchController extends Zend_Controller_Action
      */
     public function testAction()
     {
+        return $this->_redirect('/');
         /*
         //$data = $this->_main->getProjectData();
         //$this->_main->modifyProjectData();
