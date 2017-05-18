@@ -11,11 +11,13 @@ require_once '../application/modules/default/models/MainModel.php';
  * PHP-resque
  */
 
+/*
 require '../application/modules/default/functions/vendor/autoload.php';
 
 Resque::setBackend('localhost:6379');
 //Resque::setBackend('127.0.0.1:6379');
 Resque::enqueue('search', 'SearchController');
+*/
 
 class SearchController extends Zend_Controller_Action
 {
