@@ -311,24 +311,24 @@ class SearchController extends Zend_Controller_Action
     private function SendNoSearchError($search) {
         if (!$search) {
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-            //return $this->_redirect('/');
+            return $this->_redirect('/');
         }
         foreach ($search as $item) {
             if (intval($item) <= 0 ) {
                 $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                //return $this->_redirect('/');
+                return $this->_redirect('/');
             }
         }
     }
 
     private function GetCount($search) {
         $count = count($search);
-        /*
+
         if ($count > 15) {
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-            //return $this->_redirect('/');
+            return $this->_redirect('/');
         }
-        */
+
         return $count;
     }
 
@@ -340,7 +340,7 @@ class SearchController extends Zend_Controller_Action
             foreach ($search as $j =>  $val) { //同じpt_pidがあった時対策
                 if ($val == $item && $i != $j) {
                     $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                    //return $this->_redirect('/');
+                    return $this->_redirect('/');
                 }
             }
         }
