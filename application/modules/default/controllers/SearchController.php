@@ -471,6 +471,7 @@ class SearchController extends Zend_Controller_Action
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
+                var_dump($pt_pid);
 
                 if (count($pt_pid) <= 1) {
                     return -2;
