@@ -480,7 +480,7 @@
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
 
-                } else if (search.length > 16) {
+                } else if (search.length > 15) {
                     ErrorMsg("企画の数が多すぎます", "検索するには、企画は15個以下にしてください");
                 } else {
                     var time = FinishTimeCheck(search);
@@ -693,7 +693,6 @@
                 clock2 : clock2
             },
             success: function(arr) {
-                console.log(arr);
                 if (arr == 0 || arr == -1 || arr == -2) {
                     $('#page-wrapper').removeClass('sk-loading');
                     swal({
