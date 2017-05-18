@@ -2,14 +2,18 @@
  /**
   * Search Controller
   */
-
-
 require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Session.php';
-
 require_once '../application/modules/default/models/MainModel.php';
 
+/**
+ * PHP-resque
+ */
+require '../application/modules/default/functions/vendor/autoload.php';
+
+Resque::setBackend('127.0.0.1:6379');
+Resque::enqueue('search', 'SearchController');
 class SearchController extends Zend_Controller_Action
 {
     private $_config;                         // 設定情報
@@ -57,8 +61,6 @@ class SearchController extends Zend_Controller_Action
             $this->_session->lang = 'ja';
         }
         $this->_lang = $this->_session->lang;
-
-        // テキストデータを取得
 
         /**
          * Viewに必要データを渡す
@@ -250,10 +252,10 @@ class SearchController extends Zend_Controller_Action
 
         //企画の建物間のかかる時間
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
-        //var_dump($inputData);
+        var_dump($inputData);
 
         /*C++スクリプトとの結合*/
-        $result = $this->procOpen(1); //1=サーバー 0=localhost
+        $result = $this->procOpen(0); //1=サーバー 0=localhost
         $proc = $result['proc']; $pipes = $result['pipes'];
 
         //$echo = $this->returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
@@ -305,23 +307,25 @@ class SearchController extends Zend_Controller_Action
     private function SendNoSearchError($search) {
         if (!$search) {
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-            return $this->_redirect('/');
+            //return $this->_redirect('/');
         }
         foreach ($search as $item) {
             if (intval($item) <= 0 ) {
                 $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                return $this->_redirect('/');
+                //return $this->_redirect('/');
             }
         }
     }
 
     private function GetCount($search) {
         $count = count($search);
+        /*
         if ($count > 15) {
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-            return $this->_redirect('/');
+            //return $this->_redirect('/');
         }
-        else return $count;
+        */
+        return $count;
     }
 
     private function SetInfo($search) {
@@ -332,7 +336,7 @@ class SearchController extends Zend_Controller_Action
             foreach ($search as $j =>  $val) { //同じpt_pidがあった時対策
                 if ($val == $item && $i != $j) {
                     $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
-                    return $this->_redirect('/');
+                    //return $this->_redirect('/');
                 }
             }
         }
@@ -401,7 +405,9 @@ class SearchController extends Zend_Controller_Action
     }
 
     private function setInputData3($inputData, $pp_search, $N) {
+        var_dump($N);
         foreach ($pp_search as $i => $item) {
+            var_dump($i);
             $t = array();
             foreach ($pp_search as $j => $item2) {
                 if ($item == $item2) $t[$j] = 0;
@@ -427,10 +433,10 @@ class SearchController extends Zend_Controller_Action
         );
 
         if ($flg == 1) {
-            $proc = proc_open('/var/www/html/public/scripts/search_catupper.out', $inout, $pipes, "/var/www/html/public/scripts/");
+            $proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
             //$proc = proc_open('/var/www/html/public/scripts/search.out', $inout, $pipes, "/var/www/html/public/scripts/");
         } else {
-            $proc = proc_open('/var/www/scripts/search_catupper.out', $inout, $pipes, "/var/www/scripts/");
+            $proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
             //$proc = proc_open('/var/www/scripts/search.out', $inout, $pipes, "/var/www/scripts/");
         }
         $result['proc'] = $proc;
@@ -454,12 +460,13 @@ class SearchController extends Zend_Controller_Action
     private function returnResult($proc, $pipes, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time) {
         if(is_resource($proc)){
             $connect = $this->connectCproject($pipes, $inputData);
-            //var_dump($connect);
-            if (substr($connect,0,2) == "-1") {
+            var_dump($connect);
+            if (substr($connect,0,2) == "-1" || substr($connect,0,1) == "0" ) {
                 if ($research) $this->_session->errMsg = "設定した時間では最適な結果がありませんでした。";
                 return 0;
             } else {
                 $pt_pid = array_map('intval', explode("\n", $connect)); //explodeは文字列を文字列で分解する関数
+                var_dump($pt_pid);
 
                 if (count($pt_pid) <= 1) {
                     return -2;
