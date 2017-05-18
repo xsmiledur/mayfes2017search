@@ -85,6 +85,12 @@ class ResultController extends Zend_Controller_Action
         $start_pos  = $this->_session->start_pos;
         $pt_pid     = $this->_session->pt_pid;
         $time       = $this->_session->time;
+        if (count($pt_pid) > 0) {
+
+        } else {
+            var_dump(count($pt_pid));
+            exit();
+        }
 
         $this->SendSession($clock1, $clock2, $date, $start_pos, $pt_pid, $time);
 
