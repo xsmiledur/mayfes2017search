@@ -260,7 +260,7 @@ class SearchController extends Zend_Controller_Action
         $inputData = $this->setInputData3($inputData, $pp_search, $N);
 
         /*C++スクリプトとの結合*/
-        $result = $this->procOpen(1); //1=サーバー 0=localhost
+        $result = $this->procOpen(0); //1=サーバー 0=localhost
         $proc = $result['proc']; $pipes = $result['pipes'];
 
         //$echo = $this->returnResult($proc, $pipes, $flg, $inputData, $research, $N, $clock1, $clock2, $date, $start_pos, $time);
@@ -325,7 +325,7 @@ class SearchController extends Zend_Controller_Action
     private function GetCount($search) {
         $count = count($search);
 
-        if ($count > 15) {
+        if ($count > 20) {
             $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
             return $this->_redirect('/');
         }

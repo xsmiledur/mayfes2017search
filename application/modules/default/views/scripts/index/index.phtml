@@ -441,6 +441,7 @@
                 next: "次へ",
                 previous: "戻る"
             },
+            enableAllSteps: true,
             onStepChanging: function (event, currentIndex, newIndex) {
                 // スムーススクロール
                 $('body,html').animate({scrollTop: $('#all-cover').offset().top}, 400, 'swing');
@@ -479,9 +480,9 @@
                 if (search.length == 0) {
                     ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
 
-                } else if (search.length > 15) {
+                } else if (search.length > 20) {
 
-                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は15個以下にしてください");
+                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は20個以下にしてください");
                 } else {
                     var time = FinishTimeCheck(search);
                     $('#page-wrapper').addClass('sk-loading');
