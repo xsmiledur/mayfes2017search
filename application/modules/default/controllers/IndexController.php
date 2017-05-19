@@ -83,10 +83,11 @@ class IndexController extends Zend_Controller_Action
         $this->view->data_all   = $this->_main->getProjectData();
 
 
-
+/*
         $text = "工学博覧会2017";
         $encoded = rawurlencode( $text ) ;
         echo $encoded;
+*/
 
 
 
