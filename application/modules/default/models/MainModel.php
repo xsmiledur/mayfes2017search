@@ -161,23 +161,14 @@ class MainModel
 
         foreach ($area as $key => $item) {
 
-            $this->_read->beginTransaction();
-            $this->_read->query('begin');
-            try {
-                $select = $this->_read->select();
-                $select->from('building_data', array('bd_pid', 'bd_p_name1', 'bd_p_label1', 'bd_p_name2', 'bd_p_label2' ));
-                $select->where('bd_active_flg = ?', 1)
-                    ->where('bd_p_name1 = ?', $item['name'])
-                    ->order('bd_order');
-                $stmt = $select->query();
-                $data['area'][$item['name']] = $stmt->fetchAll();
-            } catch (Exception $e) {
-                // 失敗した場合はロールバックしてエラーメッセージを返す
-                $this->_read->rollBack();
-                $this->_read->query('rollback');
-                var_dump($e->getMessage());exit();
-                return false;
-            }
+            $select = $this->_read->select();
+            $select->from('building_data', array('bd_pid', 'bd_p_name1', 'bd_p_label1', 'bd_p_name2', 'bd_p_label2' ));
+            $select->where('bd_active_flg = ?', 1)
+                ->where('bd_p_name1 = ?', $item['name'])
+                ->order('bd_order');
+            $stmt = $select->query();
+            $data['area'][$item['name']] = $stmt->fetchAll();
+
 
             foreach ($data['area'][$item['name']] as $key2 => $item2) {
 
@@ -247,22 +238,14 @@ class MainModel
 
         foreach ($genre as $key => $item) {
 
-            $this->_read->beginTransaction();
-            $this->_read->query('begin');
-            try {
-                $select = $this->_read->select();
-                $select->from('genre_data', array('gd_pid', 'gd_index', 'gd_index_label', 'gd_detail', 'gd_detail_label'));
-                $select->where('gd_active_flg = ?', 1)
-                    ->where('gd_index = ?', $item['name']);
-                $stmt = $select->query();
-                $data['genre'][$item['name']] = $stmt->fetchAll();
-            } catch (Exception $e) {
-                // 失敗した場合はロールバックしてエラーメッセージを返す
-                $this->_read->rollBack();
-                $this->_read->query('rollback');
-                //var_dump($e->getMessage());exit();
-                return false;
-            }
+
+            $select = $this->_read->select();
+            $select->from('genre_data', array('gd_pid', 'gd_index', 'gd_index_label', 'gd_detail', 'gd_detail_label'));
+            $select->where('gd_active_flg = ?', 1)
+                ->where('gd_index = ?', $item['name']);
+            $stmt = $select->query();
+            $data['genre'][$item['name']] = $stmt->fetchAll();
+
 
             foreach ($data['genre'][$item['name']] as $key2 => $item2) {
 
