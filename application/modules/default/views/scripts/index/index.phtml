@@ -120,7 +120,7 @@
         }
         #toppage-may {
             position: absolute;
-            bottom: -10px;
+            bottom: -20px;
             left: 0;
             z-index: 10000;
             cursor: pointer;
@@ -129,26 +129,27 @@
             filter: brightness(1.05);
         }
         #toppage-comment {
-            /* display: none; */
+            display: none;
             width: 190px;
-            margin-left: 80px;
+            left: 85px;
+            bottom: -18px;
             background-color: rgba(255,69,0,0.6);
             color: #ffffff;
             padding: 5px 10px;
             border-radius: 3px;
-            position: relative;
+            position: absolute;
         }
         #toppage-comment::after {
             content: "";
             position: absolute;
-            top: 50%; left: -10px;
+            top: 60%; left: -10px;
             margin-top: -10px;
             display: block;
             width: 0px;
             height: 0px;
             border-style: solid;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent #19283C transparent transparent;
+            border-width: 5px 10px 5px 0;
+            border-color: transparent rgba(255,69,0,0.6) transparent transparent;
         }
     </style>
 
@@ -177,12 +178,13 @@
                         <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
                             <a href="/"><img alt="MaySearch" style="width: 100%;" src="/img/logo/maysearch_long.png"></a>
                         </div>
-                        <!--
-                        <p id="toppage-comment">
-                            投票よろしくなのー、めぇ。
-                        </p>
-                        <img id="toppage-may" src="/img/toppage-maychan2.png">
-                        -->
+                        <!--<a target="_blank" href="https://gogatsusai.jp/90/search/result?id=394">-->
+                        <!--<a>
+                            <p id="toppage-comment">
+                                投票よろしくなのー、めぇ。
+                            </p>
+                        </a>
+                        <img id="toppage-may" src="/img/toppage-maychan2.png">-->
 
                     </div>
                     <div class="col-xs-12 sub-title b-r-md text-center">
@@ -583,6 +585,9 @@
         $('head link:last').after(style);
         $('#toppage-may').hover(function() {
             $('#toppage-comment').fadeIn('fast');
+        }, function() {
+            $('#toppage-comment').fadeOut('fast');
+
         });
 
     });
