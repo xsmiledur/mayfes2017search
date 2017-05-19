@@ -909,12 +909,6 @@ span.select2-selection__choice__remove {
 }
 @media screen and ( max-width:991px ) {
 
-    #id1 {
-        display: none;
-    }
-    #id2 {
-        display: block;
-    }
     #map_img {
         margin-top: 30px;
         width: 700px;
@@ -938,6 +932,13 @@ span.select2-selection__choice__remove {
     }
 }
 @media screen and ( max-width:767px ) {
+
+    #id1 {
+        display: none;
+    }
+    #id2 {
+        display: block;
+    }
     body {
         font-size: 12px;
     }
