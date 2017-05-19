@@ -871,6 +871,13 @@ span.select2-selection__choice__remove {
     overflow: scroll;
 }
 @media screen and ( max-width:1199px ) {
+
+    #id1 {
+        display: none;
+    }
+    #id2 {
+        display: block;
+    }
     .last-conf-box {
         height: 500px;
     }
@@ -933,12 +940,6 @@ span.select2-selection__choice__remove {
 }
 @media screen and ( max-width:767px ) {
 
-    #id1 {
-        display: none;
-    }
-    #id2 {
-        display: block;
-    }
     body {
         font-size: 12px;
     }
