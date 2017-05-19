@@ -83,11 +83,11 @@ class IndexController extends Zend_Controller_Action
         $this->view->data_all   = $this->_main->getProjectData();
 
 
-        /*
-        $text = "東京大学五月祭企画経路探索アプリ「MaySearch」がスゴすぎる！";
+
+        $text = "工学博覧会2017";
         $encoded = rawurlencode( $text ) ;
         echo $encoded;
-        */
+
 
 
 
