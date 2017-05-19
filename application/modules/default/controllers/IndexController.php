@@ -79,17 +79,8 @@ class IndexController extends Zend_Controller_Action
 
 
         $request = $this->getRequest();
-        $search = $request->getParam('search');
+        //$search = $request->getParam('search');
         $this->view->data_all   = $this->_main->getProjectData();
-
-        /*
-        $pt_pid = $this->_session->pt_pid;
-        if ($pt_pid) {
-            $this->view->pt_pid;
-        }
-        */
-
-
 
 
         /*
