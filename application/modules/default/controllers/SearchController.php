@@ -11,9 +11,9 @@ require_once '../application/modules/default/models/MainModel.php';
  * PHP-resque
  */
 
-/*
-require '../application/modules/default/functions/vendor/autoload.php';
 
+require '../application/modules/default/functions/vendor/autoload.php';
+/*
 Resque::setBackend('localhost:6379');
 //Resque::setBackend('127.0.0.1:6379');
 Resque::enqueue('search', 'SearchController');
@@ -171,7 +171,7 @@ class SearchController extends Zend_Controller_Action
      */
     public function testAction()
     {
-        return $this->_redirect('/');
+        //return $this->_redirect('/');
         /*
         //$data = $this->_main->getProjectData();
         //$this->_main->modifyProjectData();
@@ -186,6 +186,7 @@ class SearchController extends Zend_Controller_Action
         //$this->_main->insertStayTime();
         //$this->_main->fixTimeBug();
         */
+        //$this->_main->fixKana();
     }
 
     /**

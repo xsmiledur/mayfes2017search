@@ -2001,6 +2001,113 @@ class MainModel
         }
     }
 
+    public function fixKana() {
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+            $select = $this->_read->select();
+            $select->from('90_project_data')
+                ->order('pd_pid');
+            $stmt = $select->query();
+            $data = $stmt->fetchAll();
+
+            $this->_read->commit();
+            $this->_read->query('commit');
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());
+            //exit();
+            return false;
+        }
+
+        foreach ($data as $item) {
+            $update = array();
+            $update['pd_label_kana'] = mb_convert_kana($item['pd_label'],'ca');
+            $update['pd_body_kana']  = mb_convert_kana($item['pd_body'],'ca');
+            echo "<pre>";
+            var_dump($update);
+            echo "</pre>";
+
+            $where = '';
+            $where[] = "pd_pid = '{$item['pd_pid']}'";
+
+            $this->_write->beginTransaction();
+            $this->_write->query('begin');
+            try {
+
+                //$this->_write->update('90_project_data', $update, $where);
+
+                // 成功した場合はコミットする
+
+                $this->_write->commit();
+                $this->_write->query('commit');
+            } catch (Exception $e) {
+                // 失敗した場合はロールバックしてエラーメッセージを返す
+                $this->_write->rollBack();
+                $this->_write->query('rollback');
+                var_dump($e->getMessage());
+                exit();
+                return false;
+            }
+        }
+
+        $data = array();
+
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+            $select = $this->_read->select();
+            $select->from('90_project_place')
+                ->order('pp_pid');
+            $stmt = $select->query();
+            $data = $stmt->fetchAll();
+
+            $this->_read->commit();
+            $this->_read->query('commit');
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+            var_dump($e->getMessage());
+            //exit();
+            return false;
+        }
+
+        foreach ($data as $item) {
+            $update = array();
+            $update['pp_place_num'] = mb_convert_kana($item['pp_place'],'ca');
+
+            echo "<pre>";
+            var_dump($update);
+            echo "</pre>";
+
+
+            $where = '';
+            $where[] = "pp_pid = '{$item['pp_pid']}'";
+
+            $this->_write->beginTransaction();
+            $this->_write->query('begin');
+            try {
+
+                //$this->_write->update('90_project_place', $update, $where);
+
+                // 成功した場合はコミットする
+
+                $this->_write->commit();
+                $this->_write->query('commit');
+            } catch (Exception $e) {
+                // 失敗した場合はロールバックしてエラーメッセージを返す
+                $this->_write->rollBack();
+                $this->_write->query('rollback');
+                var_dump($e->getMessage());
+                exit();
+                return false;
+            }
+        }
+    }
+
 
     /**
      * 99:99の時間表示を分単位に直す
@@ -2024,6 +2131,7 @@ class MainModel
         if (strlen($m) < 2 ) $m = "0".$m;
         return $h.":".$m;
     }
+
 
 
 }
