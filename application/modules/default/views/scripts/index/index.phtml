@@ -118,6 +118,16 @@
                 padding: 10px 7px 10px 12px;
             }
         }
+        #toppage-may {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            z-index: 10000;
+            cursor: pointer;
+        }
+        #toppage-may:hover {
+            filter: brightness(1.05);
+        }
     </style>
 
 </head>
@@ -131,22 +141,25 @@
 </p>
 
 <div id="wrapper">
-    <!--<img src="/img/toppage-maychan.png">-->
-    <h1 style="display: none;">MaySearch</h1>
-    <h2 style="display: none;">MaySearch</h2>
-    <strong style="display: none;">MaySearch</strong>
 
     <div id="page-wrapper" class="gray-bg">
         <div id="page-next-wrapper">
 
             <div class="row">
                 <div class="col-lg-4 width-change">
-                    <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
-                        <a href="/"><img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_square.png"></a>
+                    <div style="position: relative;">
+                        <div id="id1" class="m-t-md m-b-md" style="padding: 50px;">
+                            <a href="/"><img alt="MaySearch" style="width: 100%;" src="/img/logo/maysearch_square.png"></a>
 
-                    </div>
-                    <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
-                        <a href="/"><img alt="toptitle" style="width: 100%;" src="/img/logo/maysearch_long.png"></a>
+                        </div>
+                        <div id="id2" class="p-h-md p-w-sm" style="padding: 50px;">
+                            <a href="/"><img alt="MaySearch" style="width: 100%;" src="/img/logo/maysearch_long.png"></a>
+                        </div>
+                        <!--<p id="toppage-comment">
+                            投票よろしくなのー、めぇ。
+                        </p>-->
+                        <!--<img id="toppage-may" src="/img/toppage-maychan2.png">-->
+
                     </div>
                     <div class="col-xs-12 sub-title b-r-md text-center">
                         MaySearchは、東京大学工学部計数工学科の有志によって制作された、アルゴリズムを用いた経路最適化アプリケーションです。<br>
@@ -544,6 +557,9 @@
         //SweerAlert
         style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
         $('head link:last').after(style);
+        $('#toppage-may').hover(function() {
+            $('#toppage-comment').fadeIn('fast');
+        });
 
     });
 
