@@ -69,67 +69,6 @@ class MainModel
     }
 
     /**
-     * コンテンツテキストデータを取得
-     *
-     * @param $lang
-     * @param $path
-     * @return bool|mixed
-     */
-    public function getContentsData($lang, $path)
-    {
-        // トランザクション開始
-        $this->_read->beginTransaction();
-        $this->_read->query('begin');
-        try {
-            $result = array();
-
-            $select = $this->_read->select();
-            $select->from('site_contents');
-            $select->where('sc_active_flg = ?', 1)
-                ->order('sc_order ASC');
-            $stmt = $select->query();
-            $data = $stmt->fetchAll();
-
-            if ($data) {
-
-                foreach ($data as $val) {
-                    $result[$val['sc_name']] = $val['label'];
-                }
-
-            }
-
-            // 成功した場合はコミットする
-            $this->_read->commit();
-            $this->_read->query('commit');
-            return $result;
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_read->rollBack();
-            $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
-            return false;
-        }
-    }
-
-
-    /**
-     * 普通に企画データを取得
-     *
-     * @return array
-     */
-    public function getProjectDataAll()
-    {
-        $select = $this->_read->select();
-        $select->from('90_project_time')
-            ->join('90_project_data', 'pt_pd_pid = pd_pid')
-            ->join('90_project_place', 'pt_pp_pid = pp_pid');
-        $select->where('pd_active_flg = ?', 1);
-        $stmt = $select->query();
-        return $stmt->fetchAll();
-    }
-
-
-    /**
      * 企画データを取得
      *
      * @return array
@@ -221,13 +160,24 @@ class MainModel
         );
 
         foreach ($area as $key => $item) {
-            $select = $this->_read->select();
-            $select->from('building_data', array('bd_pid', 'bd_p_name1', 'bd_p_label1', 'bd_p_name2', 'bd_p_label2' ));
-            $select->where('bd_active_flg = ?', 1)
-                ->where('bd_p_name1 = ?', $item['name'])
-                ->order('bd_order');
-            $stmt = $select->query();
-            $data['area'][$item['name']] = $stmt->fetchAll();
+
+            $this->_read->beginTransaction();
+            $this->_read->query('begin');
+            try {
+                $select = $this->_read->select();
+                $select->from('building_data', array('bd_pid', 'bd_p_name1', 'bd_p_label1', 'bd_p_name2', 'bd_p_label2' ));
+                $select->where('bd_active_flg = ?', 1)
+                    ->where('bd_p_name1 = ?', $item['name'])
+                    ->order('bd_order');
+                $stmt = $select->query();
+                $data['area'][$item['name']] = $stmt->fetchAll();
+            } catch (Exception $e) {
+                // 失敗した場合はロールバックしてエラーメッセージを返す
+                $this->_read->rollBack();
+                $this->_read->query('rollback');
+                var_dump($e->getMessage());exit();
+                return false;
+            }
 
             foreach ($data['area'][$item['name']] as $key2 => $item2) {
 
@@ -296,12 +246,23 @@ class MainModel
         );
 
         foreach ($genre as $key => $item) {
-            $select = $this->_read->select();
-            $select->from('genre_data', array('gd_pid', 'gd_index', 'gd_index_label', 'gd_detail', 'gd_detail_label'));
-            $select->where('gd_active_flg = ?', 1)
-                ->where('gd_index = ?', $item['name']);
-            $stmt = $select->query();
-            $data['genre'][$item['name']] = $stmt->fetchAll();
+
+            $this->_read->beginTransaction();
+            $this->_read->query('begin');
+            try {
+                $select = $this->_read->select();
+                $select->from('genre_data', array('gd_pid', 'gd_index', 'gd_index_label', 'gd_detail', 'gd_detail_label'));
+                $select->where('gd_active_flg = ?', 1)
+                    ->where('gd_index = ?', $item['name']);
+                $stmt = $select->query();
+                $data['genre'][$item['name']] = $stmt->fetchAll();
+            } catch (Exception $e) {
+                // 失敗した場合はロールバックしてエラーメッセージを返す
+                $this->_read->rollBack();
+                $this->_read->query('rollback');
+                //var_dump($e->getMessage());exit();
+                return false;
+            }
 
             foreach ($data['genre'][$item['name']] as $key2 => $item2) {
 
@@ -529,205 +490,6 @@ class MainModel
 
 
     /**
-     * エリア検索のための
-     * @param $start
-     * @param $end
-     * @return array
-     */
-    public function getProjectDataArea($start, $end)
-    {
-        $this->_read->beginTransaction();
-        $this->_read->query('begin');
-        try {
-
-            $select = $this->_read->select();
-            $select->from('building_data', array('bd_kind', 'bd_kind_label'))
-                ->where('bd_kind = "ko_dept" || bd_kind = "no_dept" || bd_kind = "yasuko" || bd_kind = "akamon"')
-                ->distinct();
-            $stmt = $select->query();
-            $_blding =  $stmt->fetchAll();
-            $data = array();
-            foreach ($_blding as $key => $name) {
-                $select = $this->_read->select();
-                $select->from('building_data')
-                    ->where('bd_kind = ?', $name['bd_kind']);
-                $stmt = $select->query();
-                $data[$key]['name'] = $name['bd_kind_label'];
-                $data[$key]['kind'] = $name['bd_kind'];
-                $data[$key]['info'] = $stmt->fetchAll();
-
-                foreach ($data[$key]['info'] as $name => $item) {
-                    //fulltimeのものを先に
-                    $select = $this->_read->select();
-                    $select->from('project_summary_89', 'ps_pid')
-                        ->join('project_data_89', 'ps_pd_pid = pd_pid')
-                        ->join('project_place_89', 'ps_pp_pid = pp_pid')
-                        ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid')
-                        ->where('pd_active_flg = ?', 1)
-                        ->where('pp_area = ?', $item['bd_kind'])
-                        ->where('pp_place_index = ?', $item['bd_name']);
-                    $stmt = $select->query();
-                    $_data = $stmt->fetchAll();
-
-                    if (!$start && !$end) {
-                        $data = $_data;
-                    } else {
-                        $i = 0;
-                        foreach ($_data as $item2) {
-                            if (!$item2['pt_pid']) {
-                                $data[$key]['info'][$name]['data'][$i] = $item2;
-                                $i++;
-                            } else {
-                                if (strtotime($item2['pt_start']) > $start && strtotime($item2['pt_end']) < $end) {
-
-                                    $data[$key]['info'][$name]['data'][$i] = $item2;
-                                    $i++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 成功した場合はコミットする
-            $this->_read->commit();
-            $this->_read->query('commit');
-
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_read->rollBack();
-            $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
-            return false;
-        }
-        return $data;
-
-    }
-
-
-    /**
-     * ジャンル検索のための
-     * @param $start
-     * @param $end
-     * @return array
-     */
-    public function getProjectDataGenre($start, $end)
-    {
-
-        $this->_read->beginTransaction();
-        $this->_read->query('begin');
-        try {
-
-            $select = $this->_read->select();
-            $select->from('genre_data', array('gd_index', 'gd_index_label'))
-                ->distinct();
-            $stmt = $select->query();
-            $_genre =  $stmt->fetchAll();
-            $data = array();
-            foreach ($_genre as $key => $name) {
-                $select = $this->_read->select();
-                $select->from('genre_data')
-                    ->where('gd_index = ?', $name['gd_index']);
-                $stmt = $select->query();
-                $data[$key]['name'] = $name['gd_index_label'];
-                $data[$key]['kind'] = $name['gd_index'];
-                $data[$key]['info'] = $stmt->fetchAll();
-
-                foreach ($data[$key]['info'] as $name => $item) {
-                    $select = $this->_read->select();
-                    $select->from('project_summary_89', 'ps_pid')
-                        ->join('project_data_89', 'ps_pd_pid = pd_pid')
-                        ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid')
-                        ->where('pd_active_flg = ?', 1)
-                        ->where('pd_genre = ?', $item['gd_index'])
-                        ->where('pd_genre_detail = ?', $item['gd_detail']);
-                    $stmt = $select->query();
-                    $_data = $stmt->fetchAll();
-
-                    if (!$start && !$end) {
-                        $data = $_data;
-                    } else {
-                        $i = 0;
-                        foreach ($_data as $item2) {
-                            if (!$item2['pt_pid']) {
-                                $data[$key]['info'][$name]['data'][$i] = $item2;
-                                $i++;
-                            } else {
-                                if (strtotime($item2['pt_start']) > $start && strtotime($item2['pt_end']) < $end) {
-                                    $data[$key]['info'][$name]['data'][$i] = $item2;
-                                    $i++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 成功した場合はコミットする
-            $this->_read->commit();
-            $this->_read->query('commit');
-
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_read->rollBack();
-            $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
-            return false;
-        }
-
-        return $data;
-    }
-
-
-    public function getProjectDataRec($start, $end)
-    {
-
-        $this->_read->beginTransaction();
-        $this->_read->query('begin');
-        try {
-            $select = $this->_read->select();
-            $select->from('project_summary_89', 'ps_pid')
-                ->join('project_data_89', 'ps_pd_pid = pd_pid')
-                ->joinLeft('project_time_89', 'ps_pt_pid = pt_pid')
-                ->where('pd_active_flg = ?', 1)
-                ->where('pd_rec_flg = ?', 1);
-            $stmt = $select->query();
-            $_data = $stmt->fetchAll();
-
-            if (!$start && !$end) {
-                $data = $_data;
-            } else {
-                $i = 0;
-                foreach ($_data as $item) {
-                    if (!$item['pt_pid']) {
-                        $data[$i] = $item;
-                        $i++;
-                    } else {
-                        if (strtotime($item['pt_start']) > $start && strtotime($item['pt_end']) < $end) {
-                            $data[$i] = $item;
-                            $i++;
-                        }
-                    }
-                }
-            }
-
-            // 成功した場合はコミットする
-            $this->_read->commit();
-            $this->_read->query('commit');
-
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_read->rollBack();
-            $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
-            return false;
-        }
-
-        return $data;
-    }
-
-
-    /**
      * 企画を取ってくる
      * @param $pt_pid
      * @return array
@@ -770,12 +532,26 @@ class MainModel
      */
     public function getBuildingData($bd_pid)
     {
-        $select = $this->_read->select();
-        $select->from('building_data');
-        $select->where('bd_active_flg = ?', 1)
-            ->where('bd_pid = ?', $bd_pid);
-        $stmt = $select->query();
-        return $stmt->fetch();
+
+        // トランザクション開始
+        $this->_read->beginTransaction();
+        $this->_read->query('begin');
+        try {
+
+            $select = $this->_read->select();
+            $select->from('building_data');
+            $select->where('bd_active_flg = ?', 1)
+                ->where('bd_pid = ?', $bd_pid);
+            $stmt = $select->query();
+            return $stmt->fetch();
+
+        } catch (Exception $e) {
+            // 失敗した場合はロールバックしてエラーメッセージを返す
+            $this->_read->rollBack();
+            $this->_read->query('rollback');
+//            var_dump($e->getMessage());exit();
+            return false;
+        }
     }
 
     //建物間の
@@ -876,109 +652,6 @@ class MainModel
     }
 
 
-    /* public function getProjectDataForArea()
-     {
-         $select = $this->_read->select();
-         $select->from('project_data_89');
-         $select->where('active_flg = ?', 1);
-         $stmt = $select->query();
-         $_data = $stmt->fetchAll();
-
-         $i = 0;
-         foreach ($_data as $item) {
-             $data1 = null;
-             $data2 = null;
-             $data3 = null;
-             $data4 = null;
-
-             $data[$i]['name'] = $item['name'];
-             $data[$i]['body'] = $item['body'];
-             $data[$i]['web'] = $item['web'];
-             $data[$i]['genre'] = $item['genre'];
-             $data[$i]['genre_detail'] = $item['genre_detail'];
-             $data[$i]['area'] = $item['area1'];
-             $data[$i]['place'] = $item['place1'];
-             $data[$i]['place_index'] = $item['place_index1'];
-             $data[$i]['place_detail'] = $item['place_detail1'];
-             $data[$i]['pid'] = $item['pid'];
-             $data[$i]['start1'] = $item['start1-1'];
-             $data[$i]['end1'] = $item['end1-1'];
-             $data[$i]['start2'] = $item['start1-2'];
-             $data[$i]['end2'] = $item['end1-2'];
-             $data[$i]['start3'] = $item['start1-3'];
-             $data[$i]['end3'] = $item['end1-3'];
-             $data[$i]['start4'] = $item['start1-4'];
-             $data[$i]['end4'] = $item['end1-4'];
-             $i++;
-
-             if ($item['place_index2'] || $item['place2'] || $item['place_index2']) {
-
-                 if ($item['place_index1'] != $item['place_index2']) {
-                     $data[$i]['name'] = $item['name'];
-                     $data[$i]['body'] = $item['body'];
-                     $data[$i]['web'] = $item['web'];
-                     $data[$i]['genre'] = $item['genre'];
-                     $data[$i]['genre_detail'] = $item['genre_detail'];
-                     $data[$i]['area'] = $item['area2'];
-                     $data[$i]['place'] = $item['place2'];
-                     $data[$i]['place_index'] = $item['place_index2'];
-                     $data[$i]['place_detail'] = $item['place_detail2'];
-                     $data[$i]['pid'] = $item['pid'];
-                     $data[$i]['start1'] = $item['start2-1'];
-                     $data[$i]['end1'] = $item['end2-1'];
-                     $data[$i]['start2'] = $item['start2-2'];
-                     $data[$i]['end2'] = $item['end2-2'];
-                     $data[$i]['start3'] = $item['start2-3'];
-                     $data[$i]['end3'] = $item['end2-3'];
-                     $data[$i]['start4'] = $item['start2-4'];
-                     $data[$i]['end4'] = $item['end2-4'];
-                     $i++;
-                 }
-
-                 if ($item['place_index3'] || $item['place3'] || $item['place_index3']) {
-                     if ($item['place_index1'] != $item['place_index3'] && $item['place_index3'] != $item['place_index2']) {
-                         $data[$i]['name'] = $item['name'];
-                         $data[$i]['body'] = $item['body'];
-                         $data[$i]['web'] = $item['web'];
-                         $data[$i]['genre'] = $item['genre'];
-                         $data[$i]['genre_detail'] = $item['genre_detail'];
-                         $data[$i]['area'] = $item['area3'];
-                         $data[$i]['place'] = $item['place3'];
-                         $data[$i]['place_index'] = $item['place_index3'];
-                         $data[$i]['place_detail'] = $item['place_detail3'];
-                         $data[$i]['pid'] = $item['pid'];
-                         $i++;
-                     }
-
-                     if ($item['place_index4'] || $item['place4'] || $item['place_index4']) {
-                         if ($item['place_index1'] != $item['place_index4'] && $item['place_index2'] != $item['place_index4'] && $item['place_index3'] != $item['place_index4']) {
-
-                             $data[$i]['name'] = $item['name'];
-                             $data[$i]['body'] = $item['body'];
-                             $data[$i]['web'] = $item['web'];
-                             $data[$i]['genre'] = $item['genre'];
-                             $data[$i]['genre_detail'] = $item['genre_detail'];
-                             $data[$i]['area'] = $item['area2'];
-                             $data[$i]['place'] = $item['place2'];
-                             $data[$i]['place_index'] = $item['place_index2'];
-                             $data[$i]['place_detail'] = $item['place_detail2'];
-                             $data[$i]['pid'] = $item['pid'];
-                             $i++;
-                         }
-
-                     }
-                 }
-             }
-
-         }
-
-         echo "<pre>";
-         var_dump($data);
-         echo "</pre>";
-
-         return $data;
-     }*/
-
 
 
     /**
@@ -1033,40 +706,7 @@ class MainModel
         }
     }
 
-    /*
-    /**
-     * タイムデータ保存
-     *
-     * @param $pid1
-     * @param $pid2
-     * @param $time
-     * @return bool
-     */
-    /*public function insertTimeInfo($pid1,$pid2,$time)
-    {
-        $this->_write->beginTransaction();
-        $this->_write->query('begin');
-        try {
-            $insert = array();
-            $insert['pid1'] = $pid1;
-            $insert['pid2'] = $pid2;
-            $insert['time'] = $time;
 
-            $this->_write->insert('place_time', $insert);
-
-            // 成功した場合はコミットする
-            $this->_write->commit();
-            $this->_write->query('commit');
-
-            return true;
-        } catch (Exception $e) {
-            // 失敗した場合はロールバックしてエラーメッセージを返す
-            $this->_write->rollBack();
-            $this->_write->query('rollback');
-            //var_dump($e->getMessage());exit();
-            return false;
-        }
-    }*/
 
     /**
      * nochangeデータからproject_dataを作成
