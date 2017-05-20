@@ -241,14 +241,16 @@ class SearchController extends Zend_Controller_Action
             $time = $this->SetTime($search, NULL, $research);
         }
 
+
         $start_pos  = $this->getDataParam('start_pos', $research);
         $date       = $this->getDataParam('date', $research);
         $clock1     = $this->getDataParam('clock1', $research);
         $clock2     = $this->getDataParam('clock2', $research);
 
+
         $N = $this->GetCount($search);
 
-        $flg = 1; //0だと旧バーション　1だと新バージョンのコード
+        $flg = 2; //0だと旧バーション　1だと新バージョンのコード 2だとopenまで含めたもの
 
         $inputData = $this->setInputData1($N, $start_pos, $clock1, $clock2, $flg);
 
@@ -338,6 +340,7 @@ class SearchController extends Zend_Controller_Action
         foreach ($search as $i => $item) { //$itemの中身
             /* 企画情報を格納 */
             $data[$i] = $this->_main->getProjectInfo($item);
+
             foreach ($search as $j =>  $val) { //同じpt_pidがあった時対策
                 if ($val == $item && $i != $j) {
                     $this->_session->errMsg = "エラーが発生しました。お手数ですが、再検索を行ってください。";
@@ -362,15 +365,25 @@ class SearchController extends Zend_Controller_Action
         return $time;
     }
 
-    private function setInputData1($N, $start_pos, $clock1, $clock2, $flg) {
+    private function setInputData1($N, $start_pos, $clock1, $clock2, $flg)
+    {
 
         /* $clock1, $clock2から分単位の時間に変換 */
         $clock1_ = $this->_main->convertTime($clock1);
         $clock2_ = $this->_main->convertTime($clock2);
 
+        /* 時刻が9:00~18:00の間にないものが万一入ってた場合に弾く */
+        if ($clock1_ < 540 || $clock2_ > 1080) {
+            echo -1;
+            exit();
+        }
+
         $inputData = "";
 
-        if ($flg == 1) {
+        if ($flg == 2) {
+            $inputData .= sprintf("%d \n", $N); //企画の個数
+            $inputData .= sprintf("%d -1 %d %d -1\n", $start_pos, $clock1_, $clock2_);
+        } elseif ($flg == 1) {
             $inputData .= sprintf("%d \n", $N); //企画の個数
             $inputData .= sprintf("%d %d %d -1\n", $start_pos, $clock1_, $clock2_);
         } else {
@@ -390,9 +403,12 @@ class SearchController extends Zend_Controller_Action
         //$dataは、indexは0から増加する整数、中身はgetProjectInfoで獲得した、その企画に関する全てのデータ
         foreach ($data as $i => $item) {
             $pt_pid = $item['pt_pid']; //企画pt_pid
+            $open   = ($item['pt_open_']  ) ? $item['pt_open_']   : -1; //企画終了時刻
             $start = ($item['pt_start_']) ? $item['pt_start_'] : -1; //企画開始時刻
             $end   = ($item['pt_end_']  ) ? $item['pt_end_']   : -1; //企画終了時刻
-            if ($flg == 1) {
+            if ($flg == 2) {
+                $inputData .= sprintf("%d %d %d %d %d\n", $pt_pid, $open, $start, $end, $time[$pt_pid]);
+            } elseif ($flg == 1) {
                 $inputData .= sprintf("%d %d %d %d\n", $pt_pid, $start, $end, $time[$pt_pid]);
             } else {
                 $inputData .= sprintf("%d %d %d\n", $pt_pid, $start, $time);

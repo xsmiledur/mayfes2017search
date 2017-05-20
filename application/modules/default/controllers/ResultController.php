@@ -198,6 +198,7 @@ class ResultController extends Zend_Controller_Action
 
     /**
      * @param $project //企画全データ
+     * @param $open //対象の企画の開始時刻
      * @param $start //対象の企画の開始時刻
      * @param $end　//対象の企画の終了時刻
      * @param $time //対象の企画の滞在時間目安
@@ -206,18 +207,23 @@ class ResultController extends Zend_Controller_Action
      * @param $start_ //次の開始時刻
      * @return mixed
      */
-    private function setStartEnd($project, $start, $end, $time, $re_t, $i, $start_, $order) {
+    private function setStartEnd($project, $open, $start, $end, $time, $re_t, $i, $start_, $order) {
 
         if ($start) { //もしこの企画に開始時刻が存在すれば
             $project[$i]['start'] = $this->_main->fixTime($start); //開始時刻はそのまま入れる
             //次回の移動開始時刻を考える
             $start_ = $this->setNextOrderTimeStart($start, $time, $re_t, $end);
+        } elseif ($open && $open > $start_ + $order[$i]['time']) { //もしこの企画がstartなしopenあり かつ 移動開始時刻に移動時間を足したものが この企画のopenより早かったら
+            $project[$i]['start'] = $this->_main->fixTime($open); //open時刻そのまま入れる openのタイミングで企画に入るということ
+            //次回の移動開始時刻を考える
+            $start_ = $this->setNextOrderTimeStart($open, $time, $re_t, $end);
 
         } else { //なければ、前の開始時刻に
             if ($order[$i]['time']) {
                 $start_ += $order[$i]['time']; //前回算出した今回の移動開始時刻に、移動時間を足して、企画を見て回る開始時刻にする
             }
             $project[$i]['start'] = $this->_main->fixTime($start_); //時刻表示にする
+            //次回の移動開始時刻を考える
             $start_ = $this->setNextOrderTimeStart($start_, $time, $re_t, $end);
         }
         //移動時間も書く
@@ -235,7 +241,7 @@ class ResultController extends Zend_Controller_Action
             if ($key != 0) {
                 $project = $this->setProjectInfo($project, $key-1, $item, $order);
                 $project = $this->setResearchTime($project, $time, $key-1, $item);
-                $result  = $this->setStartEnd($project, $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $time[$item], $key-1, $start_, $order);
+                $result  = $this->setStartEnd($project, $project[$key-1]['info']['pt_open_'], $project[$key-1]['info']['pt_start_'], $project[$key-1]['info']['pt_end_'], $project[$key-1]['info']['pt_time'], $time[$item], $key-1, $start_, $order);
                 $project = $result['project'];
                 $start_  = $result['start_'];
             }
@@ -256,7 +262,7 @@ class ResultController extends Zend_Controller_Action
     private function setNextOrderTimeStart($start, $time, $re_t, $end) {
         if (strlen($re_t) > 0)  $start += $re_t; //変更した滞在時間
         elseif (strlen($time) > 0) $start += $time; //標準の滞在時間があれば、これを足す
-        elseif (strlen($end) > 0) $start = $end; //次の開始時刻の式に今回の終了時刻を分で代入
+        elseif (strlen($end) > 0) $start = $end; //次の移動開始時刻の式に今回の終了時刻を分で代入
         else $start += 30;
         return $start;
     }
