@@ -876,6 +876,9 @@ span.select2-selection__choice__remove {
 .nav-tabs > li > a:hover {
     background-color: #e6e6e6 !important;
 }
+.nav-tabs > li.active > a:hover {
+    background-color: #fff !important;
+}
 @media screen and ( max-width:1199px ) {
 
     #id1 {
