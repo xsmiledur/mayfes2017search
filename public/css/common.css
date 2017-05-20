@@ -870,6 +870,12 @@ span.select2-selection__choice__remove {
     height: 410px;
     overflow: scroll;
 }
+.nav-tabs > li > a {
+    background-color: #e6e6e6;
+}
+.nav-tabs > li > a:hover {
+    background-color: #e6e6e6 !important;
+}
 @media screen and ( max-width:1199px ) {
 
     #id1 {
